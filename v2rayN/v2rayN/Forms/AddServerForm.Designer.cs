@@ -33,6 +33,19 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnGUID = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbSecurity = new System.Windows.Forms.ComboBox();
+            this.txtRemarks = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtAlterId = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtPort = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -56,20 +69,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.cmbHeaderType = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cmbSecurity = new System.Windows.Forms.ComboBox();
-            this.txtRemarks = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtAlterId = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtId = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtPort = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtAddress = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label22 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuServer = new System.Windows.Forms.MenuStrip();
@@ -97,7 +98,6 @@
             // 
             this.groupBox1.Controls.Add(this.btnGUID);
             this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.cmbSecurity);
             this.groupBox1.Controls.Add(this.txtRemarks);
@@ -126,6 +126,78 @@
             // 
             resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // cmbSecurity
+            // 
+            this.cmbSecurity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSecurity.FormattingEnabled = true;
+            this.cmbSecurity.Items.AddRange(new object[] {
+            resources.GetString("cmbSecurity.Items"),
+            resources.GetString("cmbSecurity.Items1"),
+            resources.GetString("cmbSecurity.Items2"),
+            resources.GetString("cmbSecurity.Items3")});
+            resources.ApplyResources(this.cmbSecurity, "cmbSecurity");
+            this.cmbSecurity.Name = "cmbSecurity";
+            // 
+            // txtRemarks
+            // 
+            resources.ApplyResources(this.txtRemarks, "txtRemarks");
+            this.txtRemarks.Name = "txtRemarks";
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // txtAlterId
+            // 
+            resources.ApplyResources(this.txtAlterId, "txtAlterId");
+            this.txtAlterId.Name = "txtAlterId";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // txtId
+            // 
+            resources.ApplyResources(this.txtId, "txtId");
+            this.txtId.Name = "txtId";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // txtPort
+            // 
+            resources.ApplyResources(this.txtPort, "txtPort");
+            this.txtPort.Name = "txtPort";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // txtAddress
+            // 
+            resources.ApplyResources(this.txtAddress, "txtAddress");
+            this.txtAddress.Name = "txtAddress";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
             // 
             // groupBox2
             // 
@@ -296,84 +368,19 @@
             resources.ApplyResources(this.cmbHeaderType, "cmbHeaderType");
             this.cmbHeaderType.Name = "cmbHeaderType";
             // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // cmbSecurity
-            // 
-            this.cmbSecurity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSecurity.FormattingEnabled = true;
-            this.cmbSecurity.Items.AddRange(new object[] {
-            resources.GetString("cmbSecurity.Items"),
-            resources.GetString("cmbSecurity.Items1"),
-            resources.GetString("cmbSecurity.Items2"),
-            resources.GetString("cmbSecurity.Items3")});
-            resources.ApplyResources(this.cmbSecurity, "cmbSecurity");
-            this.cmbSecurity.Name = "cmbSecurity";
-            // 
-            // txtRemarks
-            // 
-            resources.ApplyResources(this.txtRemarks, "txtRemarks");
-            this.txtRemarks.Name = "txtRemarks";
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
-            // 
-            // txtAlterId
-            // 
-            resources.ApplyResources(this.txtAlterId, "txtAlterId");
-            this.txtAlterId.Name = "txtAlterId";
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
-            // 
-            // txtId
-            // 
-            resources.ApplyResources(this.txtId, "txtId");
-            this.txtId.Name = "txtId";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            // 
-            // txtPort
-            // 
-            resources.ApplyResources(this.txtPort, "txtPort");
-            this.txtPort.Name = "txtPort";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // txtAddress
-            // 
-            resources.ApplyResources(this.txtAddress, "txtAddress");
-            this.txtAddress.Name = "txtAddress";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label22);
             this.panel2.Controls.Add(this.btnClose);
             this.panel2.Controls.Add(this.btnOK);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
+            // 
+            // label22
+            // 
+            this.label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.Name = "label22";
             // 
             // btnOK
             // 
@@ -389,6 +396,7 @@
             // 
             // menuServer
             // 
+            this.menuServer.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuServer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuItem1});
             resources.ApplyResources(this.menuServer, "menuServer");
@@ -434,6 +442,7 @@
             this.CancelButton = this.btnClose;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuServer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -504,5 +513,6 @@
         private System.Windows.Forms.Panel panTlsMore;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
     }
 }

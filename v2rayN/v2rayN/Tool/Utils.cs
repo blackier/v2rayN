@@ -1,24 +1,28 @@
 ﻿using Microsoft.Win32;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Net.Security;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Drawing;
+using System.Xml.Serialization;
+using v2rayN.Base;
 using ZXing;
 using ZXing.Common;
 using ZXing.QrCode;
-using System.Security.Principal;
-using v2rayN.Base;
 
 namespace v2rayN
 {
@@ -84,12 +88,12 @@ namespace v2rayN
         {
             try
             {
-                T obj = JsonConvert.DeserializeObject<T>(strJson);
+                T obj = JsonSerializer.Deserialize<T>(strJson);
                 return obj;
             }
             catch
             {
-                return JsonConvert.DeserializeObject<T>("");
+                return JsonSerializer.Deserialize<T>("");
             }
         }
 
@@ -103,9 +107,7 @@ namespace v2rayN
             string result = string.Empty;
             try
             {
-                result = JsonConvert.SerializeObject(obj,
-                                           Formatting.Indented,
-                                           new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                result = JsonSerializer.Serialize(obj, obj.GetType(), new JsonSerializerOptions {WriteIndented=true, IgnoreNullValues=true });
             }
             catch
             {
@@ -126,17 +128,17 @@ namespace v2rayN
             {
                 using (StreamWriter file = File.CreateText(filePath))
                 {
-                    JsonSerializer serializer;
+                    JsonSerializerOptions serializer_opts;
                     if (nullValue)
                     {
-                        serializer = new JsonSerializer() { Formatting = Formatting.Indented };
+                        serializer_opts = new JsonSerializerOptions() { WriteIndented = true };
                     }
                     else
                     {
-                        serializer = new JsonSerializer() { Formatting = Formatting.Indented, NullValueHandling = NullValueHandling.Ignore };
+                        serializer_opts = new JsonSerializerOptions() { WriteIndented = true, IgnoreNullValues = true };
                     }
 
-                    serializer.Serialize(file, obj);
+                    file.Write(JsonSerializer.Serialize(obj, obj.GetType(), serializer_opts));
                 }
                 result = 0;
             }
@@ -665,11 +667,10 @@ namespace v2rayN
 
         public static void SetSecurityProtocol()
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3
-                                       | SecurityProtocolType.Tls
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
                                        | SecurityProtocolType.Tls11
                                        | SecurityProtocolType.Tls12;
-            ServicePointManager.DefaultConnectionLimit = 256;
+            ServicePointManager.DefaultConnectionLimit = 1024;
         }
         #endregion
 

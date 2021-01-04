@@ -8,7 +8,7 @@ namespace v2rayN.Mode
         /// <summary>
         /// 版本
         /// </summary>
-        public string v { get; set; } = string.Empty;
+        public object v { get; set; } = null;
         /// <summary>
         /// 备注
         /// </summary>
@@ -28,7 +28,7 @@ namespace v2rayN.Mode
         /// <summary>
         /// 远程服务器额外ID
         /// </summary>
-        public string aid { get; set; } = string.Empty;
+        public object aid { get; set; } = null;
         /// <summary>
         /// 传输协议tcp,kcp,ws
         /// </summary>

@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using v2rayN.Base;
@@ -60,7 +61,7 @@ namespace v2rayN.Handler
         public async void CheckUpdateAsync(string type)
         {
             Utils.SetSecurityProtocol();
-            WebRequestHandler webRequestHandler = new WebRequestHandler
+            HttpClientHandler webRequestHandler = new HttpClientHandler
             {
                 AllowAutoRedirect = false
             };
@@ -324,7 +325,7 @@ namespace v2rayN.Handler
                 File.WriteAllText(Utils.GetTempPath("gfwlist.txt"), result, Encoding.UTF8);
                 List<string> lines = ParsePacResult(result);
                 string abpContent = Utils.UnGzip(Resources.abp_js);
-                abpContent = abpContent.Replace("__RULES__", JsonConvert.SerializeObject(lines, Formatting.Indented));
+                abpContent = abpContent.Replace("__RULES__", JsonSerializer.Serialize(lines, lines.GetType(), new JsonSerializerOptions { WriteIndented = true }));
                 File.WriteAllText(Utils.GetPath(Global.pacFILE), abpContent, Encoding.UTF8);
             }
             catch (Exception ex)

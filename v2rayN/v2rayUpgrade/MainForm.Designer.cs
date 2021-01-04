@@ -38,9 +38,10 @@
             // 
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnClose.Location = new System.Drawing.Point(367, 118);
+            this.btnClose.Location = new System.Drawing.Point(377, 237);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(6);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(184, 89);
+            this.btnClose.Size = new System.Drawing.Size(225, 80);
             this.btnClose.TabIndex = 1;
             this.btnClose.Text = "&Exit(退出)";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -49,9 +50,10 @@
             // btnOK
             // 
             this.btnOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnOK.Location = new System.Drawing.Point(81, 118);
+            this.btnOK.Location = new System.Drawing.Point(56, 237);
+            this.btnOK.Margin = new System.Windows.Forms.Padding(6);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(184, 89);
+            this.btnOK.Size = new System.Drawing.Size(225, 80);
             this.btnOK.TabIndex = 0;
             this.btnOK.Text = "&Upgrade(升级)";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -60,32 +62,35 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(79, 64);
+            this.label1.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(195, 136);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(205, 15);
+            this.label1.Size = new System.Drawing.Size(296, 22);
             this.label1.TabIndex = 8;
             this.label1.Text = "升级成功后将自动重启v2rayN";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(79, 37);
+            this.label2.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(25, 74);
+            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(471, 15);
+            this.label2.Size = new System.Drawing.Size(648, 22);
             this.label2.TabIndex = 9;
             this.label2.Text = "v2rayN will restart automatically after successful upgrade";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(616, 284);
+            this.ClientSize = new System.Drawing.Size(698, 424);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnOK);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "v2rayUpgrade";

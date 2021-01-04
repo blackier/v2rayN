@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using v2rayN.Base;
 using v2rayN.Handler;
 using v2rayN.HttpProxyHandler;
 using v2rayN.Mode;
-using v2rayN.Base;
 using v2rayN.Tool;
-using System.Diagnostics;
-using System.Drawing;
-using System.Net;
 
 namespace v2rayN.Forms
 {
@@ -25,11 +25,11 @@ namespace v2rayN.Forms
         public MainForm()
         {
             InitializeComponent();
-            this.ShowInTaskbar = false;
-            this.WindowState = FormWindowState.Minimized;
-            HideForm();
+
+            this.notifyMain.Visible = true;
             this.Text = Utils.GetVersion();
-            Global.processJob = new Job();
+            this.WindowState = FormWindowState.Minimized;
+            this.ShowInTaskbar = false;
 
             Application.ApplicationExit += (sender, args) =>
             {
@@ -46,6 +46,7 @@ namespace v2rayN.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            Global.processJob = new Job();
             ConfigHandler.LoadConfig(ref config);
             v2rayHandler = new V2rayHandler();
             v2rayHandler.ProcessEvent += v2rayHandler_ProcessEvent;
@@ -54,6 +55,7 @@ namespace v2rayN.Forms
             {
                 statistics = new StatisticsHandler(config, UpdateStatisticsHandler);
             }
+
         }
 
         private void MainForm_VisibleChanged(object sender, EventArgs e)
@@ -78,7 +80,6 @@ namespace v2rayN.Forms
             LoadV2ray();
 
             HideForm();
-
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -182,13 +183,13 @@ namespace v2rayN.Forms
 
             lvServers.Columns.Add("", 30);
             lvServers.Columns.Add(UIRes.I18N("LvServiceType"), 80);
-            lvServers.Columns.Add(UIRes.I18N("LvAlias"), 100);
+            lvServers.Columns.Add(UIRes.I18N("LvAlias"), 200);
             lvServers.Columns.Add(UIRes.I18N("LvAddress"), 120);
             lvServers.Columns.Add(UIRes.I18N("LvPort"), 50);
             lvServers.Columns.Add(UIRes.I18N("LvEncryptionMethod"), 90);
             lvServers.Columns.Add(UIRes.I18N("LvTransportProtocol"), 70);
             lvServers.Columns.Add(UIRes.I18N("LvSubscription"), 50);
-            lvServers.Columns.Add(UIRes.I18N("LvTestResults"), 70, HorizontalAlignment.Right);
+            lvServers.Columns.Add(UIRes.I18N("LvTestResults"), 70);
 
             if (statistics != null && statistics.Enable)
             {
@@ -1014,29 +1015,22 @@ namespace v2rayN.Forms
 
         private void ShowForm()
         {
-            this.Show();
-            this.WindowState = FormWindowState.Normal;
-            this.Activate();
+            this.Visible = true;
             this.ShowInTaskbar = true;
-            //this.notifyIcon1.Visible = false;
+            this.WindowState = FormWindowState.Normal;
+
             this.txtMsgBox.ScrollToCaret();
             if (config.index >= 0 && config.index < lvServers.Items.Count)
             {
                 lvServers.EnsureVisible(config.index); // workaround
             }
 
-            SetVisibleCore(true);
+            this.Activate();
         }
 
         private void HideForm()
         {
-            //this.WindowState = FormWindowState.Minimized;
-            this.Hide();
-            //this.notifyMain.Icon = this.Icon;
-            this.notifyMain.Visible = true;
-            this.ShowInTaskbar = false;
-
-            SetVisibleCore(false);
+            this.Visible = false;
         }
 
         #endregion

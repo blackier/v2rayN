@@ -1,64 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
+﻿<root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -117,181 +57,202 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="menuAddVmessServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <assembly alias="System.Drawing.Primitives" name="System.Drawing.Primitives, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="menuAddVmessServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuAddVmessServer.Text" xml:space="preserve">
     <value>添加[VMess]服务器</value>
   </data>
-  <data name="menuAddVlessServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuAddVlessServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuAddVlessServer.Text" xml:space="preserve">
     <value>添加[VLESS]服务器</value>
   </data>
-  <data name="menuAddShadowsocksServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuAddShadowsocksServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuAddShadowsocksServer.Text" xml:space="preserve">
     <value>添加[Shadowsocks]服务器</value>
   </data>
-  <data name="menuAddSocksServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuAddSocksServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuAddSocksServer.Text" xml:space="preserve">
     <value>添加[Socks]服务器</value>
   </data>
-  <data name="menuAddTrojanServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuAddTrojanServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuAddTrojanServer.Text" xml:space="preserve">
     <value>添加[Trojan]服务器</value>
   </data>
-  <data name="menuAddCustomServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuAddCustomServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuAddCustomServer.Text" xml:space="preserve">
     <value>添加自定义配置服务器</value>
   </data>
-  <data name="menuAddServers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuAddServers.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuAddServers.Text" xml:space="preserve">
     <value>从剪贴板导入批量URL (Ctrl+V)</value>
   </data>
-  <data name="menuScanScreen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuScanScreen.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuScanScreen.Text" xml:space="preserve">
     <value>扫描屏幕上的二维码 (Ctrl+S)</value>
   </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 6</value>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>412, 6</value>
   </data>
-  <data name="menuRemoveServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuRemoveServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuRemoveServer.Text" xml:space="preserve">
     <value>移除所选服务器(多选) (Delete)</value>
   </data>
-  <data name="menuRemoveDuplicateServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuRemoveDuplicateServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuRemoveDuplicateServer.Text" xml:space="preserve">
     <value>移除重复的服务器</value>
   </data>
-  <data name="menuCopyServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuCopyServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuCopyServer.Text" xml:space="preserve">
     <value>克隆所选服务器</value>
   </data>
-  <data name="menuSetDefaultServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuSetDefaultServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuSetDefaultServer.Text" xml:space="preserve">
     <value>设为活动服务器 (Enter)</value>
   </data>
-  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 6</value>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>412, 6</value>
   </data>
-  <data name="menuMoveTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuMoveTop.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuMoveTop.Text" xml:space="preserve">
     <value>上移至顶 (T)</value>
   </data>
-  <data name="menuMoveUp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuMoveUp.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuMoveUp.Text" xml:space="preserve">
     <value>上移 (U)</value>
   </data>
-  <data name="menuMoveDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuMoveDown.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuMoveDown.Text" xml:space="preserve">
     <value>下移 (D)</value>
   </data>
-  <data name="menuMoveBottom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuMoveBottom.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuMoveBottom.Text" xml:space="preserve">
     <value>下移至底 (B)</value>
   </data>
-  <data name="menuSelectAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuSelectAll.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuSelectAll.Text" xml:space="preserve">
     <value>全选 (Ctrl+A)</value>
   </data>
-  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 6</value>
+  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>412, 6</value>
   </data>
-  <data name="menuPingServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuPingServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuPingServer.Text" xml:space="preserve">
     <value>测试服务器延迟Ping(多选) (Ctrl+P)</value>
   </data>
-  <data name="menuTcpingServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuTcpingServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuTcpingServer.Text" xml:space="preserve">
     <value>测试服务器延迟Tcping(多选) (Ctrl+O)</value>
   </data>
-  <data name="menuRealPingServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuRealPingServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuRealPingServer.Text" xml:space="preserve">
     <value>测试服务器真连接延迟(多选) (Ctrl+R)</value>
   </data>
-  <data name="menuSpeedServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuSpeedServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuSpeedServer.Text" xml:space="preserve">
     <value>测试服务器速度(多选) (Ctrl+T)</value>
   </data>
-  <data name="tsbTestMe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="tsbTestMe.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="tsbTestMe.Text" xml:space="preserve">
     <value>测试当前服务状态</value>
   </data>
-  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 6</value>
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>412, 6</value>
   </data>
-  <data name="menuExport2ClientConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuExport2ClientConfig.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuExport2ClientConfig.Text" xml:space="preserve">
     <value>导出所选服务器为客户端配置</value>
   </data>
-  <data name="menuExport2ServerConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuExport2ServerConfig.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuExport2ServerConfig.Text" xml:space="preserve">
     <value>导出所选服务器为服务端配置</value>
   </data>
-  <data name="menuExport2ShareUrl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuExport2ShareUrl.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuExport2ShareUrl.Text" xml:space="preserve">
     <value>批量导出分享URL至剪贴板(多选) (Ctrl+C)</value>
   </data>
-  <data name="menuExport2SubContent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+  <data name="menuExport2SubContent.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>415, 30</value>
   </data>
   <data name="menuExport2SubContent.Text" xml:space="preserve">
     <value>批量导出订阅内容至剪贴板(多选)</value>
   </data>
-  <data name="cmsLv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 600</value>
+  <assembly alias="System.Drawing.Common" name="System.Drawing.Common, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+  <data name="tsbServer.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAHTSURBVFhH7dZhTcVAEATgSkACEnAADkACEnAADsABOAAH
+        4AAcgANwAPuFd0nTtL295vqHMMkk7/V2p9O93WuHfzTgJHgdvA0+L9CaGLFdQOg++Bn8CD4Eb4IXwbMJ
+        XbMmRqwcuZvMHAUfg1/Bu+BxsBVy5NKgRTMFjrn3JOmkFdCg9R5MVeMtqJS9QfP19+cyOFSyvUB7tQqa
+        Sfn3AgPusQiL38G9toB21YAR4tQI9WpCWjRpVw28BI3QU9B2OFy2jqFcGrQYoZ0yUOC/EeLeGHkSJ915
+        8HRC16yJEStH7viGKQNLo2LtKkiU0BytiVm6SWoLqo2yESlti0qHPU3Q0gtVXYtK6cUiePPL5AC5ZQJo
+        0k4ZAF1rdiXrCx2t0dYMWRMjVo5cGmWcmwyMwb03mzX7WKisOL4mRqycKVIGiGQOILGFmW2iSTtlQPky
+        JrKgRTNlQJnK+3uujK2gQaucHykDINHBIbn1O4+ORpRLozxIk4ECydwTUsLpByj67Vops1g50wpWDXhK
+        o7MEe0nAcWu8xrwMWlvrHdrVSu75SUa7ilIFJ1iPSaBBy7ak+0jSHt8DzeBYM6mIjvYkrd8D6aeugZDm
+        K0fyHK2J6XbTv45h+AEpcqnttwXlsgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="tsbServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>102, 60</value>
+  </data>
+  <data name="tsbServer.Text" xml:space="preserve">
+    <value>  服务器  </value>
+  </data>
+  <data name="cmsLv.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>416, 808</value>
   </data>
   <data name="lvServers.Items" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj01LjAuMS4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
         ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2Vu
         PWIwM2Y1ZjdmMTFkNTBhM2EFAQAAACFTeXN0ZW0uV2luZG93cy5Gb3Jtcy5MaXN0Vmlld0l0ZW0HAAAA
@@ -306,98 +267,92 @@
         ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQBAAAAB3ZhbHVlX18ACAMAAAADAAAACw==
 </value>
   </data>
-  <data name="tsbServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 53</value>
+  <data name="cmsMain.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>259, 220</value>
   </data>
-  <data name="tsbServer.Text" xml:space="preserve">
-    <value>  服务器  </value>
-  </data>
-  <data name="cmsMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 164</value>
-  </data>
-  <data name="menuSysAgentMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+  <data name="menuSysAgentMode.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>258, 30</value>
   </data>
   <data name="menuSysAgentMode.Text" xml:space="preserve">
     <value>Http代理</value>
   </data>
-  <data name="menuNotEnabledHttp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 22</value>
+  <data name="menuNotEnabledHttp.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>472, 34</value>
   </data>
   <data name="menuNotEnabledHttp.Text" xml:space="preserve">
     <value>关闭Http代理</value>
   </data>
-  <data name="menuGlobal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 22</value>
+  <data name="menuGlobal.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>472, 34</value>
   </data>
   <data name="menuGlobal.Text" xml:space="preserve">
     <value>开启Http代理,并自动配置系统代理(全局模式)</value>
   </data>
-  <data name="menuGlobalPAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 22</value>
+  <data name="menuGlobalPAC.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>472, 34</value>
   </data>
   <data name="menuGlobalPAC.Text" xml:space="preserve">
     <value>开启PAC,并自动配置系统代理(PAC模式)</value>
   </data>
-  <data name="menuKeep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 22</value>
+  <data name="menuKeep.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>472, 34</value>
   </data>
   <data name="menuKeep.Text" xml:space="preserve">
     <value>仅开启Http代理,并清除系统代理</value>
   </data>
-  <data name="menuKeepPAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 22</value>
+  <data name="menuKeepPAC.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>472, 34</value>
   </data>
   <data name="menuKeepPAC.Text" xml:space="preserve">
     <value>仅开启PAC,并清除系统代理</value>
   </data>
-  <data name="menuKeepNothing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 22</value>
+  <data name="menuKeepNothing.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>472, 34</value>
   </data>
   <data name="menuKeepNothing.Text" xml:space="preserve">
     <value>仅开启Http代理,不改变系统代理</value>
   </data>
-  <data name="menuKeepPACNothing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 22</value>
+  <data name="menuKeepPACNothing.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>472, 34</value>
   </data>
   <data name="menuKeepPACNothing.Text" xml:space="preserve">
     <value>仅开启PAC,不改变系统代理</value>
   </data>
-  <data name="menuServers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+  <data name="menuServers.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>258, 30</value>
   </data>
   <data name="menuServers.Text" xml:space="preserve">
     <value>服务器</value>
   </data>
-  <data name="menuAddServers2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+  <data name="menuAddServers2.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>258, 30</value>
   </data>
   <data name="menuAddServers2.Text" xml:space="preserve">
     <value>从剪贴板导入批量URL</value>
   </data>
-  <data name="menuScanScreen2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+  <data name="menuScanScreen2.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>258, 30</value>
   </data>
   <data name="menuScanScreen2.Text" xml:space="preserve">
     <value>扫描屏幕上的二维码</value>
   </data>
-  <data name="menuCopyPACUrl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+  <data name="menuCopyPACUrl.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>258, 30</value>
   </data>
   <data name="menuCopyPACUrl.Text" xml:space="preserve">
     <value>复制本地PAC网址</value>
   </data>
-  <data name="menuUpdateSubscriptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+  <data name="menuUpdateSubscriptions.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>258, 30</value>
   </data>
   <data name="menuUpdateSubscriptions.Text" xml:space="preserve">
     <value>更新订阅</value>
   </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 6</value>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>255, 6</value>
   </data>
-  <data name="menuExit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+  <data name="menuExit.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>258, 30</value>
   </data>
   <data name="menuExit.Text" xml:space="preserve">
     <value>退出</value>
@@ -411,40 +366,76 @@
   <data name="toolSslServerSpeed.Text" xml:space="preserve">
     <value>网速显示未启用</value>
   </data>
-  <data name="tsbSub.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 53</value>
+  <data name="tsbSub.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAEtSURBVFhH7dY9S0JRHMfxG0QPGIEEUQ7SkmuQYRQNQYOL
+        tPcAbe05pJsvxt5Ae76AoJaothoaWmoI0lb9/jgIl1C6/c+1S3W/8KHjXfqjx+MJ0tIiNoUNbEdUQmzt
+        oY3uN91gE15l0MEpZvQgYpM4xitm9cCa3sontzR1iYpb2trBrVuaauHALW35DrCCebe0ZRmgjjm39M8y
+        wBsKbunfrxhgGuFDSGfGYej1yPfAMgYdRH0//i34f3vgc4kPsAVtTJXIQRTuAokexX97gHXc4xplPRjQ
+        SAbI4Qy6qNRQxTvOsYRwsQ4wAf1DHbVNLKLfAvTsAw3oRqRiG0B/H3CFIoalO+AdHrELXUj2YS6PFzzj
+        CGP4qnGcQB+LfgvW4FUWlguG9sqqW6alDSsIegqQWDsqhX/IAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="tsbSub.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>84, 60</value>
   </data>
   <data name="tsbSub.Text" xml:space="preserve">
     <value>  订阅  </value>
   </data>
-  <data name="tsbSubSetting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 22</value>
-  </data>
   <data name="tsbSubSetting.Text" xml:space="preserve">
     <value>订阅设置</value>
-  </data>
-  <data name="tsbSubUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 22</value>
   </data>
   <data name="tsbSubUpdate.Text" xml:space="preserve">
     <value>更新订阅</value>
   </data>
-  <data name="tsbQRCodeSwitch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 53</value>
+  <data name="tsbQRCodeSwitch.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAI3SURBVFhH1dd9kRNBEAXwSEACEnAADsABOAAH4AAcgANw
+        AA7AATgAB9C/q7yquU1PspM7/rhX9Sqb3ZnuntcfmxweKp4VnxbfFl8fr/G/4lXxc/HvGf4ufiy+LN4b
+        OP5Z5OBH8U2RAo+LgWv3PhR/Fa39erx3NR4Vc+JvxRVj1grWXoosg/PvxT9FClwLakUNNndhdP7EjTvi
+        RZEtau7Cl+I1ztWBThhrIxAEJdTIWZDbwlXZsy8F2O1/V/TsbC0xoOBWIGUMOyXktF3O2VcPLXKK1dax
+        3r4RMzvx0aZX7rXOKhJAZPephmbwrK0FRrRNB0aNXRyLzH3Tj7QMs+EzwXT4VDTYbiGn6GSjjGchh/LM
+        kO8+k+89ndPWSALYtpCTuB9lbMqEw3MnnaE9bFpki64uBGltqn4VVDoJICNzC/Ju2zJt16VrD9oAIss2
+        BcnXmNvkvuvzPYivNoBbN4/QMp4ZIN4RrtH17L3PzqwgU1cnmPZngTFpQifnIEroivdF6lnne1qym3rT
+        ecPgSX9eAKcKOA7t5wAEaj5sZ8v0oJGmS8Me2M/4uN+hBBjExyw9N9LI7bVw+rz3qUORzAqKSE8UaiF6
+        EW5l2wtOx0FFgSA1s+20E2ThtYMGSDy2aaTffTDDJzP/rojzUY2LEL1c2eiPxzVgwy/iZecjMoQU08qf
+        Daem4JLsMyhMKWGMUad6XvQDVK7RtQB1QBxT8GLBrYAjiuSHZ0cdYM20z+8L8kuZkQ8Rh8M/fEzA4dvd
+        3BMAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="tsbQRCodeSwitch.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>70, 60</value>
   </data>
   <data name="tsbQRCodeSwitch.Text" xml:space="preserve">
     <value>  分享  </value>
   </data>
-  <data name="tsbOptionSetting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 53</value>
+  <data name="tsbOptionSetting.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAISSURBVFhH7ZZ9UcRADMVPAhKQgAQk4AAcgANwAA7AATgA
+        B+AAHIADyK/TV8Jrbm/p9P67N/Nm2v1IssnbtJsDFuAp+F3wM3ga3CtwIIcviR/j2E1wr1AAd8PbL3C8
+        WgAnweugpxPjpLlypADgffA4mHERxCa2m2CjnMDHIIG8prGHoBvinax8BbXuMuh7se3B/YEERk3fxmeR
+        Wjc3j7gK5kAgtqQTDlBC9WXzEQMBGdu6aQsIVE7PGAhgU4F5eQdwQiapV0bPqSvoEBnYxsfz8GZgAiri
+        HlD7ncJKwLb8zKAMIBQU2wKlyWLt2ZNvEb5mIGUoWUbfxzFHXoMhBQ65gg5sSICQ/ZXdCdSchQjGkedy
+        6nmWwKqSaK5LT0TH4ipNajiUwCGBeZMCylJXALqOVQBcR+aqa9TapwDK6+foyUB1ytUyoDqjWEeecw1I
+        4S0NVHMTOPltkIUQ5VZqzbeAhgL1zpwDG/kW4KOyO6WJaCuRZTCfjfbuUSZW64SUpKuuI7o64ZrfAk+1
+        hFoJfBAIk3RAQaqvOlwL2OI/AFvnDAQIpiXUAbrn2syzSN12ZQMn/IjIkYgt2Wt+2jEgoUBSRbT554Rs
+        eENhDeqWY4mSdXkv416WGTglqXcxMqbgvNmoVJATeqaoPWuW6mmC2q3fdwXgga0OBUCq82nUnPYegGvE
+        O+F/eshiuCjF8m4f0MZm8wPEJPGqmvbveAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="tsbOptionSetting.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>106, 60</value>
   </data>
   <data name="tsbOptionSetting.Text" xml:space="preserve">
     <value>  参数设置  </value>
   </data>
-  <data name="tsbReload.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsbReload.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE3SURBVFhH7ZaBDQIhDEVvBEdwBDfQDXQER3AD3cARdAPd
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAE3SURBVFhH7ZaBDQIhDEVvBEdwBDfQDXQER3AD3cARdAPd
         QDfSDbQvuSb1AicFjJrwkxcN0FIolOuamv5VE2E+gLaPayWchEcE+hhTXVPhIoQmDcFYbKpoJtwEdX4X
         jgIrXfTwnzb6dBw22BaJVdjJmWQs1/SdBRtE0U5cBXW2oSFRO0HtSEeW2FZ1wsq9sjuRdTDVAXnNuWLY
         6JnAl0sYa/Q5q1dhq35ci+Bkq2HJvbZpxGeybAAuw4Fq+cnW1wPITgHFYxvBUw+qHEIL1yq1vDKhVlH3
@@ -452,47 +443,80 @@
         B6zCvozvYGzRM8zEoeg5TPZwDaGvpHQni1yzSxbXPW9q+hF13ROHuJnQcjbhtQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="tsbReload.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 53</value>
+  <data name="tsbReload.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>106, 60</value>
   </data>
   <data name="tsbReload.Text" xml:space="preserve">
     <value>  重启服务  </value>
   </data>
-  <data name="tsbCheckUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 53</value>
+  <data name="tsbCheckUpdate.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAFBSURBVFhH7ZbBTcQwEEVTAiVQwpZAJ9AB2wFbAiXQARy5
+        QQdw5EgBK8GBO8wz+4WxMvY42QMSftLXxtHM988mcTwNBg1OTJemW9NDp+ihF49FXJjeTJ8rhQdeXZyZ
+        ZPBs2i3Uq0k+eIZ5NNF0l0brwAMvbksYpT5NI5+N6fz70AUP+YXANNqgf4qeGvJr1SXy+9+C54O61v2V
+        X+g56AkQNY7WJUaAEeDPBmBpZTXLPy5zxtemctWbq3PxAuidfzIpRGl8Y2L8nkY/lHVVvACsYhhzXiFy
+        43zycsXL65p4AaAMobr7w+/c5KC61QEgD5HLmxxUc5QAUIb4OJzzUF0oAKihtp3iM/ti2ptqk+fPSs3v
+        F9rJbNNoHXjghWcYNaErU+0KPeihVz7dF6PX6hjCaxHsZrUALRG93TviwX9imr4Acnff+GoP49sAAAAA
+        SUVORK5CYII=
+</value>
+  </data>
+  <data name="tsbCheckUpdate.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>120, 60</value>
   </data>
   <data name="tsbCheckUpdate.Text" xml:space="preserve">
     <value>  检查更新  </value>
   </data>
-  <data name="tsbCheckUpdateN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 22</value>
+  <data name="tsbCheckUpdateN.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>329, 34</value>
   </data>
   <data name="tsbCheckUpdateN.Text" xml:space="preserve">
     <value>v2rayN</value>
   </data>
-  <data name="tsbCheckUpdateCore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 22</value>
+  <data name="tsbCheckUpdateCore.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>329, 34</value>
   </data>
   <data name="tsbCheckUpdateCore.Text" xml:space="preserve">
     <value>v2rayCore</value>
   </data>
-  <data name="tsbCheckUpdatePACList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 22</value>
+  <data name="tsbCheckUpdatePACList.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>329, 34</value>
   </data>
   <data name="tsbCheckUpdatePACList.Text" xml:space="preserve">
     <value>PAC</value>
   </data>
-  <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 6</value>
+  <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>326, 6</value>
   </data>
-  <data name="tsbCheckClearPACList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 22</value>
+  <data name="tsbCheckClearPACList.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>329, 34</value>
   </data>
   <data name="tsbCheckClearPACList.Text" xml:space="preserve">
     <value>简化PAC (请设置Core路由)</value>
   </data>
-  <data name="tsbHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 53</value>
+  <data name="tsbHelp.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAANtSURBVFhH7ZfZS1RxFMfFNqgow5aHaIVogcAyWiHbRsQZ
+        nYVse+q1l0AKgyKwP6DA1156CCJosZSgaEESpAjToE2kgkhNTOpBsU3rc6bvdWa6c713xEe/cPjd3/d8
+        zzm/e+79/e5M3iSCoqysbEY8Hg/FYrELlZWVLdFo9B3X37EBXT/GzoTD4cUKmThQcD9FelnAHzOuh7Fu
+        Cj5jbMV6jHN86BuxdQofPyoqKhZRpMESM45g17EDkUhkpiSjqKqqmo3uEP56FvHb9CziMp2bI0luIEEp
+        1qe7amXcKJcvWOBSYi9p4Z3EL5crGAjYZa3EfmA1UPn/PLmB4oRHh+xGGIMtwtpO674Q8JNxi+hxgzzb
+        WcAv6wQv6DzR3kB431qHHRflAs97OroIyWuwWrTVjOvldgH/ST2OBlHZYUlNSLKHolygK/vQfTJduhFj
+        L94xyVxA02Q6NKWi3CDJGwT29mbdQiTYimZIBXvR3mWsQ99hnPiY5BlAs0H+dlGZsKJKckOUCxR8oCT9
+        iURimWhDPvEt5kMzWFJSMlV8BvAltzTv2QpRKZD0lJIfEZUB+AIseRgxnhA9Crg685l5dRDNUWmqRaVA
+        UKOSF4gKDO6skLhui+d6wF5SuTKAf6E0N0WlANlGkm+aBgaPYhVJX1ti2Tm5soIatr2fapoCC+jD3moa
+        CCRabXFOcZK3e929A/TvsS5NU4D8jL3S1BcUmmLJnOJc3+YIni+3J9B1Yh81TQHyOfZVU19w98ltpeJX
+        RfsCrZ2KTzRNATK5RbizuaLGBO0udxbAYnaKHhN8GRcoxr3VIZPHJYmzbsP/QbvXoK01y2HRzjZ0H/N0
+        YK2cngdROtDtwex4bcp6sGSB02VPPYKXmOdRnA50hy2ZGXfm+SFygKbItMS1iXIDQViiR6I8kesC0DWb
+        1vd9QXBPiT0/x7mCXME+xwb70YDwA3dlJ9Ym0eMGz3sH+Wzr2TlTKHps2PHKAvoJGGQsF50T7KAi9rTd
+        CDZMrm1yBQOLWEkHOggcoX0X7YemXL4gZjP2wtpO8V7y7JYrN9j+JviKLYJE9ovnGuPBUCg0S5JRoE3+
+        LMduadH2zOuDHM++oGgRye44ia2lWA9z1x8TFe7CEgqfOFBkCXaWrqT/NRvE7KPUDHce21tcXDxNIZPw
+        QV7eX6eK4JuVRtAeAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="tsbHelp.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>94, 60</value>
   </data>
   <data name="tsbHelp.Text" xml:space="preserve">
     <value>   帮助   </value>
@@ -503,21 +527,36 @@
   <data name="tsbV2rayWebsite.Text" xml:space="preserve">
     <value>V2Ray 官网</value>
   </data>
-  <data name="tsbPromotion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 53</value>
+  <data name="tsbPromotion.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAIKSURBVFhH3Za9axRBAEcvBAVRJH6AhRaiVYQQ1M7CxkYb
+        0So2NoKlohbGKqRJYaGNhYKIJihqKwh2pvIPUNFCxUQMBC1EsDH49d7uzmV3c7MJeDdiHjxuZ25u5ncz
+        uzvTWi2cwvd4LSslZAs+wt+FTzEZh/ETOvDz4jNJgA14Ex3wO17EXUW55wEO4Aw62CscQtmJPQ2wBifw
+        J/7CK7gWAz0NMIhhjT/iQawTC7Aet+aXzfThSRyveRVdZzu/ixuxE7EA5/AHPsERdJyO3EI7iDmGTcQC
+        7MeXGPp5httwCeFffsEb6L+/U9TpGWxiuXvgOL5B27zFzVghDLQnKy3yAK13KptYyU3o8k2j7ey3gpUf
+        8ssK57FbAWQdfkbb7rUiYIXPdx0H7mYAGUXbutRtUgbYjbb1RdYmZQD5hl/zy5x/EUDbpAwQNq7XWakg
+        ZYBLaNvrWanAitn8skIvH8NhKwJWuNPtyEqL3MZuBSi/iO5bUcbB/cJz3Qk8hJdxAa0/i00sF+AYvkPb
+        +LkJKzxGv4x5AZuIBfDA8gJDP25G23EJrk2n7dipCj+ewgHsRCzAabTes6Mn5+h23MQRnEc78tNynVgA
+        T00eaPqz0l/gmjkDDqL3sLylruQm7Arl2fBxOoqSLIDUZ+Mh7iuukwQIlGfD93ryAOJsTGKYjeQBAs7G
+        HPqe/59otf4AMHHSr5XTUMYAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="tsbPromotion.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>90, 60</value>
   </data>
   <data name="tsbPromotion.Text" xml:space="preserve">
     <value>    推广    </value>
   </data>
-  <data name="tsbClose.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="tsbClose.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVFhH7c6xDQAgCEVBRnVTHU2ZABuMxV3yOvJDAAA/
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAySURBVFhH7c6xDQAgCEVBRnVTHU2ZABuMxV3yOvJDAAA/
         GqfZVG6X8mg1dfUAAPBQxAZd0SJruVXHWwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="tsbClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 53</value>
+  <data name="tsbClose.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>106, 60</value>
   </data>
   <data name="tsbClose.Text" xml:space="preserve">
     <value>  关闭窗口  </value>

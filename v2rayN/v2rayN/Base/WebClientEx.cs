@@ -9,7 +9,7 @@ namespace v2rayN.Base
         {
             get; set;
         }
-        public WebClientEx(int timeout = 3000)
+        public WebClientEx(int timeout = 300 * 1000)
         {
             Timeout = timeout;
         }
