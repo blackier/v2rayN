@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
-using v2rayN.Mode;
-using v2rayN.Base;
 using System.Linq;
+using System.Net;
+using v2rayN.Base;
+using v2rayN.Mode;
 using v2rayN.Tool;
 
 namespace v2rayN.Handler
@@ -771,6 +771,10 @@ namespace v2rayN.Handler
                             break;
                         case "ws":
                             //*ws(path+host),它们中间分号(;)隔开
+                            if (vmessItem.requestHost.IsNullOrEmpty())
+                            {
+                                break;
+                            }
                             arrParameter = vmessItem.requestHost.Replace(" ", "").Split(';');
                             if (arrParameter.Length > 0)
                             {

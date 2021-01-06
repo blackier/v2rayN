@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using v2rayN.Handler;
 using v2rayN.Base;
+using v2rayN.Handler;
 using v2rayN.HttpProxyHandler;
 
 namespace v2rayN.Forms
@@ -444,7 +444,7 @@ namespace v2rayN.Forms
 
         private void linkLabelRoutingDoc_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.v2fly.org/config/routing.html");
+            System.Diagnostics.Process.Start("explorer.exe", "https://www.v2fly.org/config/routing.html");
         }
     }
 

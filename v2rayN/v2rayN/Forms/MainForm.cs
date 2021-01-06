@@ -577,7 +577,7 @@ namespace v2rayN.Forms
 
         private void menuAddVlessServer_Click(object sender, EventArgs e)
         {
-            ShowServerForm((int)EConfigType.VLESS, -1);            
+            ShowServerForm((int)EConfigType.VLESS, -1);
         }
 
         private void menuRemoveServer_Click(object sender, EventArgs e)
@@ -859,13 +859,13 @@ namespace v2rayN.Forms
 
         private void menuAddShadowsocksServer_Click(object sender, EventArgs e)
         {
-            ShowServerForm((int)EConfigType.Shadowsocks, -1);             
+            ShowServerForm((int)EConfigType.Shadowsocks, -1);
             ShowForm();
         }
 
         private void menuAddSocksServer_Click(object sender, EventArgs e)
         {
-            ShowServerForm((int)EConfigType.Socks, -1);      
+            ShowServerForm((int)EConfigType.Socks, -1);
             ShowForm();
         }
 
@@ -1411,17 +1411,17 @@ namespace v2rayN.Forms
 
         private void tsbAbout_Click(object sender, EventArgs e)
         {
-            Process.Start(Global.AboutUrl);
+            Process.Start("explorer.exe", Global.AboutUrl);
         }
 
         private void tsbV2rayWebsite_Click(object sender, EventArgs e)
         {
-            Process.Start(Global.v2rayWebsiteUrl);
+            Process.Start("explorer.exe", Global.v2rayWebsiteUrl);
         }
 
         private void tsbPromotion_Click(object sender, EventArgs e)
         {
-            Process.Start($"{Utils.Base64Decode(Global.PromotionUrl)}?t={DateTime.Now.Ticks}");
+            Process.Start("explorer.exe", $"{Utils.Base64Decode(Global.PromotionUrl)}?t={DateTime.Now.Ticks}");
         }
         #endregion
 
@@ -1566,6 +1566,6 @@ namespace v2rayN.Forms
 
         #endregion
 
-      
+
     }
 }

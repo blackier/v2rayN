@@ -30,7 +30,7 @@ namespace v2rayN.Mode
         public API api { get; set; }
 
         /// </summary>
-        public Policy policy;
+        public Policy policy { get; set; }
 
         /// <summary>
         /// DNS 配置
@@ -52,13 +52,13 @@ namespace v2rayN.Mode
 
     public class Policy
     {
-        public SystemPolicy system;
+        public SystemPolicy system { get; set; }
     }
 
     public class SystemPolicy
     {
-        public bool statsInboundUplink;
-        public bool statsInboundDownlink;
+        public bool statsInboundUplink { get; set; }
+        public bool statsInboundDownlink { get; set; }
     }
 
     public class Log
