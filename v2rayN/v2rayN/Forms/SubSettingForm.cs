@@ -79,7 +79,7 @@ namespace v2rayN.Forms
             }
             else
             {
-                UI.ShowWarning(UIRes.I18N("OperationFailed"));
+                Utils.MsgBox.ShowWarning(Utils.StringsRes.I18N("OperationFailed"));
             }
         }
 

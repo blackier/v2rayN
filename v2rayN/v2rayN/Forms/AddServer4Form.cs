@@ -62,12 +62,12 @@ namespace v2rayN.Forms
 
             if (Utils.IsNullOrEmpty(address))
             {
-                UI.Show(UIRes.I18N("FillServerAddress"));
+                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillServerAddress"));
                 return;
             }
             if (Utils.IsNullOrEmpty(port) || !Utils.IsNumberic(port))
             {
-                UI.Show(UIRes.I18N("FillCorrectServerPort"));
+                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillCorrectServerPort"));
                 return;
             }
 
@@ -83,7 +83,7 @@ namespace v2rayN.Forms
             }
             else
             {
-                UI.ShowWarning(UIRes.I18N("OperationFailed"));
+                Utils.MsgBox.ShowWarning(Utils.StringsRes.I18N("OperationFailed"));
             }
         }
         private void btnClose_Click(object sender, EventArgs e)
@@ -111,7 +111,7 @@ namespace v2rayN.Forms
             VmessItem vmessItem = V2rayConfigHandler.ImportFromClipboardConfig(Utils.GetClipboardData(), out string msg);
             if (vmessItem == null)
             {
-                UI.ShowWarning(msg);
+                Utils.MsgBox.ShowWarning(msg);
                 return;
             }
 

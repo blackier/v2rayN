@@ -10,17 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Forms\QRCodeForm.cs" />
-    <Compile Remove="Forms\QRCodeForm.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="Forms\QRCodeForm.resx" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Protos\Statistics.proto" />
-    <None Remove="Sample\BlankPac.txt" />
+    <None Remove="V2RayAPI\Statistics.proto" />
     <None Remove="Sample\custom_routing_block" />
     <None Remove="Sample\custom_routing_direct" />
     <None Remove="Sample\custom_routing_proxy" />
@@ -31,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Sample\BlankPac.txt" />
     <EmbeddedResource Include="Sample\custom_routing_block" />
     <EmbeddedResource Include="Sample\custom_routing_direct" />
     <EmbeddedResource Include="Sample\custom_routing_proxy" />
@@ -52,39 +41,39 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\Statistics.proto" />
+    <Protobuf Include="V2RayAPI\StatsService\StatsService.proto" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
+    <Compile Update="Resources\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resx\ResUI.Designer.cs">
+    <Compile Update="Localization\Strings.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResUI.resx</DependentUpon>
+      <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resx\ResUI.zh-Hans.Designer.cs">
+    <Compile Update="Localization\Strings.zh-Hans.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResUI.zh-Hans.resx</DependentUpon>
+      <DependentUpon>Strings.zh-Hans.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
+    <EmbeddedResource Update="Resources\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resx\ResUI.resx">
+    <EmbeddedResource Update="Localization\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResUI.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resx\ResUI.zh-Hans.resx">
+    <EmbeddedResource Update="Localization\Strings.zh-Hans.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResUI.zh-Hans.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings.zh-Hans.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

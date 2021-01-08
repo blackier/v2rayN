@@ -62,17 +62,17 @@ namespace v2rayN.Forms
 
             if (Utils.IsNullOrEmpty(address))
             {
-                UI.Show(UIRes.I18N("FillServerAddress"));
+                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillServerAddress"));
                 return;
             }
             if (Utils.IsNullOrEmpty(port) || !Utils.IsNumberic(port))
             {
-                UI.Show(UIRes.I18N("FillCorrectServerPort"));
+                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillCorrectServerPort"));
                 return;
             }
             if (Utils.IsNullOrEmpty(id))
             {
-                UI.Show(UIRes.I18N("FillPassword"));
+                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillPassword"));
                 return;
             } 
 
@@ -88,7 +88,7 @@ namespace v2rayN.Forms
             }
             else
             {
-                UI.ShowWarning(UIRes.I18N("OperationFailed"));
+                Utils.MsgBox.ShowWarning(Utils.StringsRes.I18N("OperationFailed"));
             }
         }
         private void btnClose_Click(object sender, EventArgs e)

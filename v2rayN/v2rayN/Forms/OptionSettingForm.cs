@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using v2rayN.Base;
+using v2rayN.Extension;
 using v2rayN.Handler;
-using v2rayN.HttpProxyHandler;
 
 namespace v2rayN.Forms
 {
@@ -23,8 +22,6 @@ namespace v2rayN.Forms
             InitKCP();
 
             InitGUI();
-
-            InitUserPAC();
         }
 
         /// <summary>
@@ -110,9 +107,6 @@ namespace v2rayN.Forms
             //开机自动启动
             chkAutoRun.Checked = Utils.IsAutoRun();
 
-            //自定义GFWList
-            txturlGFWList.Text = config.urlGFWList;
-
             chkAllowLANConn.Checked = config.allowLANConn;
             chkEnableStatistics.Checked = config.enableStatistics;
             chkKeepOlderDedupl.Checked = config.keepOlderDedupl;
@@ -122,9 +116,9 @@ namespace v2rayN.Forms
 
             ComboItem[] cbSource = new ComboItem[]
             {
-                new ComboItem{ID = (int)Global.StatisticsFreshRate.quick, Text = UIRes.I18N("QuickFresh")},
-                new ComboItem{ID = (int)Global.StatisticsFreshRate.medium, Text = UIRes.I18N("MediumFresh")},
-                new ComboItem{ID = (int)Global.StatisticsFreshRate.slow, Text = UIRes.I18N("SlowFresh")},
+                new ComboItem{ID = (int)Global.StatisticsFreshRate.quick, Text = Utils.StringsRes.I18N("QuickFresh")},
+                new ComboItem{ID = (int)Global.StatisticsFreshRate.medium, Text = Utils.StringsRes.I18N("MediumFresh")},
+                new ComboItem{ID = (int)Global.StatisticsFreshRate.slow, Text = Utils.StringsRes.I18N("SlowFresh")},
             };
             cbFreshrate.DataSource = cbSource;
 
@@ -144,11 +138,6 @@ namespace v2rayN.Forms
                     break;
             }
 
-        }
-
-        private void InitUserPAC()
-        {
-            txtuserPacRule.Text = Utils.List2String(config.userPacRule, true);
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -173,18 +162,13 @@ namespace v2rayN.Forms
                 return;
             }
 
-            if (SaveUserPAC() != 0)
-            {
-                return;
-            }
-
             if (ConfigHandler.SaveConfig(ref config) == 0)
             {
                 this.DialogResult = DialogResult.OK;
             }
             else
             {
-                UI.ShowWarning(UIRes.I18N("OperationFailed"));
+                Utils.MsgBox.ShowWarning(Utils.StringsRes.I18N("OperationFailed"));
             }
         }
 
@@ -208,12 +192,12 @@ namespace v2rayN.Forms
             bool sniffingEnabled = chksniffingEnabled.Checked;
             if (Utils.IsNullOrEmpty(localPort) || !Utils.IsNumberic(localPort))
             {
-                UI.Show(UIRes.I18N("FillLocalListeningPort"));
+                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillLocalListeningPort"));
                 return -1;
             }
             if (Utils.IsNullOrEmpty(protocol))
             {
-                UI.Show(UIRes.I18N("PleaseSelectProtocol"));
+                Utils.MsgBox.Show(Utils.StringsRes.I18N("PleaseSelectProtocol"));
                 return -1;
             }
             config.inbound[0].localPort = Utils.ToInt(localPort);
@@ -230,12 +214,12 @@ namespace v2rayN.Forms
             {
                 if (Utils.IsNullOrEmpty(localPort2) || !Utils.IsNumberic(localPort2))
                 {
-                    UI.Show(UIRes.I18N("FillLocalListeningPort"));
+                    Utils.MsgBox.Show(Utils.StringsRes.I18N("FillLocalListeningPort"));
                     return -1;
                 }
                 if (Utils.IsNullOrEmpty(protocol2))
                 {
-                    UI.Show(UIRes.I18N("PleaseSelectProtocol"));
+                    Utils.MsgBox.Show(Utils.StringsRes.I18N("PleaseSelectProtocol"));
                     return -1;
                 }
                 if (config.inbound.Count < 2)
@@ -317,7 +301,7 @@ namespace v2rayN.Forms
                 || Utils.IsNullOrEmpty(readBufferSize) || !Utils.IsNumberic(readBufferSize)
                 || Utils.IsNullOrEmpty(writeBufferSize) || !Utils.IsNumberic(writeBufferSize))
             {
-                UI.Show(UIRes.I18N("FillKcpParameters"));
+                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillKcpParameters"));
                 return -1;
             }
             config.kcpItem.mtu = Utils.ToInt(mtu);
@@ -340,9 +324,6 @@ namespace v2rayN.Forms
             //开机自动启动
             Utils.SetAutoRun(chkAutoRun.Checked);
 
-            //自定义GFWList
-            config.urlGFWList = txturlGFWList.Text.TrimEx();
-
             config.allowLANConn = chkAllowLANConn.Checked;
 
             bool lastEnableStatistics = config.enableStatistics;
@@ -362,15 +343,6 @@ namespace v2rayN.Forms
             return 0;
         }
 
-        private int SaveUserPAC()
-        {
-            string userPacRule = txtuserPacRule.Text.TrimEx();
-            userPacRule = userPacRule.Replace("\"", "");
-
-            config.userPacRule = Utils.String2List(userPacRule);
-
-            return 0;
-        }
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;

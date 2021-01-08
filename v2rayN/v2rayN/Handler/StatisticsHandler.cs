@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using v2rayN.Mode;
-using v2rayN.Protos.Statistics;
+using v2rayN.V2RayAPI;
 
 namespace v2rayN.Handler
 {
@@ -14,9 +14,9 @@ namespace v2rayN.Handler
     {
         private Mode.Config config_;
         private ServerStatistics serverStatistics_;
-        private Channel channel_;
-        private StatsService.StatsServiceClient client_;
+        private StatsServiceClient client_;
         private bool exitFlag_;
+        private Task loopTask_;
 
         Action<ulong, ulong, List<ServerStatItem>> updateFunc_;
 
@@ -30,56 +30,22 @@ namespace v2rayN.Handler
             get; set;
         }
 
-        public List<ServerStatItem> Statistic
-        {
-            get
-            {
-                return serverStatistics_.server;
-            }
-        }
+        public List<ServerStatItem> Statistic => serverStatistics_.server;
 
         public StatisticsHandler(Mode.Config config, Action<ulong, ulong, List<ServerStatItem>> update)
         {
-            //try
-            //{
-            //    if (Environment.Is64BitOperatingSystem)
-            //    {
-            //        FileManager.UncompressFile(Utils.GetPath("grpc_csharp_ext.x64.dll"), Resources.grpc_csharp_ext_x64_dll);
-            //    }
-            //    else
-            //    {
-            //        FileManager.UncompressFile(Utils.GetPath("grpc_csharp_ext.x86.dll"), Resources.grpc_csharp_ext_x86_dll);
-            //    }
-            //}
-            //catch (IOException ex)
-            //{
-            //    Utils.SaveLog(ex.Message, ex);
-
-            //}
-
             config_ = config;
             Enable = config.enableStatistics;
             UpdateUI = false;
             updateFunc_ = update;
             exitFlag_ = false;
 
+            client_ = new StatsServiceClient($"{Global.Loopback}:{Global.v2rayApiPort}");
+
             LoadFromFile();
 
-            GrpcInit();
-
-            Task.Run(() => Run());
-        }
-
-        private void GrpcInit()
-        {
-            if (channel_ == null)
-            {
-                Global.statePort = GetFreePort();
-
-                channel_ = new Channel($"{Global.Loopback}:{Global.statePort}", ChannelCredentials.Insecure);
-                channel_.ConnectAsync();
-                client_ = new StatsService.StatsServiceClient(channel_);
-            }
+            loopTask_ = new Task(() => Run());
+            loopTask_.Start();
         }
 
         public void Close()
@@ -87,7 +53,11 @@ namespace v2rayN.Handler
             try
             {
                 exitFlag_ = true;
-                channel_.ShutdownAsync();
+                if (loopTask_.Status == TaskStatus.Running)
+                {
+                    loopTask_.Wait();
+                }                
+                client_.Shutdown();
             }
             catch (Exception ex)
             {
@@ -101,39 +71,25 @@ namespace v2rayN.Handler
             {
                 try
                 {
-                    if (Enable && channel_.State == ChannelState.Ready)
+                    var resStat = client_.QueryStats("", true);
+                    if (resStat != null)
                     {
-                        QueryStatsResponse res = null;
-                        try
+                        string itemId = config_.getItemId();
+                        ServerStatItem serverStatItem = GetServerStatItem(itemId);
+
+                        ParseOutput(resStat, out ulong up, out ulong down);
+
+                        serverStatItem.todayUp += up;
+                        serverStatItem.todayDown += down;
+                        serverStatItem.totalUp += up;
+                        serverStatItem.totalDown += down;
+
+                        if (UpdateUI)
                         {
-                            res = client_.QueryStats(new QueryStatsRequest() { Pattern = "", Reset = true });
-                        }
-                        catch (Exception ex)
-                        {
-                            Utils.SaveLog(ex.Message, ex);
-                        }
-
-                        if (res != null)
-                        {
-                            string itemId = config_.getItemId();
-                            ServerStatItem serverStatItem = GetServerStatItem(itemId);
-
-                            //TODO: parse output
-                            ParseOutput(res.Stat, out ulong up, out ulong down);
-
-                            serverStatItem.todayUp += up;
-                            serverStatItem.todayDown += down;
-                            serverStatItem.totalUp += up;
-                            serverStatItem.totalDown += down;
-
-                            if (UpdateUI)
-                            {
-                                updateFunc_(up, down, new List<ServerStatItem> { serverStatItem });
-                            }
+                            updateFunc_(up, down, new List<ServerStatItem> { serverStatItem });
                         }
                     }
                     Thread.Sleep(config_.statisticsFreshRate);
-                    channel_.ConnectAsync();
                 }
                 catch (Exception ex)
                 {
@@ -255,24 +211,5 @@ namespace v2rayN.Handler
             }
         }
 
-        private int GetFreePort()
-        {
-            int defaultPort = 28123;
-            try
-            {
-                // TCP stack please do me a favor
-                TcpListener l = new TcpListener(IPAddress.Loopback, 0);
-                l.Start();
-                int port = ((IPEndPoint)l.LocalEndpoint).Port;
-                l.Stop();
-                return port;
-            }
-            catch (Exception ex)
-            {
-                // in case access denied
-                Utils.SaveLog(ex.Message, ex);
-                return defaultPort;
-            }
-        }
     }
 }

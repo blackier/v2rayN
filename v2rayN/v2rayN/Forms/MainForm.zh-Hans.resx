@@ -268,7 +268,7 @@
 </value>
   </data>
   <data name="cmsMain.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>259, 220</value>
+    <value>259, 190</value>
   </data>
   <data name="menuSysAgentMode.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>258, 30</value>
@@ -288,35 +288,17 @@
   <data name="menuGlobal.Text" xml:space="preserve">
     <value>开启Http代理,并自动配置系统代理(全局模式)</value>
   </data>
-  <data name="menuGlobalPAC.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>472, 34</value>
-  </data>
-  <data name="menuGlobalPAC.Text" xml:space="preserve">
-    <value>开启PAC,并自动配置系统代理(PAC模式)</value>
-  </data>
   <data name="menuKeep.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>472, 34</value>
   </data>
   <data name="menuKeep.Text" xml:space="preserve">
     <value>仅开启Http代理,并清除系统代理</value>
   </data>
-  <data name="menuKeepPAC.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>472, 34</value>
-  </data>
-  <data name="menuKeepPAC.Text" xml:space="preserve">
-    <value>仅开启PAC,并清除系统代理</value>
-  </data>
   <data name="menuKeepNothing.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>472, 34</value>
   </data>
   <data name="menuKeepNothing.Text" xml:space="preserve">
     <value>仅开启Http代理,不改变系统代理</value>
-  </data>
-  <data name="menuKeepPACNothing.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>472, 34</value>
-  </data>
-  <data name="menuKeepPACNothing.Text" xml:space="preserve">
-    <value>仅开启PAC,不改变系统代理</value>
   </data>
   <data name="menuServers.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>258, 30</value>
@@ -335,12 +317,6 @@
   </data>
   <data name="menuScanScreen2.Text" xml:space="preserve">
     <value>扫描屏幕上的二维码</value>
-  </data>
-  <data name="menuCopyPACUrl.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>258, 30</value>
-  </data>
-  <data name="menuCopyPACUrl.Text" xml:space="preserve">
-    <value>复制本地PAC网址</value>
   </data>
   <data name="menuUpdateSubscriptions.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>258, 30</value>
@@ -468,51 +444,36 @@
     <value>  检查更新  </value>
   </data>
   <data name="tsbCheckUpdateN.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>329, 34</value>
+    <value>197, 34</value>
   </data>
   <data name="tsbCheckUpdateN.Text" xml:space="preserve">
     <value>v2rayN</value>
   </data>
   <data name="tsbCheckUpdateCore.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>329, 34</value>
+    <value>197, 34</value>
   </data>
   <data name="tsbCheckUpdateCore.Text" xml:space="preserve">
     <value>v2rayCore</value>
   </data>
-  <data name="tsbCheckUpdatePACList.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>329, 34</value>
-  </data>
-  <data name="tsbCheckUpdatePACList.Text" xml:space="preserve">
-    <value>PAC</value>
-  </data>
-  <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>326, 6</value>
-  </data>
-  <data name="tsbCheckClearPACList.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>329, 34</value>
-  </data>
-  <data name="tsbCheckClearPACList.Text" xml:space="preserve">
-    <value>简化PAC (请设置Core路由)</value>
-  </data>
   <data name="tsbHelp.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAANtSURBVFhH7ZfZS1RxFMfFNqgow5aHaIVogcAyWiHbRsQZ
-        nYVse+q1l0AKgyKwP6DA1156CCJosZSgaEESpAjToE2kgkhNTOpBsU3rc6bvdWa6c713xEe/cPjd3/d8
-        zzm/e+79/e5M3iSCoqysbEY8Hg/FYrELlZWVLdFo9B3X37EBXT/GzoTD4cUKmThQcD9FelnAHzOuh7Fu
-        Cj5jbMV6jHN86BuxdQofPyoqKhZRpMESM45g17EDkUhkpiSjqKqqmo3uEP56FvHb9CziMp2bI0luIEEp
-        1qe7amXcKJcvWOBSYi9p4Z3EL5crGAjYZa3EfmA1UPn/PLmB4oRHh+xGGIMtwtpO674Q8JNxi+hxgzzb
-        WcAv6wQv6DzR3kB431qHHRflAs97OroIyWuwWrTVjOvldgH/ST2OBlHZYUlNSLKHolygK/vQfTJduhFj
-        L94xyVxA02Q6NKWi3CDJGwT29mbdQiTYimZIBXvR3mWsQ99hnPiY5BlAs0H+dlGZsKJKckOUCxR8oCT9
-        iURimWhDPvEt5kMzWFJSMlV8BvAltzTv2QpRKZD0lJIfEZUB+AIseRgxnhA9Crg685l5dRDNUWmqRaVA
-        UKOSF4gKDO6skLhui+d6wF5SuTKAf6E0N0WlANlGkm+aBgaPYhVJX1ti2Tm5soIatr2fapoCC+jD3moa
-        CCRabXFOcZK3e929A/TvsS5NU4D8jL3S1BcUmmLJnOJc3+YIni+3J9B1Yh81TQHyOfZVU19w98ltpeJX
-        RfsCrZ2KTzRNATK5RbizuaLGBO0udxbAYnaKHhN8GRcoxr3VIZPHJYmzbsP/QbvXoK01y2HRzjZ0H/N0
-        YK2cngdROtDtwex4bcp6sGSB02VPPYKXmOdRnA50hy2ZGXfm+SFygKbItMS1iXIDQViiR6I8kesC0DWb
-        1vd9QXBPiT0/x7mCXME+xwb70YDwA3dlJ9Ym0eMGz3sH+Wzr2TlTKHps2PHKAvoJGGQsF50T7KAi9rTd
-        CDZMrm1yBQOLWEkHOggcoX0X7YemXL4gZjP2wtpO8V7y7JYrN9j+JviKLYJE9ovnGuPBUCg0S5JRoE3+
-        LMduadH2zOuDHM++oGgRye44ia2lWA9z1x8TFe7CEgqfOFBkCXaWrqT/NRvE7KPUDHce21tcXDxNIZPw
-        QV7eX6eK4JuVRtAeAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAANsSURBVFhH7ZfZS1RhGMbFNqgow5aLaIVogaAyWiHbRsQZ
+        nXHItqtuuwmkKCgC+wMKvO2miyCCFksJihYkQYooDdpEKojUxKQuFMvS+r3Tc5yZzhzPOeKlD7yc8z3v
+        8y7fd873nZm8CQRFaWnptMrKykgikbhQUVHRjL3n/gfWp/vH2JloNLpQIeMHCuzDumngjxn3Q1gnBZ/F
+        4/HnWJdxGb4GbI3Cx47y8vIFFKm3xFyHsevY/lgsNl2SEVRVVc1EdxB/HcV/m57rZVZuliThQIISrMeK
+        2yy5bpDLFzS4mNhLaryd+KVyBQMBO7WUP7k/CZX/zxMOFCc8PmATCdyELTv2leKD2GbRYwaFt9HAL1sJ
+        XtA5or2B8L4tHXZMlAs876noYrY6WA3aaq5r5XYB/wk9jnpRuWFJTUiyh6JcYFX2ovtsukyDtxfvqGQu
+        oGk0HZoSUW5Q+C0Ce3tzbiESbEEzoILdaO8yruWRtRlnxjgheRbQr1dcq6hsWFEluSHKBQo+UJLeZDK5
+        RLQhH67ZfGj6i4uLJ4vPAr7UlqbhZaLSoPNT5uR6WFQW4AsokjqMuD8uegRwteYzs8mIzgKaI9JUi0qD
+        oAYlLxAVGMyskPhOi+e+z15SubKAf740N0WlAdlCku8aBgaPYgVJ31hi2Tm5coIagzyCpxqmQQM92DsN
+        A4FkKy3OKc641Wv2DtB/wDo0TAPyC/ZaQ19QaJIlc4pzf5sjeK7cnkDXjn3SMA3IF9g3DX3BbFPbSsWv
+        ivYFWjsVn2iYBmRqizCz2aJGBS9rmdMAzewQPSr4Ms5TjHurQ6aOSxLn3Ib/g+VehbbGLETTzjZ0H/Os
+        wGo5PQ+iTKDbjdnx2pjzYMkBZ5U99QheYZ5HcSbQHbJkZszM80PkAM060xLXIsoNBFGJHonyRNgG0DWZ
+        1vd9QXBPiT0/x2FBrmCfY4P9aED4kUbsB8lG0WMGz3s7+Wzr2TlTKHp02PFK8V4C+lneMtGhYAcVsac1
+        kSFybZUrGGhiOd23ETjM8l20H5py+YKYTdhLW3aKd2O75AoH298EX7EmuNovnmvM6kAkEpkhyQjQpn6W
+        Y7fUtD3zuiDHsy9sC5HsjpPYlhSui7Hrj4kKd2BJhY8fKLQIO0uxzL9m/Zh9lJrwncf2FBUVTVHIBHyQ
+        l/cXIjfgOIwcM+8AAAAASUVORK5CYII=
 </value>
   </data>
   <data name="tsbHelp.Size" type="System.Drawing.Size, System.Drawing.Primitives">

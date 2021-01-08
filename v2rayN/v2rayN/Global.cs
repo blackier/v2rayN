@@ -242,23 +242,31 @@ namespace v2rayN
         /// <summary>
         ///  
         /// </summary>
-        public static int statePort
-        {
-            get; set;
-        }
+        public static readonly int v2rayApiPort = Utils.GetFreePort();
 
         public static Job processJob
         {
             get; set;
         }
+
         public static System.Threading.Mutex mutexObj
         {
             get; set;
         }
 
+        private static Shadowsocks.WPF.Services.PrivoxyRunner privoxy_runner_instance;
+        public static Shadowsocks.WPF.Services.PrivoxyRunner privoxyRunner
+        {
+            get
+            {                
+                if (privoxy_runner_instance == null)
+                {
+                    privoxy_runner_instance = new Shadowsocks.WPF.Services.PrivoxyRunner();
+                }
+                return privoxy_runner_instance;
+            }
+        }
+
         #endregion
-
-
-
     }
 }

@@ -291,23 +291,11 @@
   <data name="chkAllowLANConn.Text" xml:space="preserve">
     <value>允许来自局域网的连接</value>
   </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>344, 24</value>
-  </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>自定义GFWList地址(不需自定义请填空白)</value>
-  </data>
   <data name="chkAutoRun.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>264, 28</value>
   </data>
   <data name="chkAutoRun.Text" xml:space="preserve">
     <value>开机自动启动(可能会不成功)</value>
-  </data>
-  <data name="tabPage9.Text" xml:space="preserve">
-    <value>  用户PAC设置  </value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>*设置用户PAC规则，用逗号(,)隔开</value>
   </data>
   <data name="btnOK.Text" xml:space="preserve">
     <value>确定(&amp;O)</value>

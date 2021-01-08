@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using v2rayN.Base;
+using v2rayN.Extension;
 using v2rayN.Mode;
-using v2rayN.Tool;
 
 namespace v2rayN.Handler
 {

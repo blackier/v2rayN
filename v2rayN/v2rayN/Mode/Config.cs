@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using v2rayN.Base;
-using v2rayN.HttpProxyHandler;
+using v2rayN.Extension;
+using v2rayN.Handler;
 
 
 namespace v2rayN.Mode

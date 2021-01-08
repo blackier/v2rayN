@@ -402,35 +402,17 @@
   <data name="menuGlobal.Text" xml:space="preserve">
     <value>Open Http proxy and set the system proxy (global mode)</value>
   </data>
-  <data name="menuGlobalPAC.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>604, 34</value>
-  </data>
-  <data name="menuGlobalPAC.Text" xml:space="preserve">
-    <value>Open PAC and set the system proxy (PAC mode)</value>
-  </data>
   <data name="menuKeep.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>604, 34</value>
   </data>
   <data name="menuKeep.Text" xml:space="preserve">
     <value>Only open Http proxy and clear the proxy settings</value>
   </data>
-  <data name="menuKeepPAC.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>604, 34</value>
-  </data>
-  <data name="menuKeepPAC.Text" xml:space="preserve">
-    <value>Only open PAC and clear the proxy settings</value>
-  </data>
   <data name="menuKeepNothing.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>604, 34</value>
   </data>
   <data name="menuKeepNothing.Text" xml:space="preserve">
     <value>Only open Http proxy and do nothing</value>
-  </data>
-  <data name="menuKeepPACNothing.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>604, 34</value>
-  </data>
-  <data name="menuKeepPACNothing.Text" xml:space="preserve">
-    <value>Only open PAC and do nothing</value>
   </data>
   <data name="menuSysAgentMode.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>355, 30</value>
@@ -456,12 +438,6 @@
   <data name="menuScanScreen2.Text" xml:space="preserve">
     <value>Scan QR code on the screen</value>
   </data>
-  <data name="menuCopyPACUrl.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>355, 30</value>
-  </data>
-  <data name="menuCopyPACUrl.Text" xml:space="preserve">
-    <value>Copy local PAC URL</value>
-  </data>
   <data name="menuUpdateSubscriptions.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>355, 30</value>
   </data>
@@ -478,7 +454,7 @@
     <value>Exit</value>
   </data>
   <data name="cmsMain.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>356, 220</value>
+    <value>356, 190</value>
   </data>
   <data name="&gt;&gt;cmsMain.Name" xml:space="preserve">
     <value>cmsMain</value>
@@ -568,7 +544,7 @@
     <value>微软雅黑, 8pt</value>
   </data>
   <data name="toolSslBlank1.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>280, 21</value>
+    <value>444, 21</value>
   </data>
   <data name="toolSslHttpPortLab.Font" type="System.Drawing.Font, System.Drawing.Common">
     <value>微软雅黑, 8pt</value>
@@ -582,29 +558,11 @@
   <data name="toolSslHttpPort.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>0, 21</value>
   </data>
-  <data name="toolSslBlank2.Font" type="System.Drawing.Font, System.Drawing.Common">
-    <value>微软雅黑, 8pt</value>
-  </data>
-  <data name="toolSslBlank2.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>280, 21</value>
-  </data>
-  <data name="toolSslPacPortLab.Font" type="System.Drawing.Font, System.Drawing.Common">
-    <value>微软雅黑, 8pt</value>
-  </data>
-  <data name="toolSslPacPortLab.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>46, 21</value>
-  </data>
-  <data name="toolSslPacPortLab.Text" xml:space="preserve">
-    <value>PAC:</value>
-  </data>
-  <data name="toolSslPacPort.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>0, 21</value>
-  </data>
   <data name="toolSslBlank3.Font" type="System.Drawing.Font, System.Drawing.Common">
     <value>微软雅黑, 8pt</value>
   </data>
   <data name="toolSslBlank3.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>280, 21</value>
+    <value>444, 21</value>
   </data>
   <data name="toolSslServerSpeed.AutoSize" type="System.Boolean, System.Private.CoreLib">
     <value>False</value>
@@ -831,31 +789,16 @@
     <value>6, 65</value>
   </data>
   <data name="tsbCheckUpdateN.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>575, 34</value>
+    <value>298, 34</value>
   </data>
   <data name="tsbCheckUpdateN.Text" xml:space="preserve">
     <value>v2rayN (this software)</value>
   </data>
   <data name="tsbCheckUpdateCore.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>575, 34</value>
+    <value>298, 34</value>
   </data>
   <data name="tsbCheckUpdateCore.Text" xml:space="preserve">
     <value>Update v2rayCore</value>
-  </data>
-  <data name="tsbCheckUpdatePACList.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>575, 34</value>
-  </data>
-  <data name="tsbCheckUpdatePACList.Text" xml:space="preserve">
-    <value>Check for updated PAC (need the HTTP proxy are ON)</value>
-  </data>
-  <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>572, 6</value>
-  </data>
-  <data name="tsbCheckClearPACList.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>575, 34</value>
-  </data>
-  <data name="tsbCheckClearPACList.Text" xml:space="preserve">
-    <value>Simplify PAC (need to set Core route)</value>
   </data>
   <data name="tsbCheckUpdate.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -914,22 +857,22 @@
   <data name="tsbHelp.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="tsbHelp.ImageTransparentColor" type="System.Drawing.Color, System.Drawing.Primitives">
@@ -1242,34 +1185,16 @@
   <data name="&gt;&gt;menuGlobal.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;menuGlobalPAC.Name" xml:space="preserve">
-    <value>menuGlobalPAC</value>
-  </data>
-  <data name="&gt;&gt;menuGlobalPAC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;menuKeep.Name" xml:space="preserve">
     <value>menuKeep</value>
   </data>
   <data name="&gt;&gt;menuKeep.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;menuKeepPAC.Name" xml:space="preserve">
-    <value>menuKeepPAC</value>
-  </data>
-  <data name="&gt;&gt;menuKeepPAC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;menuKeepNothing.Name" xml:space="preserve">
     <value>menuKeepNothing</value>
   </data>
   <data name="&gt;&gt;menuKeepNothing.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuKeepPACNothing.Name" xml:space="preserve">
-    <value>menuKeepPACNothing</value>
-  </data>
-  <data name="&gt;&gt;menuKeepPACNothing.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;menuServers.Name" xml:space="preserve">
@@ -1288,12 +1213,6 @@
     <value>menuScanScreen2</value>
   </data>
   <data name="&gt;&gt;menuScanScreen2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuCopyPACUrl.Name" xml:space="preserve">
-    <value>menuCopyPACUrl</value>
-  </data>
-  <data name="&gt;&gt;menuCopyPACUrl.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;menuUpdateSubscriptions.Name" xml:space="preserve">
@@ -1348,24 +1267,6 @@
     <value>toolSslHttpPort</value>
   </data>
   <data name="&gt;&gt;toolSslHttpPort.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolSslBlank2.Name" xml:space="preserve">
-    <value>toolSslBlank2</value>
-  </data>
-  <data name="&gt;&gt;toolSslBlank2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolSslPacPortLab.Name" xml:space="preserve">
-    <value>toolSslPacPortLab</value>
-  </data>
-  <data name="&gt;&gt;toolSslPacPortLab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolSslPacPort.Name" xml:space="preserve">
-    <value>toolSslPacPort</value>
-  </data>
-  <data name="&gt;&gt;toolSslPacPort.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolSslBlank3.Name" xml:space="preserve">
@@ -1462,24 +1363,6 @@
     <value>tsbCheckUpdateCore</value>
   </data>
   <data name="&gt;&gt;tsbCheckUpdateCore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbCheckUpdatePACList.Name" xml:space="preserve">
-    <value>tsbCheckUpdatePACList</value>
-  </data>
-  <data name="&gt;&gt;tsbCheckUpdatePACList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator13.Name" xml:space="preserve">
-    <value>toolStripSeparator13</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbCheckClearPACList.Name" xml:space="preserve">
-    <value>tsbCheckClearPACList</value>
-  </data>
-  <data name="&gt;&gt;tsbCheckClearPACList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">

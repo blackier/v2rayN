@@ -9,9 +9,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using v2rayN.Base;
+using v2rayN.Extension;
 using v2rayN.Mode;
-using v2rayN.Properties;
+using v2rayN.Resources;
 
 namespace v2rayN.Handler
 {
@@ -102,7 +102,7 @@ namespace v2rayN.Handler
                 string filePath = Utils.GetPath("V2ray.exe");
                 if (!File.Exists(filePath))
                 {
-                    string msg = string.Format(UIRes.I18N("NotFoundCore"), @"https://github.com/v2fly/v2ray-core/releases");
+                    string msg = string.Format(Utils.StringsRes.I18N("NotFoundCore"), @"https://github.com/v2fly/v2ray-core/releases");
                     //ShowMsg(true, msg);
                     return "";
                 }
@@ -140,14 +140,14 @@ namespace v2rayN.Handler
                 if (type == "Core")
                 {
                     curVersion = "v" + getV2rayVersion();
-                    message = string.Format(UIRes.I18N("IsLatestCore"), curVersion);
+                    message = string.Format(Utils.StringsRes.I18N("IsLatestCore"), curVersion);
                     string osBit = Environment.Is64BitProcess ? "64" : "32";
                     url = string.Format(coreUrl, version, osBit);
                 }
                 else if (type == "v2rayN")
                 {
                     curVersion = FileVersionInfo.GetVersionInfo(Utils.GetExePath()).FileVersion.ToString();
-                    message = string.Format(UIRes.I18N("IsLatestN"), curVersion);
+                    message = string.Format(Utils.StringsRes.I18N("IsLatestN"), curVersion);
                     url = string.Format(nUrl, version);
                 }
                 else
@@ -181,7 +181,7 @@ namespace v2rayN.Handler
             try
             {
                 Utils.SetSecurityProtocol();
-                UpdateCompleted?.Invoke(this, new ResultEventArgs(false, UIRes.I18N("Downloading")));
+                UpdateCompleted?.Invoke(this, new ResultEventArgs(false, Utils.StringsRes.I18N("Downloading")));
 
                 progressPercentage = -1;
                 totalBytesToReceive = 0;
@@ -312,47 +312,6 @@ namespace v2rayN.Handler
 
                 Error?.Invoke(this, new ErrorEventArgs(ex));
             }
-        }
-
-        #endregion
-
-        #region PAC
-
-        public string GenPacFile(string result)
-        {
-            try
-            {
-                File.WriteAllText(Utils.GetTempPath("gfwlist.txt"), result, Encoding.UTF8);
-                List<string> lines = ParsePacResult(result);
-                string abpContent = Utils.UnGzip(Resources.abp_js);
-                abpContent = abpContent.Replace("__RULES__", JsonSerializer.Serialize(lines, lines.GetType(), new JsonSerializerOptions { WriteIndented = true }));
-                File.WriteAllText(Utils.GetPath(Global.pacFILE), abpContent, Encoding.UTF8);
-            }
-            catch (Exception ex)
-            {
-                Utils.SaveLog(ex.Message, ex);
-                return ex.Message;
-            }
-            return string.Empty;
-        }
-
-        private List<string> ParsePacResult(string response)
-        {
-            IEnumerable<char> IgnoredLineBegins = new[] { '!', '[' };
-
-            byte[] bytes = Convert.FromBase64String(response);
-            string content = Encoding.UTF8.GetString(bytes);
-            List<string> valid_lines = new List<string>();
-            using (StringReader sr = new StringReader(content))
-            {
-                foreach (string line in sr.NonWhiteSpaceLines())
-                {
-                    if (line.BeginWithAny(IgnoredLineBegins))
-                        continue;
-                    valid_lines.Add(line);
-                }
-            }
-            return valid_lines;
         }
 
         #endregion

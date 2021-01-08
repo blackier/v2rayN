@@ -32,7 +32,7 @@ namespace v2rayN.Forms
                     return;
                 }
                 txtUrl.Text = url;
-                picQRCode.Image = QRCodeHelper.GetQRCode(url);                
+                picQRCode.Image = Utils.QRCode.GetQRCode(url);                
             }
         }
     }

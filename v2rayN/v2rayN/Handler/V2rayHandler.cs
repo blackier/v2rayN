@@ -175,7 +175,7 @@ namespace v2rayN.Handler
             }
             if (Utils.IsNullOrEmpty(fileName))
             {
-                string msg = string.Format(UIRes.I18N("NotFoundCore"), @"https://github.com/v2fly/v2ray-core/releases");
+                string msg = string.Format(Utils.StringsRes.I18N("NotFoundCore"), @"https://github.com/v2fly/v2ray-core/releases");
                 ShowMsg(false, msg);
             }
             return fileName;
@@ -186,7 +186,7 @@ namespace v2rayN.Handler
         /// </summary>
         private void V2rayStart()
         {
-            ShowMsg(false, string.Format(UIRes.I18N("StartService"), DateTime.Now.ToString()));
+            ShowMsg(false, string.Format(Utils.StringsRes.I18N("StartService"), DateTime.Now.ToString()));
 
             try
             {
@@ -239,7 +239,7 @@ namespace v2rayN.Handler
         /// </summary>
         private int V2rayStartNew(string configStr)
         {
-            ShowMsg(false, string.Format(UIRes.I18N("StartService"), DateTime.Now.ToString()));
+            ShowMsg(false, string.Format(Utils.StringsRes.I18N("StartService"), DateTime.Now.ToString()));
 
             try
             {

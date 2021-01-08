@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.scMain = new System.Windows.Forms.SplitContainer();
-            this.lvServers = new v2rayN.Base.ListViewFlickerFree();
+            this.lvServers = new v2rayN.Extension.ListViewEx();
             this.cmsLv = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuAddVmessServer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddVlessServer = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,15 +70,11 @@
             this.menuSysAgentMode = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNotEnabledHttp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGlobal = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuGlobalPAC = new System.Windows.Forms.ToolStripMenuItem();
             this.menuKeep = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuKeepPAC = new System.Windows.Forms.ToolStripMenuItem();
             this.menuKeepNothing = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuKeepPACNothing = new System.Windows.Forms.ToolStripMenuItem();
             this.menuServers = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddServers2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuScanScreen2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuCopyPACUrl = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUpdateSubscriptions = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,9 +88,6 @@
             this.toolSslBlank1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolSslHttpPortLab = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolSslHttpPort = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolSslBlank2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolSslPacPortLab = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolSslPacPort = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolSslBlank3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolSslServerSpeed = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolSslBlank4 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -113,9 +106,6 @@
             this.tsbCheckUpdate = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsbCheckUpdateN = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbCheckUpdateCore = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbCheckUpdatePACList = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbCheckClearPACList = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbHelp = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsbAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -413,7 +403,6 @@
             this.menuServers,
             this.menuAddServers2,
             this.menuScanScreen2,
-            this.menuCopyPACUrl,
             this.menuUpdateSubscriptions,
             this.toolStripSeparator2,
             this.menuExit});
@@ -427,11 +416,8 @@
             this.menuSysAgentMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuNotEnabledHttp,
             this.menuGlobal,
-            this.menuGlobalPAC,
             this.menuKeep,
-            this.menuKeepPAC,
-            this.menuKeepNothing,
-            this.menuKeepPACNothing});
+            this.menuKeepNothing});
             this.menuSysAgentMode.Name = "menuSysAgentMode";
             resources.ApplyResources(this.menuSysAgentMode, "menuSysAgentMode");
             // 
@@ -447,35 +433,17 @@
             resources.ApplyResources(this.menuGlobal, "menuGlobal");
             this.menuGlobal.Click += new System.EventHandler(this.menuGlobal_Click);
             // 
-            // menuGlobalPAC
-            // 
-            this.menuGlobalPAC.Name = "menuGlobalPAC";
-            resources.ApplyResources(this.menuGlobalPAC, "menuGlobalPAC");
-            this.menuGlobalPAC.Click += new System.EventHandler(this.menuGlobalPAC_Click);
-            // 
             // menuKeep
             // 
             this.menuKeep.Name = "menuKeep";
             resources.ApplyResources(this.menuKeep, "menuKeep");
             this.menuKeep.Click += new System.EventHandler(this.menuKeep_Click);
             // 
-            // menuKeepPAC
-            // 
-            this.menuKeepPAC.Name = "menuKeepPAC";
-            resources.ApplyResources(this.menuKeepPAC, "menuKeepPAC");
-            this.menuKeepPAC.Click += new System.EventHandler(this.menuKeepPAC_Click);
-            // 
             // menuKeepNothing
             // 
             this.menuKeepNothing.Name = "menuKeepNothing";
             resources.ApplyResources(this.menuKeepNothing, "menuKeepNothing");
             this.menuKeepNothing.Click += new System.EventHandler(this.menuKeepNothing_Click);
-            // 
-            // menuKeepPACNothing
-            // 
-            this.menuKeepPACNothing.Name = "menuKeepPACNothing";
-            resources.ApplyResources(this.menuKeepPACNothing, "menuKeepPACNothing");
-            this.menuKeepPACNothing.Click += new System.EventHandler(this.menuKeepPACNothing_Click);
             // 
             // menuServers
             // 
@@ -493,12 +461,6 @@
             this.menuScanScreen2.Name = "menuScanScreen2";
             resources.ApplyResources(this.menuScanScreen2, "menuScanScreen2");
             this.menuScanScreen2.Click += new System.EventHandler(this.menuScanScreen_Click);
-            // 
-            // menuCopyPACUrl
-            // 
-            this.menuCopyPACUrl.Name = "menuCopyPACUrl";
-            resources.ApplyResources(this.menuCopyPACUrl, "menuCopyPACUrl");
-            this.menuCopyPACUrl.Click += new System.EventHandler(this.menuCopyPACUrl_Click);
             // 
             // menuUpdateSubscriptions
             // 
@@ -556,9 +518,6 @@
             this.toolSslBlank1,
             this.toolSslHttpPortLab,
             this.toolSslHttpPort,
-            this.toolSslBlank2,
-            this.toolSslPacPortLab,
-            this.toolSslPacPort,
             this.toolSslBlank3,
             this.toolSslServerSpeed,
             this.toolSslBlank4});
@@ -591,22 +550,6 @@
             // 
             this.toolSslHttpPort.Name = "toolSslHttpPort";
             resources.ApplyResources(this.toolSslHttpPort, "toolSslHttpPort");
-            // 
-            // toolSslBlank2
-            // 
-            resources.ApplyResources(this.toolSslBlank2, "toolSslBlank2");
-            this.toolSslBlank2.Name = "toolSslBlank2";
-            this.toolSslBlank2.Spring = true;
-            // 
-            // toolSslPacPortLab
-            // 
-            resources.ApplyResources(this.toolSslPacPortLab, "toolSslPacPortLab");
-            this.toolSslPacPortLab.Name = "toolSslPacPortLab";
-            // 
-            // toolSslPacPort
-            // 
-            this.toolSslPacPort.Name = "toolSslPacPort";
-            resources.ApplyResources(this.toolSslPacPort, "toolSslPacPort");
             // 
             // toolSslBlank3
             // 
@@ -717,10 +660,7 @@
             // 
             this.tsbCheckUpdate.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbCheckUpdateN,
-            this.tsbCheckUpdateCore,
-            this.tsbCheckUpdatePACList,
-            this.toolStripSeparator13,
-            this.tsbCheckClearPACList});
+            this.tsbCheckUpdateCore});
             resources.ApplyResources(this.tsbCheckUpdate, "tsbCheckUpdate");
             this.tsbCheckUpdate.Name = "tsbCheckUpdate";
             // 
@@ -735,23 +675,6 @@
             this.tsbCheckUpdateCore.Name = "tsbCheckUpdateCore";
             resources.ApplyResources(this.tsbCheckUpdateCore, "tsbCheckUpdateCore");
             this.tsbCheckUpdateCore.Click += new System.EventHandler(this.tsbCheckUpdateCore_Click);
-            // 
-            // tsbCheckUpdatePACList
-            // 
-            this.tsbCheckUpdatePACList.Name = "tsbCheckUpdatePACList";
-            resources.ApplyResources(this.tsbCheckUpdatePACList, "tsbCheckUpdatePACList");
-            this.tsbCheckUpdatePACList.Click += new System.EventHandler(this.tsbCheckUpdatePACList_Click);
-            // 
-            // toolStripSeparator13
-            // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
-            resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
-            // 
-            // tsbCheckClearPACList
-            // 
-            this.tsbCheckClearPACList.Name = "tsbCheckClearPACList";
-            resources.ApplyResources(this.tsbCheckClearPACList, "tsbCheckClearPACList");
-            this.tsbCheckClearPACList.Click += new System.EventHandler(this.tsbCheckClearPACList_Click);
             // 
             // toolStripSeparator10
             // 
@@ -855,7 +778,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtMsgBox;
-        private v2rayN.Base.ListViewFlickerFree lvServers;
+        private v2rayN.Extension.ListViewEx lvServers;
         private System.Windows.Forms.NotifyIcon notifyMain;
         private System.Windows.Forms.ContextMenuStrip cmsMain;
         private System.Windows.Forms.ToolStripMenuItem menuExit;
@@ -886,9 +809,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem menuSysAgentMode;
         private System.Windows.Forms.ToolStripMenuItem menuGlobal;
-        private System.Windows.Forms.ToolStripMenuItem menuGlobalPAC;
         private System.Windows.Forms.ToolStripMenuItem menuKeep;
-        private System.Windows.Forms.ToolStripMenuItem menuCopyPACUrl;
         private System.Windows.Forms.ToolStripMenuItem menuAddCustomServer;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuAddShadowsocksServer;
@@ -898,7 +819,6 @@
         private System.Windows.Forms.ToolStripDropDownButton tsbCheckUpdate;
         private System.Windows.Forms.ToolStripMenuItem tsbCheckUpdateN;
         private System.Windows.Forms.ToolStripMenuItem tsbCheckUpdateCore;
-        private System.Windows.Forms.ToolStripMenuItem tsbCheckUpdatePACList;
         private System.Windows.Forms.ToolStripMenuItem menuAddServers;
         private System.Windows.Forms.ToolStripMenuItem menuExport2ShareUrl;
         private System.Windows.Forms.ToolStripMenuItem menuSpeedServer;
@@ -913,8 +833,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem tsbSubSetting;
         private System.Windows.Forms.ToolStripMenuItem tsbSubUpdate;
-        private System.Windows.Forms.ToolStripMenuItem tsbCheckClearPACList;
-        private System.Windows.Forms.ToolStripMenuItem menuKeepPAC;
         private System.Windows.Forms.ToolStripMenuItem menuSelectAll;
         private System.Windows.Forms.ToolStripMenuItem menuExport2SubContent;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
@@ -925,24 +843,19 @@
         private System.Windows.Forms.StatusStrip ssMain;
         private System.Windows.Forms.ToolStripStatusLabel toolSslSocksPort;
         private System.Windows.Forms.ToolStripStatusLabel toolSslHttpPort;
-        private System.Windows.Forms.ToolStripStatusLabel toolSslBlank2;
         private System.Windows.Forms.ToolStripStatusLabel toolSslBlank1;
-        private System.Windows.Forms.ToolStripStatusLabel toolSslPacPort;
         private System.Windows.Forms.ToolStripStatusLabel toolSslBlank3;
         private System.Windows.Forms.ToolStripStatusLabel toolSslSocksPortLab;
         private System.Windows.Forms.ToolStripStatusLabel toolSslHttpPortLab;
-        private System.Windows.Forms.ToolStripStatusLabel toolSslPacPortLab;
         private System.Windows.Forms.ToolStripStatusLabel toolSslServerSpeed;
         private System.Windows.Forms.ToolStripStatusLabel toolSslBlank4;
         private System.Windows.Forms.ToolStripMenuItem menuRemoveDuplicateServer;
         private System.Windows.Forms.ToolStripMenuItem menuTcpingServer;
         private System.Windows.Forms.ToolStripMenuItem menuRealPingServer;
         private System.Windows.Forms.ToolStripMenuItem menuNotEnabledHttp;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripMenuItem menuUpdateSubscriptions;
         private System.Windows.Forms.ToolStripMenuItem tsbV2rayWebsite;
         private System.Windows.Forms.ToolStripMenuItem menuKeepNothing;
-        private System.Windows.Forms.ToolStripMenuItem menuKeepPACNothing;
         private System.Windows.Forms.ToolStripMenuItem tsbTestMe;
         private System.Windows.Forms.ToolStripButton tsbReload;
         private System.Windows.Forms.ToolStripButton tsbQRCodeSwitch;

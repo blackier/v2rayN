@@ -48,7 +48,7 @@ namespace v2rayN.Handler
 
                 graphics.FillEllipse(drawBrush, new Rectangle(0, 0, width, height));
                 int zoom = 16;
-                graphics.DrawImage(new Bitmap(Properties.Resources.notify, width - zoom, width - zoom), zoom / 2, zoom / 2);
+                graphics.DrawImage(new Bitmap(Resources.Resources.notify, width - zoom, width - zoom), zoom / 2, zoom / 2);
 
                 Icon createdIcon = Icon.FromHandle(bitmap.GetHicon());
 
@@ -75,7 +75,7 @@ namespace v2rayN.Handler
             if (config.vmess[index].configType != (int)EConfigType.Vmess
                 && config.vmess[index].configType != (int)EConfigType.VLESS)
             {
-                UI.Show(UIRes.I18N("NonVmessService"));
+                Utils.MsgBox.Show(Utils.StringsRes.I18N("NonVmessService"));
                 return;
             }
 
@@ -98,11 +98,11 @@ namespace v2rayN.Handler
             configCopy.index = index;
             if (V2rayConfigHandler.Export2ClientConfig(configCopy, fileName, out string msg) != 0)
             {
-                UI.Show(msg);
+                Utils.MsgBox.Show(msg);
             }
             else
             {
-                UI.ShowWarning(string.Format(UIRes.I18N("SaveClientConfigurationIn"), fileName));
+                Utils.MsgBox.ShowWarning(string.Format(Utils.StringsRes.I18N("SaveClientConfigurationIn"), fileName));
             }
         }
 
@@ -116,7 +116,7 @@ namespace v2rayN.Handler
             if (config.vmess[index].configType != (int)EConfigType.Vmess
                 && config.vmess[index].configType != (int)EConfigType.VLESS)
             {
-                UI.Show(UIRes.I18N("NonVmessService"));
+                Utils.MsgBox.Show(Utils.StringsRes.I18N("NonVmessService"));
                 return;
             }
 
@@ -139,11 +139,11 @@ namespace v2rayN.Handler
             configCopy.index = index;
             if (V2rayConfigHandler.Export2ServerConfig(configCopy, fileName, out string msg) != 0)
             {
-                UI.Show(msg);
+                Utils.MsgBox.Show(msg);
             }
             else
             {
-                UI.ShowWarning(string.Format(UIRes.I18N("SaveServerConfigurationIn"), fileName));
+                Utils.MsgBox.ShowWarning(string.Format(Utils.StringsRes.I18N("SaveServerConfigurationIn"), fileName));
             }
         }
 

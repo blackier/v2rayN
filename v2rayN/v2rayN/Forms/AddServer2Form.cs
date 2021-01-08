@@ -50,7 +50,7 @@ namespace v2rayN.Forms
             string remarks = txtRemarks.Text;
             if (Utils.IsNullOrEmpty(remarks))
             {
-                UI.Show(UIRes.I18N("PleaseFillRemarks"));
+                Utils.MsgBox.Show(Utils.StringsRes.I18N("PleaseFillRemarks"));
                 return;
             }
             vmessItem.remarks = remarks;
@@ -61,7 +61,7 @@ namespace v2rayN.Forms
             }
             else
             {
-                UI.ShowWarning(UIRes.I18N("OperationFailed"));
+                Utils.MsgBox.ShowWarning(Utils.StringsRes.I18N("OperationFailed"));
             }
         }
 
