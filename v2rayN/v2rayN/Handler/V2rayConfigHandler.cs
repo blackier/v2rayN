@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using v2rayN.Extension;
-using v2rayN.Mode;
+using v2rayN.Config;
 
 namespace v2rayN.Handler
 {
@@ -29,7 +29,7 @@ namespace v2rayN.Handler
         /// <param name="fileName"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public static int GenerateClientConfig(Config config, string fileName, bool blExport, out string msg)
+        public static int GenerateClientConfig(Config.V2RayNConfig config, string fileName, bool blExport, out string msg)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace v2rayN.Handler
                 }
 
                 //转成Json
-                V2rayConfig v2rayConfig = Utils.FromJson<V2rayConfig>(result);
+                V2RayConfig v2rayConfig = Utils.FromJson<V2RayConfig>(result);
                 if (v2rayConfig == null)
                 {
                     msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
@@ -102,7 +102,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="v2rayConfig"></param>
         /// <returns></returns>
-        private static int log(Config config, ref V2rayConfig v2rayConfig, bool blExport)
+        private static int log(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig, bool blExport)
         {
             try
             {
@@ -147,7 +147,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="v2rayConfig"></param>
         /// <returns></returns>
-        private static int inbound(Config config, ref V2rayConfig v2rayConfig)
+        private static int inbound(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
             try
             {
@@ -179,7 +179,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="v2rayConfig"></param>
         /// <returns></returns>
-        private static int routing(Config config, ref V2rayConfig v2rayConfig)
+        private static int routing(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
             try
             {
@@ -220,7 +220,7 @@ namespace v2rayN.Handler
             }
             return 0;
         }
-        private static int routingUserRule(List<string> userRule, string tag, ref V2rayConfig v2rayConfig)
+        private static int routingUserRule(List<string> userRule, string tag, ref V2RayConfig v2rayConfig)
         {
             try
             {
@@ -280,7 +280,7 @@ namespace v2rayN.Handler
         }
 
 
-        private static int routingGeo(string ipOrDomain, string code, string tag, ref V2rayConfig v2rayConfig)
+        private static int routingGeo(string ipOrDomain, string code, string tag, ref V2RayConfig v2rayConfig)
         {
             try
             {
@@ -325,7 +325,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="v2rayConfig"></param>
         /// <returns></returns>
-        private static int outbound(Config config, ref V2rayConfig v2rayConfig)
+        private static int outbound(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
             try
             {
@@ -543,7 +543,7 @@ namespace v2rayN.Handler
         /// <param name="iobound"></param>
         /// <param name="streamSettings"></param>
         /// <returns></returns>
-        private static int boundStreamSettings(Config config, string iobound, ref StreamSettings streamSettings)
+        private static int boundStreamSettings(Config.V2RayNConfig config, string iobound, ref StreamSettings streamSettings)
         {
             try
             {
@@ -736,7 +736,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="v2rayConfig"></param>
         /// <returns></returns>
-        private static int dns(Config config, ref V2rayConfig v2rayConfig)
+        private static int dns(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
             try
             {
@@ -755,7 +755,7 @@ namespace v2rayN.Handler
                     //}
                 }
                 //servers.Add("localhost");
-                v2rayConfig.dns = new Mode.Dns
+                v2rayConfig.dns = new Config.Dns
                 {
                     servers = servers
                 };
@@ -766,7 +766,7 @@ namespace v2rayN.Handler
             return 0;
         }
 
-        public static int statistic(Config config, ref V2rayConfig v2rayConfig)
+        public static int statistic(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
             if (config.enableStatistics)
             {
@@ -822,7 +822,7 @@ namespace v2rayN.Handler
         /// <param name="fileName"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public static int GenerateClientCustomConfig(Config config, string fileName, out string msg)
+        public static int GenerateClientCustomConfig(Config.V2RayNConfig config, string fileName, out string msg)
         {
             try
             {
@@ -875,7 +875,7 @@ namespace v2rayN.Handler
         /// <param name="fileName"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public static int GenerateServerConfig(Config config, string fileName, out string msg)
+        public static int GenerateServerConfig(Config.V2RayNConfig config, string fileName, out string msg)
         {
             try
             {
@@ -901,7 +901,7 @@ namespace v2rayN.Handler
                 }
 
                 //转成Json
-                V2rayConfig v2rayConfig = Utils.FromJson<V2rayConfig>(result);
+                V2RayConfig v2rayConfig = Utils.FromJson<V2RayConfig>(result);
                 if (v2rayConfig == null)
                 {
                     msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
@@ -935,7 +935,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="v2rayConfig"></param>
         /// <returns></returns>
-        private static int ServerInbound(Config config, ref V2rayConfig v2rayConfig)
+        private static int ServerInbound(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
             try
             {
@@ -987,7 +987,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="v2rayConfig"></param>
         /// <returns></returns>
-        private static int ServerOutbound(Config config, ref V2rayConfig v2rayConfig)
+        private static int ServerOutbound(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
             try
             {
@@ -1027,7 +1027,7 @@ namespace v2rayN.Handler
                 }
 
                 //转成Json
-                V2rayConfig v2rayConfig = Utils.FromJson<V2rayConfig>(result);
+                V2RayConfig v2rayConfig = Utils.FromJson<V2RayConfig>(result);
                 if (v2rayConfig == null)
                 {
                     msg = Utils.StringsRes.I18N("FailedConversionConfiguration");
@@ -1173,7 +1173,7 @@ namespace v2rayN.Handler
                 }
 
                 //转成Json
-                V2rayConfig v2rayConfig = Utils.FromJson<V2rayConfig>(result);
+                V2RayConfig v2rayConfig = Utils.FromJson<V2RayConfig>(result);
                 if (v2rayConfig == null)
                 {
                     msg = Utils.StringsRes.I18N("FailedConversionConfiguration");
@@ -1475,7 +1475,7 @@ namespace v2rayN.Handler
         /// <param name="fileName"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public static int Export2ClientConfig(Config config, string fileName, out string msg)
+        public static int Export2ClientConfig(Config.V2RayNConfig config, string fileName, out string msg)
         {
             return GenerateClientConfig(config, fileName, true, out msg);
         }
@@ -1487,7 +1487,7 @@ namespace v2rayN.Handler
         /// <param name="fileName"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public static int Export2ServerConfig(Config config, string fileName, out string msg)
+        public static int Export2ServerConfig(Config.V2RayNConfig config, string fileName, out string msg)
         {
             return GenerateServerConfig(config, fileName, out msg);
         }
@@ -1707,7 +1707,7 @@ namespace v2rayN.Handler
         #region Gen speedtest config
 
 
-        public static string GenerateClientSpeedtestConfigString(Config config, List<int> selecteds, out string msg)
+        public static string GenerateClientSpeedtestConfigString(Config.V2RayNConfig config, List<int> selecteds, out string msg)
         {
             try
             {
@@ -1723,7 +1723,7 @@ namespace v2rayN.Handler
 
                 msg = Utils.StringsRes.I18N("InitialConfiguration");
 
-                Config configCopy = Utils.DeepCopy(config);
+                Config.V2RayNConfig configCopy = Utils.DeepCopy(config);
 
                 string result = Utils.GetEmbedText(SampleClient);
                 if (Utils.IsNullOrEmpty(result))
@@ -1732,7 +1732,7 @@ namespace v2rayN.Handler
                     return "";
                 }
 
-                V2rayConfig v2rayConfig = Utils.FromJson<V2rayConfig>(result);
+                V2RayConfig v2rayConfig = Utils.FromJson<V2RayConfig>(result);
                 if (v2rayConfig == null)
                 {
                     msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
@@ -1765,7 +1765,7 @@ namespace v2rayN.Handler
                     v2rayConfig.inbounds.Add(inbound);
 
 
-                    V2rayConfig v2rayConfigCopy = Utils.FromJson<V2rayConfig>(result);
+                    V2RayConfig v2rayConfigCopy = Utils.FromJson<V2RayConfig>(result);
                     outbound(configCopy, ref v2rayConfigCopy);
                     v2rayConfigCopy.outbounds[0].tag = Global.agentTag + inbound.port.ToString();
                     v2rayConfig.outbounds.Add(v2rayConfigCopy.outbounds[0]);

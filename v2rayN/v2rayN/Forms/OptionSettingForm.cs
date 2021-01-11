@@ -224,7 +224,7 @@ namespace v2rayN.Forms
                 }
                 if (config.inbound.Count < 2)
                 {
-                    config.inbound.Add(new Mode.InItem());
+                    config.inbound.Add(new Config.InItem());
                 }
                 config.inbound[1].localPort = Utils.ToInt(localPort2);
                 config.inbound[1].protocol = protocol2;

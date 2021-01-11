@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace v2rayN.Mode
+namespace v2rayN.Config
 {
     [Serializable]
     class VmessQRCode

@@ -5,19 +5,19 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
-using v2rayN.Mode;
+using v2rayN.Config;
 
 namespace v2rayN.Handler
 {
     class SpeedtestHandler
     {
-        private Config _config;
+        private Config.V2RayNConfig _config;
         private V2rayHandler _v2rayHandler;
         private List<int> _selecteds;
         Action<int, string> _updateFunc;
 
 
-        public SpeedtestHandler(ref Config config, ref V2rayHandler v2rayHandler, List<int> selecteds, string actionType, Action<int, string> update)
+        public SpeedtestHandler(ref Config.V2RayNConfig config, ref V2rayHandler v2rayHandler, List<int> selecteds, string actionType, Action<int, string> update)
         {
             _config = config;
             _v2rayHandler = v2rayHandler;

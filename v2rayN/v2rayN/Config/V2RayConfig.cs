@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace v2rayN.Mode
+namespace v2rayN.Config
 {
     /// <summary>
     /// v2ray配置文件实体类
     /// 例子SampleConfig.txt
     /// </summary>
-    public class V2rayConfig
+    public class V2RayConfig
     {
         /// <summary>
         /// 日志配置

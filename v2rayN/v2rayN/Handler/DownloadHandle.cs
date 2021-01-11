@@ -10,7 +10,7 @@ using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using v2rayN.Extension;
-using v2rayN.Mode;
+using v2rayN.Config;
 using v2rayN.Resources;
 
 namespace v2rayN.Handler

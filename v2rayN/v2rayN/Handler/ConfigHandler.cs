@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using v2rayN.Extension;
-using v2rayN.Mode;
+using v2rayN.Config;
 
 namespace v2rayN.Handler
 {
@@ -20,18 +20,18 @@ namespace v2rayN.Handler
         /// </summary>
         /// <param name="config"></param>
         /// <returns></returns>
-        public static int LoadConfig(ref Config config)
+        public static int LoadConfig(ref Config.V2RayNConfig config)
         {
             //载入配置文件 
             string result = Utils.LoadResource(Utils.GetPath(configRes));
             if (!Utils.IsNullOrEmpty(result))
             {
                 //转成Json
-                config = Utils.FromJson<Config>(result);
+                config = Utils.FromJson<Config.V2RayNConfig>(result);
             }
             if (config == null)
             {
-                config = new Config
+                config = new Config.V2RayNConfig
                 {
                     index = -1,
                     logEnabled = false,
@@ -186,7 +186,7 @@ namespace v2rayN.Handler
         /// <param name="vmessItem"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static int AddServer(ref Config config, VmessItem vmessItem, int index)
+        public static int AddServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
         {
             vmessItem.configVersion = 2;
             vmessItem.configType = (int)EConfigType.Vmess;
@@ -235,7 +235,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static int RemoveServer(ref Config config, int index)
+        public static int RemoveServer(ref Config.V2RayNConfig config, int index)
         {
             if (index < 0 || index > config.vmess.Count - 1)
             {
@@ -276,7 +276,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static int CopyServer(ref Config config, int index)
+        public static int CopyServer(ref Config.V2RayNConfig config, int index)
         {
             if (index < 0 || index > config.vmess.Count - 1)
             {
@@ -314,7 +314,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static int SetDefaultServer(ref Config config, int index)
+        public static int SetDefaultServer(ref Config.V2RayNConfig config, int index)
         {
             if (index < 0 || index > config.vmess.Count - 1)
             {
@@ -339,7 +339,7 @@ namespace v2rayN.Handler
         /// </summary>
         /// <param name="config"></param>
         /// <returns></returns>
-        public static int SaveConfig(ref Config config, bool reload = true)
+        public static int SaveConfig(ref Config.V2RayNConfig config, bool reload = true)
         {
             Global.reloadV2ray = reload;
 
@@ -352,7 +352,7 @@ namespace v2rayN.Handler
         /// 存储文件
         /// </summary>
         /// <param name="config"></param>
-        private static void ToJsonFile(Config config)
+        private static void ToJsonFile(Config.V2RayNConfig config)
         {
             Utils.ToJsonFile(config, Utils.GetPath(configRes));
         }
@@ -363,7 +363,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static string GetVmessQRCode(Config config, int index)
+        public static string GetVmessQRCode(Config.V2RayNConfig config, int index)
         {
             try
             {
@@ -458,7 +458,7 @@ namespace v2rayN.Handler
         /// <param name="index"></param>
         /// <param name="eMove"></param>
         /// <returns></returns>
-        public static int MoveServer(ref Config config, int index, EMove eMove)
+        public static int MoveServer(ref Config.V2RayNConfig config, int index, EMove eMove)
         {
             int count = config.vmess.Count;
             if (index < 0 || index > config.vmess.Count - 1)
@@ -567,7 +567,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public static int AddCustomServer(ref Config config, string fileName)
+        public static int AddCustomServer(ref Config.V2RayNConfig config, string fileName)
         {
             string newFileName = string.Format("{0}.json", Utils.GetGUID());
             //newFileName = Path.Combine(Utils.GetTempPath(), newFileName);
@@ -607,7 +607,7 @@ namespace v2rayN.Handler
         /// <param name="vmessItem"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static int EditCustomServer(ref Config config, VmessItem vmessItem, int index)
+        public static int EditCustomServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
         {
             //修改
             config.vmess[index] = vmessItem;
@@ -628,7 +628,7 @@ namespace v2rayN.Handler
         /// <param name="vmessItem"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static int AddShadowsocksServer(ref Config config, VmessItem vmessItem, int index)
+        public static int AddShadowsocksServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
         {
             vmessItem.configVersion = 2;
             vmessItem.configType = (int)EConfigType.Shadowsocks;
@@ -669,7 +669,7 @@ namespace v2rayN.Handler
         /// <param name="vmessItem"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static int AddSocksServer(ref Config config, VmessItem vmessItem, int index)
+        public static int AddSocksServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
         {
             vmessItem.configVersion = 2;
             vmessItem.configType = (int)EConfigType.Socks;
@@ -709,7 +709,7 @@ namespace v2rayN.Handler
         /// <param name="vmessItem"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static int AddTrojanServer(ref Config config, VmessItem vmessItem, int index)
+        public static int AddTrojanServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
         {
             vmessItem.configVersion = 2;
             vmessItem.configType = (int)EConfigType.Trojan;
@@ -821,7 +821,7 @@ namespace v2rayN.Handler
         /// <param name="clipboardData"></param>
         /// <param name="subid"></param>
         /// <returns>成功导入的数量</returns>
-        public static int AddBatchServers(ref Config config, string clipboardData, string subid = "")
+        public static int AddBatchServers(ref Config.V2RayNConfig config, string clipboardData, string subid = "")
         {
             if (Utils.IsNullOrEmpty(clipboardData))
             {
@@ -890,7 +890,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static int AddSubItem(ref Config config, string url)
+        public static int AddSubItem(ref Config.V2RayNConfig config, string url)
         {
             //already exists
             foreach (SubItem sub in config.subItem)
@@ -917,7 +917,7 @@ namespace v2rayN.Handler
         /// </summary>
         /// <param name="config"></param>
         /// <returns></returns>
-        public static int SaveSubItem(ref Config config)
+        public static int SaveSubItem(ref Config.V2RayNConfig config)
         {
             if (config.subItem == null || config.subItem.Count <= 0)
             {
@@ -942,7 +942,7 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="subid"></param>
         /// <returns></returns>
-        public static int RemoveServerViaSubid(ref Config config, string subid)
+        public static int RemoveServerViaSubid(ref Config.V2RayNConfig config, string subid)
         {
             if (Utils.IsNullOrEmpty(subid) || config.vmess.Count <= 0)
             {
@@ -960,7 +960,7 @@ namespace v2rayN.Handler
             return 0;
         }
 
-        public static int AddformMainLvColWidth(ref Config config, string name, int width)
+        public static int AddformMainLvColWidth(ref Config.V2RayNConfig config, string name, int width)
         {
             if (config.uiItem.mainLvColWidth == null)
             {
@@ -976,7 +976,7 @@ namespace v2rayN.Handler
             }
             return 0;
         }
-        public static int GetformMainLvColWidth(ref Config config, string name, int width)
+        public static int GetformMainLvColWidth(ref Config.V2RayNConfig config, string name, int width)
         {
             if (config.uiItem.mainLvColWidth == null)
             {
@@ -992,7 +992,7 @@ namespace v2rayN.Handler
             }
         }
 
-        public static int SortServers(ref Config config, EServerColName name, bool asc)
+        public static int SortServers(ref Config.V2RayNConfig config, EServerColName name, bool asc)
         {
             if (config.vmess.Count <= 0)
             {
@@ -1040,7 +1040,7 @@ namespace v2rayN.Handler
         /// <param name="vmessItem"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static int AddVlessServer(ref Config config, VmessItem vmessItem, int index)
+        public static int AddVlessServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
         {
             vmessItem.configVersion = 2;
             vmessItem.configType = (int)EConfigType.VLESS;

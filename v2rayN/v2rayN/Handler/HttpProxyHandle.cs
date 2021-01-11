@@ -1,5 +1,5 @@
 ﻿using System;
-using v2rayN.Mode;
+using v2rayN.Config;
 
 using Shadowsocks.WPF.Services.SystemProxy;
 
@@ -22,7 +22,7 @@ namespace v2rayN.Handler
     /// </summary>
     class HttpProxyHandle
     {
-        private static bool Update(Config config, bool forceDisable)
+        private static bool Update(Config.V2RayNConfig config, bool forceDisable)
         {
             ListenerType type = config.listenerType;
 
@@ -68,7 +68,7 @@ namespace v2rayN.Handler
         /// 启用系统代理(http)
         /// </summary>
         /// <param name="config"></param>
-        private static void StartHttpAgent(Config config)
+        private static void StartHttpAgent(Config.V2RayNConfig config)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace v2rayN.Handler
         /// 关闭系统代理
         /// </summary>
         /// <param name="config"></param>
-        public static void CloseHttpAgent(Config config)
+        public static void CloseHttpAgent(Config.V2RayNConfig config)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace v2rayN.Handler
         /// </summary>
         /// <param name="config"></param>
         /// <param name="forced"></param>
-        public static void RestartHttpAgent(Config config, bool forced)
+        public static void RestartHttpAgent(Config.V2RayNConfig config, bool forced)
         {
             bool isRestart = false;
             if (config.listenerType == ListenerType.noHttpProxy)

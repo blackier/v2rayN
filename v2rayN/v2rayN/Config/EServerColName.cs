@@ -1,5 +1,5 @@
 ﻿
-namespace v2rayN.Mode
+namespace v2rayN.Config
 {
     public enum EServerColName
     {

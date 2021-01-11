@@ -14,8 +14,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -25,10 +23,6 @@ namespace v2rayN
 {
     partial class Utils
     {
-
-
-        #region 资源Json操作
-
         /// <summary>
         /// 获取嵌入文本资源
         /// </summary>
@@ -53,7 +47,6 @@ namespace v2rayN
             return result;
         }
 
-
         /// <summary>
         /// 取得存储资源
         /// </summary>
@@ -74,78 +67,6 @@ namespace v2rayN
             }
             return result;
         }
-
-        /// <summary>
-        /// 反序列化成对象
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="strJson"></param>
-        /// <returns></returns>
-        public static T FromJson<T>(string strJson)
-        {
-            try
-            {
-                T obj = JsonSerializer.Deserialize<T>(strJson);
-                return obj;
-            }
-            catch
-            {
-                return JsonSerializer.Deserialize<T>("");
-            }
-        }
-
-        /// <summary>
-        /// 序列化成Json
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public static string ToJson(object obj)
-        {
-            string result = string.Empty;
-            try
-            {
-                result = JsonSerializer.Serialize(obj, obj.GetType(), new JsonSerializerOptions { WriteIndented = true, IgnoreNullValues = true });
-            }
-            catch
-            {
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// 保存成json文件
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="filePath"></param>
-        /// <returns></returns>
-        public static int ToJsonFile(object obj, string filePath, bool nullValue = true)
-        {
-            int result;
-            try
-            {
-                using (StreamWriter file = File.CreateText(filePath))
-                {
-                    JsonSerializerOptions serializer_opts;
-                    if (nullValue)
-                    {
-                        serializer_opts = new JsonSerializerOptions() { WriteIndented = true };
-                    }
-                    else
-                    {
-                        serializer_opts = new JsonSerializerOptions() { WriteIndented = true, IgnoreNullValues = true };
-                    }
-
-                    file.Write(JsonSerializer.Serialize(obj, obj.GetType(), serializer_opts));
-                }
-                result = 0;
-            }
-            catch
-            {
-                result = -1;
-            }
-            return result;
-        }
-        #endregion
 
         #region 转换函数
 
@@ -323,15 +244,15 @@ namespace v2rayN
             return $"{string.Format("{0:f1}", result)} {unit}";
         }
 
-        public static void DedupServerList(List<Mode.VmessItem> source, out List<Mode.VmessItem> result, bool keepOlder)
+        public static void DedupServerList(List<Config.VmessItem> source, out List<Config.VmessItem> result, bool keepOlder)
         {
-            List<Mode.VmessItem> list = new List<Mode.VmessItem>();
+            List<Config.VmessItem> list = new List<Config.VmessItem>();
             if (!keepOlder)
             {
                 source.Reverse(); // Remove the early items first
             }
 
-            bool _isAdded(Mode.VmessItem o, Mode.VmessItem n)
+            bool _isAdded(Config.VmessItem o, Config.VmessItem n)
             {
                 return o.configVersion == n.configVersion &&
                     o.configType == n.configType &&
@@ -347,7 +268,7 @@ namespace v2rayN
                     o.streamSecurity == n.streamSecurity;
                 // skip (will remove) different remarks
             }
-            foreach (Mode.VmessItem item in source)
+            foreach (Config.VmessItem item in source)
             {
                 if (!list.Exists(i => _isAdded(i, item)))
                 {

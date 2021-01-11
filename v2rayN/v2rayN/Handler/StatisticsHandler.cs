@@ -5,14 +5,14 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
-using v2rayN.Mode;
+using v2rayN.Config;
 using v2rayN.V2RayAPI;
 
 namespace v2rayN.Handler
 {
     class StatisticsHandler
     {
-        private Mode.Config config_;
+        private Config.V2RayNConfig config_;
         private ServerStatistics serverStatistics_;
         private StatsServiceClient client_;
         private bool exitFlag_;
@@ -32,7 +32,7 @@ namespace v2rayN.Handler
 
         public List<ServerStatItem> Statistic => serverStatistics_.server;
 
-        public StatisticsHandler(Mode.Config config, Action<ulong, ulong, List<ServerStatItem>> update)
+        public StatisticsHandler(Config.V2RayNConfig config, Action<ulong, ulong, List<ServerStatItem>> update)
         {
             config_ = config;
             Enable = config.enableStatistics;

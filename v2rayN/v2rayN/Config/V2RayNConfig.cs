@@ -4,13 +4,13 @@ using v2rayN.Extension;
 using v2rayN.Handler;
 
 
-namespace v2rayN.Mode
+namespace v2rayN.Config
 {
     /// <summary>
     /// 本软件配置文件实体类
     /// </summary>
     [Serializable]
-    public class Config
+    public class V2RayNConfig
     {
         /// <summary>
         /// 本地监听
@@ -441,7 +441,7 @@ namespace v2rayN.Mode
             }
             return summary;
         }
-        public string getSubRemarks(Config config)
+        public string getSubRemarks(V2RayNConfig config)
         {
             string subRemarks = string.Empty;
             if (Utils.IsNullOrEmpty(subid))

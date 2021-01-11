@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using v2rayN.Mode;
+using v2rayN.Config;
 
 namespace v2rayN.Handler
 {
@@ -27,7 +27,7 @@ namespace v2rayN.Handler
             }
         }
 
-        public Icon GetNotifyIcon(Config config, Icon def)
+        public Icon GetNotifyIcon(Config.V2RayNConfig config, Icon def)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace v2rayN.Handler
             }
         }
 
-        public void Export2ClientConfig(int index, Config config)
+        public void Export2ClientConfig(int index, Config.V2RayNConfig config)
         {
             //int index = GetLvSelectedIndex();
             if (index < 0)
@@ -94,7 +94,7 @@ namespace v2rayN.Handler
             {
                 return;
             }
-            Config configCopy = Utils.DeepCopy(config);
+            Config.V2RayNConfig configCopy = Utils.DeepCopy(config);
             configCopy.index = index;
             if (V2rayConfigHandler.Export2ClientConfig(configCopy, fileName, out string msg) != 0)
             {
@@ -106,7 +106,7 @@ namespace v2rayN.Handler
             }
         }
 
-        public void Export2ServerConfig(int index, Config config)
+        public void Export2ServerConfig(int index, Config.V2RayNConfig config)
         {
             //int index = GetLvSelectedIndex();
             if (index < 0)
@@ -135,7 +135,7 @@ namespace v2rayN.Handler
             {
                 return;
             }
-            Config configCopy = Utils.DeepCopy(config);
+            Config.V2RayNConfig configCopy = Utils.DeepCopy(config);
             configCopy.index = index;
             if (V2rayConfigHandler.Export2ServerConfig(configCopy, fileName, out string msg) != 0)
             {

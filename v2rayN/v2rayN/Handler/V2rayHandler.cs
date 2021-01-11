@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using v2rayN.Mode;
+using v2rayN.Config;
 
 namespace v2rayN.Handler
 {
@@ -39,7 +39,7 @@ namespace v2rayN.Handler
         /// <summary>
         /// 载入V2ray
         /// </summary>
-        public void LoadV2ray(Config config)
+        public void LoadV2ray(Config.V2RayNConfig config)
         {
             if (Global.reloadV2ray)
             {
@@ -60,7 +60,7 @@ namespace v2rayN.Handler
         /// 新建进程，载入V2ray配置文件字符串
         /// 返回新进程pid。
         /// </summary>
-        public int LoadV2rayConfigString(Config config, List<int> _selecteds)
+        public int LoadV2rayConfigString(Config.V2RayNConfig config, List<int> _selecteds)
         {
             int pid = -1;
             string configStr = V2rayConfigHandler.GenerateClientSpeedtestConfigString(config, _selecteds, out string msg);
