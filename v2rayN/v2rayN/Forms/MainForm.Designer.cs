@@ -38,7 +38,6 @@
             this.menuAddShadowsocksServer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddSocksServer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddTrojanServer = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuAddCustomServer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddServers = new System.Windows.Forms.ToolStripMenuItem();
             this.menuScanScreen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -59,8 +58,6 @@
             this.menuSpeedServer = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbTestMe = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuExport2ClientConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuExport2ServerConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.menuExport2ShareUrl = new System.Windows.Forms.ToolStripMenuItem();
             this.menuExport2SubContent = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbServer = new System.Windows.Forms.ToolStripDropDownButton();
@@ -172,7 +169,6 @@
             this.menuAddShadowsocksServer,
             this.menuAddSocksServer,
             this.menuAddTrojanServer,
-            this.menuAddCustomServer,
             this.menuAddServers,
             this.menuScanScreen,
             this.toolStripSeparator1,
@@ -193,8 +189,6 @@
             this.menuSpeedServer,
             this.tsbTestMe,
             this.toolStripSeparator6,
-            this.menuExport2ClientConfig,
-            this.menuExport2ServerConfig,
             this.menuExport2ShareUrl,
             this.menuExport2SubContent});
             this.cmsLv.Name = "cmsLv";
@@ -230,12 +224,6 @@
             this.menuAddTrojanServer.Name = "menuAddTrojanServer";
             resources.ApplyResources(this.menuAddTrojanServer, "menuAddTrojanServer");
             this.menuAddTrojanServer.Click += new System.EventHandler(this.menuAddTrojanServer_Click);
-            // 
-            // menuAddCustomServer
-            // 
-            this.menuAddCustomServer.Name = "menuAddCustomServer";
-            resources.ApplyResources(this.menuAddCustomServer, "menuAddCustomServer");
-            this.menuAddCustomServer.Click += new System.EventHandler(this.menuAddCustomServer_Click);
             // 
             // menuAddServers
             // 
@@ -352,18 +340,6 @@
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
-            // 
-            // menuExport2ClientConfig
-            // 
-            this.menuExport2ClientConfig.Name = "menuExport2ClientConfig";
-            resources.ApplyResources(this.menuExport2ClientConfig, "menuExport2ClientConfig");
-            this.menuExport2ClientConfig.Click += new System.EventHandler(this.menuExport2ClientConfig_Click);
-            // 
-            // menuExport2ServerConfig
-            // 
-            this.menuExport2ServerConfig.Name = "menuExport2ServerConfig";
-            resources.ApplyResources(this.menuExport2ServerConfig, "menuExport2ServerConfig");
-            this.menuExport2ServerConfig.Click += new System.EventHandler(this.menuExport2ServerConfig_Click);
             // 
             // menuExport2ShareUrl
             // 
@@ -792,8 +768,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuCopyServer;
         private System.Windows.Forms.ToolStripMenuItem menuPingServer;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem menuExport2ClientConfig;
-        private System.Windows.Forms.ToolStripMenuItem menuExport2ServerConfig;
         private System.Windows.Forms.ToolStrip tsMain;
         private System.Windows.Forms.ToolStripDropDownButton tsbServer;
         private System.Windows.Forms.ToolStripButton tsbOptionSetting;
@@ -810,7 +784,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuSysAgentMode;
         private System.Windows.Forms.ToolStripMenuItem menuGlobal;
         private System.Windows.Forms.ToolStripMenuItem menuKeep;
-        private System.Windows.Forms.ToolStripMenuItem menuAddCustomServer;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuAddShadowsocksServer;
         private System.Windows.Forms.SplitContainer scMain;

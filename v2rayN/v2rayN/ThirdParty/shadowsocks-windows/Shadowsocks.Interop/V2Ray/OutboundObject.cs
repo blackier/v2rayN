@@ -77,5 +77,19 @@ namespace Shadowsocks.Interop.V2Ray
             Protocol = "vmess",
             Settings = new Protocols.VMess.OutboundConfigurationObject(address, port, id),
         };
+        /// <summary>
+        /// Gets the <see cref="OutboundObject"/> for the VLESS server.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="address"></param>
+        /// <param name="port"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static OutboundObject GetVLESS(string name, string address, int port, string id) => new()
+        {
+            Tag = name,
+            Protocol = "vless",
+            Settings = new Protocols.VLESS.OutboundConfigurationObject(address, port, id),
+        };
     }
 }

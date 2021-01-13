@@ -88,12 +88,6 @@
   <data name="menuAddTrojanServer.Text" xml:space="preserve">
     <value>添加[Trojan]服务器</value>
   </data>
-  <data name="menuAddCustomServer.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>415, 30</value>
-  </data>
-  <data name="menuAddCustomServer.Text" xml:space="preserve">
-    <value>添加自定义配置服务器</value>
-  </data>
   <data name="menuAddServers.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>415, 30</value>
   </data>
@@ -202,18 +196,6 @@
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>412, 6</value>
   </data>
-  <data name="menuExport2ClientConfig.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>415, 30</value>
-  </data>
-  <data name="menuExport2ClientConfig.Text" xml:space="preserve">
-    <value>导出所选服务器为客户端配置</value>
-  </data>
-  <data name="menuExport2ServerConfig.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>415, 30</value>
-  </data>
-  <data name="menuExport2ServerConfig.Text" xml:space="preserve">
-    <value>导出所选服务器为服务端配置</value>
-  </data>
   <data name="menuExport2ShareUrl.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>415, 30</value>
   </data>
@@ -248,11 +230,11 @@
     <value>  服务器  </value>
   </data>
   <data name="cmsLv.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>416, 808</value>
+    <value>416, 718</value>
   </data>
   <data name="lvServers.Items" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj01LjAuMS4w
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj01LjAuMi4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
         ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2Vu
         PWIwM2Y1ZjdmMTFkNTBhM2EFAQAAACFTeXN0ZW0uV2luZG93cy5Gb3Jtcy5MaXN0Vmlld0l0ZW0HAAAA
@@ -458,22 +440,22 @@
   <data name="tsbHelp.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAANsSURBVFhH7ZfZS1RhGMbFNqgow5aLaIVogaAyWiHbRsQZ
-        nXHItqtuuwmkKCgC+wMKvO2miyCCFksJihYkQYooDdpEKojUxKQuFMvS+r3Tc5yZzhzPOeKlD7yc8z3v
-        8y7fd873nZm8CQRFaWnptMrKykgikbhQUVHRjL3n/gfWp/vH2JloNLpQIeMHCuzDumngjxn3Q1gnBZ/F
-        4/HnWJdxGb4GbI3Cx47y8vIFFKm3xFyHsevY/lgsNl2SEVRVVc1EdxB/HcV/m57rZVZuliThQIISrMeK
-        2yy5bpDLFzS4mNhLaryd+KVyBQMBO7WUP7k/CZX/zxMOFCc8PmATCdyELTv2leKD2GbRYwaFt9HAL1sJ
-        XtA5or2B8L4tHXZMlAs876noYrY6WA3aaq5r5XYB/wk9jnpRuWFJTUiyh6JcYFX2ovtsukyDtxfvqGQu
-        oGk0HZoSUW5Q+C0Ce3tzbiESbEEzoILdaO8yruWRtRlnxjgheRbQr1dcq6hsWFEluSHKBQo+UJLeZDK5
-        RLQhH67ZfGj6i4uLJ4vPAr7UlqbhZaLSoPNT5uR6WFQW4AsokjqMuD8uegRwteYzs8mIzgKaI9JUi0qD
-        oAYlLxAVGMyskPhOi+e+z15SubKAf740N0WlAdlCku8aBgaPYgVJ31hi2Tm5coIagzyCpxqmQQM92DsN
-        A4FkKy3OKc641Wv2DtB/wDo0TAPyC/ZaQ19QaJIlc4pzf5sjeK7cnkDXjn3SMA3IF9g3DX3BbFPbSsWv
-        ivYFWjsVn2iYBmRqizCz2aJGBS9rmdMAzewQPSr4Ms5TjHurQ6aOSxLn3Ib/g+VehbbGLETTzjZ0H/Os
-        wGo5PQ+iTKDbjdnx2pjzYMkBZ5U99QheYZ5HcSbQHbJkZszM80PkAM060xLXIsoNBFGJHonyRNgG0DWZ
-        1vd9QXBPiT0/x2FBrmCfY4P9aED4kUbsB8lG0WMGz3s7+Wzr2TlTKHp02PFK8V4C+lneMtGhYAcVsac1
-        kSFybZUrGGhiOd23ETjM8l20H5py+YKYTdhLW3aKd2O75AoH298EX7EmuNovnmvM6kAkEpkhyQjQpn6W
-        Y7fUtD3zuiDHsy9sC5HsjpPYlhSui7Hrj4kKd2BJhY8fKLQIO0uxzL9m/Zh9lJrwncf2FBUVTVHIBHyQ
-        l/cXIjfgOIwcM+8AAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAANxSURBVFhH7ZfbS1RRFMbFblBRhl0eoitEFwgqoytktxFx
+        RmccsttTr70EUhQUgf0BBb720kMQQRdLCYouSIIUURp0E6kgUhOTelAsS+u3pu84M505nnPERz9YnLO/
+        9a219l5z9j5n8iYQFKWlpdMqKysjiUTiQkVFRTP2nvsfWJ/uH2NnotHoQoWMHyiwr7y8vJsJ/DHjfgjr
+        pOCzeDz+HOsyzvGhb8DWKHzsINkCitRbYq7D2HVsfywWmy7JCKqqqmaiO4i/jrjfpmcSl+ncLEnCgQQl
+        WI8Vt1Vy3SCXL5jgYmIvaeLtxC+VKxgI2GmtxH5yfxIq/58nHChOeHzAFhJ4EtZ2VvCV6yAt3Cx6zKDw
+        NibwyzrBAzpHtDcQ3rfWYcdEucDvPRVdzLqD1aCt5rpWbhfwn9DPUS8qNyypCUn2UJQLdGUvus+myzQ9
+        eEclcwFNo+nQlIhyg8JvEdjTm3MLkWALmgEV7EZ7l3Et923GmTFOSJ4Fcq43P9dWUdmwokpyQ5QLFHxg
+        Ggr2JpPJJaIN+cQ3mw9Nf3Fx8WTxWcCX2tLELxOVBjM/ZU6uh0VlAb7AVi3NcdEjgKs1n5lXB9EckaZa
+        VBoENSh5gajAYGWFTK7T4rnvs4dUrizgny/NTVFpQLaQ5LuGgcFPsYKkbyyx7JxcOUGNQeyphmkwgR7s
+        nYaBQNdWWpxTnHGr1+odoP+AdWiYBuQX7LWGvqDQJEvmFOf+NgfYXLk9ga4d+6RhGpAvsG8a+oLVpraV
+        il8V7Qu0dio+0TANyNQWYWWzRY0KHtYyZwJMZofoUcGbcZ5i3FsdMnVckjjnNvwftHsV2hqzEJN2tqH7
+        mKcDq+X0PIgygW43ZsdrI0+1+2DJAafLnnoErzDPozgT6A5ZMjNW5vkicoBmnWmJaxHlBoKoRI9EeSLs
+        BNA1mdb3eUFwT4k9X8dhQa5gr2ODfTQg/GgnFpPZKHrMIM928tnWs3OmUPTosOOVwF4C+mlvmehQsIOK
+        2NO2EGyIXFvlCgYmsZzANgKHad9F+9CUyxfEbMJeWtvJ0U0nd8kVDra/Cb5ikyCRffFcY1UHIpHIDElG
+        gDb1WY7d0qTtN68Lcjz7wrYQye44ia2lcF2MXX9MVLgDSyp8/EChRdhZupL516wfs5dSE77z2J6ioqIp
+        CpmAD/Ly/gJ1pN/tv8DYgQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="tsbHelp.Size" type="System.Drawing.Size, System.Drawing.Primitives">

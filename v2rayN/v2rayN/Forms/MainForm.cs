@@ -6,9 +6,9 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using v2rayN.Config;
 using v2rayN.Extension;
 using v2rayN.Handler;
-using v2rayN.Config;
 
 namespace v2rayN.Forms
 {
@@ -24,10 +24,10 @@ namespace v2rayN.Forms
         {
             InitializeComponent();
 
-            this.notifyMain.Visible = true;
-            this.Text = Utils.GetVersion();
-            this.WindowState = FormWindowState.Minimized;
-            this.ShowInTaskbar = false;
+            notifyMain.Visible = true;
+            Text = Utils.GetVersion();
+            WindowState = FormWindowState.Minimized;
+            ShowInTaskbar = false;
 
             Application.ApplicationExit += (sender, args) =>
             {
@@ -57,7 +57,11 @@ namespace v2rayN.Forms
 
         private void MainForm_VisibleChanged(object sender, EventArgs e)
         {
-            if (statistics == null || !statistics.Enable) return;
+            if (statistics == null || !statistics.Enable)
+            {
+                return;
+            }
+
             if ((sender as Form).Visible)
             {
                 statistics.UpdateUI = true;
@@ -128,8 +132,8 @@ namespace v2rayN.Forms
 
             if (!config.uiItem.mainSize.IsEmpty)
             {
-                this.Width = config.uiItem.mainSize.Width;
-                this.Height = config.uiItem.mainSize.Height;
+                Width = config.uiItem.mainSize.Width;
+                Height = config.uiItem.mainSize.Height;
             }
 
             for (int k = 0; k < lvServers.Columns.Count; k++)
@@ -141,7 +145,7 @@ namespace v2rayN.Forms
 
         private void StorageUI()
         {
-            config.uiItem.mainSize = new Size(this.Width, this.Height);
+            config.uiItem.mainSize = new Size(Width, Height);
 
             for (int k = 0; k < lvServers.Columns.Count; k++)
             {
@@ -264,7 +268,10 @@ namespace v2rayN.Forms
                     lvItem.Font = new Font(lvItem.Font, FontStyle.Bold);
                 }
 
-                if (lvItem != null) lvServers.Items.Add(lvItem);
+                if (lvItem != null)
+                {
+                    lvServers.Items.Add(lvItem);
+                }
             }
             lvServers.EndUpdate();
 
@@ -351,7 +358,7 @@ namespace v2rayN.Forms
                 toolSslHttpPort.Text = $"{Global.Loopback}:{Global.httpPort}";
             }
 
-            notifyMain.Icon = MainFormHandler.Instance.GetNotifyIcon(config, this.Icon);
+            notifyMain.Icon = MainFormHandler.Instance.GetNotifyIcon(config, Icon);
         }
         private void ssMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -467,22 +474,22 @@ namespace v2rayN.Forms
             switch (configType)
             {
                 case (int)EConfigType.Vmess:
-                    fm = new AddServerForm();
+                    fm = new ConfigVMessForm();
                     break;
                 case (int)EConfigType.Shadowsocks:
-                    fm = new AddServer3Form();
+                    fm = new ConfigShadowsocksForm();
                     break;
                 case (int)EConfigType.Socks:
-                    fm = new AddServer4Form();
+                    fm = new ConfigSocksForm();
                     break;
                 case (int)EConfigType.VLESS:
-                    fm = new AddServer5Form();
+                    fm = new ConfigVLESSForm();
                     break;
                 case (int)EConfigType.Trojan:
-                    fm = new AddServer6Form();
+                    fm = new ConfigTrojanForm();
                     break;
                 default:
-                    fm = new AddServer2Form();
+                    fm = new();
                     break;
             }
             fm.EditIndex = index;
@@ -661,7 +668,11 @@ namespace v2rayN.Forms
         }
         private void Speedtest(string actionType)
         {
-            if (GetLvSelectedIndex() < 0) return;
+            if (GetLvSelectedIndex() < 0)
+            {
+                return;
+            }
+
             ClearTestResult();
             SpeedtestHandler statistics = new SpeedtestHandler(ref config, ref v2rayHandler, lvSelecteds, actionType, UpdateSpeedtestHandler);
         }
@@ -675,18 +686,6 @@ namespace v2rayN.Forms
         {
             SpeedtestHandler statistics = new SpeedtestHandler(ref config, ref v2rayHandler, lvSelecteds, "", UpdateSpeedtestHandler);
             return statistics.RunAvailabilityCheck();
-        }
-
-        private void menuExport2ClientConfig_Click(object sender, EventArgs e)
-        {
-            int index = GetLvSelectedIndex();
-            MainFormHandler.Instance.Export2ClientConfig(index, config);
-        }
-
-        private void menuExport2ServerConfig_Click(object sender, EventArgs e)
-        {
-            int index = GetLvSelectedIndex();
-            MainFormHandler.Instance.Export2ServerConfig(index, config);
         }
 
         private void menuExport2ShareUrl_Click(object sender, EventArgs e)
@@ -929,7 +928,7 @@ namespace v2rayN.Forms
 
         void AppendText(string text)
         {
-            if (this.txtMsgBox.InvokeRequired)
+            if (txtMsgBox.InvokeRequired)
             {
                 Invoke(new AppendTextDelegate(AppendText), new object[] { text });
             }
@@ -950,10 +949,10 @@ namespace v2rayN.Forms
             {
                 ClearMsg();
             }
-            this.txtMsgBox.AppendText(msg);
+            txtMsgBox.AppendText(msg);
             if (!msg.EndsWith(Environment.NewLine))
             {
-                this.txtMsgBox.AppendText(Environment.NewLine);
+                txtMsgBox.AppendText(Environment.NewLine);
             }
         }
 
@@ -962,7 +961,7 @@ namespace v2rayN.Forms
         /// </summary>
         private void ClearMsg()
         {
-            this.txtMsgBox.Clear();
+            txtMsgBox.Clear();
         }
 
         /// <summary>
@@ -989,8 +988,8 @@ namespace v2rayN.Forms
 
         private void menuExit_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
-            this.Close();
+            Visible = false;
+            Close();
 
             Application.Exit();
         }
@@ -998,22 +997,22 @@ namespace v2rayN.Forms
 
         private void ShowForm()
         {
-            this.Visible = true;
-            this.ShowInTaskbar = true;
-            this.WindowState = FormWindowState.Normal;
+            Visible = true;
+            ShowInTaskbar = true;
+            WindowState = FormWindowState.Normal;
 
-            this.txtMsgBox.ScrollToCaret();
+            txtMsgBox.ScrollToCaret();
             if (config.index >= 0 && config.index < lvServers.Items.Count)
             {
                 lvServers.EnsureVisible(config.index); // workaround
             }
 
-            this.Activate();
+            Activate();
         }
 
         private void HideForm()
         {
-            this.Visible = false;
+            Visible = false;
         }
 
         #endregion
@@ -1211,7 +1210,7 @@ namespace v2rayN.Forms
                         AppendText(false, string.Format(Utils.StringsRes.I18N("MsgParsingSuccessfully"), "v2rayN"));
 
                         string url = args.Msg;
-                        this.Invoke((MethodInvoker)(delegate
+                        Invoke((MethodInvoker)(delegate
                         {
                             askToDownload(downloadHandle, url);
                         }));
@@ -1278,7 +1277,7 @@ namespace v2rayN.Forms
                         AppendText(false, string.Format(Utils.StringsRes.I18N("MsgParsingSuccessfully"), "v2rayCore"));
 
                         string url = args.Msg;
-                        this.Invoke((MethodInvoker)(delegate
+                        Invoke((MethodInvoker)(delegate
                         {
                             askToDownload(downloadHandle, url);
                         }));

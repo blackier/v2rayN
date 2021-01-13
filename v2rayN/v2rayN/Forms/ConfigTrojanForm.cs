@@ -5,9 +5,9 @@ using v2rayN.Config;
 
 namespace v2rayN.Forms
 {
-    public partial class AddServer6Form : BaseServerForm
+    public partial class ConfigTrojanForm : BaseServerForm
     {
-        public AddServer6Form()
+        public ConfigTrojanForm()
         {
             InitializeComponent();
         }

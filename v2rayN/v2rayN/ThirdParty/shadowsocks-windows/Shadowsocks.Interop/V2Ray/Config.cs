@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Shadowsocks.Interop.V2Ray
@@ -9,12 +10,12 @@ namespace Shadowsocks.Interop.V2Ray
         public DnsObject? Dns { get; set; }
         public RoutingObject Routing { get; set; }
         public PolicyObject? Policy { get; set; }
-        public InboundObject Inbounds { get; set; }
-        public OutboundObject Outbounds { get; set; }
+        public List<InboundObject> Inbounds { get; set; }
+        public List<OutboundObject> Outbounds { get; set; }
         public TransportObject? Transport { get; set; }
         public StatsObject? Stats { get; set; }
         public ReverseObject? Reverse { get; set; }
-        
+
         public Config()
         {
             Routing = new();

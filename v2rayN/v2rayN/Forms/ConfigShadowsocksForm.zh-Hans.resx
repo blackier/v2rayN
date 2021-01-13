@@ -106,18 +106,6 @@
   <data name="btnOK.Text" xml:space="preserve">
     <value>确定(&amp;O)</value>
   </data>
-  <data name="MenuItem1.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>134, 28</value>
-  </data>
-  <data name="MenuItem1.Text" xml:space="preserve">
-    <value>导入配置文件</value>
-  </data>
-  <data name="menuItemImportClipboard.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>252, 34</value>
-  </data>
-  <data name="menuItemImportClipboard.Text" xml:space="preserve">
-    <value>从剪贴板导入URL</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>编辑或添加[Shadowsocks]服务器</value>
   </data>

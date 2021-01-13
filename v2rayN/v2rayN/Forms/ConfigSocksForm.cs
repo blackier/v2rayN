@@ -5,10 +5,10 @@ using v2rayN.Config;
 
 namespace v2rayN.Forms
 {
-    public partial class AddServer4Form : BaseServerForm
+    public partial class ConfigSocksForm : BaseServerForm
     { 
 
-        public AddServer4Form()
+        public ConfigSocksForm()
         {
             InitializeComponent();
         }
@@ -89,41 +89,7 @@ namespace v2rayN.Forms
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-        }
-
-
-        #region 导入配置
-         
-        /// <summary>
-        /// 从剪贴板导入URL
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void menuItemImportClipboard_Click(object sender, EventArgs e)
-        {
-            ImportConfig();
-        }
-
-        private void ImportConfig()
-        {
-            ClearServer();
-
-            VmessItem vmessItem = V2rayConfigHandler.ImportFromClipboardConfig(Utils.GetClipboardData(), out string msg);
-            if (vmessItem == null)
-            {
-                Utils.MsgBox.ShowWarning(msg);
-                return;
-            }
-
-            txtAddress.Text = vmessItem.address;
-            txtPort.Text = vmessItem.port.ToString();
-            txtSecurity.Text = vmessItem.security;
-            txtId.Text = vmessItem.id;
-            txtRemarks.Text = vmessItem.remarks;
         }        
-
-        #endregion
-         
 
     }
 }

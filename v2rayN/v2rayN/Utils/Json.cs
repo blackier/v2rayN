@@ -31,7 +31,7 @@ namespace v2rayN
         /// <param name="obj"></param>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public static int ToJsonFile(object obj, string filePath, bool nullValue = true)
+        public static int ToJsonFile(object obj, string filePath, bool nullValue = true, bool caseInsensitive = false)
         {
             int result;
             try
@@ -46,6 +46,10 @@ namespace v2rayN
                     else
                     {
                         serializer_opts = new JsonSerializerOptions() { WriteIndented = true, IgnoreNullValues = true };
+                    }
+                    if (caseInsensitive)
+                    {
+                        serializer_opts.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                     }
 
                     file.Write(JsonSerializer.Serialize(obj, obj.GetType(), serializer_opts));

@@ -1,6 +1,6 @@
 ﻿namespace v2rayN.Forms
 {
-    partial class AddServer5Form
+    partial class ConfigVMessForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddServer5Form));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigVMessForm));
             this.btnClose = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmbFlow = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnGUID = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -40,6 +38,8 @@
             this.txtRemarks = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.txtAlterId = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPort = new System.Windows.Forms.TextBox();
@@ -73,17 +73,10 @@
             this.label22 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.menuServer = new System.Windows.Forms.MenuStrip();
-            this.MenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemImportClient = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemImportServer = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.MenuItemImportClipboard = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panTlsMore.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.menuServer.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
@@ -97,8 +90,6 @@
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Controls.Add(this.cmbFlow);
-            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnGUID);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label8);
@@ -106,6 +97,8 @@
             this.groupBox1.Controls.Add(this.txtRemarks);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.txtAlterId);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtId);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtPort);
@@ -114,23 +107,6 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
-            // 
-            // cmbFlow
-            // 
-            resources.ApplyResources(this.cmbFlow, "cmbFlow");
-            this.cmbFlow.FormattingEnabled = true;
-            this.cmbFlow.Items.AddRange(new object[] {
-            resources.GetString("cmbFlow.Items"),
-            resources.GetString("cmbFlow.Items1"),
-            resources.GetString("cmbFlow.Items2"),
-            resources.GetString("cmbFlow.Items3"),
-            resources.GetString("cmbFlow.Items4")});
-            this.cmbFlow.Name = "cmbFlow";
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
             // 
             // btnGUID
             // 
@@ -152,10 +128,13 @@
             // cmbSecurity
             // 
             resources.ApplyResources(this.cmbSecurity, "cmbSecurity");
-            this.cmbSecurity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.cmbSecurity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSecurity.FormattingEnabled = true;
             this.cmbSecurity.Items.AddRange(new object[] {
-            resources.GetString("cmbSecurity.Items")});
+            resources.GetString("cmbSecurity.Items"),
+            resources.GetString("cmbSecurity.Items1"),
+            resources.GetString("cmbSecurity.Items2"),
+            resources.GetString("cmbSecurity.Items3")});
             this.cmbSecurity.Name = "cmbSecurity";
             // 
             // txtRemarks
@@ -172,6 +151,16 @@
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
+            // 
+            // txtAlterId
+            // 
+            resources.ApplyResources(this.txtAlterId, "txtAlterId");
+            this.txtAlterId.Name = "txtAlterId";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
             // 
             // txtId
             // 
@@ -333,8 +322,7 @@
             this.cmbStreamSecurity.FormattingEnabled = true;
             this.cmbStreamSecurity.Items.AddRange(new object[] {
             resources.GetString("cmbStreamSecurity.Items"),
-            resources.GetString("cmbStreamSecurity.Items1"),
-            resources.GetString("cmbStreamSecurity.Items2")});
+            resources.GetString("cmbStreamSecurity.Items1")});
             this.cmbStreamSecurity.Name = "cmbStreamSecurity";
             this.cmbStreamSecurity.SelectedIndexChanged += new System.EventHandler(this.cmbStreamSecurity_SelectedIndexChanged);
             // 
@@ -399,60 +387,18 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
-            // menuServer
-            // 
-            resources.ApplyResources(this.menuServer, "menuServer");
-            this.menuServer.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.menuServer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItem1});
-            this.menuServer.Name = "menuServer";
-            // 
-            // MenuItem1
-            // 
-            resources.ApplyResources(this.MenuItem1, "MenuItem1");
-            this.MenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItemImportClient,
-            this.MenuItemImportServer,
-            this.toolStripSeparator1,
-            this.MenuItemImportClipboard});
-            this.MenuItem1.Name = "MenuItem1";
-            // 
-            // MenuItemImportClient
-            // 
-            resources.ApplyResources(this.MenuItemImportClient, "MenuItemImportClient");
-            this.MenuItemImportClient.Name = "MenuItemImportClient";
-            this.MenuItemImportClient.Click += new System.EventHandler(this.MenuItemImportClient_Click);
-            // 
-            // MenuItemImportServer
-            // 
-            resources.ApplyResources(this.MenuItemImportServer, "MenuItemImportServer");
-            this.MenuItemImportServer.Name = "MenuItemImportServer";
-            this.MenuItemImportServer.Click += new System.EventHandler(this.MenuItemImportServer_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            // 
-            // MenuItemImportClipboard
-            // 
-            resources.ApplyResources(this.MenuItemImportClipboard, "MenuItemImportClipboard");
-            this.MenuItemImportClipboard.Name = "MenuItemImportClipboard";
-            this.MenuItemImportClipboard.Click += new System.EventHandler(this.MenuItemImportClipboard_Click);
-            // 
-            // AddServer5Form
+            // ConfigVMessForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.menuServer);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "AddServer5Form";
-            this.Load += new System.EventHandler(this.AddServer5Form_Load);
+            this.Name = "ConfigVMessForm";
+            this.Load += new System.EventHandler(this.AddServerForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -460,10 +406,7 @@
             this.panTlsMore.ResumeLayout(false);
             this.panTlsMore.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.menuServer.ResumeLayout(false);
-            this.menuServer.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -475,6 +418,8 @@
         private System.Windows.Forms.TextBox txtRemarks;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtAlterId;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtPort;
@@ -495,14 +440,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.MenuStrip menuServer;
-        private System.Windows.Forms.ToolStripMenuItem MenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemImportClient;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemImportServer;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox cmbStreamSecurity;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemImportClipboard;
         private System.Windows.Forms.Button btnGUID;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label14;
@@ -516,8 +455,6 @@
         private System.Windows.Forms.Panel panTlsMore;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.ComboBox cmbFlow;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label22;
     }
 }

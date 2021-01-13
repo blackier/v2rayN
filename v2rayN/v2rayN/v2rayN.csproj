@@ -14,20 +14,12 @@
     <None Remove="Sample\custom_routing_block" />
     <None Remove="Sample\custom_routing_direct" />
     <None Remove="Sample\custom_routing_proxy" />
-    <None Remove="Sample\SampleClientConfig.txt" />
-    <None Remove="Sample\SampleHttprequest.txt" />
-    <None Remove="Sample\SampleHttpresponse.txt" />
-    <None Remove="Sample\SampleServerConfig.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Sample\custom_routing_block" />
     <EmbeddedResource Include="Sample\custom_routing_direct" />
     <EmbeddedResource Include="Sample\custom_routing_proxy" />
-    <EmbeddedResource Include="Sample\SampleClientConfig.txt" />
-    <EmbeddedResource Include="Sample\SampleHttprequest.txt" />
-    <EmbeddedResource Include="Sample\SampleHttpresponse.txt" />
-    <EmbeddedResource Include="Sample\SampleServerConfig.txt" />
   </ItemGroup>
 
   <ItemGroup>
