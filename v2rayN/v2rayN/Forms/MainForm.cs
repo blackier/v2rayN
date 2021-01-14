@@ -173,31 +173,28 @@ namespace v2rayN.Forms
         private void InitServersView()
         {
             lvServers.BeginUpdate();
-            lvServers.Items.Clear();
-
-            lvServers.GridLines = true;
-            lvServers.FullRowSelect = true;
-            lvServers.View = View.Details;
-            lvServers.Scrollable = true;
-            lvServers.MultiSelect = true;
-            lvServers.HeaderStyle = ColumnHeaderStyle.Clickable;
+            if (lvServers.Items.Count > 0)
+            {
+                lvServers.Items.Clear();
+                lvServers.HeaderStyle = ColumnHeaderStyle.Clickable;
+            }
 
             lvServers.Columns.Add("", 30);
             lvServers.Columns.Add(Utils.StringsRes.I18N("LvServiceType"), 80);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvAlias"), 200);
+            lvServers.Columns.Add(Utils.StringsRes.I18N("LvAlias"), 80);
             lvServers.Columns.Add(Utils.StringsRes.I18N("LvAddress"), 120);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvPort"), 50);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvEncryptionMethod"), 90);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvTransportProtocol"), 70);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvSubscription"), 50);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvTestResults"), 70);
+            lvServers.Columns.Add(Utils.StringsRes.I18N("LvPort"), 80);
+            lvServers.Columns.Add(Utils.StringsRes.I18N("LvEncryptionMethod"), 100);
+            lvServers.Columns.Add(Utils.StringsRes.I18N("LvTransportProtocol"), 100);
+            lvServers.Columns.Add(Utils.StringsRes.I18N("LvSubscription"), 80);
+            lvServers.Columns.Add(Utils.StringsRes.I18N("LvTestResults"), 100);
 
             if (statistics != null && statistics.Enable)
             {
-                lvServers.Columns.Add(Utils.StringsRes.I18N("LvTodayDownloadDataAmount"), 70);
-                lvServers.Columns.Add(Utils.StringsRes.I18N("LvTodayUploadDataAmount"), 70);
-                lvServers.Columns.Add(Utils.StringsRes.I18N("LvTotalDownloadDataAmount"), 70);
-                lvServers.Columns.Add(Utils.StringsRes.I18N("LvTotalUploadDataAmount"), 70);
+                lvServers.Columns.Add(Utils.StringsRes.I18N("LvTodayDownloadDataAmount"), 100);
+                lvServers.Columns.Add(Utils.StringsRes.I18N("LvTodayUploadDataAmount"), 100);
+                lvServers.Columns.Add(Utils.StringsRes.I18N("LvTotalDownloadDataAmount"), 100);
+                lvServers.Columns.Add(Utils.StringsRes.I18N("LvTotalUploadDataAmount"), 100);
             }
             lvServers.EndUpdate();
         }
