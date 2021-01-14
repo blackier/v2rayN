@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using v2rayN.Extension;
 using v2rayN.Config;
-using v2rayN.Resources;
+using v2rayN.Properties;
 
 namespace v2rayN.Handler
 {

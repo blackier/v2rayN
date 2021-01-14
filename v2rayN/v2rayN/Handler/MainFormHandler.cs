@@ -48,7 +48,7 @@ namespace v2rayN.Handler
 
                 graphics.FillEllipse(drawBrush, new Rectangle(0, 0, width, height));
                 int zoom = 16;
-                graphics.DrawImage(new Bitmap(Resources.Resources.notify, width - zoom, width - zoom), zoom / 2, zoom / 2);
+                graphics.DrawImage(new Bitmap(Properties.Resources.notify, width - zoom, width - zoom), zoom / 2, zoom / 2);
 
                 Icon createdIcon = Icon.FromHandle(bitmap.GetHicon());
 

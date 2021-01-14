@@ -111,8 +111,6 @@
             this.tsbLanguageDef = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbLanguageZhHans = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbPromotion = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbClose = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -565,9 +563,7 @@
             this.tsbCheckUpdate,
             this.toolStripSeparator10,
             this.tsbHelp,
-            this.tsbPromotion,
-            this.toolStripSeparator11,
-            this.tsbClose});
+            this.tsbPromotion});
             resources.ApplyResources(this.tsMain, "tsMain");
             this.tsMain.Name = "tsMain";
             this.tsMain.TabStop = true;
@@ -704,17 +700,6 @@
             this.tsbPromotion.Name = "tsbPromotion";
             this.tsbPromotion.Click += new System.EventHandler(this.tsbPromotion_Click);
             // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
-            // 
-            // tsbClose
-            // 
-            resources.ApplyResources(this.tsbClose, "tsbClose");
-            this.tsbClose.Name = "tsbClose";
-            this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -771,7 +756,6 @@
         private System.Windows.Forms.ToolStrip tsMain;
         private System.Windows.Forms.ToolStripDropDownButton tsbServer;
         private System.Windows.Forms.ToolStripButton tsbOptionSetting;
-        private System.Windows.Forms.ToolStripButton tsbClose;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
@@ -795,7 +779,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuAddServers;
         private System.Windows.Forms.ToolStripMenuItem menuExport2ShareUrl;
         private System.Windows.Forms.ToolStripMenuItem menuSpeedServer;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripDropDownButton tsbHelp;
         private System.Windows.Forms.ToolStripMenuItem tsbAbout;
         private System.Windows.Forms.ToolStripMenuItem menuAddServers2;
