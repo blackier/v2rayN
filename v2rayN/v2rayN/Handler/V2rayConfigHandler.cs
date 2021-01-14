@@ -195,10 +195,10 @@ namespace v2rayN.Handler
                 //自定义
                 //需代理
                 routingUserRule(config.useragent, Global.agentTag, ref v2rayConfig);
-                //直连
-                routingUserRule(config.userdirect, Global.directTag, ref v2rayConfig);
                 //阻止
                 routingUserRule(config.userblock, Global.blockTag, ref v2rayConfig);
+                //直连
+                routingUserRule(config.userdirect, Global.directTag, ref v2rayConfig);
 
             }
             return 0;
@@ -260,15 +260,6 @@ namespace v2rayN.Handler
         /// <returns></returns>
         private static int SetOutbound(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
-            // 设置直连，放前面作为主出站
-            var freedomOutbound = new V2Ray.OutboundObject
-            {
-                Protocol = "freedom",
-                Tag = Global.directTag,
-                Settings = new V2Ray.Protocols.Freedom.OutboundConfigurationObject()
-            };
-            v2rayConfig.Outbounds.Add(freedomOutbound);
-
             if (config.configType() == (int)EConfigType.Vmess)
             {
                 var outbound = V2Ray.OutboundObject.GetVMess(Global.agentTag, config.address(), config.port(), config.id());
@@ -367,12 +358,24 @@ namespace v2rayN.Handler
                 v2rayConfig.Outbounds.Add(outbound);
             }
 
+            // 设置直连，放前面作为主出站
+            var freedomOutbound = new V2Ray.OutboundObject
+            {
+                Protocol = "freedom",
+                Tag = Global.directTag,
+                Settings = new V2Ray.Protocols.Freedom.OutboundConfigurationObject()
+            };
+            v2rayConfig.Outbounds.Add(freedomOutbound);
+
             // 设置黑名单
-            var blackholeOutbound = new V2Ray.OutboundObject();
-            blackholeOutbound.Protocol = "blackhole";
-            blackholeOutbound.Tag = Global.blockTag;
-            blackholeOutbound.Settings = new V2Ray.Protocols.Blackhole.OutboundConfigurationObject();
+            var blackholeOutbound = new V2Ray.OutboundObject
+            {
+                Protocol = "blackhole",
+                Tag = Global.blockTag,
+                Settings = new V2Ray.Protocols.Blackhole.OutboundConfigurationObject()
+            };
             v2rayConfig.Outbounds.Add(blackholeOutbound);
+
             return 0;
         }
 
@@ -547,7 +550,8 @@ namespace v2rayN.Handler
                     InboundTag = new() { $"{Global.InboundAPITagName}" },
                     OutboundTag = Global.InboundAPITagName
                 };
-                v2rayConfig.Routing.Rules.Add(apiRule);
+                // 需要放到最前面
+                v2rayConfig.Routing.Rules.Insert(0, apiRule);
             }
             return 0;
         }
