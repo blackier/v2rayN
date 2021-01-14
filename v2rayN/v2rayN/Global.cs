@@ -1,15 +1,15 @@
 ﻿
+using System.Collections.Generic;
+
 namespace v2rayN
 {
     class Global
     {
         #region 常量
 
-
         public const string v2rayWebsiteUrl = @"https://www.v2fly.org/";
         public const string AboutUrl = @"https://github.com/2dust/v2rayN";
         public const string UpdateUrl = AboutUrl + @"/releases";
-
 
         /// <summary>
         /// SpeedTestUrl
@@ -17,13 +17,6 @@ namespace v2rayN
         public const string SpeedTestUrl = @"http://cachefly.cachefly.net/10mb.test";
         public const string SpeedPingTestUrl = @"https://www.google.com/generate_204";
         public const string AvailabilityTestUrl = @"https://www.google.com/generate_204";
-
-        /// <summary>
-        /// CustomRoutingListUrl
-        /// </summary>
-        public const string CustomRoutingListUrl = @"https://raw.githubusercontent.com/2dust/v2rayCustomRoutingList/master/";
-
-        public const string GFWLIST_URL = "https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt";
 
         /// <summary>
         /// PromotionUrl
@@ -39,30 +32,6 @@ namespace v2rayN
         /// v2ray配置文件名
         /// </summary>
         public const string v2rayConfigFileName = "config.json";
-
-        /// <summary>
-        /// v2ray客户端配置样例文件名
-        /// </summary>
-        public const string v2raySampleClient = "v2rayN.Sample.SampleClientConfig.txt";
-        /// <summary>
-        /// v2ray服务端配置样例文件名
-        /// </summary>
-        public const string v2raySampleServer = "v2rayN.Sample.SampleServerConfig.txt";
-        /// <summary>
-        /// v2ray配置Httprequest文件名
-        /// </summary>
-        public const string v2raySampleHttprequestFileName = "v2rayN.Sample.SampleHttprequest.txt";
-        /// <summary>
-        /// v2ray配置Httpresponse文件名
-        /// </summary>
-        public const string v2raySampleHttpresponseFileName = "v2rayN.Sample.SampleHttpresponse.txt";
-        /// <summary>
-        /// 空白的pac文件
-        /// </summary>
-        public const string BlankPacFileName = "v2rayN.Sample.BlankPac.txt";
-
-        public const string CustomRoutingFileName = "v2rayN.Sample.custom_routing_";
-
 
         /// <summary>
         /// 默认加密方式
@@ -193,7 +162,36 @@ namespace v2rayN
         }
         public const string StatisticLogOverall = "StatisticLogOverall.json";
 
-        public const string IEProxyExceptions = "localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;192.168.*";
+        /// <summary>
+        /// 大陆常用ip和域名
+        /// </summary>
+        public static readonly string[] geoCnAdress = { "geoip:cn", "geosite:cn" };
+
+        /// <summary>
+        /// 大陆外常用ip和域名
+        /// </summary>
+        public static readonly string[] geoNoCnAdress = { "geosite:geolocation-!cn" };
+
+        /// <summary>
+        /// 常见广告地址
+        /// </summary>
+        public static readonly string[] geoAdAdress = { "geosite:category-ads-all" };
+
+        /// <summary>
+        /// 常见私有ip和域名
+        /// </summary>
+        public static readonly string[] geoPrivateAdress = { "geoip:private" };
+
+        /// <summary>
+        /// 所有预设路由规则
+        /// </summary>
+        public static readonly List<string[]> presetRoutingRules = new()
+        {
+            geoPrivateAdress,
+            geoCnAdress,
+            geoNoCnAdress,
+            geoAdAdress
+        };
 
         #endregion
 
@@ -258,7 +256,7 @@ namespace v2rayN
         public static Shadowsocks.WPF.Services.PrivoxyRunner privoxyRunner
         {
             get
-            {                
+            {
                 if (privoxy_runner_instance == null)
                 {
                     privoxy_runner_instance = new Shadowsocks.WPF.Services.PrivoxyRunner();

@@ -11,15 +11,6 @@
 
   <ItemGroup>
     <None Remove="V2RayAPI\Statistics.proto" />
-    <None Remove="Sample\custom_routing_block" />
-    <None Remove="Sample\custom_routing_direct" />
-    <None Remove="Sample\custom_routing_proxy" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Sample\custom_routing_block" />
-    <EmbeddedResource Include="Sample\custom_routing_direct" />
-    <EmbeddedResource Include="Sample\custom_routing_proxy" />
   </ItemGroup>
 
   <ItemGroup>

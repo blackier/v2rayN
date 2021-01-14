@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using v2rayN.Extension;
 using v2rayN.Handler;
@@ -78,7 +79,6 @@ namespace v2rayN.Forms
             //路由
             cmbdomainStrategy.Text = config.domainStrategy;
             int.TryParse(config.routingMode, out int routingMode);
-            cmbroutingMode.SelectedIndex = routingMode;
 
             txtUseragent.Text = Utils.List2String(config.useragent, true);
             txtUserdirect.Text = Utils.List2String(config.userdirect, true);
@@ -110,9 +110,6 @@ namespace v2rayN.Forms
             chkAllowLANConn.Checked = config.allowLANConn;
             chkEnableStatistics.Checked = config.enableStatistics;
             chkKeepOlderDedupl.Checked = config.keepOlderDedupl;
-
-
-
 
             ComboItem[] cbSource = new ComboItem[]
             {
@@ -164,7 +161,7 @@ namespace v2rayN.Forms
 
             if (ConfigHandler.SaveConfig(ref config) == 0)
             {
-                this.DialogResult = DialogResult.OK;
+                DialogResult = DialogResult.OK;
             }
             else
             {
@@ -271,7 +268,6 @@ namespace v2rayN.Forms
             string userblock = txtUserblock.Text.TrimEx();
 
             config.domainStrategy = domainStrategy;
-            config.routingMode = routingMode;
 
             config.useragent = Utils.String2List(useragent);
             config.userdirect = Utils.String2List(userdirect);
@@ -331,21 +327,12 @@ namespace v2rayN.Forms
             config.statisticsFreshRate = (int)cbFreshrate.SelectedValue;
             config.keepOlderDedupl = chkKeepOlderDedupl.Checked;
 
-            //if(lastEnableStatistics != config.enableStatistics)
-            //{
-            //    /// https://stackoverflow.com/questions/779405/how-do-i-restart-my-c-sharp-winform-application
-            //    // Shut down the current app instance.
-            //    Application.Exit();
-
-            //    // Restart the app passing "/restart [processId]" as cmd line args
-            //    Process.Start(Application.ExecutablePath, "/restart " + Process.GetCurrentProcess().Id);
-            //}
             return 0;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
         }
 
         private void chkAllowIn2_CheckedChanged(object sender, EventArgs e)
@@ -360,63 +347,46 @@ namespace v2rayN.Forms
             chkudpEnabled2.Enabled = blAllow2;
         }
 
-        private void btnSetDefRountingRule_Click(object sender, EventArgs e)
-        {
-            txtUseragent.Text = Utils.GetEmbedText(Global.CustomRoutingFileName + Global.agentTag);
-            txtUserdirect.Text = Utils.GetEmbedText(Global.CustomRoutingFileName + Global.directTag);
-            txtUserblock.Text = Utils.GetEmbedText(Global.CustomRoutingFileName + Global.blockTag);
-            cmbroutingMode.SelectedIndex = 3;
-
-            List<string> lstUrl = new List<string>
-            {
-                Global.CustomRoutingListUrl + Global.agentTag,
-                Global.CustomRoutingListUrl + Global.directTag,
-                Global.CustomRoutingListUrl + Global.blockTag
-            };
-
-            List<TextBox> lstTxt = new List<TextBox>
-            {
-                txtUseragent,
-                txtUserdirect,
-                txtUserblock
-            };
-
-            for (int k = 0; k < lstUrl.Count; k++)
-            {
-                TextBox txt = lstTxt[k];
-                DownloadHandle downloadHandle = new DownloadHandle();
-                downloadHandle.UpdateCompleted += (sender2, args) =>
-                {
-                    if (args.Success)
-                    {
-                        string result = args.Msg;
-                        if (Utils.IsNullOrEmpty(result))
-                        {
-                            return;
-                        }
-                        txt.Text = result;
-                    }
-                    else
-                    {
-                        AppendText(false, args.Msg);
-                    }
-                };
-                downloadHandle.Error += (sender2, args) =>
-                {
-                    AppendText(true, args.GetException().Message);
-                };
-
-                downloadHandle.WebDownloadString(lstUrl[k]);
-            }
-        }
-        void AppendText(bool notify, string text)
-        {
-            labRoutingTips.Text = text;
-        }
 
         private void linkLabelRoutingDoc_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("explorer.exe", "https://www.v2fly.org/config/routing.html");
+        }
+
+        private void cmbroutingMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // 预设路由规则
+            var index = cmbroutingMode.SelectedIndex;
+            if (index == 0)
+            {
+                return;
+            }
+            if (index == 1)
+            {
+                // 全局
+                txtUseragent.Clear();
+                txtUserdirect.Clear();
+                txtUserblock.Clear();
+                return;
+            }
+            var address = Global.presetRoutingRules[index - 2];
+            switch (tabControl_Routing.SelectedIndex)
+            {
+                case 0:
+                    // 代理
+                    txtUseragent.Text = Utils.List2String(Utils.String2List(txtUseragent.Text).Concat(new List<string>(address)).ToList(), true);
+                    break;
+                case 1:
+                    // 直连
+                    txtUserdirect.Text = Utils.List2String(Utils.String2List(txtUserdirect.Text).Concat(new List<string>(address)).ToList(), true);
+                    break;
+                case 2:
+                    // 禁止
+                    txtUserblock.Text = Utils.List2String(Utils.String2List(txtUserblock.Text).Concat(new List<string>(address)).ToList(), true);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

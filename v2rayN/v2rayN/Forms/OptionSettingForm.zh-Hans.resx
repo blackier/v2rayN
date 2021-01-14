@@ -196,48 +196,32 @@
   <data name="txtUserblock.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>904, 647</value>
   </data>
-  <data name="tabPage8.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>910, 653</value>
-  </data>
-  <data name="tabPage8.Text" xml:space="preserve">
-    <value>  4.预定义规则  </value>
-  </data>
-  <data name="cmbroutingMode.Items" xml:space="preserve">
-    <value>全局</value>
-  </data>
-  <data name="cmbroutingMode.Items1" xml:space="preserve">
-    <value>绕过局域网地址</value>
-  </data>
-  <data name="cmbroutingMode.Items2" xml:space="preserve">
-    <value>绕过大陆地址</value>
-  </data>
-  <data name="cmbroutingMode.Items3" xml:space="preserve">
-    <value>绕过局域网及大陆地址</value>
-  </data>
-  <data name="cmbroutingMode.Location" type="System.Drawing.Point, System.Drawing.Primitives">
-    <value>160, 18</value>
-  </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>918, 72</value>
+  </data>
+  <data name="cmbroutingMode.Items" xml:space="preserve">
+    <value>下拉添加路由规则</value>
+  </data>
+  <data name="cmbroutingMode.Items1" xml:space="preserve">
+    <value>全局</value>
+  </data>
+  <data name="cmbroutingMode.Items2" xml:space="preserve">
+    <value>局域网地址</value>
+  </data>
+  <data name="cmbroutingMode.Items3" xml:space="preserve">
+    <value>常见大陆地址</value>
+  </data>
+  <data name="cmbroutingMode.Items4" xml:space="preserve">
+    <value>常见非大陆地址</value>
+  </data>
+  <data name="cmbroutingMode.Items5" xml:space="preserve">
+    <value>常见广告地址 </value>
   </data>
   <data name="linkLabelRoutingDoc.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>118, 24</value>
   </data>
   <data name="linkLabelRoutingDoc.Text" xml:space="preserve">
     <value>域名解析策略</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=5.0.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnSetDefRountingRule.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnSetDefRountingRule.Location" type="System.Drawing.Point, System.Drawing.Primitives">
-    <value>398, 1</value>
-  </data>
-  <data name="btnSetDefRountingRule.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>254, 34</value>
-  </data>
-  <data name="btnSetDefRountingRule.Text" xml:space="preserve">
-    <value>一键设置默认自定义路由规则</value>
   </data>
   <assembly alias="System.Private.CoreLib" name="System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e" />
   <data name="labRoutingTips.AutoSize" type="System.Boolean, System.Private.CoreLib">

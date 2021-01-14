@@ -42,7 +42,7 @@ namespace v2rayN.Handler
                     }
                     if (type == ListenerType.GlobalHttp)
                     {
-                        WinINet.ProxyGlobal($"{Global.Loopback}:{port}", Global.IEProxyExceptions);
+                        WinINet.ProxyGlobal($"{Global.Loopback}:{port}", string.Empty);
                     }
                     else if (type == ListenerType.HttpOpenAndClear)
                     {
