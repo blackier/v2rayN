@@ -90,6 +90,7 @@ namespace v2rayN.Handler
             catch (Exception e)
             {
                 msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
+                Utils.SaveLog(e.Message, e);
                 return -1;
             }
             return 0;
@@ -1067,6 +1068,7 @@ namespace v2rayN.Handler
             catch (Exception e)
             {
                 msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
+                Utils.SaveLog(e.Message, e);
                 return "";
             }
         }

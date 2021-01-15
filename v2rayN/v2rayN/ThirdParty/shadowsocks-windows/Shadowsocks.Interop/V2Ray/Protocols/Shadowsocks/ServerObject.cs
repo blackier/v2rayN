@@ -4,11 +4,11 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.Shadowsocks
 {
     public class ServerObject
     {
-        public string? Email { get; set; }
+        public string Email { get; set; }
 
         public string Address { get; set; }
 
-        public int Port { get; set; }
+        public int? Port { get; set; }
 
         public string Method { get; set; }
 

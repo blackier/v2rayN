@@ -163,10 +163,10 @@
   <data name="tabPage2.Text" xml:space="preserve">
     <value>  Core:路由设置  </value>
   </data>
-  <data name="tabControl2.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+  <data name="tabControl_Routing.Location" type="System.Drawing.Point, System.Drawing.Primitives">
     <value>3, 98</value>
   </data>
-  <data name="tabControl2.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+  <data name="tabControl_Routing.Size" type="System.Drawing.Size, System.Drawing.Primitives">
     <value>918, 690</value>
   </data>
   <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing.Primitives">

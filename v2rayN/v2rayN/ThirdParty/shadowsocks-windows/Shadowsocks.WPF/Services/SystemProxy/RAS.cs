@@ -44,7 +44,7 @@ namespace Shadowsocks.WPF.Services.SystemProxy
             // pointer to full path and file name of phone-book file
             string lpszPhonebook,
             // buffer to receive phone-book entries
-            [In, Out] RasEntryName[]? lprasentryname,
+            [In, Out] RasEntryName[] lprasentryname,
             // size in bytes of buffer
             ref int lpcb,
             // number of entries written to buffer

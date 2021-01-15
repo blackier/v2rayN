@@ -465,6 +465,7 @@ namespace v2rayN
             return Application.StartupPath;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
         public static string RegReadValue(string path, string name, string def)
         {
             RegistryKey regKey = null;
@@ -491,6 +492,7 @@ namespace v2rayN
             return def;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
         public static void RegWriteValue(string path, string name, string value)
         {
             RegistryKey regKey = null;
@@ -692,10 +694,12 @@ namespace v2rayN
             return string.Empty;
         }
 
+
         /// <summary>
         /// IsAdministrator
         /// </summary>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
         public static bool IsAdministrator()
         {
             try

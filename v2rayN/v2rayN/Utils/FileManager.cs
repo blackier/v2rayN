@@ -52,27 +52,6 @@ namespace v2rayN
                 }
             }
 
-            public static string NonExclusiveReadAllText(string path)
-            {
-                return NonExclusiveReadAllText(path, Encoding.Default);
-            }
-
-            public static string NonExclusiveReadAllText(string path, Encoding encoding)
-            {
-                try
-                {
-                    using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                    using (StreamReader sr = new StreamReader(fs, encoding))
-                    {
-                        return sr.ReadToEnd();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Utils.SaveLog(ex.Message, ex);
-                    throw ex;
-                }
-            }
             public static bool ZipExtractToFile(string fileName)
             {
                 try

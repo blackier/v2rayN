@@ -20,7 +20,7 @@ namespace Shadowsocks.Interop.V2Ray
         /// <summary>
         /// Gets or sets the list of load balancers.
         /// </summary>
-        public List<BalancerObject>? Balancers { get; set; }
+        public List<BalancerObject> Balancers { get; set; }
 
         public RoutingObject()
         {

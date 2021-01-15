@@ -17,7 +17,7 @@ namespace Shadowsocks.WPF.Services
     {
         private static int _uid;
         private static string _uniqueConfigFile = "";
-        private Process? _process;
+        private Process _process;
         private int _runningPort;
 
         public PrivoxyRunner()

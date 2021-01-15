@@ -8,9 +8,9 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.VLESS
     public class UserObject
     {
         public string Id { get; set; }
-        public string? Email { get; set; }
-        public int Level { get; set; }
-        public string? Encryption { get; set; }
+        public string Email { get; set; }
+        public int? Level { get; set; }
+        public string Encryption { get; set; }
 
         public UserObject(string id = "", string encryption = "none")
         {

@@ -6,8 +6,8 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.Socks
     public class ServerObject
     {
         public string Address { get; set; }
-        public int Port { get; set; }
-        public List<UserObject>? Users { get; set; }
+        public int? Port { get; set; }
+        public List<UserObject> Users { get; set; }
 
         public ServerObject()
         {
@@ -15,7 +15,7 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.Socks
             Port = 0;
         }
 
-        public ServerObject(DnsEndPoint socksEndPoint, string? username = null, string? password = null)
+        public ServerObject(DnsEndPoint socksEndPoint, string username = null, string password = null)
         {
             Address = socksEndPoint.Host;
             Port = socksEndPoint.Port;

@@ -8,10 +8,10 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.VMess
     public class UserObject
     {
         public string Id { get; set; }
-        public string? Email { get; set; }
-        public int Level { get; set; }
-        public int AlterId { get; set; }
-        public string? Security { get; set; }
+        public string Email { get; set; }
+        public int? Level { get; set; }
+        public int? AlterId { get; set; }
+        public string Security { get; set; }
 
         public UserObject(string id = "")
         {
