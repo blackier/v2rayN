@@ -1343,7 +1343,7 @@ namespace v2rayN.Forms
 
         private void tsbPromotion_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", $"{Utils.Base64Decode(Global.PromotionUrl)}?t={DateTime.Now.Ticks}");
+            Process.Start("explorer.exe", $"{Utils.Base64Decode(Global.PromotionUrl)}");
         }
         #endregion
 
