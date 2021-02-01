@@ -7,8 +7,10 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-using v2rayN.Base;
-using v2rayN.Mode;
+using v2rayN.Config;
+using v2rayN.Extension;
+using V2Ray = Shadowsocks.Interop.V2Ray;
+using V2RayConfig = Shadowsocks.Interop.V2Ray.Config;
 
 namespace v2rayN.Handler
 {
@@ -17,9 +19,6 @@ namespace v2rayN.Handler
     /// </summary>
     class V2rayConfigHandler
     {
-        private static string SampleClient = Global.v2raySampleClient;
-        private static string SampleServer = Global.v2raySampleServer;
-
         #region 生成客户端配置
 
         /// <summary>
@@ -29,7 +28,7 @@ namespace v2rayN.Handler
         /// <param name="fileName"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public static int GenerateClientConfig(Config config, string fileName, bool blExport, out string msg)
+        public static int GenerateClientConfig(Config.V2RayNConfig config, string fileName, bool blExport, out string msg)
         {
             try
             {
@@ -40,57 +39,58 @@ namespace v2rayN.Handler
                     || config.index > config.vmess.Count - 1
                     )
                 {
-                    msg = UIRes.I18N("CheckServerSettings");
+                    msg = Utils.StringsRes.I18N("CheckServerSettings");
                     return -1;
                 }
 
-                msg = UIRes.I18N("InitialConfiguration");
+                msg = Utils.StringsRes.I18N("InitialConfiguration");
                 if (config.configType() == (int)EConfigType.Custom)
                 {
                     return GenerateClientCustomConfig(config, fileName, out msg);
                 }
 
-                //取得默认配置
-                string result = Utils.GetEmbedText(SampleClient);
-                if (Utils.IsNullOrEmpty(result))
-                {
-                    msg = UIRes.I18N("FailedGetDefaultConfiguration");
-                    return -1;
-                }
-
                 //转成Json
-                V2rayConfig v2rayConfig = Utils.FromJson<V2rayConfig>(result);
+                var v2rayConfig = new V2RayConfig()
+                {
+                    Log = new(),
+                    Dns = new(),
+                    Routing = new(),
+                    Inbounds = new(),
+                    Outbounds = new(),
+                    Stats = new(),
+                };
                 if (v2rayConfig == null)
                 {
-                    msg = UIRes.I18N("FailedGenDefaultConfiguration");
+                    msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
                     return -1;
                 }
 
                 //开始修改配置
-                log(config, ref v2rayConfig, blExport);
+                SetLog(config, ref v2rayConfig, blExport);
 
                 //本地端口
-                inbound(config, ref v2rayConfig);
+                SetInbound(config, ref v2rayConfig);
 
                 //路由
-                routing(config, ref v2rayConfig);
+                SetRouting(config, ref v2rayConfig);
 
                 //outbound
-                outbound(config, ref v2rayConfig);
+                SetOutbound(config, ref v2rayConfig);
 
                 //dns
-                dns(config, ref v2rayConfig);
+                SetDNS(config, ref v2rayConfig);
 
-                // TODO: 统计配置
-                statistic(config, ref v2rayConfig);
+                // 统计配置
+                SetAPI(config, ref v2rayConfig);
 
-                Utils.ToJsonFile(v2rayConfig, fileName, false);
+                Utils.ToJsonFile(v2rayConfig, fileName, false, true);
 
-                msg = string.Format(UIRes.I18N("SuccessfulConfiguration"), config.getSummary());
+                msg = string.Format(Utils.StringsRes.I18N("SuccessfulConfiguration"), config.getSummary());
             }
-            catch
+            catch (Exception e)
             {
-                msg = UIRes.I18N("FailedGenDefaultConfiguration");
+                msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
+                Utils.SaveLog(e.Message, e);
                 return -1;
             }
             return 0;
@@ -102,41 +102,35 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="v2rayConfig"></param>
         /// <returns></returns>
-        private static int log(Config config, ref V2rayConfig v2rayConfig, bool blExport)
+        private static int SetLog(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig, bool blExport)
         {
-            try
+            if (blExport)
             {
-                if (blExport)
+                if (config.logEnabled)
                 {
-                    if (config.logEnabled)
-                    {
-                        v2rayConfig.log.loglevel = config.loglevel;
-                    }
-                    else
-                    {
-                        v2rayConfig.log.loglevel = config.loglevel;
-                        v2rayConfig.log.access = "";
-                        v2rayConfig.log.error = "";
-                    }
+                    v2rayConfig.Log.Loglevel = config.loglevel;
                 }
                 else
                 {
-                    if (config.logEnabled)
-                    {
-                        v2rayConfig.log.loglevel = config.loglevel;
-                        v2rayConfig.log.access = Utils.GetPath(v2rayConfig.log.access);
-                        v2rayConfig.log.error = Utils.GetPath(v2rayConfig.log.error);
-                    }
-                    else
-                    {
-                        v2rayConfig.log.loglevel = config.loglevel;
-                        v2rayConfig.log.access = "";
-                        v2rayConfig.log.error = "";
-                    }
+                    v2rayConfig.Log.Loglevel = config.loglevel;
+                    v2rayConfig.Log.Access = "";
+                    v2rayConfig.Log.Error = "";
                 }
             }
-            catch
+            else
             {
+                if (config.logEnabled)
+                {
+                    v2rayConfig.Log.Loglevel = config.loglevel;
+                    v2rayConfig.Log.Access = Utils.GetPath(v2rayConfig.Log.Access);
+                    v2rayConfig.Log.Error = Utils.GetPath(v2rayConfig.Log.Error);
+                }
+                else
+                {
+                    v2rayConfig.Log.Loglevel = config.loglevel;
+                    v2rayConfig.Log.Access = "";
+                    v2rayConfig.Log.Error = "";
+                }
             }
             return 0;
         }
@@ -147,29 +141,42 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="v2rayConfig"></param>
         /// <returns></returns>
-        private static int inbound(Config config, ref V2rayConfig v2rayConfig)
+        private static int SetInbound(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
-            try
+            // 默认使用socks
+            var inbound = new V2Ray.InboundObject()
             {
-                Inbounds inbound = v2rayConfig.inbounds[0];
-                //端口
-                inbound.port = config.inbound[0].localPort;
-                inbound.protocol = config.inbound[0].protocol;
-                if (config.allowLANConn)
+                Tag = "proxy",
+                Protocol = "socks",
+                Settings = new V2Ray.Protocols.Socks.InboundConfigurationObject()
                 {
-                    inbound.listen = "0.0.0.0";
-                }
-                else
+                    Udp = true,
+                    Ip = "127.0.0.1",
+                },
+                Sniffing = new()
                 {
-                    inbound.listen = Global.Loopback;
-                }
-                //开启udp
-                inbound.settings.udp = config.inbound[0].udpEnabled;
-                inbound.sniffing.enabled = config.inbound[0].sniffingEnabled;
-            }
-            catch
+                    Enabled = false,
+                },
+            };
+            // 端口
+            inbound.Port = config.inbound[0].localPort;
+            if (config.allowLANConn)
             {
+                inbound.Listen = "0.0.0.0";
             }
+            else
+            {
+                inbound.Listen = Global.Loopback;
+            }
+            // 开启udp
+            var inboundSettings = (V2Ray.Protocols.Socks.InboundConfigurationObject)inbound.Settings;
+            inboundSettings.Udp = config.inbound[0].udpEnabled;
+
+            // 流量探测
+            inbound.Sniffing.Enabled = config.inbound[0].sniffingEnabled;
+            inbound.Sniffing.DestOverride = new() { "http", "tls" };
+
+            v2rayConfig.Inbounds.Add(inbound);
             return 0;
         }
 
@@ -179,142 +186,69 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="v2rayConfig"></param>
         /// <returns></returns>
-        private static int routing(Config config, ref V2rayConfig v2rayConfig)
+        private static int SetRouting(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
-            try
+            if (v2rayConfig.Routing != null
+              && v2rayConfig.Routing.Rules != null)
             {
-                if (v2rayConfig.routing != null
-                  && v2rayConfig.routing.rules != null)
-                {
-                    v2rayConfig.routing.domainStrategy = config.domainStrategy;
+                v2rayConfig.Routing.DomainStrategy = config.domainStrategy;
 
-                    //自定义
-                    //需代理
-                    routingUserRule(config.useragent, Global.agentTag, ref v2rayConfig);
-                    //直连
-                    routingUserRule(config.userdirect, Global.directTag, ref v2rayConfig);
-                    //阻止
-                    routingUserRule(config.userblock, Global.blockTag, ref v2rayConfig);
+                //自定义
+                //需代理
+                routingUserRule(config.useragent, Global.agentTag, ref v2rayConfig);
+                //阻止
+                routingUserRule(config.userblock, Global.blockTag, ref v2rayConfig);
+                //直连
+                routingUserRule(config.userdirect, Global.directTag, ref v2rayConfig);
 
-
-                    switch (config.routingMode)
-                    {
-                        case "0":
-                            break;
-                        case "1":
-                            routingGeo("ip", "private", Global.directTag, ref v2rayConfig);
-                            break;
-                        case "2":
-                            routingGeo("", "cn", Global.directTag, ref v2rayConfig);
-                            break;
-                        case "3":
-                            routingGeo("ip", "private", Global.directTag, ref v2rayConfig);
-                            routingGeo("", "cn", Global.directTag, ref v2rayConfig);
-                            break;
-                    }
-
-                }
-            }
-            catch
-            {
             }
             return 0;
         }
-        private static int routingUserRule(List<string> userRule, string tag, ref V2rayConfig v2rayConfig)
+        private static int routingUserRule(List<string> userRule, string tag, ref V2RayConfig v2rayConfig)
         {
-            try
+            if (userRule != null && userRule.Count > 0)
             {
-                if (userRule != null
-                    && userRule.Count > 0)
+                var ipRule = new V2Ray.Routing.RuleObject
                 {
-                    //Domain
-                    RulesItem rulesDomain = new RulesItem
-                    {
-                        type = "field",
-                        outboundTag = tag,
-                        domain = new List<string>()
-                    };
+                    Type = "field",
+                    OutboundTag = tag,
+                    Ip = new List<string>()
+                };
+                var domainRule = new V2Ray.Routing.RuleObject
+                {
+                    Type = "field",
+                    OutboundTag = tag,
+                    Domain = new List<string>()
+                };
 
-                    //IP
-                    RulesItem rulesIP = new RulesItem
+                foreach (string u in userRule)
+                {
+                    string url = u.TrimEx();
+                    if (Utils.IsNullOrEmpty(url))
                     {
-                        type = "field",
-                        outboundTag = tag,
-                        ip = new List<string>()
-                    };
-
-                    foreach (string u in userRule)
-                    {
-                        string url = u.TrimEx();
-                        if (Utils.IsNullOrEmpty(url))
-                        {
-                            continue;
-                        }
-                        if (Utils.IsIP(url) || url.StartsWith("geoip:"))
-                        {
-                            rulesIP.ip.Add(url);
-                        }
-                        else if (Utils.IsDomain(url)
-                            || url.StartsWith("geosite:")
-                            || url.StartsWith("regexp:")
-                            || url.StartsWith("domain:")
-                            || url.StartsWith("full:"))
-                        {
-                            rulesDomain.domain.Add(url);
-                        }
+                        continue;
                     }
-                    if (rulesDomain.domain.Count > 0)
+                    if (Utils.IsIP(url) || url.StartsWith("geoip:"))
                     {
-                        v2rayConfig.routing.rules.Add(rulesDomain);
+                        ipRule.Ip.Add(url);
                     }
-                    if (rulesIP.ip.Count > 0)
+                    else if (Utils.IsDomain(url)
+                        || url.StartsWith("geosite:")
+                        || url.StartsWith("regexp:")
+                        || url.StartsWith("domain:")
+                        || url.StartsWith("full:"))
                     {
-                        v2rayConfig.routing.rules.Add(rulesIP);
+                        domainRule.Domain.Add(url);
                     }
                 }
-            }
-            catch
-            {
-            }
-            return 0;
-        }
-
-
-        private static int routingGeo(string ipOrDomain, string code, string tag, ref V2rayConfig v2rayConfig)
-        {
-            try
-            {
-                if (!Utils.IsNullOrEmpty(code))
+                if (domainRule.Domain.Count > 0)
                 {
-                    //IP
-                    if (ipOrDomain == "ip" || ipOrDomain == "")
-                    {
-                        RulesItem rulesItem = new RulesItem
-                        {
-                            type = "field",
-                            outboundTag = Global.directTag,
-                            ip = new List<string>()
-                        };
-                        rulesItem.ip.Add($"geoip:{code}");
-
-                        v2rayConfig.routing.rules.Add(rulesItem);
-                    }
-
-                    if (ipOrDomain == "domain" || ipOrDomain == "")
-                    {
-                        RulesItem rulesItem = new RulesItem
-                        {
-                            type = "field",
-                            outboundTag = Global.directTag,
-                            domain = new List<string>()
-                        };
-                        rulesItem.domain.Add($"geosite:{code}");
-                        v2rayConfig.routing.rules.Add(rulesItem);
-                    }
+                    v2rayConfig.Routing.Rules.Add(domainRule);
                 }
-            }
-            catch
-            {
+                if (ipRule.Ip.Count > 0)
+                {
+                    v2rayConfig.Routing.Rules.Add(ipRule);
+                }
             }
             return 0;
         }
@@ -325,407 +259,238 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="v2rayConfig"></param>
         /// <returns></returns>
-        private static int outbound(Config config, ref V2rayConfig v2rayConfig)
+        private static int SetOutbound(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
-            try
+            if (config.configType() == (int)EConfigType.Vmess)
             {
-                Outbounds outbound = v2rayConfig.outbounds[0];
-                if (config.configType() == (int)EConfigType.Vmess)
-                {
-                    VnextItem vnextItem;
-                    if (outbound.settings.vnext.Count <= 0)
-                    {
-                        vnextItem = new VnextItem();
-                        outbound.settings.vnext.Add(vnextItem);
-                    }
-                    else
-                    {
-                        vnextItem = outbound.settings.vnext[0];
-                    }
-                    //远程服务器地址和端口
-                    vnextItem.address = config.address();
-                    vnextItem.port = config.port();
+                var outbound = V2Ray.OutboundObject.GetVMess(Global.agentTag, config.address(), config.port(), config.id());
 
-                    UsersItem usersItem;
-                    if (vnextItem.users.Count <= 0)
-                    {
-                        usersItem = new UsersItem();
-                        vnextItem.users.Add(usersItem);
-                    }
-                    else
-                    {
-                        usersItem = vnextItem.users[0];
-                    }
-                    //远程服务器用户ID
-                    usersItem.id = config.id();
-                    usersItem.alterId = config.alterId();
-                    usersItem.email = Global.userEMail;
-                    usersItem.security = config.security();
+                var settings = (V2Ray.Protocols.VMess.OutboundConfigurationObject)outbound.Settings;
+                settings.Vnext[0].Users[0].AlterId = config.alterId();
+                settings.Vnext[0].Users[0].Email = Global.userEMail;
+                settings.Vnext[0].Users[0].Security = config.security();
 
-                    //Mux
-                    outbound.mux.enabled = config.muxEnabled;
-                    outbound.mux.concurrency = config.muxEnabled ? 8 : -1;
+                //Mux
+                outbound.Mux = new();
+                outbound.Mux.Enabled = config.muxEnabled;
+                outbound.Mux.Concurrency = config.muxEnabled ? 8 : -1;
 
-                    //远程服务器底层传输配置
-                    StreamSettings streamSettings = outbound.streamSettings;
-                    boundStreamSettings(config, "out", ref streamSettings);
+                //远程服务器底层传输配置
+                var streamSettings = new V2Ray.Transport.StreamSettingsObject();
+                boundStreamSettings(config, ref streamSettings);
+                outbound.StreamSettings = streamSettings;
 
-                    outbound.protocol = Global.vmessProtocolLite;
-                    outbound.settings.servers = null;
-                }
-                else if (config.configType() == (int)EConfigType.Shadowsocks)
-                {
-                    ServersItem serversItem;
-                    if (outbound.settings.servers.Count <= 0)
-                    {
-                        serversItem = new ServersItem();
-                        outbound.settings.servers.Add(serversItem);
-                    }
-                    else
-                    {
-                        serversItem = outbound.settings.servers[0];
-                    }
-                    //远程服务器地址和端口
-                    serversItem.address = config.address();
-                    serversItem.port = config.port();
-                    serversItem.password = config.id();
-                    serversItem.method = config.security();
+                v2rayConfig.Outbounds.Add(outbound);
 
-                    serversItem.ota = false;
-                    serversItem.level = 1;
-
-                    outbound.mux.enabled = false;
-                    outbound.mux.concurrency = -1;
-
-
-                    outbound.protocol = Global.ssProtocolLite;
-                    outbound.settings.vnext = null;
-                }
-                else if (config.configType() == (int)EConfigType.Socks)
-                {
-                    ServersItem serversItem;
-                    if (outbound.settings.servers.Count <= 0)
-                    {
-                        serversItem = new ServersItem();
-                        outbound.settings.servers.Add(serversItem);
-                    }
-                    else
-                    {
-                        serversItem = outbound.settings.servers[0];
-                    }
-                    //远程服务器地址和端口
-                    serversItem.address = config.address();
-                    serversItem.port = config.port();
-                    serversItem.method = null;
-                    serversItem.password = null;
-
-                    if (!Utils.IsNullOrEmpty(config.security())
-                        && !Utils.IsNullOrEmpty(config.id()))
-                    {
-                        SocksUsersItem socksUsersItem = new SocksUsersItem
-                        {
-                            user = config.security(),
-                            pass = config.id(),
-                            level = 1
-                        };
-
-                        serversItem.users = new List<SocksUsersItem>() { socksUsersItem };
-                    }
-
-                    outbound.mux.enabled = false;
-                    outbound.mux.concurrency = -1;
-
-                    outbound.protocol = Global.socksProtocolLite;
-                    outbound.settings.vnext = null;
-                }
-                else if (config.configType() == (int)EConfigType.VLESS)
-                {
-                    VnextItem vnextItem;
-                    if (outbound.settings.vnext.Count <= 0)
-                    {
-                        vnextItem = new VnextItem();
-                        outbound.settings.vnext.Add(vnextItem);
-                    }
-                    else
-                    {
-                        vnextItem = outbound.settings.vnext[0];
-                    }
-                    //远程服务器地址和端口
-                    vnextItem.address = config.address();
-                    vnextItem.port = config.port();
-
-                    UsersItem usersItem;
-                    if (vnextItem.users.Count <= 0)
-                    {
-                        usersItem = new UsersItem();
-                        vnextItem.users.Add(usersItem);
-                    }
-                    else
-                    {
-                        usersItem = vnextItem.users[0];
-                    }
-                    //远程服务器用户ID
-                    usersItem.id = config.id();
-                    usersItem.alterId = 0;
-                    usersItem.flow = string.Empty;
-                    usersItem.email = Global.userEMail;
-                    usersItem.encryption = config.security();
-                    
-                    //Mux
-                    outbound.mux.enabled = config.muxEnabled;
-                    outbound.mux.concurrency = config.muxEnabled ? 8 : -1;
-
-                    //远程服务器底层传输配置
-                    StreamSettings streamSettings = outbound.streamSettings;
-                    boundStreamSettings(config, "out", ref streamSettings);
-
-                    //if xtls
-                    if (config.streamSecurity() == Global.StreamSecurityX)
-                    {
-                        if (Utils.IsNullOrEmpty(config.flow()))
-                        {
-                            usersItem.flow = "xtls-rprx-origin";
-                        }
-                        else
-                        {
-                            usersItem.flow = config.flow();
-                        }
-                        
-                        outbound.mux.enabled = false;
-                        outbound.mux.concurrency = -1;
-                    }
-
-                    outbound.protocol = Global.vlessProtocolLite;
-                    outbound.settings.servers = null;
-                }
-                else if (config.configType() == (int)EConfigType.Trojan)
-                {
-                    ServersItem serversItem;
-                    if (outbound.settings.servers.Count <= 0)
-                    {
-                        serversItem = new ServersItem();
-                        outbound.settings.servers.Add(serversItem);
-                    }
-                    else
-                    {
-                        serversItem = outbound.settings.servers[0];
-                    }
-                    //远程服务器地址和端口
-                    serversItem.address = config.address();
-                    serversItem.port = config.port();
-                    serversItem.password = config.id();
-
-                    serversItem.ota = false;
-                    serversItem.level = 1;
-
-                    outbound.mux.enabled = false;
-                    outbound.mux.concurrency = -1;
-
-
-                    //远程服务器底层传输配置
-                    StreamSettings streamSettings = outbound.streamSettings;
-                    boundStreamSettings(config, "out", ref streamSettings);
-
-                    outbound.protocol = Global.trojanProtocolLite;
-                    outbound.settings.vnext = null;
-                }
             }
-            catch
+            else if (config.configType() == (int)EConfigType.Shadowsocks)
             {
+                var outbound = V2Ray.OutboundObject.GetShadowsocks(Global.agentTag);
+                var settings = (V2Ray.Protocols.Shadowsocks.OutboundConfigurationObject)outbound.Settings;
+
+                //远程服务器地址和端口
+                settings.Servers[0].Address = config.address();
+                settings.Servers[0].Port = config.port();
+                settings.Servers[0].Password = config.id();
+                settings.Servers[0].Method = config.security();
+
+                //Mux
+                outbound.Mux = new();
+                outbound.Mux.Enabled = config.muxEnabled;
+                outbound.Mux.Concurrency = config.muxEnabled ? 8 : -1;
+
+                v2rayConfig.Outbounds.Add(outbound);
+
             }
+            else if (config.configType() == (int)EConfigType.Socks)
+            {
+                var outbound = V2Ray.OutboundObject.GetSocks(Global.agentTag, new DnsEndPoint(config.address(), config.port()));
+                var settings = (V2Ray.Protocols.Socks.OutboundConfigurationObject)outbound.Settings;
+
+                if (!Utils.IsNullOrEmpty(config.security())
+                    && !Utils.IsNullOrEmpty(config.id()))
+                {
+                    settings.Servers[0].Users.Add(new() { User = config.security(), Pass = config.id(), Level = 1 });
+                }
+
+                //Mux
+                outbound.Mux = new();
+                outbound.Mux.Enabled = config.muxEnabled;
+                outbound.Mux.Concurrency = config.muxEnabled ? 8 : -1;
+
+                v2rayConfig.Outbounds.Add(outbound);
+            }
+            else if (config.configType() == (int)EConfigType.VLESS)
+            {
+                var outbound = V2Ray.OutboundObject.GetVLESS(Global.agentTag, config.address(), config.port(), config.id());
+
+                var settings = (V2Ray.Protocols.VLESS.OutboundConfigurationObject)outbound.Settings;
+
+                //远程服务器用户ID
+                settings.Vnext[0].Users[0].Email = Global.userEMail;
+                settings.Vnext[0].Users[0].Encryption = config.security();
+
+                //Mux
+                outbound.Mux = new();
+                outbound.Mux.Enabled = config.muxEnabled;
+                outbound.Mux.Concurrency = config.muxEnabled ? 8 : -1;
+
+                //远程服务器底层传输配置
+                var streamSettings = new V2Ray.Transport.StreamSettingsObject();
+                boundStreamSettings(config, ref streamSettings);
+                outbound.StreamSettings = streamSettings;
+
+                v2rayConfig.Outbounds.Add(outbound);
+            }
+            else if (config.configType() == (int)EConfigType.Trojan)
+            {
+                var outbound = V2Ray.OutboundObject.GetTrojan(Global.agentTag, config.address(), config.port(), config.id());
+
+                //Mux
+                outbound.Mux = new();
+                outbound.Mux.Enabled = config.muxEnabled;
+                outbound.Mux.Concurrency = config.muxEnabled ? 8 : -1;
+
+                //远程服务器底层传输配置
+                var streamSettings = new V2Ray.Transport.StreamSettingsObject();
+                boundStreamSettings(config, ref streamSettings);
+                outbound.StreamSettings = streamSettings;
+
+                v2rayConfig.Outbounds.Add(outbound);
+            }
+
+            // 设置直连，放前面作为主出站
+            var freedomOutbound = new V2Ray.OutboundObject
+            {
+                Protocol = "freedom",
+                Tag = Global.directTag,
+                Settings = new V2Ray.Protocols.Freedom.OutboundConfigurationObject()
+            };
+            v2rayConfig.Outbounds.Add(freedomOutbound);
+
+            // 设置黑名单
+            var blackholeOutbound = new V2Ray.OutboundObject
+            {
+                Protocol = "blackhole",
+                Tag = Global.blockTag,
+                Settings = new V2Ray.Protocols.Blackhole.OutboundConfigurationObject()
+            };
+            v2rayConfig.Outbounds.Add(blackholeOutbound);
+
             return 0;
         }
 
         /// <summary>
-        /// vmess协议远程服务器底层传输配置
+        /// 服务器底层传输配置
         /// </summary>
         /// <param name="config"></param>
         /// <param name="iobound"></param>
         /// <param name="streamSettings"></param>
         /// <returns></returns>
-        private static int boundStreamSettings(Config config, string iobound, ref StreamSettings streamSettings)
+        private static int boundStreamSettings(Config.V2RayNConfig config, ref V2Ray.Transport.StreamSettingsObject streamSettings)
         {
-            try
+
+            // 底层传输配置
+            streamSettings.Network = config.network();
+            string host = config.requestHost();
+            //if tls
+            if (config.streamSecurity() == Global.StreamSecurity)
             {
-                //远程服务器底层传输配置
-                streamSettings.network = config.network();
-                string host = config.requestHost();
-                //if tls
-                if (config.streamSecurity() == Global.StreamSecurity)
+                streamSettings.Security = config.streamSecurity();
+                streamSettings.TlsSettings = new();
+                streamSettings.TlsSettings.AllowInsecure = config.allowInsecure();
+
+                if (!string.IsNullOrWhiteSpace(host))
                 {
-                    streamSettings.security = config.streamSecurity();
-
-                    TlsSettings tlsSettings = new TlsSettings
-                    {
-                        allowInsecure = config.allowInsecure()
-                    };
-                    if (!string.IsNullOrWhiteSpace(host))
-                    {
-                        tlsSettings.serverName = Utils.String2List(host)[0];
-                    }
-                    streamSettings.tlsSettings = tlsSettings;
-                }
-
-                //if xtls
-                if (config.streamSecurity() == Global.StreamSecurityX)
-                {
-                    streamSettings.security = config.streamSecurity();
-
-                    TlsSettings xtlsSettings = new TlsSettings
-                    {
-                        allowInsecure = config.allowInsecure()
-                    };
-                    if (!string.IsNullOrWhiteSpace(host))
-                    {
-                        xtlsSettings.serverName = Utils.String2List(host)[0];
-                    }
-                    streamSettings.xtlsSettings = xtlsSettings;
-                }
-
-                //streamSettings
-                switch (config.network())
-                {
-                    //kcp基本配置暂时是默认值，用户能自己设置伪装类型
-                    case "kcp":
-                        KcpSettings kcpSettings = new KcpSettings
-                        {
-                            mtu = config.kcpItem.mtu,
-                            tti = config.kcpItem.tti
-                        };
-                        if (iobound.Equals("out"))
-                        {
-                            kcpSettings.uplinkCapacity = config.kcpItem.uplinkCapacity;
-                            kcpSettings.downlinkCapacity = config.kcpItem.downlinkCapacity;
-                        }
-                        else if (iobound.Equals("in"))
-                        {
-                            kcpSettings.uplinkCapacity = config.kcpItem.downlinkCapacity; ;
-                            kcpSettings.downlinkCapacity = config.kcpItem.downlinkCapacity;
-                        }
-                        else
-                        {
-                            kcpSettings.uplinkCapacity = config.kcpItem.uplinkCapacity;
-                            kcpSettings.downlinkCapacity = config.kcpItem.downlinkCapacity;
-                        }
-
-                        kcpSettings.congestion = config.kcpItem.congestion;
-                        kcpSettings.readBufferSize = config.kcpItem.readBufferSize;
-                        kcpSettings.writeBufferSize = config.kcpItem.writeBufferSize;
-                        kcpSettings.header = new Header
-                        {
-                            type = config.headerType()
-                        };
-                        if (!Utils.IsNullOrEmpty(config.path()))
-                        {
-                            kcpSettings.seed = config.path();
-                        }
-                        streamSettings.kcpSettings = kcpSettings;
-                        break;
-                    //ws
-                    case "ws":
-                        WsSettings wsSettings = new WsSettings
-                        {                            
-                        };
-
-                        string path = config.path();
-                        if (!string.IsNullOrWhiteSpace(host))
-                        {
-                            wsSettings.headers = new Headers
-                            {
-                                Host = host
-                            };
-                        }
-                        if (!string.IsNullOrWhiteSpace(path))
-                        {
-                            wsSettings.path = path;
-                        }
-                        streamSettings.wsSettings = wsSettings;
-
-                        //TlsSettings tlsSettings = new TlsSettings();
-                        //tlsSettings.allowInsecure = config.allowInsecure();
-                        //if (!string.IsNullOrWhiteSpace(host))
-                        //{
-                        //    tlsSettings.serverName = host;
-                        //}
-                        //streamSettings.tlsSettings = tlsSettings;
-                        break;
-                    //h2
-                    case "h2":
-                        HttpSettings httpSettings = new HttpSettings();
-
-                        if (!string.IsNullOrWhiteSpace(host))
-                        {
-                            httpSettings.host = Utils.String2List(host);
-                        }
-                        httpSettings.path = config.path();
-
-                        streamSettings.httpSettings = httpSettings;
-
-                        //TlsSettings tlsSettings2 = new TlsSettings();
-                        //tlsSettings2.allowInsecure = config.allowInsecure();
-                        //streamSettings.tlsSettings = tlsSettings2;
-                        break;
-                    //quic
-                    case "quic":
-                        QuicSettings quicsettings = new QuicSettings
-                        {
-                            security = host,
-                            key = config.path(),
-                            header = new Header
-                            {
-                                type = config.headerType()
-                            }
-                        };
-                        streamSettings.quicSettings = quicsettings;
-                        if (config.streamSecurity() == Global.StreamSecurity)
-                        {
-                            streamSettings.tlsSettings.serverName = config.address();
-                        }
-                        break;
-                    default:
-                        //tcp带http伪装
-                        if (config.headerType().Equals(Global.TcpHeaderHttp))
-                        {
-                            TcpSettings tcpSettings = new TcpSettings
-                            {
-                                header = new Header
-                                {
-                                    type = config.headerType()
-                                }
-                            };
-
-                            if (iobound.Equals("out"))
-                            {
-                                //request填入自定义Host
-                                string request = Utils.GetEmbedText(Global.v2raySampleHttprequestFileName);
-                                string[] arrHost = host.Split(',');
-                                string host2 = string.Join("\",\"", arrHost);
-                                request = request.Replace("$requestHost$", string.Format("\"{0}\"", host2));
-                                //request = request.Replace("$requestHost$", string.Format("\"{0}\"", config.requestHost()));
-
-                                //填入自定义Path
-                                string pathHttp = @"/";
-                                if (!Utils.IsNullOrEmpty(config.path()))
-                                {
-                                    string[] arrPath = config.path().Split(',');
-                                    pathHttp = string.Join("\",\"", arrPath);
-                                }
-                                request = request.Replace("$requestPath$", string.Format("\"{0}\"", pathHttp));
-                                tcpSettings.header.request = Utils.FromJson<object>(request);
-                            }
-                            else if (iobound.Equals("in"))
-                            {
-                                //string response = Utils.GetEmbedText(Global.v2raySampleHttpresponseFileName);
-                                //tcpSettings.header.response = Utils.FromJson<object>(response);
-                            }
-
-                            streamSettings.tcpSettings = tcpSettings;
-                        }
-                        break;
+                    streamSettings.TlsSettings.ServerName = Utils.String2List(host)[0];
                 }
             }
-            catch
+
+            //streamSettings
+            switch (config.network())
             {
+                //kcp基本配置暂时是默认值，用户能自己设置伪装类型
+                case "kcp":
+                    streamSettings.KcpSettings = new() { Mtu = config.kcpItem.mtu, Tti = config.kcpItem.tti };
+                    var kcpSettings = streamSettings.KcpSettings;
+                    // 不区客户端和服务
+                    kcpSettings.UplinkCapacity = config.kcpItem.uplinkCapacity;
+                    kcpSettings.DownlinkCapacity = config.kcpItem.downlinkCapacity;
+
+                    kcpSettings.Congestion = config.kcpItem.congestion;
+                    kcpSettings.ReadBufferSize = config.kcpItem.readBufferSize;
+                    kcpSettings.WriteBufferSize = config.kcpItem.writeBufferSize;
+                    kcpSettings.Header.Type = config.headerType();
+                    if (!Utils.IsNullOrEmpty(config.path()))
+                    {
+                        kcpSettings.Seed = config.path();
+                    }
+                    break;
+                //ws
+                case "ws":
+                    streamSettings.WsSettings = new();
+                    var wsSettings = streamSettings.WsSettings;
+
+                    string path = config.path();
+                    if (!string.IsNullOrWhiteSpace(host))
+                    {
+                        wsSettings.Headers.Add("Host", $"{host}");
+                    }
+                    if (!string.IsNullOrWhiteSpace(path))
+                    {
+                        wsSettings.Path = path;
+                    }
+
+                    break;
+                //h2
+                case "h2":
+                    streamSettings.HttpSettings = new();
+                    var httpSettings = streamSettings.HttpSettings;
+
+                    if (!string.IsNullOrWhiteSpace(host))
+                    {
+                        httpSettings.Host = Utils.String2List(host);
+                    }
+                    httpSettings.Path = config.path();
+
+                    break;
+                //quic
+                case "quic":
+                    streamSettings.QuicSettings = new()
+                    {
+                        Security = host,
+                        Key = config.path(),
+                        Header = new()
+                        {
+                            Type = config.headerType()
+                        }
+                    };
+                    if (config.streamSecurity() == Global.StreamSecurity)
+                    {
+                        streamSettings.TlsSettings.ServerName = config.address();
+                    }
+                    break;
+                default:
+                    //tcp带http伪装
+                    if (config.headerType().Equals(Global.TcpHeaderHttp))
+                    {
+                        // 这块订阅基本没法用
+                        streamSettings.TcpSettings = Utils.DeepCopy(V2Ray.Transport.TcpObject.DefaultHttp);
+                        var header = (V2Ray.Transport.Header.HttpHeaderObject)streamSettings.TcpSettings.Header;
+
+                        //request填入自定义Host
+                        if (!string.IsNullOrWhiteSpace(host))
+                        {
+                            header.request.Headers["Host"] = host.Split(',').ToList();
+                        }
+
+                        //填入自定义Path
+                        if (!Utils.IsNullOrEmpty(config.path()))
+                        {
+                            header.request.Path = config.path().Split(',').ToList();
+                        }
+                    }
+                    break;
             }
             return 0;
         }
@@ -736,81 +501,58 @@ namespace v2rayN.Handler
         /// <param name="config"></param>
         /// <param name="v2rayConfig"></param>
         /// <returns></returns>
-        private static int dns(Config config, ref V2rayConfig v2rayConfig)
+        private static int SetDNS(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
-            try
+            if (!string.IsNullOrWhiteSpace(config.remoteDNS))
             {
-                if (string.IsNullOrWhiteSpace(config.remoteDNS))
+                foreach (var server in config.remoteDNS.Split(','))
                 {
-                    return 0;
+                    v2rayConfig.Dns.Servers.Add(server);
                 }
-                List<string> servers = new List<string>();
+            }
 
-                string[] arrDNS = config.remoteDNS.Split(',');
-                foreach (string str in arrDNS)
-                {
-                    //if (Utils.IsIP(str))
-                    //{
-                    servers.Add(str);
-                    //}
-                }
-                //servers.Add("localhost");
-                v2rayConfig.dns = new Mode.Dns
-                {
-                    servers = servers
-                };
-            }
-            catch
-            {
-            }
             return 0;
         }
 
-        public static int statistic(Config config, ref V2rayConfig v2rayConfig)
+        public static int SetAPI(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
             if (config.enableStatistics)
             {
-                string tag = Global.InboundAPITagName;
-                API apiObj = new API();
-                Policy policyObj = new Policy();
-                SystemPolicy policySystemSetting = new SystemPolicy();
-
-                string[] services = { "StatsService" };
-
-                v2rayConfig.stats = new Stats();
-
-                apiObj.tag = tag;
-                apiObj.services = services.ToList();
-                v2rayConfig.api = apiObj;
-
-                policySystemSetting.statsInboundDownlink = true;
-                policySystemSetting.statsInboundUplink = true;
-                policyObj.system = policySystemSetting;
-                v2rayConfig.policy = policyObj;
-
-                if (!v2rayConfig.inbounds.Exists(item => { return item.tag == tag; }))
+                v2rayConfig.Api = new()
                 {
-                    Inbounds apiInbound = new Inbounds();
-                    Inboundsettings apiInboundSettings = new Inboundsettings();
-                    apiInbound.tag = tag;
-                    apiInbound.listen = Global.Loopback;
-                    apiInbound.port = Global.statePort;
-                    apiInbound.protocol = Global.InboundAPIProtocal;
-                    apiInboundSettings.address = Global.Loopback;
-                    apiInbound.settings = apiInboundSettings;
-                    v2rayConfig.inbounds.Add(apiInbound);
-                }
-
-                if (!v2rayConfig.routing.rules.Exists(item => { return item.outboundTag == tag; }))
-                {
-                    RulesItem apiRoutingRule = new RulesItem
+                    Tag = "api",
+                    Services = new()
                     {
-                        inboundTag = new List<string> { tag },
-                        outboundTag = tag,
-                        type = "field"
-                    };
-                    v2rayConfig.routing.rules.Add(apiRoutingRule);
-                }
+                        "StatsService",
+                    },
+                };
+                v2rayConfig.Policy = new()
+                {
+                    System = new()
+                    {
+                        StatsInboundUplink = true,
+                        StatsInboundDownlink = true
+                    }
+                };
+
+                var apiInbound = new V2Ray.InboundObject
+                {
+                    Tag = Global.InboundAPITagName,
+                    Listen = Global.Loopback,
+                    Port = Global.v2rayApiPort,
+                    Protocol = Global.InboundAPIProtocal,
+                    Settings = new V2Ray.Protocols.Dokodemo_door.InboundConfigurationObject(Global.Loopback, "tcp,udp")
+                };
+                v2rayConfig.Inbounds.Add(apiInbound);
+
+                var apiRule = new V2Ray.Routing.RuleObject
+                {
+                    Type = "field",
+                    InboundTag = new() { $"{Global.InboundAPITagName}" },
+                    OutboundTag = Global.InboundAPITagName
+                };
+                // 需要放到最前面
+                v2rayConfig.Routing.Rules.Insert(0, apiRule);
             }
             return 0;
         }
@@ -822,7 +564,7 @@ namespace v2rayN.Handler
         /// <param name="fileName"></param>
         /// <param name="msg"></param>
         /// <returns></returns>
-        public static int GenerateClientCustomConfig(Config config, string fileName, out string msg)
+        public static int GenerateClientCustomConfig(Config.V2RayNConfig config, string fileName, out string msg)
         {
             try
             {
@@ -833,7 +575,7 @@ namespace v2rayN.Handler
                     || config.index > config.vmess.Count - 1
                     )
                 {
-                    msg = UIRes.I18N("CheckServerSettings");
+                    msg = Utils.StringsRes.I18N("CheckServerSettings");
                     return -1;
                 }
 
@@ -849,16 +591,16 @@ namespace v2rayN.Handler
                 }
                 if (!File.Exists(addressFileName))
                 {
-                    msg = UIRes.I18N("FailedGenDefaultConfiguration");
+                    msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
                     return -1;
                 }
                 File.Copy(addressFileName, fileName);
 
-                msg = string.Format(UIRes.I18N("SuccessfulConfiguration"), config.getSummary());
+                msg = string.Format(Utils.StringsRes.I18N("SuccessfulConfiguration"), config.getSummary());
             }
             catch
             {
-                msg = UIRes.I18N("FailedGenDefaultConfiguration");
+                msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
                 return -1;
             }
             return 0;
@@ -866,435 +608,7 @@ namespace v2rayN.Handler
 
         #endregion
 
-        #region 生成服务端端配置
-
-        /// <summary>
-        /// 生成v2ray的客户端配置文件
-        /// </summary>
-        /// <param name="config"></param>
-        /// <param name="fileName"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        public static int GenerateServerConfig(Config config, string fileName, out string msg)
-        {
-            try
-            {
-                //检查GUI设置
-                if (config == null
-                    || config.index < 0
-                    || config.vmess.Count <= 0
-                    || config.index > config.vmess.Count - 1
-                    )
-                {
-                    msg = UIRes.I18N("CheckServerSettings");
-                    return -1;
-                }
-
-                msg = UIRes.I18N("InitialConfiguration");
-
-                //取得默认配置
-                string result = Utils.GetEmbedText(SampleServer);
-                if (Utils.IsNullOrEmpty(result))
-                {
-                    msg = UIRes.I18N("FailedGetDefaultConfiguration");
-                    return -1;
-                }
-
-                //转成Json
-                V2rayConfig v2rayConfig = Utils.FromJson<V2rayConfig>(result);
-                if (v2rayConfig == null)
-                {
-                    msg = UIRes.I18N("FailedGenDefaultConfiguration");
-                    return -1;
-                }
-
-                ////开始修改配置
-                log(config, ref v2rayConfig, true);
-
-                //vmess协议服务器配置
-                ServerInbound(config, ref v2rayConfig);
-
-                //传出设置
-                ServerOutbound(config, ref v2rayConfig);
-
-                Utils.ToJsonFile(v2rayConfig, fileName, false);
-
-                msg = string.Format(UIRes.I18N("SuccessfulConfiguration"), config.getSummary());
-            }
-            catch
-            {
-                msg = UIRes.I18N("FailedGenDefaultConfiguration");
-                return -1;
-            }
-            return 0;
-        }
-
-        /// <summary>
-        /// vmess协议服务器配置
-        /// </summary>
-        /// <param name="config"></param>
-        /// <param name="v2rayConfig"></param>
-        /// <returns></returns>
-        private static int ServerInbound(Config config, ref V2rayConfig v2rayConfig)
-        {
-            try
-            {
-                Inbounds inbound = v2rayConfig.inbounds[0];
-                UsersItem usersItem;
-                if (inbound.settings.clients.Count <= 0)
-                {
-                    usersItem = new UsersItem();
-                    inbound.settings.clients.Add(usersItem);
-                }
-                else
-                {
-                    usersItem = inbound.settings.clients[0];
-                }
-                //远程服务器端口
-                inbound.port = config.port();
-
-                //远程服务器用户ID
-                usersItem.id = config.id();
-                usersItem.email = Global.userEMail;
-
-                if (config.configType() == (int)EConfigType.Vmess)
-                {
-                    inbound.protocol = Global.vmessProtocolLite;
-                    usersItem.alterId = config.alterId();
-
-                }
-                else if (config.configType() == (int)EConfigType.VLESS)
-                {
-                    inbound.protocol = Global.vlessProtocolLite;
-                    usersItem.alterId = 0;
-                    usersItem.flow = config.flow();
-                    inbound.settings.decryption = config.security();
-                }
-
-                //远程服务器底层传输配置
-                StreamSettings streamSettings = inbound.streamSettings;
-                boundStreamSettings(config, "in", ref streamSettings);
-            }
-            catch
-            {
-            }
-            return 0;
-        }
-
-        /// <summary>
-        /// 传出设置
-        /// </summary>
-        /// <param name="config"></param>
-        /// <param name="v2rayConfig"></param>
-        /// <returns></returns>
-        private static int ServerOutbound(Config config, ref V2rayConfig v2rayConfig)
-        {
-            try
-            {
-                if (v2rayConfig.outbounds[0] != null)
-                {
-                    v2rayConfig.outbounds[0].settings = null;
-                }
-            }
-            catch
-            {
-            }
-            return 0;
-        }
-        #endregion
-
-        #region 导入(导出)客户端/服务端配置
-
-        /// <summary>
-        /// 导入v2ray客户端配置
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        public static VmessItem ImportFromClientConfig(string fileName, out string msg)
-        {
-            msg = string.Empty;
-            VmessItem vmessItem = new VmessItem();
-
-            try
-            {
-                //载入配置文件 
-                string result = Utils.LoadResource(fileName);
-                if (Utils.IsNullOrEmpty(result))
-                {
-                    msg = UIRes.I18N("FailedReadConfiguration");
-                    return null;
-                }
-
-                //转成Json
-                V2rayConfig v2rayConfig = Utils.FromJson<V2rayConfig>(result);
-                if (v2rayConfig == null)
-                {
-                    msg = UIRes.I18N("FailedConversionConfiguration");
-                    return null;
-                }
-
-                if (v2rayConfig.outbounds == null
-                 || v2rayConfig.outbounds.Count <= 0)
-                {
-                    msg = UIRes.I18N("IncorrectClientConfiguration");
-                    return null;
-                }
-
-                Outbounds outbound = v2rayConfig.outbounds[0];
-                if (outbound == null
-                    || Utils.IsNullOrEmpty(outbound.protocol)
-                    || outbound.protocol != Global.vmessProtocolLite
-                    || outbound.settings == null
-                    || outbound.settings.vnext == null
-                    || outbound.settings.vnext.Count <= 0
-                    || outbound.settings.vnext[0].users == null
-                    || outbound.settings.vnext[0].users.Count <= 0)
-                {
-                    msg = UIRes.I18N("IncorrectClientConfiguration");
-                    return null;
-                }
-
-                vmessItem.security = Global.DefaultSecurity;
-                vmessItem.network = Global.DefaultNetwork;
-                vmessItem.headerType = Global.None;
-                vmessItem.address = outbound.settings.vnext[0].address;
-                vmessItem.port = outbound.settings.vnext[0].port;
-                vmessItem.id = outbound.settings.vnext[0].users[0].id;
-                vmessItem.alterId = outbound.settings.vnext[0].users[0].alterId;
-                vmessItem.remarks = string.Format("import@{0}", DateTime.Now.ToShortDateString());
-
-                //tcp or kcp
-                if (outbound.streamSettings != null
-                    && outbound.streamSettings.network != null
-                    && !Utils.IsNullOrEmpty(outbound.streamSettings.network))
-                {
-                    vmessItem.network = outbound.streamSettings.network;
-                }
-
-                //tcp伪装http
-                if (outbound.streamSettings != null
-                    && outbound.streamSettings.tcpSettings != null
-                    && outbound.streamSettings.tcpSettings.header != null
-                    && !Utils.IsNullOrEmpty(outbound.streamSettings.tcpSettings.header.type))
-                {
-                    if (outbound.streamSettings.tcpSettings.header.type.Equals(Global.TcpHeaderHttp))
-                    {
-                        vmessItem.headerType = outbound.streamSettings.tcpSettings.header.type;
-                        string request = Convert.ToString(outbound.streamSettings.tcpSettings.header.request);
-                        if (!Utils.IsNullOrEmpty(request))
-                        {
-                            V2rayTcpRequest v2rayTcpRequest = Utils.FromJson<V2rayTcpRequest>(request);
-                            if (v2rayTcpRequest != null
-                                && v2rayTcpRequest.headers != null
-                                && v2rayTcpRequest.headers.Host != null
-                                && v2rayTcpRequest.headers.Host.Count > 0)
-                            {
-                                vmessItem.requestHost = v2rayTcpRequest.headers.Host[0];
-                            }
-                        }
-                    }
-                }
-                //kcp伪装
-                if (outbound.streamSettings != null
-                    && outbound.streamSettings.kcpSettings != null
-                    && outbound.streamSettings.kcpSettings.header != null
-                    && !Utils.IsNullOrEmpty(outbound.streamSettings.kcpSettings.header.type))
-                {
-                    vmessItem.headerType = outbound.streamSettings.kcpSettings.header.type;
-                }
-
-                //ws
-                if (outbound.streamSettings != null
-                    && outbound.streamSettings.wsSettings != null)
-                {
-                    if (!Utils.IsNullOrEmpty(outbound.streamSettings.wsSettings.path))
-                    {
-                        vmessItem.path = outbound.streamSettings.wsSettings.path;
-                    }
-                    if (outbound.streamSettings.wsSettings.headers != null
-                      && !Utils.IsNullOrEmpty(outbound.streamSettings.wsSettings.headers.Host))
-                    {
-                        vmessItem.requestHost = outbound.streamSettings.wsSettings.headers.Host;
-                    }
-                }
-
-                //h2
-                if (outbound.streamSettings != null
-                    && outbound.streamSettings.httpSettings != null)
-                {
-                    if (!Utils.IsNullOrEmpty(outbound.streamSettings.httpSettings.path))
-                    {
-                        vmessItem.path = outbound.streamSettings.httpSettings.path;
-                    }
-                    if (outbound.streamSettings.httpSettings.host != null
-                        && outbound.streamSettings.httpSettings.host.Count > 0)
-                    {
-                        vmessItem.requestHost = Utils.List2String(outbound.streamSettings.httpSettings.host);
-                    }
-                }
-
-                //tls
-                if (outbound.streamSettings != null
-                    && outbound.streamSettings.security != null
-                    && outbound.streamSettings.security == Global.StreamSecurity)
-                {
-                    vmessItem.streamSecurity = Global.StreamSecurity;
-                }
-            }
-            catch
-            {
-                msg = UIRes.I18N("IncorrectClientConfiguration");
-                return null;
-            }
-
-            return vmessItem;
-        }
-
-        /// <summary>
-        /// 导入v2ray服务端配置
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        public static VmessItem ImportFromServerConfig(string fileName, out string msg)
-        {
-            msg = string.Empty;
-            VmessItem vmessItem = new VmessItem();
-
-            try
-            {
-                //载入配置文件 
-                string result = Utils.LoadResource(fileName);
-                if (Utils.IsNullOrEmpty(result))
-                {
-                    msg = UIRes.I18N("FailedReadConfiguration");
-                    return null;
-                }
-
-                //转成Json
-                V2rayConfig v2rayConfig = Utils.FromJson<V2rayConfig>(result);
-                if (v2rayConfig == null)
-                {
-                    msg = UIRes.I18N("FailedConversionConfiguration");
-                    return null;
-                }
-
-                if (v2rayConfig.inbounds == null
-                 || v2rayConfig.inbounds.Count <= 0)
-                {
-                    msg = UIRes.I18N("IncorrectServerConfiguration");
-                    return null;
-                }
-
-                Inbounds inbound = v2rayConfig.inbounds[0];
-                if (inbound == null
-                    || Utils.IsNullOrEmpty(inbound.protocol)
-                    || inbound.protocol != Global.vmessProtocolLite
-                    || inbound.settings == null
-                    || inbound.settings.clients == null
-                    || inbound.settings.clients.Count <= 0)
-                {
-                    msg = UIRes.I18N("IncorrectServerConfiguration");
-                    return null;
-                }
-
-                vmessItem.security = Global.DefaultSecurity;
-                vmessItem.network = Global.DefaultNetwork;
-                vmessItem.headerType = Global.None;
-                vmessItem.address = string.Empty;
-                vmessItem.port = inbound.port;
-                vmessItem.id = inbound.settings.clients[0].id;
-                vmessItem.alterId = inbound.settings.clients[0].alterId;
-
-                vmessItem.remarks = string.Format("import@{0}", DateTime.Now.ToShortDateString());
-
-                //tcp or kcp
-                if (inbound.streamSettings != null
-                    && inbound.streamSettings.network != null
-                    && !Utils.IsNullOrEmpty(inbound.streamSettings.network))
-                {
-                    vmessItem.network = inbound.streamSettings.network;
-                }
-
-                //tcp伪装http
-                if (inbound.streamSettings != null
-                    && inbound.streamSettings.tcpSettings != null
-                    && inbound.streamSettings.tcpSettings.header != null
-                    && !Utils.IsNullOrEmpty(inbound.streamSettings.tcpSettings.header.type))
-                {
-                    if (inbound.streamSettings.tcpSettings.header.type.Equals(Global.TcpHeaderHttp))
-                    {
-                        vmessItem.headerType = inbound.streamSettings.tcpSettings.header.type;
-                        string request = Convert.ToString(inbound.streamSettings.tcpSettings.header.request);
-                        if (!Utils.IsNullOrEmpty(request))
-                        {
-                            V2rayTcpRequest v2rayTcpRequest = Utils.FromJson<V2rayTcpRequest>(request);
-                            if (v2rayTcpRequest != null
-                                && v2rayTcpRequest.headers != null
-                                && v2rayTcpRequest.headers.Host != null
-                                && v2rayTcpRequest.headers.Host.Count > 0)
-                            {
-                                vmessItem.requestHost = v2rayTcpRequest.headers.Host[0];
-                            }
-                        }
-                    }
-                }
-                //kcp伪装
-                //if (v2rayConfig.outbound.streamSettings != null
-                //    && v2rayConfig.outbound.streamSettings.kcpSettings != null
-                //    && v2rayConfig.outbound.streamSettings.kcpSettings.header != null
-                //    && !Utils.IsNullOrEmpty(v2rayConfig.outbound.streamSettings.kcpSettings.header.type))
-                //{
-                //    cmbHeaderType.Text = v2rayConfig.outbound.streamSettings.kcpSettings.header.type;
-                //}
-
-                //ws
-                if (inbound.streamSettings != null
-                    && inbound.streamSettings.wsSettings != null)
-                {
-                    if (!Utils.IsNullOrEmpty(inbound.streamSettings.wsSettings.path))
-                    {
-                        vmessItem.path = inbound.streamSettings.wsSettings.path;
-                    }
-                    if (inbound.streamSettings.wsSettings.headers != null
-                      && !Utils.IsNullOrEmpty(inbound.streamSettings.wsSettings.headers.Host))
-                    {
-                        vmessItem.requestHost = inbound.streamSettings.wsSettings.headers.Host;
-                    }
-                }
-
-                //h2
-                if (inbound.streamSettings != null
-                    && inbound.streamSettings.httpSettings != null)
-                {
-                    if (!Utils.IsNullOrEmpty(inbound.streamSettings.httpSettings.path))
-                    {
-                        vmessItem.path = inbound.streamSettings.httpSettings.path;
-                    }
-                    if (inbound.streamSettings.httpSettings.host != null
-                        && inbound.streamSettings.httpSettings.host.Count > 0)
-                    {
-                        vmessItem.requestHost = Utils.List2String(inbound.streamSettings.httpSettings.host);
-                    }
-                }
-
-                //tls
-                if (inbound.streamSettings != null
-                    && inbound.streamSettings.security != null
-                    && inbound.streamSettings.security == Global.StreamSecurity)
-                {
-                    vmessItem.streamSecurity = Global.StreamSecurity;
-                }
-            }
-            catch
-            {
-                msg = UIRes.I18N("IncorrectClientConfiguration");
-                return null;
-            }
-            return vmessItem;
-        }
-
+        #region 从剪贴板导入
         /// <summary>
         /// 从剪贴板导入URL
         /// </summary>
@@ -1312,7 +626,7 @@ namespace v2rayN.Handler
                 string result = clipboardData.TrimEx();// Utils.GetClipboardData();
                 if (Utils.IsNullOrEmpty(result))
                 {
-                    msg = UIRes.I18N("FailedReadConfiguration");
+                    msg = Utils.StringsRes.I18N("FailedReadConfiguration");
                     return null;
                 }
 
@@ -1333,7 +647,7 @@ namespace v2rayN.Handler
                         VmessQRCode vmessQRCode = Utils.FromJson<VmessQRCode>(result);
                         if (vmessQRCode == null)
                         {
-                            msg = UIRes.I18N("FailedConversionConfiguration");
+                            msg = Utils.StringsRes.I18N("FailedConversionConfiguration");
                             return null;
                         }
                         vmessItem.security = Global.DefaultSecurity;
@@ -1366,7 +680,7 @@ namespace v2rayN.Handler
                 }
                 else if (result.StartsWith(Global.ssProtocol))
                 {
-                    msg = UIRes.I18N("ConfigurationFormatIncorrect");
+                    msg = Utils.StringsRes.I18N("ConfigurationFormatIncorrect");
 
                     vmessItem = ResolveSSLegacy(result);
                     if (vmessItem == null)
@@ -1386,7 +700,7 @@ namespace v2rayN.Handler
                 }
                 else if (result.StartsWith(Global.socksProtocol))
                 {
-                    msg = UIRes.I18N("ConfigurationFormatIncorrect");
+                    msg = Utils.StringsRes.I18N("ConfigurationFormatIncorrect");
 
                     vmessItem.configType = (int)EConfigType.Socks;
                     result = result.Substring(Global.socksProtocol.Length);
@@ -1430,7 +744,7 @@ namespace v2rayN.Handler
                 }
                 else if (result.StartsWith(Global.trojanProtocol))
                 {
-                    msg = UIRes.I18N("ConfigurationFormatIncorrect");
+                    msg = Utils.StringsRes.I18N("ConfigurationFormatIncorrect");
 
                     vmessItem.configType = (int)EConfigType.Trojan;
 
@@ -1450,46 +764,21 @@ namespace v2rayN.Handler
                     else
                     {
                         vmessItem.remarks = WebUtility.UrlDecode(remarks);
-                    }                     
+                    }
                 }
                 else
                 {
-                    msg = UIRes.I18N("NonvmessOrssProtocol");
+                    msg = Utils.StringsRes.I18N("NonvmessOrssProtocol");
                     return null;
                 }
             }
             catch
             {
-                msg = UIRes.I18N("Incorrectconfiguration");
+                msg = Utils.StringsRes.I18N("Incorrectconfiguration");
                 return null;
             }
 
             return vmessItem;
-        }
-
-
-        /// <summary>
-        /// 导出为客户端配置
-        /// </summary>
-        /// <param name="config"></param>
-        /// <param name="fileName"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        public static int Export2ClientConfig(Config config, string fileName, out string msg)
-        {
-            return GenerateClientConfig(config, fileName, true, out msg);
-        }
-
-        /// <summary>
-        /// 导出为服务端配置
-        /// </summary>
-        /// <param name="config"></param>
-        /// <param name="fileName"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        public static int Export2ServerConfig(Config config, string fileName, out string msg)
-        {
-            return GenerateServerConfig(config, fileName, out msg);
         }
 
         private static VmessItem ResolveVmess4Kitsunebi(string result)
@@ -1586,7 +875,9 @@ namespace v2rayN.Handler
         {
             var match = UrlFinder.Match(result);
             if (!match.Success)
+            {
                 return null;
+            }
 
             VmessItem server = new VmessItem();
             var base64 = match.Groups["base64"].Value.TrimEnd('/');
@@ -1606,7 +897,10 @@ namespace v2rayN.Handler
                 return null;
             }
             if (!details.Success)
+            {
                 return null;
+            }
+
             server.security = details.Groups["method"].Value;
             server.id = details.Groups["password"].Value;
             server.address = details.Groups["hostname"].Value;
@@ -1634,7 +928,10 @@ namespace v2rayN.Handler
             var q = HttpUtility.ParseQueryString(u.Query);
 
             var m = StdVmessUserInfo.Match(u.UserInfo);
-            if (!m.Success) return null;
+            if (!m.Success)
+            {
+                return null;
+            }
 
             i.id = m.Groups["id"].Value;
             if (!int.TryParse(m.Groups["alterId"].Value, out int aid))
@@ -1654,7 +951,10 @@ namespace v2rayN.Handler
                     break;
                 default:
                     if (!string.IsNullOrWhiteSpace(i.streamSecurity))
+                    {
                         return null;
+                    }
+
                     break;
             }
 
@@ -1704,10 +1004,8 @@ namespace v2rayN.Handler
         }
         #endregion
 
-        #region Gen speedtest config
-
-
-        public static string GenerateClientSpeedtestConfigString(Config config, List<int> selecteds, out string msg)
+        #region 生成速度测试的配置
+        public static string GenerateClientSpeedtestConfigString(Config.V2RayNConfig config, List<int> selecteds, out string msg)
         {
             try
             {
@@ -1717,33 +1015,20 @@ namespace v2rayN.Handler
                     || config.index > config.vmess.Count - 1
                     )
                 {
-                    msg = UIRes.I18N("CheckServerSettings");
+                    msg = Utils.StringsRes.I18N("CheckServerSettings");
                     return "";
                 }
 
-                msg = UIRes.I18N("InitialConfiguration");
+                msg = Utils.StringsRes.I18N("InitialConfiguration");
 
-                Config configCopy = Utils.DeepCopy(config);
+                Config.V2RayNConfig configCopy = Utils.DeepCopy(config);
 
-                string result = Utils.GetEmbedText(SampleClient);
-                if (Utils.IsNullOrEmpty(result))
-                {
-                    msg = UIRes.I18N("FailedGetDefaultConfiguration");
-                    return "";
-                }
-
-                V2rayConfig v2rayConfig = Utils.FromJson<V2rayConfig>(result);
+                V2RayConfig v2rayConfig = new();
                 if (v2rayConfig == null)
                 {
-                    msg = UIRes.I18N("FailedGenDefaultConfiguration");
+                    msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
                     return "";
                 }
-
-                log(configCopy, ref v2rayConfig, false);
-                //routing(config, ref v2rayConfig);
-                dns(configCopy, ref v2rayConfig);
-
-                v2rayConfig.inbounds.RemoveAt(0); // Remove "proxy" service for speedtest, avoiding port conflicts.
 
                 int httpPort = configCopy.GetLocalPort("speedtest");
                 foreach (int index in selecteds)
@@ -1755,36 +1040,35 @@ namespace v2rayN.Handler
 
                     configCopy.index = index;
 
-                    Inbounds inbound = new Inbounds
+                    var port = httpPort + index;
+                    v2rayConfig.Inbounds.Add(new()
                     {
-                        listen = Global.Loopback,
-                        port = httpPort + index,
-                        protocol = Global.InboundHttp
-                    };
-                    inbound.tag = Global.InboundHttp + inbound.port.ToString();
-                    v2rayConfig.inbounds.Add(inbound);
+                        Listen = Global.Loopback,
+                        Port = port,
+                        Protocol = Global.InboundHttp,
+                        Tag = Global.InboundHttp + port.ToString()
+                    });
 
 
-                    V2rayConfig v2rayConfigCopy = Utils.FromJson<V2rayConfig>(result);
-                    outbound(configCopy, ref v2rayConfigCopy);
-                    v2rayConfigCopy.outbounds[0].tag = Global.agentTag + inbound.port.ToString();
-                    v2rayConfig.outbounds.Add(v2rayConfigCopy.outbounds[0]);
+                    V2RayConfig v2rayConfigCopy = new();
+                    SetOutbound(configCopy, ref v2rayConfigCopy);
+                    v2rayConfigCopy.Outbounds[0].Tag = Global.agentTag + port.ToString();
+                    v2rayConfig.Outbounds.Add(v2rayConfigCopy.Outbounds[0]);
 
-                    RulesItem rule = new RulesItem
+                    v2rayConfig.Routing.Rules.Add(new()
                     {
-                        inboundTag = new List<string> { inbound.tag },
-                        outboundTag = v2rayConfigCopy.outbounds[0].tag,
-                        type = "field"
-                    };
-                    v2rayConfig.routing.rules.Add(rule);
+                        InboundTag = new() { Global.InboundHttp + port.ToString() },
+                        OutboundTag = Global.agentTag + port.ToString(),
+                    });
                 }
 
-                msg = string.Format(UIRes.I18N("SuccessfulConfiguration"), configCopy.getSummary());
-                return Utils.ToJson(v2rayConfig);
+                msg = string.Format(Utils.StringsRes.I18N("SuccessfulConfiguration"), configCopy.getSummary());
+                return Utils.ToJson(v2rayConfig, true);
             }
-            catch
+            catch (Exception e)
             {
-                msg = UIRes.I18N("FailedGenDefaultConfiguration");
+                msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
+                Utils.SaveLog(e.Message, e);
                 return "";
             }
         }

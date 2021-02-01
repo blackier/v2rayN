@@ -1,0 +1,295 @@
+﻿<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnClose.Text" xml:space="preserve">
+    <value>取消(&amp;C)</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>服务器</value>
+  </data>
+  <data name="btnGUID.Text" xml:space="preserve">
+    <value>生成(&amp;G)</value>
+  </data>
+  <assembly alias="System.Drawing.Primitives" name="System.Drawing.Primitives, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label13.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>564, 212</value>
+  </data>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>166, 24</value>
+  </data>
+  <data name="label13.Text" xml:space="preserve">
+    <value>*手填,方便识别管理</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>567, 177</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>163, 24</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>*随便选,建议(auto)</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>127, 24</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>别名(remarks)</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>161, 24</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>加密方式(security)</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>133, 24</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>额外ID(alterId)</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>94, 24</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>用户ID(id)</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>95, 24</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>端口(port)</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>125, 24</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>地址(address)</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>底层传输方式(transport)</value>
+  </data>
+  <data name="label24.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>613, 260</value>
+  </data>
+  <data name="label24.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>234, 24</value>
+  </data>
+  <data name="label24.Text" xml:space="preserve">
+    <value>3)QUIC 加密密钥/Kcp seed</value>
+  </data>
+  <data name="label23.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>613, 178</value>
+  </data>
+  <data name="label23.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>149, 24</value>
+  </data>
+  <data name="label23.Text" xml:space="preserve">
+    <value>4)QUIC 加密方式</value>
+  </data>
+  <data name="label21.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>246, 24</value>
+  </data>
+  <data name="label21.Text" xml:space="preserve">
+    <value>跳过证书验证(allowInsecure)</value>
+  </data>
+  <data name="cmbAllowInsecure.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>277, 22</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>613, 36</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>212, 24</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>*默认tcp,选错会无法连接</value>
+  </data>
+  <data name="label20.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>613, 154</value>
+  </data>
+  <data name="label20.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>215, 24</value>
+  </data>
+  <data name="label20.Text" xml:space="preserve">
+    <value>3)h2 host中间逗号(,)隔开</value>
+  </data>
+  <data name="txtPath.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>280, 212</value>
+  </data>
+  <data name="txtPath.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>320, 90</value>
+  </data>
+  <data name="cmbNetwork.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>280, 33</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>9, 36</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>164, 24</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>传输协议(network)</value>
+  </data>
+  <data name="label19.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>12, 215</value>
+  </data>
+  <data name="label19.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>98, 24</value>
+  </data>
+  <data name="label19.Text" xml:space="preserve">
+    <value>路径(path)</value>
+  </data>
+  <data name="label18.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>613, 236</value>
+  </data>
+  <data name="label17.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>613, 130</value>
+  </data>
+  <data name="label16.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>613, 212</value>
+  </data>
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>613, 106</value>
+  </data>
+  <data name="label14.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>230, 24</value>
+  </data>
+  <data name="label14.Text" xml:space="preserve">
+    <value>1)http host中间逗号(,)隔开</value>
+  </data>
+  <data name="label15.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>12, 311</value>
+  </data>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>150, 24</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>底层传输安全(tls)</value>
+  </data>
+  <data name="cmbStreamSecurity.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>280, 308</value>
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>613, 71</value>
+  </data>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>313, 24</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>*tcp或kcp或QUIC伪装类型,默认none</value>
+  </data>
+  <data name="txtRequestHost.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>280, 106</value>
+  </data>
+  <data name="txtRequestHost.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>320, 100</value>
+  </data>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>9, 71</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>133, 24</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>伪装类型(type)</value>
+  </data>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>9, 102</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing.Primitives">
+    <value>131, 24</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>伪装域名(host)</value>
+  </data>
+  <data name="cmbHeaderType.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+    <value>280, 68</value>
+  </data>
+  <data name="btnOK.Text" xml:space="preserve">
+    <value>确定(&amp;O)</value>
+  </data>
+  <assembly alias="System.Drawing.Common" name="System.Drawing.Common, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAAAIAAoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA
+        AAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP//
+        /wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP//
+        /wD///8A////AP///wD///8A////AP///wD///8A////APb29v/29vb/9vb2//b29v/29vb/9vb2//b2
+        9v////8A////AP///wD///8A9vb2//b29v/29vb/9vb2//b29v/29vb/QkJC/0JCQv9CQkL/QkJC/0JC
+        Qv/29vb/////AP///wD///8A////APb29v9CQkL/QkJC/0JCQv9CQkL/9vb2/0JCQv9CQkL/QkJC/0JC
+        Qv9CQkL/9vb2/////wD///8A////AP///wD29vb/QkJC/0JCQv9CQkL/QkJC//b29v9CQkL/QkJC/0JC
+        Qv9CQkL/QkJC//b29v////8A////AP///wD///8A9vb2/0JCQv9CQkL/QkJC/0JCQv/29vb/9vb2//b2
+        9v/29vb/9vb2//b29v/29vb/9vb2//b29v////8A////APb29v9CQkL/QkJC/0JCQv9CQkL/9vb2/0JC
+        Qv9CQkL/QkJC/0JCQv9CQkL/QkJC/0JCQv/29vb/////AP///wD29vb/QkJC/0JCQv9CQkL/QkJC//b2
+        9v9CQkL/QkJC/0JCQv9CQkL/QkJC/0JCQv9CQkL/9vb2/////wD///8A9vb2/0JCQv9CQkL/QkJC/0JC
+        Qv/29vb/QkJC/0JCQv9CQkL/QkJC/0JCQv9CQkL/QkJC//b29v////8A////APb29v/29vb/9vb2//b2
+        9v/29vb/9vb2/0JCQv9CQkL/QkJC/0JCQv9CQkL/QkJC/0JCQv/29vb/////AP///wD///8A////AP//
+        /wD///8A////APb29v9CQkL/QkJC/0JCQv9CQkL/QkJC/0JCQv9CQkL/9vb2/////wD///8A////AP//
+        /wD///8A////AP///wD29vb/QkJC/0JCQv9CQkL/QkJC/0JCQv9CQkL/QkJC//b29v////8A////AP//
+        /wD///8A////AP///wD///8A9vb2/0JCQv9CQkL/QkJC/0JCQv9CQkL/QkJC/0JCQv/29vb/////AP//
+        /wD///8A////AP///wD///8A////APb29v/29vb/9vb2//b29v/29vb/9vb2//b29v/29vb/9vb2////
+        /wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP//
+        /wD///8A
+</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>编辑或添加[VMess]服务器</value>
+  </data>
+</root>

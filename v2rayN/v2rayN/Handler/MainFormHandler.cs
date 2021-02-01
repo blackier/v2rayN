@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using v2rayN.Mode;
+using v2rayN.Config;
 
 namespace v2rayN.Handler
 {
@@ -27,7 +27,7 @@ namespace v2rayN.Handler
             }
         }
 
-        public Icon GetNotifyIcon(Config config, Icon def)
+        public Icon GetNotifyIcon(Config.V2RayNConfig config, Icon def)
         {
             try
             {
@@ -64,89 +64,6 @@ namespace v2rayN.Handler
                 return def;
             }
         }
-
-        public void Export2ClientConfig(int index, Config config)
-        {
-            //int index = GetLvSelectedIndex();
-            if (index < 0)
-            {
-                return;
-            }
-            if (config.vmess[index].configType != (int)EConfigType.Vmess
-                && config.vmess[index].configType != (int)EConfigType.VLESS)
-            {
-                UI.Show(UIRes.I18N("NonVmessService"));
-                return;
-            }
-
-            SaveFileDialog fileDialog = new SaveFileDialog
-            {
-                Filter = "Config|*.json",
-                FilterIndex = 2,
-                RestoreDirectory = true
-            };
-            if (fileDialog.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
-            string fileName = fileDialog.FileName;
-            if (Utils.IsNullOrEmpty(fileName))
-            {
-                return;
-            }
-            Config configCopy = Utils.DeepCopy(config);
-            configCopy.index = index;
-            if (V2rayConfigHandler.Export2ClientConfig(configCopy, fileName, out string msg) != 0)
-            {
-                UI.Show(msg);
-            }
-            else
-            {
-                UI.ShowWarning(string.Format(UIRes.I18N("SaveClientConfigurationIn"), fileName));
-            }
-        }
-
-        public void Export2ServerConfig(int index, Config config)
-        {
-            //int index = GetLvSelectedIndex();
-            if (index < 0)
-            {
-                return;
-            }
-            if (config.vmess[index].configType != (int)EConfigType.Vmess
-                && config.vmess[index].configType != (int)EConfigType.VLESS)
-            {
-                UI.Show(UIRes.I18N("NonVmessService"));
-                return;
-            }
-
-            SaveFileDialog fileDialog = new SaveFileDialog
-            {
-                Filter = "Config|*.json",
-                FilterIndex = 2,
-                RestoreDirectory = true
-            };
-            if (fileDialog.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
-            string fileName = fileDialog.FileName;
-            if (Utils.IsNullOrEmpty(fileName))
-            {
-                return;
-            }
-            Config configCopy = Utils.DeepCopy(config);
-            configCopy.index = index;
-            if (V2rayConfigHandler.Export2ServerConfig(configCopy, fileName, out string msg) != 0)
-            {
-                UI.Show(msg);
-            }
-            else
-            {
-                UI.ShowWarning(string.Format(UIRes.I18N("SaveServerConfigurationIn"), fileName));
-            }
-        }
-
 
     }
 }

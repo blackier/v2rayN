@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 using v2rayN.Handler;
-using v2rayN.Mode;
+using v2rayN.Config;
 
 namespace v2rayN.Forms
 {
@@ -20,7 +20,7 @@ namespace v2rayN.Forms
             txtUrl.SelectAll();
         }
 
-        public void showQRCode(int Index, Config config)
+        public void showQRCode(int Index, Config.V2RayNConfig config)
         {
             if (Index >= 0)
             {
@@ -32,7 +32,7 @@ namespace v2rayN.Forms
                     return;
                 }
                 txtUrl.Text = url;
-                picQRCode.Image = QRCodeHelper.GetQRCode(url);                
+                picQRCode.Image = Utils.QRCode.GetQRCode(url);                
             }
         }
     }

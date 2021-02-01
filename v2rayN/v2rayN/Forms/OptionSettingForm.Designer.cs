@@ -56,18 +56,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabControl_Routing = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.txtUseragent = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.txtUserdirect = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.txtUserblock = new System.Windows.Forms.TextBox();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.cmbroutingMode = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cmbroutingMode = new System.Windows.Forms.ComboBox();
             this.linkLabelRoutingDoc = new System.Windows.Forms.LinkLabel();
-            this.btnSetDefRountingRule = new System.Windows.Forms.Button();
             this.labRoutingTips = new System.Windows.Forms.Label();
             this.cmbdomainStrategy = new System.Windows.Forms.ComboBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
@@ -90,13 +88,7 @@
             this.lbFreshrate = new System.Windows.Forms.Label();
             this.chkEnableStatistics = new System.Windows.Forms.CheckBox();
             this.chkAllowLANConn = new System.Windows.Forms.CheckBox();
-            this.txturlGFWList = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.chkAutoRun = new System.Windows.Forms.CheckBox();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.txtuserPacRule = new System.Windows.Forms.TextBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -105,16 +97,13 @@
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.tabControl2.SuspendLayout();
+            this.tabControl_Routing.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            this.tabPage8.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage7.SuspendLayout();
-            this.tabPage9.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,7 +122,6 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Controls.Add(this.tabPage9);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
@@ -191,10 +179,7 @@
             resources.GetString("cmblistenerType.Items"),
             resources.GetString("cmblistenerType.Items1"),
             resources.GetString("cmblistenerType.Items2"),
-            resources.GetString("cmblistenerType.Items3"),
-            resources.GetString("cmblistenerType.Items4"),
-            resources.GetString("cmblistenerType.Items5"),
-            resources.GetString("cmblistenerType.Items6")});
+            resources.GetString("cmblistenerType.Items3")});
             this.cmblistenerType.Name = "cmblistenerType";
             // 
             // chksniffingEnabled2
@@ -323,20 +308,19 @@
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Controls.Add(this.tabControl2);
+            this.groupBox2.Controls.Add(this.tabControl_Routing);
             this.groupBox2.Controls.Add(this.panel3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
-            // tabControl2
+            // tabControl_Routing
             // 
-            resources.ApplyResources(this.tabControl2, "tabControl2");
-            this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Controls.Add(this.tabPage5);
-            this.tabControl2.Controls.Add(this.tabPage8);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
+            resources.ApplyResources(this.tabControl_Routing, "tabControl_Routing");
+            this.tabControl_Routing.Controls.Add(this.tabPage3);
+            this.tabControl_Routing.Controls.Add(this.tabPage4);
+            this.tabControl_Routing.Controls.Add(this.tabPage5);
+            this.tabControl_Routing.Name = "tabControl_Routing";
+            this.tabControl_Routing.SelectedIndex = 0;
             // 
             // tabPage3
             // 
@@ -374,12 +358,14 @@
             resources.ApplyResources(this.txtUserblock, "txtUserblock");
             this.txtUserblock.Name = "txtUserblock";
             // 
-            // tabPage8
+            // panel3
             // 
-            resources.ApplyResources(this.tabPage8, "tabPage8");
-            this.tabPage8.Controls.Add(this.cmbroutingMode);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Controls.Add(this.cmbroutingMode);
+            this.panel3.Controls.Add(this.linkLabelRoutingDoc);
+            this.panel3.Controls.Add(this.labRoutingTips);
+            this.panel3.Controls.Add(this.cmbdomainStrategy);
+            this.panel3.Name = "panel3";
             // 
             // cmbroutingMode
             // 
@@ -390,17 +376,11 @@
             resources.GetString("cmbroutingMode.Items"),
             resources.GetString("cmbroutingMode.Items1"),
             resources.GetString("cmbroutingMode.Items2"),
-            resources.GetString("cmbroutingMode.Items3")});
+            resources.GetString("cmbroutingMode.Items3"),
+            resources.GetString("cmbroutingMode.Items4"),
+            resources.GetString("cmbroutingMode.Items5")});
             this.cmbroutingMode.Name = "cmbroutingMode";
-            // 
-            // panel3
-            // 
-            resources.ApplyResources(this.panel3, "panel3");
-            this.panel3.Controls.Add(this.linkLabelRoutingDoc);
-            this.panel3.Controls.Add(this.btnSetDefRountingRule);
-            this.panel3.Controls.Add(this.labRoutingTips);
-            this.panel3.Controls.Add(this.cmbdomainStrategy);
-            this.panel3.Name = "panel3";
+            this.cmbroutingMode.SelectedIndexChanged += new System.EventHandler(this.cmbroutingMode_SelectedIndexChanged);
             // 
             // linkLabelRoutingDoc
             // 
@@ -408,13 +388,6 @@
             this.linkLabelRoutingDoc.Name = "linkLabelRoutingDoc";
             this.linkLabelRoutingDoc.TabStop = true;
             this.linkLabelRoutingDoc.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelRoutingDoc_LinkClicked);
-            // 
-            // btnSetDefRountingRule
-            // 
-            resources.ApplyResources(this.btnSetDefRountingRule, "btnSetDefRountingRule");
-            this.btnSetDefRountingRule.Name = "btnSetDefRountingRule";
-            this.btnSetDefRountingRule.UseVisualStyleBackColor = true;
-            this.btnSetDefRountingRule.Click += new System.EventHandler(this.btnSetDefRountingRule_Click);
             // 
             // labRoutingTips
             // 
@@ -526,8 +499,6 @@
             this.tabPage7.Controls.Add(this.lbFreshrate);
             this.tabPage7.Controls.Add(this.chkEnableStatistics);
             this.tabPage7.Controls.Add(this.chkAllowLANConn);
-            this.tabPage7.Controls.Add(this.txturlGFWList);
-            this.tabPage7.Controls.Add(this.label13);
             this.tabPage7.Controls.Add(this.chkAutoRun);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -562,46 +533,11 @@
             this.chkAllowLANConn.Name = "chkAllowLANConn";
             this.chkAllowLANConn.UseVisualStyleBackColor = true;
             // 
-            // txturlGFWList
-            // 
-            resources.ApplyResources(this.txturlGFWList, "txturlGFWList");
-            this.txturlGFWList.Name = "txturlGFWList";
-            // 
-            // label13
-            // 
-            resources.ApplyResources(this.label13, "label13");
-            this.label13.Name = "label13";
-            // 
             // chkAutoRun
             // 
             resources.ApplyResources(this.chkAutoRun, "chkAutoRun");
             this.chkAutoRun.Name = "chkAutoRun";
             this.chkAutoRun.UseVisualStyleBackColor = true;
-            // 
-            // tabPage9
-            // 
-            resources.ApplyResources(this.tabPage9, "tabPage9");
-            this.tabPage9.Controls.Add(this.txtuserPacRule);
-            this.tabPage9.Controls.Add(this.panel4);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.UseVisualStyleBackColor = true;
-            // 
-            // txtuserPacRule
-            // 
-            resources.ApplyResources(this.txtuserPacRule, "txtuserPacRule");
-            this.txtuserPacRule.Name = "txtuserPacRule";
-            // 
-            // panel4
-            // 
-            resources.ApplyResources(this.panel4, "panel4");
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Name = "panel4";
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.ForeColor = System.Drawing.Color.Brown;
-            this.label4.Name = "label4";
             // 
             // panel2
             // 
@@ -639,23 +575,19 @@
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
+            this.tabControl_Routing.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            this.tabPage8.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
-            this.tabPage9.ResumeLayout(false);
-            this.tabPage9.PerformLayout();
-            this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -686,7 +618,7 @@
         private System.Windows.Forms.CheckBox chkudpEnabled2;
         private System.Windows.Forms.CheckBox chkAllowIn2;
         private System.Windows.Forms.CheckBox chkmuxEnabled;
-        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabControl tabControl_Routing;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label labRoutingTips;
@@ -710,8 +642,6 @@
         private System.Windows.Forms.CheckBox chkKcpcongestion;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.CheckBox chkAutoRun;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox txturlGFWList;
         private System.Windows.Forms.CheckBox chkAllowLANConn;
         private System.Windows.Forms.TextBox txtremoteDNS;
         private System.Windows.Forms.Label label14;
@@ -720,17 +650,11 @@
         private System.Windows.Forms.ComboBox cmbroutingMode;
         private System.Windows.Forms.CheckBox chksniffingEnabled;
         private System.Windows.Forms.CheckBox chksniffingEnabled2;
-        private System.Windows.Forms.Button btnSetDefRountingRule;
         private System.Windows.Forms.CheckBox chkEnableStatistics;
         private System.Windows.Forms.ComboBox cbFreshrate;
         private System.Windows.Forms.Label lbFreshrate;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox cmblistenerType;
-        private System.Windows.Forms.TabPage tabPage8;
-        private System.Windows.Forms.TabPage tabPage9;
-        private System.Windows.Forms.TextBox txtuserPacRule;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox chkKeepOlderDedupl;
         private System.Windows.Forms.LinkLabel linkLabelRoutingDoc;
         private System.Windows.Forms.CheckBox chkdefAllowInsecure;

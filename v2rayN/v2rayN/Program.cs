@@ -1,29 +1,19 @@
-﻿using System;
-using System.Diagnostics;
+using System;
 using System.Threading;
 using System.Windows.Forms;
 using v2rayN.Forms;
-using v2rayN.Properties;
-using v2rayN.Tool;
 
 namespace v2rayN
 {
     static class Program
     {
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern bool SetProcessDPIAware();
-
         /// <summary>
-        /// 应用程序的主入口点。
+        ///  The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            if (Environment.OSVersion.Version.Major >= 6)
-            {
-                SetProcessDPIAware();
-            }
-
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
@@ -46,7 +36,7 @@ namespace v2rayN
             }
             else
             {
-                UI.ShowWarning($"v2rayN is already running(v2rayN已经运行)");
+                Utils.MsgBox.ShowWarning($"v2rayN is already running(v2rayN已经运行)");
             }
         }
 

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
-using v2rayN.Mode;
+using v2rayN.Config;
 
 namespace v2rayN.Forms
 {
     public partial class BaseForm : Form
     {
-        protected static Config config;
+        protected static Config.V2RayNConfig config;
         protected static System.Drawing.Icon icon;
 
         public BaseForm()
