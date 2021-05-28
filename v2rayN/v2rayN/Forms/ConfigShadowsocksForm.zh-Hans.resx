@@ -63,42 +63,42 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>服务器</value>
   </data>
-  <assembly alias="System.Drawing.Primitives" name="System.Drawing.Primitives, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label13.Location" type="System.Drawing.Point, System.Drawing.Primitives">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>465, 177</value>
   </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>166, 24</value>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 17</value>
   </data>
   <data name="label13.Text" xml:space="preserve">
     <value>*手填,方便识别管理</value>
   </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>127, 24</value>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 17</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>别名(remarks)</value>
   </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>82, 24</value>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 17</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>加密方式</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>46, 24</value>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>密码</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>100, 24</value>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>服务器端口</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>100, 24</value>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>服务器地址</value>

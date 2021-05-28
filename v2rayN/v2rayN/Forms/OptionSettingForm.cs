@@ -44,23 +44,6 @@ namespace v2rayN.Forms
                 cmbprotocol.Text = config.inbound[0].protocol.ToString();
                 chkudpEnabled.Checked = config.inbound[0].udpEnabled;
                 chksniffingEnabled.Checked = config.inbound[0].sniffingEnabled;
-
-                txtlocalPort2.Text = $"{config.inbound[0].localPort + 1}";
-                cmbprotocol2.Text = Global.InboundHttp;
-
-                if (config.inbound.Count > 1)
-                {
-                    txtlocalPort2.Text = config.inbound[1].localPort.ToString();
-                    cmbprotocol2.Text = config.inbound[1].protocol.ToString();
-                    chkudpEnabled2.Checked = config.inbound[1].udpEnabled;
-                    chksniffingEnabled2.Checked = config.inbound[1].sniffingEnabled;
-                    chkAllowIn2.Checked = true;
-                }
-                else
-                {
-                    chkAllowIn2.Checked = false;
-                }
-                chkAllowIn2State();
             }
 
             //remoteDNS
@@ -202,40 +185,6 @@ namespace v2rayN.Forms
             config.inbound[0].udpEnabled = udpEnabled;
             config.inbound[0].sniffingEnabled = sniffingEnabled;
 
-            //本地监听2
-            string localPort2 = txtlocalPort2.Text.TrimEx();
-            string protocol2 = cmbprotocol2.Text.TrimEx();
-            bool udpEnabled2 = chkudpEnabled2.Checked;
-            bool sniffingEnabled2 = chksniffingEnabled2.Checked;
-            if (chkAllowIn2.Checked)
-            {
-                if (Utils.IsNullOrEmpty(localPort2) || !Utils.IsNumberic(localPort2))
-                {
-                    Utils.MsgBox.Show(Utils.StringsRes.I18N("FillLocalListeningPort"));
-                    return -1;
-                }
-                if (Utils.IsNullOrEmpty(protocol2))
-                {
-                    Utils.MsgBox.Show(Utils.StringsRes.I18N("PleaseSelectProtocol"));
-                    return -1;
-                }
-                if (config.inbound.Count < 2)
-                {
-                    config.inbound.Add(new Config.InItem());
-                }
-                config.inbound[1].localPort = Utils.ToInt(localPort2);
-                config.inbound[1].protocol = protocol2;
-                config.inbound[1].udpEnabled = udpEnabled2;
-                config.inbound[1].sniffingEnabled = sniffingEnabled2;
-            }
-            else
-            {
-                if (config.inbound.Count > 1)
-                {
-                    config.inbound.RemoveAt(1);
-                }
-            }
-
             //日志     
             config.logEnabled = logEnabled;
             config.loglevel = loglevel;
@@ -334,19 +283,6 @@ namespace v2rayN.Forms
         {
             DialogResult = DialogResult.Cancel;
         }
-
-        private void chkAllowIn2_CheckedChanged(object sender, EventArgs e)
-        {
-            chkAllowIn2State();
-        }
-        private void chkAllowIn2State()
-        {
-            bool blAllow2 = chkAllowIn2.Checked;
-            txtlocalPort2.Enabled =
-            cmbprotocol2.Enabled =
-            chkudpEnabled2.Enabled = blAllow2;
-        }
-
 
         private void linkLabelRoutingDoc_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

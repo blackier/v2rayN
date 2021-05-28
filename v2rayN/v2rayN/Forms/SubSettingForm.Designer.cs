@@ -32,16 +32,18 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.panCon = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnClose, "btnClose");
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Name = "btnClose";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -53,18 +55,18 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.btnAdd);
-            this.panel2.Controls.Add(this.btnClose);
-            this.panel2.Controls.Add(this.btnOK);
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.tableLayoutPanel1);
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Name = "panel2";
             // 
-            // label1
+            // tableLayoutPanel1
             // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.btnAdd, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnOK, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnClose, 1, 1);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // btnAdd
             // 
@@ -80,10 +82,15 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Name = "label1";
+            // 
             // SubSettingForm
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.Controls.Add(this.panCon);
             this.Controls.Add(this.panel2);
@@ -91,6 +98,7 @@
             this.Name = "SubSettingForm";
             this.Load += new System.EventHandler(this.SubSettingForm_Load);
             this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -102,5 +110,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Panel panCon;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

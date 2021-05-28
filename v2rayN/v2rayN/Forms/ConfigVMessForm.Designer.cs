@@ -70,13 +70,18 @@
             this.label10 = new System.Windows.Forms.Label();
             this.cmbHeaderType = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label22 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panTlsMore.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
@@ -364,16 +369,15 @@
             // panel2
             // 
             resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Controls.Add(this.label22);
-            this.panel2.Controls.Add(this.btnClose);
-            this.panel2.Controls.Add(this.btnOK);
+            this.panel2.Controls.Add(this.tableLayoutPanel1);
             this.panel2.Name = "panel2";
             // 
-            // label22
+            // tableLayoutPanel1
             // 
-            resources.ApplyResources(this.label22, "label22");
-            this.label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label22.Name = "label22";
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.btnOK, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnClose, 0, 1);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // btnOK
             // 
@@ -387,16 +391,26 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
+            // panel3
+            // 
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Controls.Add(this.groupBox1);
+            this.panel3.Name = "panel3";
+            // 
+            // panel4
+            // 
+            resources.ApplyResources(this.panel4, "panel4");
+            this.panel4.Controls.Add(this.groupBox2);
+            this.panel4.Name = "panel4";
+            // 
             // ConfigVMessForm
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ConfigVMessForm";
             this.Load += new System.EventHandler(this.AddServerForm_Load);
             this.groupBox1.ResumeLayout(false);
@@ -406,6 +420,9 @@
             this.panTlsMore.ResumeLayout(false);
             this.panTlsMore.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -455,6 +472,8 @@
         private System.Windows.Forms.Panel panTlsMore;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

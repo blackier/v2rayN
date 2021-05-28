@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigVLESSForm));
-            this.btnClose = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmbFlow = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -69,23 +68,21 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.cmbHeaderType = new System.Windows.Forms.ComboBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label22 = new System.Windows.Forms.Label();
-            this.btnOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnOK = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panelServer = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panTlsMore.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panelServer.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnClose
-            // 
-            resources.ApplyResources(this.btnClose, "btnClose");
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Name = "btnClose";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // groupBox1
             // 
@@ -366,19 +363,10 @@
             resources.GetString("cmbHeaderType.Items6")});
             this.cmbHeaderType.Name = "cmbHeaderType";
             // 
-            // panel2
+            // panel1
             // 
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Controls.Add(this.label22);
-            this.panel2.Controls.Add(this.btnClose);
-            this.panel2.Controls.Add(this.btnOK);
-            this.panel2.Name = "panel2";
-            // 
-            // label22
-            // 
-            resources.ApplyResources(this.label22, "label22");
-            this.label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label22.Name = "label22";
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
             // 
             // btnOK
             // 
@@ -387,22 +375,48 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // panel1
+            // btnClose
             // 
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
+            resources.ApplyResources(this.btnClose, "btnClose");
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.Name = "btnClose";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // AddServer5Form
+            // panel2
+            // 
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.tableLayoutPanel1);
+            this.panel2.Name = "panel2";
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.btnClose, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnOK, 2, 1);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            // 
+            // panelServer
+            // 
+            resources.ApplyResources(this.panelServer, "panelServer");
+            this.panelServer.Controls.Add(this.groupBox1);
+            this.panelServer.Name = "panelServer";
+            // 
+            // panel4
+            // 
+            resources.ApplyResources(this.panel4, "panel4");
+            this.panel4.Controls.Add(this.groupBox2);
+            this.panel4.Name = "panel4";
+            // 
+            // ConfigVLESSForm
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panelServer);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.groupBox2);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "AddServer5Form";
+            this.Name = "ConfigVLESSForm";
             this.Load += new System.EventHandler(this.AddServer5Form_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -411,6 +425,9 @@
             this.panTlsMore.ResumeLayout(false);
             this.panTlsMore.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panelServer.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -418,8 +435,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.TextBox txtRemarks;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -435,7 +450,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox txtRequestHost;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
@@ -460,6 +474,11 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.ComboBox cmbFlow;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelServer;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

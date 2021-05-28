@@ -36,16 +36,10 @@
             this.chkdefAllowInsecure = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
             this.cmblistenerType = new System.Windows.Forms.ComboBox();
-            this.chksniffingEnabled2 = new System.Windows.Forms.CheckBox();
             this.chksniffingEnabled = new System.Windows.Forms.CheckBox();
             this.txtremoteDNS = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.chkmuxEnabled = new System.Windows.Forms.CheckBox();
-            this.chkAllowIn2 = new System.Windows.Forms.CheckBox();
-            this.chkudpEnabled2 = new System.Windows.Forms.CheckBox();
-            this.cmbprotocol2 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtlocalPort2 = new System.Windows.Forms.TextBox();
             this.cmbprotocol = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.chkudpEnabled = new System.Windows.Forms.CheckBox();
@@ -69,27 +63,30 @@
             this.labRoutingTips = new System.Windows.Forms.Label();
             this.cmbdomainStrategy = new System.Windows.Forms.ComboBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.chkKcpcongestion = new System.Windows.Forms.CheckBox();
+            this.txtKcpmtu = new System.Windows.Forms.TextBox();
             this.txtKcpwriteBufferSize = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.txtKcptti = new System.Windows.Forms.TextBox();
             this.txtKcpreadBufferSize = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.txtKcpuplinkCapacity = new System.Windows.Forms.TextBox();
             this.txtKcpdownlinkCapacity = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtKcpuplinkCapacity = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtKcptti = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtKcpmtu = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.chkKeepOlderDedupl = new System.Windows.Forms.CheckBox();
-            this.cbFreshrate = new System.Windows.Forms.ComboBox();
-            this.lbFreshrate = new System.Windows.Forms.Label();
-            this.chkEnableStatistics = new System.Windows.Forms.CheckBox();
-            this.chkAllowLANConn = new System.Windows.Forms.CheckBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.chkAutoRun = new System.Windows.Forms.CheckBox();
+            this.chkKeepOlderDedupl = new System.Windows.Forms.CheckBox();
+            this.chkAllowLANConn = new System.Windows.Forms.CheckBox();
+            this.cbFreshrate = new System.Windows.Forms.ComboBox();
+            this.chkEnableStatistics = new System.Windows.Forms.CheckBox();
+            this.lbFreshrate = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
@@ -103,8 +100,11 @@
             this.tabPage5.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabPage7.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
@@ -138,16 +138,10 @@
             this.groupBox1.Controls.Add(this.chkdefAllowInsecure);
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.cmblistenerType);
-            this.groupBox1.Controls.Add(this.chksniffingEnabled2);
             this.groupBox1.Controls.Add(this.chksniffingEnabled);
             this.groupBox1.Controls.Add(this.txtremoteDNS);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.chkmuxEnabled);
-            this.groupBox1.Controls.Add(this.chkAllowIn2);
-            this.groupBox1.Controls.Add(this.chkudpEnabled2);
-            this.groupBox1.Controls.Add(this.cmbprotocol2);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtlocalPort2);
             this.groupBox1.Controls.Add(this.cmbprotocol);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.chkudpEnabled);
@@ -182,12 +176,6 @@
             resources.GetString("cmblistenerType.Items3")});
             this.cmblistenerType.Name = "cmblistenerType";
             // 
-            // chksniffingEnabled2
-            // 
-            resources.ApplyResources(this.chksniffingEnabled2, "chksniffingEnabled2");
-            this.chksniffingEnabled2.Name = "chksniffingEnabled2";
-            this.chksniffingEnabled2.UseVisualStyleBackColor = true;
-            // 
             // chksniffingEnabled
             // 
             resources.ApplyResources(this.chksniffingEnabled, "chksniffingEnabled");
@@ -209,39 +197,6 @@
             resources.ApplyResources(this.chkmuxEnabled, "chkmuxEnabled");
             this.chkmuxEnabled.Name = "chkmuxEnabled";
             this.chkmuxEnabled.UseVisualStyleBackColor = true;
-            // 
-            // chkAllowIn2
-            // 
-            resources.ApplyResources(this.chkAllowIn2, "chkAllowIn2");
-            this.chkAllowIn2.Name = "chkAllowIn2";
-            this.chkAllowIn2.UseVisualStyleBackColor = true;
-            this.chkAllowIn2.CheckedChanged += new System.EventHandler(this.chkAllowIn2_CheckedChanged);
-            // 
-            // chkudpEnabled2
-            // 
-            resources.ApplyResources(this.chkudpEnabled2, "chkudpEnabled2");
-            this.chkudpEnabled2.Name = "chkudpEnabled2";
-            this.chkudpEnabled2.UseVisualStyleBackColor = true;
-            // 
-            // cmbprotocol2
-            // 
-            resources.ApplyResources(this.cmbprotocol2, "cmbprotocol2");
-            this.cmbprotocol2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbprotocol2.FormattingEnabled = true;
-            this.cmbprotocol2.Items.AddRange(new object[] {
-            resources.GetString("cmbprotocol2.Items"),
-            resources.GetString("cmbprotocol2.Items1")});
-            this.cmbprotocol2.Name = "cmbprotocol2";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            // 
-            // txtlocalPort2
-            // 
-            resources.ApplyResources(this.txtlocalPort2, "txtlocalPort2");
-            this.txtlocalPort2.Name = "txtlocalPort2";
             // 
             // cmbprotocol
             // 
@@ -409,21 +364,33 @@
             // tabPage6
             // 
             resources.ApplyResources(this.tabPage6, "tabPage6");
-            this.tabPage6.Controls.Add(this.chkKcpcongestion);
-            this.tabPage6.Controls.Add(this.txtKcpwriteBufferSize);
-            this.tabPage6.Controls.Add(this.label10);
-            this.tabPage6.Controls.Add(this.txtKcpreadBufferSize);
-            this.tabPage6.Controls.Add(this.label11);
-            this.tabPage6.Controls.Add(this.txtKcpdownlinkCapacity);
-            this.tabPage6.Controls.Add(this.label8);
-            this.tabPage6.Controls.Add(this.txtKcpuplinkCapacity);
-            this.tabPage6.Controls.Add(this.label9);
-            this.tabPage6.Controls.Add(this.txtKcptti);
-            this.tabPage6.Controls.Add(this.label7);
-            this.tabPage6.Controls.Add(this.txtKcpmtu);
-            this.tabPage6.Controls.Add(this.label6);
+            this.tabPage6.Controls.Add(this.groupBox3);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.chkKcpcongestion);
+            this.groupBox3.Controls.Add(this.txtKcpmtu);
+            this.groupBox3.Controls.Add(this.txtKcpwriteBufferSize);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.txtKcptti);
+            this.groupBox3.Controls.Add(this.txtKcpreadBufferSize);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.txtKcpuplinkCapacity);
+            this.groupBox3.Controls.Add(this.txtKcpdownlinkCapacity);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
             // 
             // chkKcpcongestion
             // 
@@ -431,25 +398,50 @@
             this.chkKcpcongestion.Name = "chkKcpcongestion";
             this.chkKcpcongestion.UseVisualStyleBackColor = true;
             // 
+            // txtKcpmtu
+            // 
+            resources.ApplyResources(this.txtKcpmtu, "txtKcpmtu");
+            this.txtKcpmtu.Name = "txtKcpmtu";
+            // 
             // txtKcpwriteBufferSize
             // 
             resources.ApplyResources(this.txtKcpwriteBufferSize, "txtKcpwriteBufferSize");
             this.txtKcpwriteBufferSize.Name = "txtKcpwriteBufferSize";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
             // 
             // label10
             // 
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
             // 
+            // txtKcptti
+            // 
+            resources.ApplyResources(this.txtKcptti, "txtKcptti");
+            this.txtKcptti.Name = "txtKcptti";
+            // 
             // txtKcpreadBufferSize
             // 
             resources.ApplyResources(this.txtKcpreadBufferSize, "txtKcpreadBufferSize");
             this.txtKcpreadBufferSize.Name = "txtKcpreadBufferSize";
             // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
             // label11
             // 
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
+            // 
+            // txtKcpuplinkCapacity
+            // 
+            resources.ApplyResources(this.txtKcpuplinkCapacity, "txtKcpuplinkCapacity");
+            this.txtKcpuplinkCapacity.Name = "txtKcpuplinkCapacity";
             // 
             // txtKcpdownlinkCapacity
             // 
@@ -461,53 +453,42 @@
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
             // 
-            // txtKcpuplinkCapacity
-            // 
-            resources.ApplyResources(this.txtKcpuplinkCapacity, "txtKcpuplinkCapacity");
-            this.txtKcpuplinkCapacity.Name = "txtKcpuplinkCapacity";
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // txtKcptti
-            // 
-            resources.ApplyResources(this.txtKcptti, "txtKcptti");
-            this.txtKcptti.Name = "txtKcptti";
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            // 
-            // txtKcpmtu
-            // 
-            resources.ApplyResources(this.txtKcpmtu, "txtKcpmtu");
-            this.txtKcpmtu.Name = "txtKcpmtu";
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
             // tabPage7
             // 
             resources.ApplyResources(this.tabPage7, "tabPage7");
-            this.tabPage7.Controls.Add(this.chkKeepOlderDedupl);
-            this.tabPage7.Controls.Add(this.cbFreshrate);
-            this.tabPage7.Controls.Add(this.lbFreshrate);
-            this.tabPage7.Controls.Add(this.chkEnableStatistics);
-            this.tabPage7.Controls.Add(this.chkAllowLANConn);
-            this.tabPage7.Controls.Add(this.chkAutoRun);
+            this.tabPage7.Controls.Add(this.groupBox4);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Controls.Add(this.chkAutoRun);
+            this.groupBox4.Controls.Add(this.chkKeepOlderDedupl);
+            this.groupBox4.Controls.Add(this.chkAllowLANConn);
+            this.groupBox4.Controls.Add(this.cbFreshrate);
+            this.groupBox4.Controls.Add(this.chkEnableStatistics);
+            this.groupBox4.Controls.Add(this.lbFreshrate);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
+            // 
+            // chkAutoRun
+            // 
+            resources.ApplyResources(this.chkAutoRun, "chkAutoRun");
+            this.chkAutoRun.Name = "chkAutoRun";
+            this.chkAutoRun.UseVisualStyleBackColor = true;
             // 
             // chkKeepOlderDedupl
             // 
             resources.ApplyResources(this.chkKeepOlderDedupl, "chkKeepOlderDedupl");
             this.chkKeepOlderDedupl.Name = "chkKeepOlderDedupl";
             this.chkKeepOlderDedupl.UseVisualStyleBackColor = true;
+            // 
+            // chkAllowLANConn
+            // 
+            resources.ApplyResources(this.chkAllowLANConn, "chkAllowLANConn");
+            this.chkAllowLANConn.Name = "chkAllowLANConn";
+            this.chkAllowLANConn.UseVisualStyleBackColor = true;
             // 
             // cbFreshrate
             // 
@@ -516,35 +497,29 @@
             this.cbFreshrate.FormattingEnabled = true;
             this.cbFreshrate.Name = "cbFreshrate";
             // 
-            // lbFreshrate
-            // 
-            resources.ApplyResources(this.lbFreshrate, "lbFreshrate");
-            this.lbFreshrate.Name = "lbFreshrate";
-            // 
             // chkEnableStatistics
             // 
             resources.ApplyResources(this.chkEnableStatistics, "chkEnableStatistics");
             this.chkEnableStatistics.Name = "chkEnableStatistics";
             this.chkEnableStatistics.UseVisualStyleBackColor = true;
             // 
-            // chkAllowLANConn
+            // lbFreshrate
             // 
-            resources.ApplyResources(this.chkAllowLANConn, "chkAllowLANConn");
-            this.chkAllowLANConn.Name = "chkAllowLANConn";
-            this.chkAllowLANConn.UseVisualStyleBackColor = true;
-            // 
-            // chkAutoRun
-            // 
-            resources.ApplyResources(this.chkAutoRun, "chkAutoRun");
-            this.chkAutoRun.Name = "chkAutoRun";
-            this.chkAutoRun.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.lbFreshrate, "lbFreshrate");
+            this.lbFreshrate.Name = "lbFreshrate";
             // 
             // panel2
             // 
             resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Controls.Add(this.btnClose);
-            this.panel2.Controls.Add(this.btnOK);
+            this.panel2.Controls.Add(this.tableLayoutPanel1);
             this.panel2.Name = "panel2";
+            // 
+            // tableLayoutPanel1
+            // 
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+            this.tableLayoutPanel1.Controls.Add(this.btnClose, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnOK, 0, 1);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // btnOK
             // 
@@ -561,7 +536,6 @@
             // OptionSettingForm
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel2);
@@ -585,10 +559,13 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -612,11 +589,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox cmbprotocol;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbprotocol2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtlocalPort2;
-        private System.Windows.Forms.CheckBox chkudpEnabled2;
-        private System.Windows.Forms.CheckBox chkAllowIn2;
         private System.Windows.Forms.CheckBox chkmuxEnabled;
         private System.Windows.Forms.TabControl tabControl_Routing;
         private System.Windows.Forms.TabPage tabPage3;
@@ -649,7 +621,6 @@
         private System.Windows.Forms.ComboBox cmbdomainStrategy;
         private System.Windows.Forms.ComboBox cmbroutingMode;
         private System.Windows.Forms.CheckBox chksniffingEnabled;
-        private System.Windows.Forms.CheckBox chksniffingEnabled2;
         private System.Windows.Forms.CheckBox chkEnableStatistics;
         private System.Windows.Forms.ComboBox cbFreshrate;
         private System.Windows.Forms.Label lbFreshrate;
@@ -658,5 +629,8 @@
         private System.Windows.Forms.CheckBox chkKeepOlderDedupl;
         private System.Windows.Forms.LinkLabel linkLabelRoutingDoc;
         private System.Windows.Forms.CheckBox chkdefAllowInsecure;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
