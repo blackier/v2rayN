@@ -57,6 +57,7 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.txtUserblock = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.cmbroutingMode = new System.Windows.Forms.ComboBox();
             this.linkLabelRoutingDoc = new System.Windows.Forms.LinkLabel();
             this.labRoutingTips = new System.Windows.Forms.Label();
@@ -109,12 +110,12 @@
             // btnClose
             // 
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnClose.Location = new System.Drawing.Point(398, 12);
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClose.Location = new System.Drawing.Point(247, 12);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 35);
             this.btnClose.TabIndex = 7;
-            this.btnClose.Text = "&Cancel";
+            this.btnClose.Text = "&取消";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -139,7 +140,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(712, 409);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Core: basic settings";
+            this.tabPage1.Text = "Core: 基础设置";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -172,9 +173,9 @@
             this.chkdefAllowInsecure.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chkdefAllowInsecure.Location = new System.Drawing.Point(100, 186);
             this.chkdefAllowInsecure.Name = "chkdefAllowInsecure";
-            this.chkdefAllowInsecure.Size = new System.Drawing.Size(106, 21);
+            this.chkdefAllowInsecure.Size = new System.Drawing.Size(99, 21);
             this.chkdefAllowInsecure.TabIndex = 35;
-            this.chkdefAllowInsecure.Text = "allowInsecure";
+            this.chkdefAllowInsecure.Text = "跳过证书校验";
             this.chkdefAllowInsecure.UseVisualStyleBackColor = true;
             // 
             // label16
@@ -183,22 +184,22 @@
             this.label16.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label16.Location = new System.Drawing.Point(6, 50);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(70, 17);
+            this.label16.Size = new System.Drawing.Size(56, 17);
             this.label16.TabIndex = 34;
-            this.label16.Text = "Http proxy";
+            this.label16.Text = "代理模式";
             // 
             // cmblistenerType
             // 
             this.cmblistenerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmblistenerType.FormattingEnabled = true;
             this.cmblistenerType.Items.AddRange(new object[] {
-            "Not Enabled Http Proxy",
-            "Open Http proxy and automatically configure proxy server (global mode)",
-            "Only open Http proxy, do not automatically configure proxy server (direct mode)",
-            "Only open Http proxy and do nothing"});
+            "关闭http代理",
+            "打开http代理，配置系统代理",
+            "打开http代理，清除系统代理",
+            "打开http代理"});
             this.cmblistenerType.Location = new System.Drawing.Point(100, 47);
             this.cmblistenerType.Name = "cmblistenerType";
-            this.cmblistenerType.Size = new System.Drawing.Size(469, 25);
+            this.cmblistenerType.Size = new System.Drawing.Size(276, 25);
             this.cmblistenerType.TabIndex = 33;
             // 
             // chksniffingEnabled
@@ -207,9 +208,9 @@
             this.chksniffingEnabled.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chksniffingEnabled.Location = new System.Drawing.Point(100, 105);
             this.chksniffingEnabled.Name = "chksniffingEnabled";
-            this.chksniffingEnabled.Size = new System.Drawing.Size(119, 21);
+            this.chksniffingEnabled.Size = new System.Drawing.Size(75, 21);
             this.chksniffingEnabled.TabIndex = 31;
-            this.chksniffingEnabled.Text = "Turn on Sniffing";
+            this.chksniffingEnabled.Text = "流量探测";
             this.chksniffingEnabled.UseVisualStyleBackColor = true;
             // 
             // txtremoteDNS
@@ -225,18 +226,18 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(6, 224);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(292, 17);
+            this.label14.Size = new System.Drawing.Size(213, 17);
             this.label14.TabIndex = 29;
-            this.label14.Text = "Custom DNS (multiple, separated by commas (,))";
+            this.label14.Text = "自定义DNS服务器，复数时逗号(,)分割";
             // 
             // chkmuxEnabled
             // 
             this.chkmuxEnabled.AutoSize = true;
             this.chkmuxEnabled.Location = new System.Drawing.Point(100, 132);
             this.chkmuxEnabled.Name = "chkmuxEnabled";
-            this.chkmuxEnabled.Size = new System.Drawing.Size(180, 21);
+            this.chkmuxEnabled.Size = new System.Drawing.Size(75, 21);
             this.chkmuxEnabled.TabIndex = 20;
-            this.chkmuxEnabled.Text = "Turn on Mux Multiplexing ";
+            this.chkmuxEnabled.Text = "多路复用";
             this.chkmuxEnabled.UseVisualStyleBackColor = true;
             // 
             // cmbprotocol
@@ -247,7 +248,7 @@
             this.cmbprotocol.Items.AddRange(new object[] {
             "socks",
             "http"});
-            this.cmbprotocol.Location = new System.Drawing.Point(273, 16);
+            this.cmbprotocol.Location = new System.Drawing.Point(279, 16);
             this.cmbprotocol.Name = "cmbprotocol";
             this.cmbprotocol.Size = new System.Drawing.Size(97, 25);
             this.cmbprotocol.TabIndex = 12;
@@ -255,20 +256,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(209, 19);
+            this.label1.Location = new System.Drawing.Point(184, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 17);
+            this.label1.Size = new System.Drawing.Size(89, 17);
             this.label1.TabIndex = 11;
-            this.label1.Text = "protocol";
+            this.label1.Text = "协议(Protocol)";
             // 
             // chkudpEnabled
             // 
             this.chkudpEnabled.AutoSize = true;
             this.chkudpEnabled.Location = new System.Drawing.Point(100, 78);
             this.chkudpEnabled.Name = "chkudpEnabled";
-            this.chkudpEnabled.Size = new System.Drawing.Size(95, 21);
+            this.chkudpEnabled.Size = new System.Drawing.Size(52, 21);
             this.chkudpEnabled.TabIndex = 10;
-            this.chkudpEnabled.Text = "Enable UDP";
+            this.chkudpEnabled.Text = "UDP";
             this.chkudpEnabled.UseVisualStyleBackColor = true;
             // 
             // chklogEnabled
@@ -276,9 +277,9 @@
             this.chklogEnabled.AutoSize = true;
             this.chklogEnabled.Location = new System.Drawing.Point(100, 159);
             this.chklogEnabled.Name = "chklogEnabled";
-            this.chklogEnabled.Size = new System.Drawing.Size(129, 21);
+            this.chklogEnabled.Size = new System.Drawing.Size(99, 21);
             this.chklogEnabled.TabIndex = 9;
-            this.chklogEnabled.Text = "Record local logs";
+            this.chklogEnabled.Text = "记录本地日志";
             this.chklogEnabled.UseVisualStyleBackColor = true;
             // 
             // cmbloglevel
@@ -291,7 +292,7 @@
             "warning",
             "error",
             "none"});
-            this.cmbloglevel.Location = new System.Drawing.Point(472, 16);
+            this.cmbloglevel.Location = new System.Drawing.Point(503, 16);
             this.cmbloglevel.Name = "cmbloglevel";
             this.cmbloglevel.Size = new System.Drawing.Size(97, 25);
             this.cmbloglevel.TabIndex = 6;
@@ -299,11 +300,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(406, 19);
+            this.label5.Location = new System.Drawing.Point(382, 19);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 17);
+            this.label5.Size = new System.Drawing.Size(115, 17);
             this.label5.TabIndex = 8;
-            this.label5.Text = "Log level";
+            this.label5.Text = "日志等级(LogLevel)";
             // 
             // txtlocalPort
             // 
@@ -319,7 +320,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 17);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Listening port";
+            this.label2.Text = "监听端口(Port)";
             // 
             // tabPage2
             // 
@@ -329,7 +330,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(712, 409);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Core: Routing settings";
+            this.tabPage2.Text = "Core: 路由设置";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -363,7 +364,7 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(692, 257);
             this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "1.Proxy Domain or IP";
+            this.tabPage3.Text = "代理";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // txtUseragent
@@ -385,7 +386,7 @@
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(692, 257);
             this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "2.Direct Domain or IP";
+            this.tabPage4.Text = "直连";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // txtUserdirect
@@ -407,7 +408,7 @@
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(692, 257);
             this.tabPage5.TabIndex = 2;
-            this.tabPage5.Text = "3.Block Domain or IP";
+            this.tabPage5.Text = "黑名单";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // txtUserblock
@@ -423,6 +424,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.cmbroutingMode);
             this.panel3.Controls.Add(this.linkLabelRoutingDoc);
             this.panel3.Controls.Add(this.labRoutingTips);
@@ -432,6 +434,15 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(700, 94);
             this.panel3.TabIndex = 19;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 37);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 17);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "预设路由规则";
             // 
             // cmbroutingMode
             // 
@@ -444,7 +455,7 @@
             "Mainland address",
             "No mainland address",
             "Ad address "});
-            this.cmbroutingMode.Location = new System.Drawing.Point(326, 3);
+            this.cmbroutingMode.Location = new System.Drawing.Point(93, 34);
             this.cmbroutingMode.Name = "cmbroutingMode";
             this.cmbroutingMode.Size = new System.Drawing.Size(160, 25);
             this.cmbroutingMode.TabIndex = 14;
@@ -453,27 +464,27 @@
             // linkLabelRoutingDoc
             // 
             this.linkLabelRoutingDoc.AutoSize = true;
+            this.linkLabelRoutingDoc.LinkColor = System.Drawing.Color.Black;
             this.linkLabelRoutingDoc.Location = new System.Drawing.Point(7, 6);
             this.linkLabelRoutingDoc.Margin = new System.Windows.Forms.Padding(0);
             this.linkLabelRoutingDoc.Name = "linkLabelRoutingDoc";
-            this.linkLabelRoutingDoc.Size = new System.Drawing.Size(104, 17);
+            this.linkLabelRoutingDoc.Size = new System.Drawing.Size(56, 17);
             this.linkLabelRoutingDoc.TabIndex = 19;
             this.linkLabelRoutingDoc.TabStop = true;
-            this.linkLabelRoutingDoc.Text = "Domain strategy";
+            this.linkLabelRoutingDoc.Text = "域名解析";
             this.linkLabelRoutingDoc.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelRoutingDoc_LinkClicked);
             // 
             // labRoutingTips
             // 
             this.labRoutingTips.AutoSize = true;
-            this.labRoutingTips.ForeColor = System.Drawing.Color.Brown;
+            this.labRoutingTips.ForeColor = System.Drawing.Color.Black;
             this.labRoutingTips.Location = new System.Drawing.Point(7, 71);
             this.labRoutingTips.Margin = new System.Windows.Forms.Padding(1);
             this.labRoutingTips.Name = "labRoutingTips";
             this.labRoutingTips.Padding = new System.Windows.Forms.Padding(1);
-            this.labRoutingTips.Size = new System.Drawing.Size(591, 19);
+            this.labRoutingTips.Size = new System.Drawing.Size(245, 19);
             this.labRoutingTips.TabIndex = 13;
-            this.labRoutingTips.Text = "*Set the rules, separated by commas (,); support Domain (pure string / regular / " +
-    "subdomain) and IP";
+            this.labRoutingTips.Text = "*设置路由规则，逗号 (,)分割，支持域名和IP";
             // 
             // cmbdomainStrategy
             // 
@@ -483,9 +494,9 @@
             "AsIs",
             "IPIfNonMatch",
             "IPOnDemand"});
-            this.cmbdomainStrategy.Location = new System.Drawing.Point(114, 3);
+            this.cmbdomainStrategy.Location = new System.Drawing.Point(93, 3);
             this.cmbdomainStrategy.Name = "cmbdomainStrategy";
-            this.cmbdomainStrategy.Size = new System.Drawing.Size(128, 25);
+            this.cmbdomainStrategy.Size = new System.Drawing.Size(160, 25);
             this.cmbdomainStrategy.TabIndex = 16;
             // 
             // tabPage6
@@ -496,7 +507,7 @@
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage6.Size = new System.Drawing.Size(712, 409);
             this.tabPage6.TabIndex = 2;
-            this.tabPage6.Text = "Core: KCP settings";
+            this.tabPage6.Text = "Core: KCP设置";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // groupBox3
@@ -635,7 +646,7 @@
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage7.Size = new System.Drawing.Size(712, 409);
             this.tabPage7.TabIndex = 3;
-            this.tabPage7.Text = "v2rayN settings";
+            this.tabPage7.Text = "v2rayN设置";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // groupBox4
@@ -652,15 +663,16 @@
             this.groupBox4.Size = new System.Drawing.Size(706, 403);
             this.groupBox4.TabIndex = 34;
             this.groupBox4.TabStop = false;
+            this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
             // 
             // chkAutoRun
             // 
             this.chkAutoRun.AutoSize = true;
             this.chkAutoRun.Location = new System.Drawing.Point(6, 22);
             this.chkAutoRun.Name = "chkAutoRun";
-            this.chkAutoRun.Size = new System.Drawing.Size(238, 21);
+            this.chkAutoRun.Size = new System.Drawing.Size(75, 21);
             this.chkAutoRun.TabIndex = 23;
-            this.chkAutoRun.Text = "Automatically start at system startup";
+            this.chkAutoRun.Text = "开机启动";
             this.chkAutoRun.UseVisualStyleBackColor = true;
             // 
             // chkKeepOlderDedupl
@@ -669,9 +681,9 @@
             this.chkKeepOlderDedupl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chkKeepOlderDedupl.Location = new System.Drawing.Point(6, 103);
             this.chkKeepOlderDedupl.Name = "chkKeepOlderDedupl";
-            this.chkKeepOlderDedupl.Size = new System.Drawing.Size(209, 21);
+            this.chkKeepOlderDedupl.Size = new System.Drawing.Size(159, 21);
             this.chkKeepOlderDedupl.TabIndex = 33;
-            this.chkKeepOlderDedupl.Text = "Keep older when deduplication";
+            this.chkKeepOlderDedupl.Text = "去重时保留序号较小的项";
             this.chkKeepOlderDedupl.UseVisualStyleBackColor = true;
             // 
             // chkAllowLANConn
@@ -679,16 +691,16 @@
             this.chkAllowLANConn.AutoSize = true;
             this.chkAllowLANConn.Location = new System.Drawing.Point(6, 49);
             this.chkAllowLANConn.Name = "chkAllowLANConn";
-            this.chkAllowLANConn.Size = new System.Drawing.Size(213, 21);
+            this.chkAllowLANConn.Size = new System.Drawing.Size(135, 21);
             this.chkAllowLANConn.TabIndex = 29;
-            this.chkAllowLANConn.Text = "Allow connections from the LAN";
+            this.chkAllowLANConn.Text = "允许来自LAN的连接";
             this.chkAllowLANConn.UseVisualStyleBackColor = true;
             // 
             // cbFreshrate
             // 
             this.cbFreshrate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFreshrate.FormattingEnabled = true;
-            this.cbFreshrate.Location = new System.Drawing.Point(139, 130);
+            this.cbFreshrate.Location = new System.Drawing.Point(107, 130);
             this.cbFreshrate.Name = "cbFreshrate";
             this.cbFreshrate.Size = new System.Drawing.Size(105, 25);
             this.cbFreshrate.TabIndex = 32;
@@ -699,10 +711,9 @@
             this.chkEnableStatistics.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.chkEnableStatistics.Location = new System.Drawing.Point(6, 76);
             this.chkEnableStatistics.Name = "chkEnableStatistics";
-            this.chkEnableStatistics.Size = new System.Drawing.Size(547, 21);
+            this.chkEnableStatistics.Size = new System.Drawing.Size(159, 21);
             this.chkEnableStatistics.TabIndex = 29;
-            this.chkEnableStatistics.Text = "Enable Statistics (Realtime netspeed and traffic records. Require restart the v2r" +
-    "ayN client)";
+            this.chkEnableStatistics.Text = "流量计速，需要重启软件";
             this.chkEnableStatistics.UseVisualStyleBackColor = true;
             // 
             // lbFreshrate
@@ -711,9 +722,9 @@
             this.lbFreshrate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.lbFreshrate.Location = new System.Drawing.Point(21, 133);
             this.lbFreshrate.Name = "lbFreshrate";
-            this.lbFreshrate.Size = new System.Drawing.Size(114, 17);
+            this.lbFreshrate.Size = new System.Drawing.Size(80, 17);
             this.lbFreshrate.TabIndex = 30;
-            this.lbFreshrate.Text = "Statistics freshrate";
+            this.lbFreshrate.Text = "计速刷新频率";
             // 
             // panel2
             // 
@@ -730,8 +741,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.btnClose, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnOK, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnOK, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnClose, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -744,12 +755,12 @@
             // 
             // btnOK
             // 
-            this.btnOK.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnOK.Location = new System.Drawing.Point(247, 12);
+            this.btnOK.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnOK.Location = new System.Drawing.Point(398, 12);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 35);
             this.btnOK.TabIndex = 8;
-            this.btnOK.Text = "&OK";
+            this.btnOK.Text = "&确定";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
@@ -863,5 +874,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label3;
     }
 }

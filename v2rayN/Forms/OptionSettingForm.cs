@@ -324,6 +324,11 @@ namespace v2rayN.Forms
                     break;
             }
         }
+
+        private void groupBox4_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 
     class ComboItem
