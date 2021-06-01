@@ -62,8 +62,8 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.menuExport2ShareUrl = new System.Windows.Forms.ToolStripMenuItem();
             this.menuExport2SubContent = new System.Windows.Forms.ToolStripMenuItem();
-            this.qrCodeControl = new v2rayN.Forms.QRCodeControl();
             this.tsbServer = new System.Windows.Forms.ToolStripDropDownButton();
+            this.qrCodeControl = new v2rayN.Forms.QRCodeControl();
             this.notifyMain = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuSysAgentMode = new System.Windows.Forms.ToolStripMenuItem();
@@ -197,6 +197,7 @@
             this.menuExport2ShareUrl,
             this.menuExport2SubContent});
             this.cmsLv.Name = "cmsLv";
+            this.cmsLv.OwnerItem = this.tsbServer;
             this.cmsLv.Size = new System.Drawing.Size(250, 534);
             // 
             // menuAddVmessServer
@@ -380,16 +381,6 @@
             this.menuExport2SubContent.Text = "导出订阅分享(base64)到剪贴板";
             this.menuExport2SubContent.Click += new System.EventHandler(this.menuExport2SubContent_Click);
             // 
-            // qrCodeControl
-            // 
-            this.qrCodeControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.qrCodeControl.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.qrCodeControl.Location = new System.Drawing.Point(0, 0);
-            this.qrCodeControl.Margin = new System.Windows.Forms.Padding(6);
-            this.qrCodeControl.Name = "qrCodeControl";
-            this.qrCodeControl.Size = new System.Drawing.Size(256, 382);
-            this.qrCodeControl.TabIndex = 2;
-            // 
             // tsbServer
             // 
             this.tsbServer.DropDown = this.cmsLv;
@@ -399,6 +390,16 @@
             this.tsbServer.Size = new System.Drawing.Size(57, 53);
             this.tsbServer.Text = "服务器";
             this.tsbServer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // qrCodeControl
+            // 
+            this.qrCodeControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.qrCodeControl.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.qrCodeControl.Location = new System.Drawing.Point(0, 0);
+            this.qrCodeControl.Margin = new System.Windows.Forms.Padding(6);
+            this.qrCodeControl.Name = "qrCodeControl";
+            this.qrCodeControl.Size = new System.Drawing.Size(256, 382);
+            this.qrCodeControl.TabIndex = 2;
             // 
             // notifyMain
             // 
@@ -661,9 +662,10 @@
             this.tsbSubUpdate});
             this.tsbSub.Image = ((System.Drawing.Image)(resources.GetObject("tsbSub.Image")));
             this.tsbSub.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSub.Margin = new System.Windows.Forms.Padding(10, 1, 10, 2);
+            this.tsbSub.Margin = new System.Windows.Forms.Padding(0, 1, 2, 2);
             this.tsbSub.Name = "tsbSub";
-            this.tsbSub.Size = new System.Drawing.Size(45, 53);
+            this.tsbSub.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.tsbSub.Size = new System.Drawing.Size(55, 53);
             this.tsbSub.Text = "订阅";
             this.tsbSub.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
@@ -687,9 +689,9 @@
             this.tsbQRCodeSwitch.ForeColor = System.Drawing.Color.Black;
             this.tsbQRCodeSwitch.Image = ((System.Drawing.Image)(resources.GetObject("tsbQRCodeSwitch.Image")));
             this.tsbQRCodeSwitch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbQRCodeSwitch.Margin = new System.Windows.Forms.Padding(0, 1, 10, 2);
             this.tsbQRCodeSwitch.Name = "tsbQRCodeSwitch";
-            this.tsbQRCodeSwitch.Size = new System.Drawing.Size(36, 53);
+            this.tsbQRCodeSwitch.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.tsbQRCodeSwitch.Size = new System.Drawing.Size(46, 53);
             this.tsbQRCodeSwitch.Text = "分享";
             this.tsbQRCodeSwitch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbQRCodeSwitch.CheckedChanged += new System.EventHandler(this.tsbQRCodeSwitch_CheckedChanged);
@@ -703,9 +705,9 @@
             // 
             this.tsbOptionSetting.Image = ((System.Drawing.Image)(resources.GetObject("tsbOptionSetting.Image")));
             this.tsbOptionSetting.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbOptionSetting.Margin = new System.Windows.Forms.Padding(10, 1, 10, 2);
             this.tsbOptionSetting.Name = "tsbOptionSetting";
-            this.tsbOptionSetting.Size = new System.Drawing.Size(36, 53);
+            this.tsbOptionSetting.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.tsbOptionSetting.Size = new System.Drawing.Size(46, 53);
             this.tsbOptionSetting.Text = "设置";
             this.tsbOptionSetting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbOptionSetting.Click += new System.EventHandler(this.tsbOptionSetting_Click);
@@ -746,14 +748,14 @@
             // tsbCheckUpdateN
             // 
             this.tsbCheckUpdateN.Name = "tsbCheckUpdateN";
-            this.tsbCheckUpdateN.Size = new System.Drawing.Size(180, 22);
+            this.tsbCheckUpdateN.Size = new System.Drawing.Size(135, 22);
             this.tsbCheckUpdateN.Text = "v2rayN";
             this.tsbCheckUpdateN.Click += new System.EventHandler(this.tsbCheckUpdateN_Click);
             // 
             // tsbCheckUpdateCore
             // 
             this.tsbCheckUpdateCore.Name = "tsbCheckUpdateCore";
-            this.tsbCheckUpdateCore.Size = new System.Drawing.Size(180, 22);
+            this.tsbCheckUpdateCore.Size = new System.Drawing.Size(135, 22);
             this.tsbCheckUpdateCore.Text = "v2rayCore";
             this.tsbCheckUpdateCore.Click += new System.EventHandler(this.tsbCheckUpdateCore_Click);
             // 
@@ -769,23 +771,24 @@
             this.tsbV2rayWebsite});
             this.tsbHelp.Image = ((System.Drawing.Image)(resources.GetObject("tsbHelp.Image")));
             this.tsbHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbHelp.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
+            this.tsbHelp.Margin = new System.Windows.Forms.Padding(0, 1, 2, 2);
             this.tsbHelp.Name = "tsbHelp";
-            this.tsbHelp.Size = new System.Drawing.Size(45, 53);
+            this.tsbHelp.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.tsbHelp.Size = new System.Drawing.Size(55, 53);
             this.tsbHelp.Text = "帮助";
             this.tsbHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // tsbAbout
             // 
             this.tsbAbout.Name = "tsbAbout";
-            this.tsbAbout.Size = new System.Drawing.Size(180, 22);
+            this.tsbAbout.Size = new System.Drawing.Size(163, 22);
             this.tsbAbout.Text = "v2rayN Project";
             this.tsbAbout.Click += new System.EventHandler(this.tsbAbout_Click);
             // 
             // tsbV2rayWebsite
             // 
             this.tsbV2rayWebsite.Name = "tsbV2rayWebsite";
-            this.tsbV2rayWebsite.Size = new System.Drawing.Size(180, 22);
+            this.tsbV2rayWebsite.Size = new System.Drawing.Size(163, 22);
             this.tsbV2rayWebsite.Text = "V2Ray Website";
             this.tsbV2rayWebsite.Click += new System.EventHandler(this.tsbV2rayWebsite_Click);
             // 
@@ -794,9 +797,9 @@
             this.tsbPromotion.ForeColor = System.Drawing.Color.Black;
             this.tsbPromotion.Image = ((System.Drawing.Image)(resources.GetObject("tsbPromotion.Image")));
             this.tsbPromotion.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbPromotion.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
             this.tsbPromotion.Name = "tsbPromotion";
-            this.tsbPromotion.Size = new System.Drawing.Size(36, 53);
+            this.tsbPromotion.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.tsbPromotion.Size = new System.Drawing.Size(46, 53);
             this.tsbPromotion.Text = "推广";
             this.tsbPromotion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbPromotion.Click += new System.EventHandler(this.tsbPromotion_Click);
