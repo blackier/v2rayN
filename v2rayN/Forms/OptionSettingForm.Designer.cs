@@ -449,12 +449,12 @@
             this.cmbroutingMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbroutingMode.FormattingEnabled = true;
             this.cmbroutingMode.Items.AddRange(new object[] {
-            "Dropdown and add rules",
-            "Global",
-            "The LAN address",
-            "Mainland address",
-            "No mainland address",
-            "Ad address "});
+            "下拉选择添加",
+            "清空",
+            "私有地址",
+            "常见大陆地址",
+            "常见非大陆地址",
+            "常见广告地址"});
             this.cmbroutingMode.Location = new System.Drawing.Point(93, 34);
             this.cmbroutingMode.Name = "cmbroutingMode";
             this.cmbroutingMode.Size = new System.Drawing.Size(160, 25);
