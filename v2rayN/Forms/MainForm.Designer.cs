@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
-            ""}, -1, System.Drawing.SystemColors.WindowText, System.Drawing.SystemColors.Window, new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point));
+            ""}, -1, System.Drawing.SystemColors.WindowText, System.Drawing.SystemColors.Window, new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.lvServers = new v2rayN.Extension.ListViewEx();
@@ -166,7 +166,7 @@
             // 
             // cmsLv
             // 
-            this.cmsLv.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.cmsLv.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cmsLv.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsLv.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuAddVmessServer,
@@ -394,7 +394,7 @@
             // qrCodeControl
             // 
             this.qrCodeControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.qrCodeControl.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.qrCodeControl.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.qrCodeControl.Location = new System.Drawing.Point(0, 0);
             this.qrCodeControl.Margin = new System.Windows.Forms.Padding(6);
             this.qrCodeControl.Name = "qrCodeControl";
@@ -410,7 +410,7 @@
             // 
             // cmsMain
             // 
-            this.cmsMain.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.cmsMain.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cmsMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsMain.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cmsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -551,7 +551,7 @@
             // 
             // ssMain
             // 
-            this.ssMain.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.ssMain.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ssMain.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.ssMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolSslSocksPortLab,
@@ -628,7 +628,7 @@
             // 
             // tsMain
             // 
-            this.tsMain.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.tsMain.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tsMain.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbServer,
@@ -812,7 +812,6 @@
             this.Controls.Add(this.groupBoxInfo);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tsMain);
-            this.Margin = new System.Windows.Forms.Padding(11479, 1022, 11479, 1022);
             this.MaximizeBox = true;
             this.MinimizeBox = true;
             this.Name = "MainForm";
