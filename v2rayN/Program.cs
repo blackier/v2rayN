@@ -40,28 +40,6 @@ namespace v2rayN
             }
         }
 
-        //private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
-        //{
-        //    try
-        //    {
-        //        string resourceName = "v2rayN.LIB." + new AssemblyName(args.Name).Name + ".dll";
-        //        using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
-        //        {
-        //            if (stream == null)
-        //            {
-        //                return null;
-        //            }
-        //            byte[] assemblyData = new byte[stream.Length];
-        //            stream.Read(assemblyData, 0, assemblyData.Length);
-        //            return Assembly.Load(assemblyData);
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        return null;
-        //    }
-        //}
-
         /// <summary> 
         /// 检查是否已在运行
         /// </summary> 

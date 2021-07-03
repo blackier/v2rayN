@@ -13,7 +13,6 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.Socks
         public static InboundConfigurationObject Default => new()
         {
             Udp = true,
-            Ip = "127.0.0.1",
         };
     }
 }

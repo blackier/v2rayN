@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
@@ -1195,135 +1194,185 @@ namespace v2rayN.Forms
         }
         private void tsbCheckUpdateN_Click(object sender, EventArgs e)
         {
-            //System.Diagnostics.Process.Start(Global.UpdateUrl);
-            DownloadHandle downloadHandle = null;
-            if (downloadHandle == null)
+            DownloadHandle downloadHandle = new DownloadHandle();
+            downloadHandle.AbsoluteCompleted += (sender2, args) =>
             {
-                downloadHandle = new DownloadHandle();
-                downloadHandle.AbsoluteCompleted += (sender2, args) =>
+                if (args.Success)
                 {
-                    if (args.Success)
-                    {
-                        AppendText(false, string.Format(Utils.StringsRes.I18N("MsgParsingSuccessfully"), "v2rayN"));
+                    AppendText(false, string.Format(Utils.StringsRes.I18N("MsgParsingSuccessfully"), "v2rayN"));
 
-                        string url = args.Msg;
-                        Invoke((MethodInvoker)(delegate
-                        {
-                            askToDownload(downloadHandle, url);
-                        }));
-                    }
-                    else
+                    string url = args.Msg;
+                    Invoke((MethodInvoker)(delegate
                     {
-                        AppendText(false, args.Msg);
-                    }
-                };
-                downloadHandle.UpdateCompleted += (sender2, args) =>
+                        askToDownload(downloadHandle, url);
+                    }));
+                }
+                else
                 {
-                    if (args.Success)
-                    {
-                        AppendText(false, Utils.StringsRes.I18N("MsgDownloadV2rayCoreSuccessfully"));
+                    AppendText(false, args.Msg);
+                }
+            };
+            downloadHandle.UpdateCompleted += (sender2, args) =>
+            {
+                if (args.Success)
+                {
+                    AppendText(false, Utils.StringsRes.I18N("MsgDownloadV2rayCoreSuccessfully"));
 
-                        try
+                    try
+                    {
+                        string fileName = Utils.GetPath(downloadHandle.downloadFileName);
+                        Process process = new Process
                         {
-                            string fileName = Utils.GetPath(downloadHandle.DownloadFileName);
-                            Process process = new Process
+                            StartInfo = new ProcessStartInfo
                             {
-                                StartInfo = new ProcessStartInfo
-                                {
-                                    FileName = "v2rayUpgrade.exe",
-                                    Arguments = "\"" + fileName + "\"",
-                                    WorkingDirectory = Utils.StartupPath()
-                                }
-                            };
-                            process.Start();
-                            if (process.Id > 0)
-                            {
-                                menuExit_Click(null, null);
+                                FileName = "v2rayUpgrade.exe",
+                                Arguments = "\"" + fileName + "\"",
+                                WorkingDirectory = Utils.StartupPath()
                             }
-                        }
-                        catch (Exception ex)
+                        };
+                        process.Start();
+                        if (process.Id > 0)
                         {
-                            AppendText(false, ex.Message);
+                            menuExit_Click(null, null);
                         }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        AppendText(false, args.Msg);
+                        AppendText(false, ex.Message);
                     }
-                };
-                downloadHandle.Error += (sender2, args) =>
+                }
+                else
                 {
-                    AppendText(true, args.GetException().Message);
-                };
-            }
+                    AppendText(false, args.Msg);
+                }
+            };
+            downloadHandle.Error += (sender2, args) =>
+            {
+                AppendText(true, args.GetException().Message);
+            };
+
 
             AppendText(false, string.Format(Utils.StringsRes.I18N("MsgStartUpdating"), "v2rayN"));
-            downloadHandle.CheckUpdateAsync("v2rayN");
+            downloadHandle.CheckUpdateAsync(DownloadHandle.downloadType.v2rayN);
         }
 
         private void tsbCheckUpdateCore_Click(object sender, EventArgs e)
         {
-            DownloadHandle downloadHandle = null;
-            if (downloadHandle == null)
+            DownloadHandle downloadHandle = new DownloadHandle();
+            downloadHandle.AbsoluteCompleted += (sender2, args) =>
             {
-                downloadHandle = new DownloadHandle();
-                downloadHandle.AbsoluteCompleted += (sender2, args) =>
+                if (args.Success)
                 {
-                    if (args.Success)
-                    {
-                        AppendText(false, string.Format(Utils.StringsRes.I18N("MsgParsingSuccessfully"), "v2rayCore"));
+                    AppendText(false, string.Format(Utils.StringsRes.I18N("MsgParsingSuccessfully"), "v2rayCore"));
 
-                        string url = args.Msg;
-                        Invoke((MethodInvoker)(delegate
-                        {
-                            askToDownload(downloadHandle, url);
-                        }));
-                    }
-                    else
+                    string url = args.Msg;
+                    Invoke((MethodInvoker)(delegate
                     {
-                        AppendText(false, args.Msg);
-                    }
-                };
-                downloadHandle.UpdateCompleted += (sender2, args) =>
+                        askToDownload(downloadHandle, url);
+                    }));
+                }
+                else
                 {
-                    if (args.Success)
-                    {
-                        AppendText(false, Utils.StringsRes.I18N("MsgDownloadV2rayCoreSuccessfully"));
-                        AppendText(false, Utils.StringsRes.I18N("MsgUnpacking"));
-
-                        try
-                        {
-                            CloseV2ray();
-
-                            string fileName = downloadHandle.DownloadFileName;
-                            fileName = Utils.GetPath(fileName);
-                            Utils.FileManager.ZipExtractToFile(fileName);
-
-                            AppendText(false, Utils.StringsRes.I18N("MsgUpdateV2rayCoreSuccessfullyMore"));
-
-                            Global.reloadV2ray = true;
-                            LoadV2ray();
-
-                            AppendText(false, Utils.StringsRes.I18N("MsgUpdateV2rayCoreSuccessfully"));
-                        }
-                        catch (Exception ex)
-                        {
-                            AppendText(false, ex.Message);
-                        }
-                    }
-                    else
-                    {
-                        AppendText(false, args.Msg);
-                    }
-                };
-                downloadHandle.Error += (sender2, args) =>
+                    AppendText(false, args.Msg);
+                }
+            };
+            downloadHandle.UpdateCompleted += (sender2, args) =>
+            {
+                if (args.Success)
                 {
-                    AppendText(true, args.GetException().Message);
-                };
-            }
+                    AppendText(false, Utils.StringsRes.I18N("MsgDownloadV2rayCoreSuccessfully"));
+                    AppendText(false, Utils.StringsRes.I18N("MsgUnpacking"));
+
+                    try
+                    {
+                        CloseV2ray();
+
+                        string fileName = downloadHandle.downloadFileName;
+                        fileName = Utils.GetPath(fileName);
+                        Utils.FileManager.ZipExtractToFile(fileName);
+
+                        AppendText(false, Utils.StringsRes.I18N("MsgUpdateV2rayCoreSuccessfullyMore"));
+
+                        Global.reloadV2ray = true;
+                        LoadV2ray();
+
+                        AppendText(false, Utils.StringsRes.I18N("MsgUpdateV2rayCoreSuccessfully"));
+                    }
+                    catch (Exception ex)
+                    {
+                        AppendText(false, ex.Message);
+                    }
+                }
+                else
+                {
+                    AppendText(false, args.Msg);
+                }
+            };
+            downloadHandle.Error += (sender2, args) =>
+            {
+                AppendText(true, args.GetException().Message);
+            };
 
             AppendText(false, string.Format(Utils.StringsRes.I18N("MsgStartUpdating"), "v2rayCore"));
-            downloadHandle.CheckUpdateAsync("Core");
+            downloadHandle.CheckUpdateAsync(DownloadHandle.downloadType.v2rayCore);
+        }
+
+        private void tsbCheckUpdateDomainList_Click(object sender, EventArgs e)
+        {
+            DownloadHandle downloadHandle = new DownloadHandle();
+            downloadHandle.AbsoluteCompleted += (sender2, args) =>
+            {
+                if (args.Success)
+                {
+                    AppendText(false, string.Format(Utils.StringsRes.I18N("MsgParsingSuccessfully"), "Domain list"));
+
+                    string url = args.Msg;
+                    Invoke((MethodInvoker)(delegate
+                    {
+                        askToDownload(downloadHandle, url);
+                    }));
+                }
+                else
+                {
+                    AppendText(false, args.Msg);
+                }
+            };
+            downloadHandle.UpdateCompleted += (sender2, args) =>
+            {
+                if (args.Success)
+                {
+                    AppendText(false, Utils.StringsRes.I18N("MsgDownloadDomainListSuccessfully"));
+
+                    try
+                    {
+                        CloseV2ray();
+
+                        Utils.FileManager.RemoveFile(Utils.GetPath("geosite.dat"));
+                        Utils.FileManager.RenameFile(Utils.GetPath(downloadHandle.downloadFileName), "geosite.dat");
+
+                        Global.reloadV2ray = true;
+                        LoadV2ray();
+
+                        AppendText(false, Utils.StringsRes.I18N("MsgReplaceDomainListSuccessfully"));
+                    }
+                    catch (Exception ex)
+                    {
+                        AppendText(false, ex.Message);
+                    }
+                }
+                else
+                {
+                    AppendText(false, args.Msg);
+                }
+            };
+            downloadHandle.Error += (sender2, args) =>
+            {
+                AppendText(true, args.GetException().Message);
+            };
+
+
+            AppendText(false, string.Format(Utils.StringsRes.I18N("MsgStartUpdating"), "Domain list"));
+            downloadHandle.CheckUpdateAsync(DownloadHandle.downloadType.domainList);
         }
 
         #endregion

@@ -7,6 +7,7 @@ namespace Shadowsocks.Interop.V2Ray.Routing
     {
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         public string Type { get; set; }
+        public string DomainMatcher { get; set; }
         public List<string> Domain { get; set; }
         public List<string> Ip { get; set; }
         public object Port { get; set; }
@@ -23,6 +24,7 @@ namespace Shadowsocks.Interop.V2Ray.Routing
         public RuleObject()
         {
             Type = "field";
+            DomainMatcher = "mph";
         }
 
         public static RuleObject DefaultOutbound => new()

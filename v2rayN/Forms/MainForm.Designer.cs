@@ -110,6 +110,7 @@
             this.tsbAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbV2rayWebsite = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbPromotion = new System.Windows.Forms.ToolStripButton();
+            this.tsbCheckUpdateDomainList = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -456,7 +457,7 @@
             // 
             this.menuKeep.Name = "menuKeep";
             this.menuKeep.Size = new System.Drawing.Size(231, 22);
-            this.menuKeep.Text = "打开http代理，清楚系统代理";
+            this.menuKeep.Text = "打开http代理，清除系统代理";
             this.menuKeep.Click += new System.EventHandler(this.menuKeep_Click);
             // 
             // menuKeepNothing
@@ -737,7 +738,8 @@
             // 
             this.tsbCheckUpdate.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbCheckUpdateN,
-            this.tsbCheckUpdateCore});
+            this.tsbCheckUpdateCore,
+            this.tsbCheckUpdateDomainList});
             this.tsbCheckUpdate.Image = ((System.Drawing.Image)(resources.GetObject("tsbCheckUpdate.Image")));
             this.tsbCheckUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbCheckUpdate.Name = "tsbCheckUpdate";
@@ -758,6 +760,13 @@
             this.tsbCheckUpdateCore.Size = new System.Drawing.Size(135, 22);
             this.tsbCheckUpdateCore.Text = "v2rayCore";
             this.tsbCheckUpdateCore.Click += new System.EventHandler(this.tsbCheckUpdateCore_Click);
+            // 
+            // tsbCheckUpdateDomainList
+            // 
+            this.tsbCheckUpdateDomainList.Name = "tsbCheckUpdateDomainList";
+            this.tsbCheckUpdateDomainList.Size = new System.Drawing.Size(135, 22);
+            this.tsbCheckUpdateDomainList.Text = "Domain list";
+            this.tsbCheckUpdateDomainList.Click += new System.EventHandler(this.tsbCheckUpdateDomainList_Click);
             // 
             // toolStripSeparator10
             // 
@@ -919,6 +928,7 @@
         private System.Windows.Forms.ToolStripButton tsbQRCodeSwitch;
         private System.Windows.Forms.ToolStripMenuItem menuAddVlessServer;
         private System.Windows.Forms.ToolStripMenuItem menuAddTrojanServer;
+        private System.Windows.Forms.ToolStripMenuItem tsbCheckUpdateDomainList;
     }
 }
 

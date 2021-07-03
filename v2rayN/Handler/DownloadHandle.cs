@@ -26,14 +26,6 @@ namespace v2rayN.Handler
 
         public event ErrorEventHandler Error;
 
-        public string DownloadFileName
-        {
-            get
-            {
-                return "v2ray-windows.zip";
-            }
-        }
-
         public class ResultEventArgs : EventArgs
         {
             public bool Success;
@@ -51,14 +43,23 @@ namespace v2rayN.Handler
         private DateTime totalDatetime = new DateTime();
         private int DownloadTimeout = -1;
 
-        #region Check for updates
-
-        private readonly string nLatestUrl = "https://github.com/2dust/v2rayN/releases/latest";
-        private const string nUrl = "https://github.com/2dust/v2rayN/releases/download/{0}/v2rayN.zip";
+        public enum downloadType
+        {
+            v2rayN,
+            v2rayCore,
+            domainList
+        }
+        public string downloadFileName;
+        private readonly string nLatestUrl = "https://github.com/blackier/v2rayN/releases/latest";
+        private const string nUrl = "https://github.com/blackier/v2rayN/releases/download/{0}/v2rayN.zip";
         private readonly string coreLatestUrl = "https://github.com/v2fly/v2ray-core/releases/latest";
         private const string coreUrl = "https://github.com/v2fly/v2ray-core/releases/download/{0}/v2ray-windows-{1}.zip";
+        private readonly string geositeLatestUrl = "https://github.com/v2fly/domain-list-community/releases/latest";
+        private const string geositeUrl = "https://github.com/v2fly/domain-list-community/releases/download/{0}/dlc.dat";
 
-        public async void CheckUpdateAsync(string type)
+        #region Check for updates
+
+        public async void CheckUpdateAsync(downloadType type)
         {
             Utils.SetSecurityProtocol();
             HttpClientHandler webRequestHandler = new HttpClientHandler
@@ -68,13 +69,17 @@ namespace v2rayN.Handler
             HttpClient httpClient = new HttpClient(webRequestHandler);
 
             string url;
-            if (type == "Core")
+            if (type == downloadType.v2rayCore)
             {
                 url = coreLatestUrl;
             }
-            else if (type == "v2rayN")
+            else if (type == downloadType.v2rayN)
             {
                 url = nLatestUrl;
+            }
+            else if (type == downloadType.domainList)
+            {
+                url = geositeLatestUrl;
             }
             else
             {
@@ -128,27 +133,31 @@ namespace v2rayN.Handler
                 return "";
             }
         }
-        private void responseHandler(string type, string redirectUrl)
+        private void responseHandler(downloadType type, string redirectUrl)
         {
             try
             {
                 string version = redirectUrl.Substring(redirectUrl.LastIndexOf("/", StringComparison.Ordinal) + 1);
 
-                string curVersion;
-                string message;
+                string curVersion = "";
+                string message = "";
                 string url;
-                if (type == "Core")
+                if (type == downloadType.v2rayCore)
                 {
                     curVersion = "v" + getV2rayVersion();
                     message = string.Format(Utils.StringsRes.I18N("IsLatestCore"), curVersion);
                     string osBit = Environment.Is64BitProcess ? "64" : "32";
                     url = string.Format(coreUrl, version, osBit);
                 }
-                else if (type == "v2rayN")
+                else if (type == downloadType.v2rayN)
                 {
                     curVersion = FileVersionInfo.GetVersionInfo(Utils.GetExePath()).FileVersion.ToString();
                     message = string.Format(Utils.StringsRes.I18N("IsLatestN"), curVersion);
                     url = string.Format(nUrl, version);
+                }
+                else if (type == downloadType.domainList)
+                {
+                    url = string.Format(geositeUrl, version);
                 }
                 else
                 {
@@ -160,6 +169,7 @@ namespace v2rayN.Handler
                     AbsoluteCompleted?.Invoke(this, new ResultEventArgs(false, message));
                     return;
                 }
+                downloadFileName = url.Substring(url.LastIndexOf("/", StringComparison.Ordinal) + 1);
 
                 AbsoluteCompleted?.Invoke(this, new ResultEventArgs(true, url));
             }
@@ -186,7 +196,6 @@ namespace v2rayN.Handler
                 progressPercentage = -1;
                 totalBytesToReceive = 0;
 
-                //WebClientEx ws = new WebClientEx();
                 DownloadTimeout = downloadTimeout;
                 if (webProxy != null)
                 {
@@ -195,7 +204,7 @@ namespace v2rayN.Handler
 
                 ws.DownloadFileCompleted += ws_DownloadFileCompleted;
                 ws.DownloadProgressChanged += ws_DownloadProgressChanged;
-                ws.DownloadFileAsync(new Uri(url), Utils.GetPath(DownloadFileName));
+                ws.DownloadFileAsync(new Uri(url), Utils.GetPath(downloadFileName));
             }
             catch (Exception ex)
             {

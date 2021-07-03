@@ -196,11 +196,10 @@ namespace v2rayN.Handler
                 //自定义
                 //需代理
                 routingUserRule(config.useragent, Global.agentTag, ref v2rayConfig);
-                //阻止
-                routingUserRule(config.userblock, Global.blockTag, ref v2rayConfig);
                 //直连
                 routingUserRule(config.userdirect, Global.directTag, ref v2rayConfig);
-
+                //阻止
+                routingUserRule(config.userblock, Global.blockTag, ref v2rayConfig);
             }
             return 0;
         }
@@ -241,13 +240,13 @@ namespace v2rayN.Handler
                         domainRule.Domain.Add(url);
                     }
                 }
-                if (domainRule.Domain.Count > 0)
-                {
-                    v2rayConfig.Routing.Rules.Add(domainRule);
-                }
                 if (ipRule.Ip.Count > 0)
                 {
                     v2rayConfig.Routing.Rules.Add(ipRule);
+                }
+                if (domainRule.Domain.Count > 0)
+                {
+                    v2rayConfig.Routing.Rules.Add(domainRule);
                 }
             }
             return 0;

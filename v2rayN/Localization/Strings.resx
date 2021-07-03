@@ -240,6 +240,12 @@
   <data name="MsgDownloadV2rayCoreSuccessfully" xml:space="preserve">
     <value>Download V2ray successfully</value>
   </data>
+  <data name="MsgDownloadDomainListSuccessfully" xml:space="preserve">
+    <value>Download domain list successfully</value>
+  </data>
+  <data name="MsgReplaceDomainListSuccessfully" xml:space="preserve">
+    <value>Replace domain list successfully</value>
+  </data>
   <data name="MsgFailedImportSubscription" xml:space="preserve">
     <value>Failed to import subscription content</value>
   </data>

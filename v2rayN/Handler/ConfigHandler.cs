@@ -65,13 +65,6 @@ namespace v2rayN.Handler
                 };
 
                 config.inbound.Add(inItem);
-
-                //inItem = new InItem();
-                //inItem.protocol = "http";
-                //inItem.localPort = 1081;
-                //inItem.udpEnabled = true;
-
-                //config.inbound.Add(inItem);
             }
             else
             {

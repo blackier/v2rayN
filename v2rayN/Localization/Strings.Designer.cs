@@ -428,6 +428,24 @@ namespace v2rayN.Localization {
                 return ResourceManager.GetString("MsgDownloadV2rayCoreSuccessfully", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Download domain list successfully.
+        /// </summary>
+        internal static string MsgDownloadDomainListSuccessfully {
+            get {
+                return ResourceManager.GetString("MsgDownloadDomainListSuccessfully", resourceCulture);
+            }
+        }
+               
+        /// <summary>
+        ///   Looks up a localized string similar to Replace domain list successfully.
+        /// </summary>
+        internal static string MsgReplaceDomainListSuccessfully {
+            get {
+                return ResourceManager.GetString("MsgReplaceDomainListSuccessfully", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Failed to import subscription content.

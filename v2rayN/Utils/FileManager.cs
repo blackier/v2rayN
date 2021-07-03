@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using Microsoft.VisualBasic.FileIO;
 using System.Text;
 
 namespace v2rayN
@@ -18,6 +19,32 @@ namespace v2rayN
                         fs.Write(content, 0, content.Length);
                     }
 
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Utils.SaveLog(ex.Message, ex);
+                }
+                return false;
+            }
+
+            public static void RemoveFile(string filePath)
+            {
+                try
+                {
+                    FileSystem.DeleteFile(filePath);
+                }
+                catch (Exception ex)
+                {
+                    Utils.SaveLog(ex.Message, ex);
+                }
+            }
+
+            public static bool RenameFile(string filePath, string newFileName)
+            {
+                try
+                {
+                    FileSystem.RenameFile(filePath, newFileName);
                     return true;
                 }
                 catch (Exception ex)
