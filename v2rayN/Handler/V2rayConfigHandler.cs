@@ -50,15 +50,7 @@ namespace v2rayN.Handler
                 }
 
                 //转成Json
-                var v2rayConfig = new V2RayConfig()
-                {
-                    Log = new(),
-                    Dns = new(),
-                    Routing = new(),
-                    Inbounds = new(),
-                    Outbounds = new(),
-                    Stats = new(),
-                };
+                var v2rayConfig = V2RayConfig.Default;
                 if (v2rayConfig == null)
                 {
                     msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
@@ -1021,7 +1013,7 @@ namespace v2rayN.Handler
 
                 Config.V2RayNConfig configCopy = Utils.DeepCopy(config);
 
-                V2RayConfig v2rayConfig = new();
+                V2RayConfig v2rayConfig = V2RayConfig.SpeedTest;
                 if (v2rayConfig == null)
                 {
                     msg = Utils.StringsRes.I18N("FailedGenDefaultConfiguration");
@@ -1048,7 +1040,7 @@ namespace v2rayN.Handler
                     });
 
 
-                    V2RayConfig v2rayConfigCopy = new();
+                    V2RayConfig v2rayConfigCopy = V2RayConfig.SpeedTest;
                     SetOutbound(configCopy, ref v2rayConfigCopy);
                     v2rayConfigCopy.Outbounds[0].Tag = Global.agentTag + port.ToString();
                     v2rayConfig.Outbounds.Add(v2rayConfigCopy.Outbounds[0]);

@@ -29,5 +29,15 @@ namespace Shadowsocks.Interop.V2Ray
             Outbounds = new(),
             Stats = new(),
         };
+
+        /// <summary>
+        /// Gets the speed test configuration.
+        /// </summary>
+        public static Config SpeedTest => new ()
+        {
+            Routing = new(),
+            Inbounds = new(),
+            Outbounds = new(),
+        };
     }
 }
