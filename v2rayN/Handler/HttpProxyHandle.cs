@@ -147,11 +147,5 @@ namespace v2rayN.Handler
             }
             Update(config, false);
         }
-
-        public static string GetPacUrl()
-        {
-            string pacUrl = $"http://{Global.Loopback}:{Global.pacPort}/pac/?t={ DateTime.Now.ToString("HHmmss")}";
-            return pacUrl;
-        }
     }
 }

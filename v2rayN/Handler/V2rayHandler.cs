@@ -115,28 +115,6 @@ namespace v2rayN.Handler
                         }
                     }
                 }
-
-                //bool blExist = true;
-                //if (processId > 0)
-                //{
-                //    Process p1 = Process.GetProcessById(processId);
-                //    if (p1 != null)
-                //    {
-                //        p1.Kill();
-                //        blExist = false;
-                //    }
-                //}
-                //if (blExist)
-                //{
-                //    foreach (string vName in lstV2ray)
-                //    {
-                //        Process[] killPro = Process.GetProcessesByName(vName);
-                //        foreach (Process p in killPro)
-                //        {
-                //            p.Kill();
-                //        }
-                //    }
-                //}
             }
             catch (Exception ex)
             {

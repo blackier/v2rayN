@@ -41,9 +41,6 @@ namespace v2rayN.Handler
                     //Mux
                     muxEnabled = false,
 
-                    ////默认监听端口
-                    //config.pacPort = 8888;
-
                     // 默认不开启统计
                     enableStatistics = false,
 
@@ -118,11 +115,7 @@ namespace v2rayN.Handler
                 config.uiItem.mainLvColWidth = new Dictionary<string, int>();
             }
 
-            //// 如果是用户升级，首次会有端口号为0的情况，不可用，这里处理
-            //if (config.pacPort == 0)
-            //{
-            //    config.pacPort = 8888;
-            //}
+            // 如果是用户升级，首次会有端口号为0的情况，不可用，这里处理
             if (Utils.IsNullOrEmpty(config.speedTestUrl))
             {
                 config.speedTestUrl = Global.SpeedTestUrl;
@@ -131,10 +124,6 @@ namespace v2rayN.Handler
             {
                 config.speedPingTestUrl = Global.SpeedPingTestUrl;
             }
-            //if (Utils.IsNullOrEmpty(config.remoteDNS))
-            //{
-            //    config.remoteDNS = "1.1.1.1";
-            //}
 
             if (config.subItem == null)
             {

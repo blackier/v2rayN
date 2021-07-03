@@ -208,14 +208,22 @@ namespace v2rayN.Forms
 
             for (int k = 0; k < config.vmess.Count; k++)
             {
-                string def = string.Empty;
                 string totalUp = string.Empty,
                         totalDown = string.Empty,
                         todayUp = string.Empty,
                         todayDown = string.Empty;
+
+                ListViewItem lvItem = new ListViewItem();
                 if (config.index.Equals(k))
                 {
-                    def = "√";
+                    lvItem.SubItems[0].Text = "√";
+                    lvItem.ForeColor = Color.DodgerBlue;
+                    lvItem.Font = new Font(lvItem.Font, FontStyle.Bold);
+                }
+                // 隔行着色
+                if (k % 2 == 1)
+                {
+                    lvItem.BackColor = Color.WhiteSmoke;
                 }
 
                 VmessItem item = config.vmess[k];
@@ -224,8 +232,15 @@ namespace v2rayN.Forms
                 {
                     i.SubItems.Add(new ListViewItem.ListViewSubItem() { Name = name, Text = text });
                 }
-                bool stats = statistics != null && statistics.Enable;
-                if (stats)
+                _addSubItem(lvItem, EServerColName.configType.ToString(), ((EConfigType)item.configType).ToString());
+                _addSubItem(lvItem, EServerColName.remarks.ToString(), item.remarks);
+                _addSubItem(lvItem, EServerColName.address.ToString(), item.address);
+                _addSubItem(lvItem, EServerColName.port.ToString(), item.port.ToString());
+                _addSubItem(lvItem, EServerColName.security.ToString(), item.security);
+                _addSubItem(lvItem, EServerColName.network.ToString(), item.network);
+                _addSubItem(lvItem, EServerColName.subRemarks.ToString(), item.getSubRemarks(config));
+                _addSubItem(lvItem, EServerColName.testResult.ToString(), item.testResult);
+                if (statistics != null && statistics.Enable)
                 {
                     ServerStatItem sItem = statistics.Statistic.Find(item_ => item_.itemId == item.getItemId());
                     if (sItem != null)
@@ -235,51 +250,15 @@ namespace v2rayN.Forms
                         todayUp = Utils.HumanFy(sItem.todayUp);
                         todayDown = Utils.HumanFy(sItem.todayDown);
                     }
-                }
-                ListViewItem lvItem = new ListViewItem(def);
-                _addSubItem(lvItem, EServerColName.configType.ToString(), ((EConfigType)item.configType).ToString());
-                _addSubItem(lvItem, EServerColName.remarks.ToString(), item.remarks);
-                _addSubItem(lvItem, EServerColName.address.ToString(), item.address);
-                _addSubItem(lvItem, EServerColName.port.ToString(), item.port.ToString());
-                _addSubItem(lvItem, EServerColName.security.ToString(), item.security);
-                _addSubItem(lvItem, EServerColName.network.ToString(), item.network);
-                _addSubItem(lvItem, EServerColName.subRemarks.ToString(), item.getSubRemarks(config));
-                _addSubItem(lvItem, EServerColName.testResult.ToString(), item.testResult);
-                if (stats)
-                {
                     _addSubItem(lvItem, EServerColName.todayDown.ToString(), todayDown);
                     _addSubItem(lvItem, EServerColName.todayUp.ToString(), todayUp);
                     _addSubItem(lvItem, EServerColName.totalDown.ToString(), totalDown);
                     _addSubItem(lvItem, EServerColName.totalUp.ToString(), totalUp);
                 }
 
-                if (k % 2 == 1) // 隔行着色
-                {
-                    lvItem.BackColor = Color.WhiteSmoke;
-                }
-                if (config.index.Equals(k))
-                {
-                    //lvItem.Checked = true;
-                    lvItem.ForeColor = Color.DodgerBlue;
-                    lvItem.Font = new Font(lvItem.Font, FontStyle.Bold);
-                }
-
-                if (lvItem != null)
-                {
-                    lvServers.Items.Add(lvItem);
-                }
+                lvServers.Items.Add(lvItem);
             }
             lvServers.EndUpdate();
-
-            //if (lvServers.Items.Count > 0)
-            //{
-            //    if (lvServers.Items.Count <= testConfigIndex)
-            //    {
-            //        testConfigIndex = lvServers.Items.Count - 1;
-            //    }
-            //    lvServers.Items[testConfigIndex].Selected = true;
-            //    lvServers.Select();
-            //}
         }
 
         /// <summary>
@@ -1122,11 +1101,6 @@ namespace v2rayN.Forms
         #endregion
 
         #region 系统代理相关
-
-        private void menuCopyPACUrl_Click(object sender, EventArgs e)
-        {
-            Utils.SetClipboardData(HttpProxyHandle.GetPacUrl());
-        }
 
         private void menuNotEnabledHttp_Click(object sender, EventArgs e)
         {
