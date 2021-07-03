@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Shadowsocks.Interop.V2Ray
 {
@@ -15,13 +14,6 @@ namespace Shadowsocks.Interop.V2Ray
         public TransportObject Transport { get; set; }
         public StatsObject Stats { get; set; }
         public ReverseObject Reverse { get; set; }
-
-        public Config()
-        {
-            Routing = new();
-            Inbounds = new();
-            Outbounds = new();
-        }
 
         /// <summary>
         /// Gets the default configuration.

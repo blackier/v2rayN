@@ -151,7 +151,6 @@ namespace v2rayN.Handler
                 Settings = new V2Ray.Protocols.Socks.InboundConfigurationObject()
                 {
                     Udp = true,
-                    Ip = "127.0.0.1",
                 },
                 Sniffing = new()
                 {

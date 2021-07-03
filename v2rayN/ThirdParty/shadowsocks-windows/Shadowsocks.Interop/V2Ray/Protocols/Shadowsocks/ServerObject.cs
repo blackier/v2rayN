@@ -8,7 +8,7 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.Shadowsocks
 
         public string Address { get; set; }
 
-        public int? Port { get; set; }
+        public int Port { get; set; }
 
         public string Method { get; set; }
 
