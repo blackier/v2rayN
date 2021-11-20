@@ -82,7 +82,7 @@ namespace v2rayN.Forms
             vmessItem.requestHost = requestHost.Replace(" ", "");
             vmessItem.remarks = remarks;
 
-            if (ConfigHandler.AddTrojanServer(ref config, vmessItem, EditIndex) == 0)
+            if (v2rayNConfigHandler.AddTrojanServer(ref config, vmessItem, EditIndex) == 0)
             {
                 this.DialogResult = DialogResult.OK;
             }

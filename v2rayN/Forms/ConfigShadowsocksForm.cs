@@ -88,7 +88,7 @@ namespace v2rayN.Forms
             vmessItem.security = security;
             vmessItem.remarks = remarks;
 
-            if (ConfigHandler.AddShadowsocksServer(ref config, vmessItem, EditIndex) == 0)
+            if (v2rayNConfigHandler.AddShadowsocksServer(ref config, vmessItem, EditIndex) == 0)
             {
                 this.DialogResult = DialogResult.OK;
             }

@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using v2rayN.Extension;
-using v2rayN.Config;
-using v2rayN.Properties;
 
 namespace v2rayN.Handler
 {
     /// <summary>
     ///Download
     /// </summary>
-    class DownloadHandle
+    class DownloadHandler
     {
         public event EventHandler<ResultEventArgs> AbsoluteCompleted;
 
@@ -47,15 +41,16 @@ namespace v2rayN.Handler
         {
             v2rayN,
             v2rayCore,
-            domainList
+            domainList,
+            ipList
         }
         public string downloadFileName;
         private readonly string nLatestUrl = "https://github.com/blackier/v2rayN/releases/latest";
         private const string nUrl = "https://github.com/blackier/v2rayN/releases/download/{0}/v2rayN.zip";
         private readonly string coreLatestUrl = "https://github.com/v2fly/v2ray-core/releases/latest";
         private const string coreUrl = "https://github.com/v2fly/v2ray-core/releases/download/{0}/v2ray-windows-{1}.zip";
-        private readonly string geositeLatestUrl = "https://github.com/v2fly/domain-list-community/releases/latest";
-        private const string geositeUrl = "https://github.com/v2fly/domain-list-community/releases/download/{0}/dlc.dat";
+        private readonly string geositeLatestUrl = "https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat";
+        private const string geoipLastUrl = "https://github.com/v2fly/geoip/releases/latest/download/geoip.dat";
 
         #region Check for updates
 
@@ -68,7 +63,7 @@ namespace v2rayN.Handler
             };
             HttpClient httpClient = new HttpClient(webRequestHandler);
 
-            string url;
+            string url = "";
             if (type == downloadType.v2rayCore)
             {
                 url = coreLatestUrl;
@@ -79,7 +74,11 @@ namespace v2rayN.Handler
             }
             else if (type == downloadType.domainList)
             {
-                url = geositeLatestUrl;
+                responseHandler(type, geositeLatestUrl);
+            }
+            else if (type == downloadType.ipList)
+            {
+                responseHandler(type, geoipLastUrl);
             }
             else
             {
@@ -157,7 +156,11 @@ namespace v2rayN.Handler
                 }
                 else if (type == downloadType.domainList)
                 {
-                    url = string.Format(geositeUrl, version);
+                    url = redirectUrl;
+                }
+                else if (type == downloadType.ipList)
+                {
+                    url = redirectUrl;
                 }
                 else
                 {
@@ -199,7 +202,7 @@ namespace v2rayN.Handler
                 DownloadTimeout = downloadTimeout;
                 if (webProxy != null)
                 {
-                    ws.Proxy = webProxy;// new WebProxy(Global.Loopback, Global.httpPort);
+                    ws.Proxy = webProxy;
                 }
 
                 ws.DownloadFileCompleted += ws_DownloadFileCompleted;

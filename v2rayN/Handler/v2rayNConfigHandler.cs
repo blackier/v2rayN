@@ -11,7 +11,7 @@ namespace v2rayN.Handler
     /// <summary>
     /// 本软件配置文件处理类
     /// </summary>
-    class ConfigHandler
+    class v2rayNConfigHandler
     {
         private static string configRes = Global.ConfigFileName;
 
@@ -41,11 +41,11 @@ namespace v2rayN.Handler
                     //Mux
                     muxEnabled = false,
 
-                    // 默认不开启统计
-                    enableStatistics = false,
+                    // 默认开启统计
+                    enableStatistics = true,
 
-                    // 默认中等刷新率
-                    statisticsFreshRate = (int)Global.StatisticsFreshRate.medium
+                    // 默认一秒刷新率
+                    statisticsFreshRate = (int)Global.StatisticsFreshRate.quick
                 };
             }
 
@@ -128,10 +128,6 @@ namespace v2rayN.Handler
             if (config.subItem == null)
             {
                 config.subItem = new List<SubItem>();
-            }
-            if (config.userPacRule == null)
-            {
-                config.userPacRule = new List<string>();
             }
 
             if (config == null
@@ -824,7 +820,7 @@ namespace v2rayN.Handler
                     }
                     continue;
                 }
-                VmessItem vmessItem = V2rayConfigHandler.ImportFromClipboardConfig(str, out string msg);
+                VmessItem vmessItem = v2rayConfigHandler.ImportFromClipboardConfig(str, out string msg);
                 if (vmessItem == null)
                 {
                     continue;

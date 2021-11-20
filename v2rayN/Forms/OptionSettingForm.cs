@@ -142,7 +142,7 @@ namespace v2rayN.Forms
                 return;
             }
 
-            if (ConfigHandler.SaveConfig(ref config) == 0)
+            if (v2rayNConfigHandler.SaveConfig(ref config) == 0)
             {
                 DialogResult = DialogResult.OK;
             }

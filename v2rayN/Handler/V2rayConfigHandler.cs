@@ -17,7 +17,7 @@ namespace v2rayN.Handler
     /// <summary>
     /// v2ray配置文件处理类
     /// </summary>
-    class V2rayConfigHandler
+    class v2rayConfigHandler
     {
         #region 生成客户端配置
 
@@ -520,8 +520,8 @@ namespace v2rayN.Handler
                 {
                     System = new()
                     {
-                        StatsInboundUplink = true,
-                        StatsInboundDownlink = true
+                        StatsOutboundUplink = true,
+                        StatsOutboundDownlink = true
                     }
                 };
 
@@ -666,7 +666,7 @@ namespace v2rayN.Handler
                         vmessItem.streamSecurity = Utils.ToString(vmessQRCode.tls);
                     }
 
-                    ConfigHandler.UpgradeServerVersion(ref vmessItem);
+                    v2rayNConfigHandler.UpgradeServerVersion(ref vmessItem);
                 }
                 else if (result.StartsWith(Global.ssProtocol))
                 {

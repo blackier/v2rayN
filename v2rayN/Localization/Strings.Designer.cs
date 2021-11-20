@@ -446,6 +446,24 @@ namespace v2rayN.Localization {
                 return ResourceManager.GetString("MsgReplaceDomainListSuccessfully", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Download IP list successfully.
+        /// </summary>
+        internal static string MsgDownloadIPListSuccessfully {
+            get {
+                return ResourceManager.GetString("MsgDownloadIPListSuccessfully", resourceCulture);
+            }
+        }
+               
+        /// <summary>
+        ///   Looks up a localized string similar to Replace IP list successfully.
+        /// </summary>
+        internal static string MsgReplaceIPListSuccessfully {
+            get {
+                return ResourceManager.GetString("MsgReplaceIPListSuccessfully", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Failed to import subscription content.

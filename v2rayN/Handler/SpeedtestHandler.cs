@@ -12,12 +12,12 @@ namespace v2rayN.Handler
     class SpeedtestHandler
     {
         private Config.V2RayNConfig _config;
-        private V2rayHandler _v2rayHandler;
+        private v2rayHandler _v2rayHandler;
         private List<int> _selecteds;
         Action<int, string> _updateFunc;
 
 
-        public SpeedtestHandler(ref Config.V2RayNConfig config, ref V2rayHandler v2rayHandler, List<int> selecteds, string actionType, Action<int, string> update)
+        public SpeedtestHandler(ref Config.V2RayNConfig config, ref v2rayHandler v2rayHandler, List<int> selecteds, string actionType, Action<int, string> update)
         {
             _config = config;
             _v2rayHandler = v2rayHandler;
@@ -180,7 +180,7 @@ namespace v2rayN.Handler
             pid = _v2rayHandler.LoadV2rayConfigString(_config, _selecteds);
 
             string url = _config.speedTestUrl;
-            DownloadHandle downloadHandle2 = new DownloadHandle();
+            DownloadHandler downloadHandle2 = new DownloadHandler();
             downloadHandle2.UpdateCompleted += (sender2, args) =>
             {
                 _updateFunc(testCounter, args.Msg);

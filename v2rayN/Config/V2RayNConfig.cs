@@ -21,6 +21,14 @@ namespace v2rayN.Config
         }
 
         /// <summary>
+        /// 代理模式
+        /// </summary>
+        public ListenerType listenerType
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// 允许日志
         /// </summary>
         public bool logEnabled
@@ -37,25 +45,25 @@ namespace v2rayN.Config
         }
 
         /// <summary>
-        /// 活动配置序号
-        /// </summary>
-        public int index
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// vmess服务器信息
-        /// </summary>
-        public List<VmessItem> vmess
-        {
-            get; set;
-        }
-
-        /// <summary>
         /// 允许Mux多路复用
         /// </summary>
         public bool muxEnabled
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// 是否允许不安全连接
+        /// </summary>
+        public bool defAllowInsecure
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// 自定义远程DNS
+        /// </summary>
+        public string remoteDNS
         {
             get; set;
         }
@@ -109,36 +117,6 @@ namespace v2rayN.Config
         }
 
         /// <summary>
-        /// 监听状态
-        /// </summary>
-        public ListenerType listenerType
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// 自定义服务器下载测速url
-        /// </summary>
-        public string speedTestUrl
-        {
-            get; set;
-        }
-        /// <summary>
-        /// 自定义“服务器真连接延迟”测试url
-        /// </summary>
-        public string speedPingTestUrl
-        {
-            get; set;
-        }
-        /// <summary>
-        /// 自定义GFWList url
-        /// </summary>
-        public string urlGFWList
-        {
-            get; set;
-        }
-
-        /// <summary>
         /// 允许来自局域网的连接
         /// </summary>
         public bool allowLANConn
@@ -163,26 +141,24 @@ namespace v2rayN.Config
         }
 
         /// <summary>
-        /// 视图刷新率
+        /// 网速刷新率
         /// </summary>
         public int statisticsFreshRate
         {
             get; set;
         }
 
-
         /// <summary>
-        /// 自定义远程DNS
+        /// 自定义服务器下载测速url
         /// </summary>
-        public string remoteDNS
+        public string speedTestUrl
         {
             get; set;
         }
-
         /// <summary>
-        /// 是否允许不安全连接
+        /// 自定义“服务器真连接延迟”测试url
         /// </summary>
-        public bool defAllowInsecure
+        public string speedPingTestUrl
         {
             get; set;
         }
@@ -202,7 +178,18 @@ namespace v2rayN.Config
             get; set;
         }
 
-        public List<string> userPacRule
+        /// <summary>
+        /// 活动服务配置序号
+        /// </summary>
+        public int index
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// vmess服务器信息
+        /// </summary>
+        public List<VmessItem> vmess
         {
             get; set;
         }

@@ -246,6 +246,12 @@
   <data name="MsgReplaceDomainListSuccessfully" xml:space="preserve">
     <value>Replace domain list successfully</value>
   </data>
+  <data name="MsgDownloadIPListSuccessfully" xml:space="preserve">
+    <value>Download IP list successfully</value>
+  </data>
+  <data name="MsgReplaceIPListSuccessfully" xml:space="preserve">
+    <value>Replace IP list successfully</value>
+  </data>
   <data name="MsgFailedImportSubscription" xml:space="preserve">
     <value>Failed to import subscription content</value>
   </data>

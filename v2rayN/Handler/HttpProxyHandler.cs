@@ -20,7 +20,7 @@ namespace v2rayN.Handler
     /// 启动privoxy提供http协议
     /// 设置IE系统代理或者PAC模式
     /// </summary>
-    class HttpProxyHandle
+    class HttpProxyHandler
     {
         private static bool Update(Config.V2RayNConfig config, bool forceDisable)
         {

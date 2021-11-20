@@ -77,7 +77,7 @@ namespace v2rayN.Forms
             vmessItem.security = security;
             vmessItem.remarks = remarks;
 
-            if (ConfigHandler.AddSocksServer(ref config, vmessItem, EditIndex) == 0)
+            if (v2rayNConfigHandler.AddSocksServer(ref config, vmessItem, EditIndex) == 0)
             {
                 this.DialogResult = DialogResult.OK;
             }

@@ -8,7 +8,7 @@ namespace v2rayN
         #region 常量
 
         public const string v2rayWebsiteUrl = @"https://www.v2fly.org/";
-        public const string AboutUrl = @"https://github.com/2dust/v2rayN";
+        public const string AboutUrl = @"https://github.com/blackier/v2rayN";
         public const string UpdateUrl = AboutUrl + @"/releases";
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace v2rayN
         /// <summary>
         /// 本软件配置文件名
         /// </summary>
-        public const string ConfigFileName = "guiNConfig.json";
+        public const string ConfigFileName = "configN.json";
 
         /// <summary>
         /// v2ray配置文件名
@@ -129,11 +129,6 @@ namespace v2rayN
         /// trojan
         /// </summary>
         public const string trojanProtocolLite = "trojan";
-
-        /// <summary>
-        /// pac
-        /// </summary>
-        public const string pacFILE = "pac.txt";
 
         /// <summary>
         /// email

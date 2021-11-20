@@ -41,7 +41,7 @@ namespace v2rayN.Forms
                 {
                     if (!Utils.IsNullOrEmpty(item.id))
                     {
-                        ConfigHandler.RemoveServerViaSubid(ref config, item.id);
+                        v2rayNConfigHandler.RemoveServerViaSubid(ref config, item.id);
                     }
                     config.subItem.RemoveAt(k);
                 }
@@ -73,7 +73,7 @@ namespace v2rayN.Forms
                 AddSub();
             }
 
-            if (ConfigHandler.SaveSubItem(ref config) == 0)
+            if (v2rayNConfigHandler.SaveSubItem(ref config) == 0)
             {
                 this.DialogResult = DialogResult.OK;
             }

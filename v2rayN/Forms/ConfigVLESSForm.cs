@@ -154,7 +154,7 @@ namespace v2rayN.Forms
             vmessItem.streamSecurity = streamSecurity;
             vmessItem.allowInsecure = allowInsecure;
 
-            if (ConfigHandler.AddVlessServer(ref config, vmessItem, EditIndex) == 0)
+            if (v2rayNConfigHandler.AddVlessServer(ref config, vmessItem, EditIndex) == 0)
             {
                 this.DialogResult = DialogResult.OK;
             }

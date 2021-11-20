@@ -13,7 +13,7 @@ namespace v2rayN.Forms
 {
     public partial class MainForm : BaseForm
     {
-        private V2rayHandler v2rayHandler;
+        private v2rayHandler v2rayHandler;
         private List<int> lvSelecteds = new List<int>();
         private StatisticsHandler statistics = null;
 
@@ -32,9 +32,9 @@ namespace v2rayN.Forms
             {
                 v2rayHandler.V2rayStop();
 
-                HttpProxyHandle.CloseHttpAgent(config);
+                HttpProxyHandler.CloseHttpAgent(config);
 
-                ConfigHandler.SaveConfig(ref config);
+                v2rayNConfigHandler.SaveConfig(ref config);
                 statistics?.SaveToFile();
                 statistics?.Close();
             };
@@ -43,8 +43,8 @@ namespace v2rayN.Forms
         private void MainForm_Load(object sender, EventArgs e)
         {
             Global.processJob = new Job();
-            ConfigHandler.LoadConfig(ref config);
-            v2rayHandler = new V2rayHandler();
+            v2rayNConfigHandler.LoadConfig(ref config);
+            v2rayHandler = new v2rayHandler();
             v2rayHandler.ProcessEvent += v2rayHandler_ProcessEvent;
 
             if (config.enableStatistics)
@@ -137,7 +137,7 @@ namespace v2rayN.Forms
 
             for (int k = 0; k < lvServers.Columns.Count; k++)
             {
-                var width = ConfigHandler.GetformMainLvColWidth(ref config, ((EServerColName)k).ToString(), lvServers.Columns[k].Width);
+                var width = v2rayNConfigHandler.GetformMainLvColWidth(ref config, ((EServerColName)k).ToString(), lvServers.Columns[k].Width);
                 lvServers.Columns[k].Width = width;
             }
         }
@@ -148,7 +148,7 @@ namespace v2rayN.Forms
 
             for (int k = 0; k < lvServers.Columns.Count; k++)
             {
-                ConfigHandler.AddformMainLvColWidth(ref config, ((EServerColName)k).ToString(), lvServers.Columns[k].Width);
+                v2rayNConfigHandler.AddformMainLvColWidth(ref config, ((EServerColName)k).ToString(), lvServers.Columns[k].Width);
             }
         }
 
@@ -354,7 +354,7 @@ namespace v2rayN.Forms
             {
                 var tag = lvServers.Columns[e.Column].Tag?.ToString();
                 bool asc = Utils.IsNullOrEmpty(tag) ? true : !Convert.ToBoolean(tag);
-                if (ConfigHandler.SortServers(ref config, (EServerColName)e.Column, asc) != 0)
+                if (v2rayNConfigHandler.SortServers(ref config, (EServerColName)e.Column, asc) != 0)
                 {
                     return;
                 }
@@ -389,7 +389,7 @@ namespace v2rayN.Forms
             }
             v2rayHandler.LoadV2ray(config);
             Global.reloadV2ray = false;
-            ConfigHandler.SaveConfig(ref config, false);
+            v2rayNConfigHandler.SaveConfig(ref config, false);
             statistics?.SaveToFile();
 
             ChangePACButtonStatus(config.listenerType);
@@ -402,7 +402,7 @@ namespace v2rayN.Forms
         /// </summary>
         private void CloseV2ray()
         {
-            ConfigHandler.SaveConfig(ref config, false);
+            v2rayNConfigHandler.SaveConfig(ref config, false);
             statistics?.SaveToFile();
 
             ChangePACButtonStatus(0);
@@ -559,7 +559,7 @@ namespace v2rayN.Forms
             }
             for (int k = lvSelecteds.Count - 1; k >= 0; k--)
             {
-                ConfigHandler.RemoveServer(ref config, lvSelecteds[k]);
+                v2rayNConfigHandler.RemoveServer(ref config, lvSelecteds[k]);
             }
             //刷新
             RefreshServers();
@@ -589,7 +589,7 @@ namespace v2rayN.Forms
             {
                 return;
             }
-            if (ConfigHandler.CopyServer(ref config, index) == 0)
+            if (v2rayNConfigHandler.CopyServer(ref config, index) == 0)
             {
                 //刷新
                 RefreshServers();
@@ -670,7 +670,7 @@ namespace v2rayN.Forms
             StringBuilder sb = new StringBuilder();
             foreach (int v in lvSelecteds)
             {
-                string url = ConfigHandler.GetVmessQRCode(config, v);
+                string url = v2rayNConfigHandler.GetVmessQRCode(config, v);
                 if (Utils.IsNullOrEmpty(url))
                 {
                     continue;
@@ -693,7 +693,7 @@ namespace v2rayN.Forms
             StringBuilder sb = new StringBuilder();
             foreach (int v in lvSelecteds)
             {
-                string url = ConfigHandler.GetVmessQRCode(config, v);
+                string url = v2rayNConfigHandler.GetVmessQRCode(config, v);
                 if (Utils.IsNullOrEmpty(url))
                 {
                     continue;
@@ -716,7 +716,7 @@ namespace v2rayN.Forms
                 //刷新
                 RefreshServers();
                 LoadV2ray();
-                HttpProxyHandle.RestartHttpAgent(config, true);
+                HttpProxyHandler.RestartHttpAgent(config, true);
             }
         }
 
@@ -744,7 +744,7 @@ namespace v2rayN.Forms
                 Utils.MsgBox.Show(Utils.StringsRes.I18N("PleaseSelectServer"));
                 return -1;
             }
-            if (ConfigHandler.SetDefaultServer(ref config, index) == 0)
+            if (v2rayNConfigHandler.SetDefaultServer(ref config, index) == 0)
             {
                 //刷新
                 RefreshServers();
@@ -801,7 +801,7 @@ namespace v2rayN.Forms
                 return;
             }
 
-            if (ConfigHandler.AddCustomServer(ref config, fileName) == 0)
+            if (v2rayNConfigHandler.AddCustomServer(ref config, fileName) == 0)
             {
                 //刷新
                 RefreshServers();
@@ -853,7 +853,7 @@ namespace v2rayN.Forms
             int counter;
             int _Add()
             {
-                return ConfigHandler.AddBatchServers(ref config, clipboardData, subid);
+                return v2rayNConfigHandler.AddBatchServers(ref config, clipboardData, subid);
             }
             counter = _Add();
             if (counter < 1)
@@ -1083,7 +1083,7 @@ namespace v2rayN.Forms
                 Utils.MsgBox.Show(Utils.StringsRes.I18N("PleaseSelectServer"));
                 return;
             }
-            if (ConfigHandler.MoveServer(ref config, index, eMove) == 0)
+            if (v2rayNConfigHandler.MoveServer(ref config, index, eMove) == 0)
             {
                 //TODO: reload is not good.
                 RefreshServers();
@@ -1128,11 +1128,11 @@ namespace v2rayN.Forms
         {
             if (type != ListenerType.noHttpProxy)
             {
-                HttpProxyHandle.RestartHttpAgent(config, false);
+                HttpProxyHandler.RestartHttpAgent(config, false);
             }
             else
             {
-                HttpProxyHandle.CloseHttpAgent(config);
+                HttpProxyHandler.CloseHttpAgent(config);
             }
 
             for (int k = 0; k < menuSysAgentMode.DropDownItems.Count; k++)
@@ -1141,7 +1141,7 @@ namespace v2rayN.Forms
                 item.Checked = ((int)type == k);
             }
 
-            ConfigHandler.SaveConfig(ref config, false);
+            v2rayNConfigHandler.SaveConfig(ref config, false);
             DisplayToolStatus();
         }
 
@@ -1150,7 +1150,7 @@ namespace v2rayN.Forms
 
         #region CheckUpdate
 
-        private void askToDownload(DownloadHandle downloadHandle, string url)
+        private void askToDownload(DownloadHandler downloadHandle, string url)
         {
             if (Utils.MsgBox.ShowYesNo(string.Format(Utils.StringsRes.I18N("DownloadYesNo"), url)) == DialogResult.Yes)
             {
@@ -1168,7 +1168,7 @@ namespace v2rayN.Forms
         }
         private void tsbCheckUpdateN_Click(object sender, EventArgs e)
         {
-            DownloadHandle downloadHandle = new DownloadHandle();
+            DownloadHandler downloadHandle = new DownloadHandler();
             downloadHandle.AbsoluteCompleted += (sender2, args) =>
             {
                 if (args.Success)
@@ -1227,12 +1227,12 @@ namespace v2rayN.Forms
 
 
             AppendText(false, string.Format(Utils.StringsRes.I18N("MsgStartUpdating"), "v2rayN"));
-            downloadHandle.CheckUpdateAsync(DownloadHandle.downloadType.v2rayN);
+            downloadHandle.CheckUpdateAsync(DownloadHandler.downloadType.v2rayN);
         }
 
         private void tsbCheckUpdateCore_Click(object sender, EventArgs e)
         {
-            DownloadHandle downloadHandle = new DownloadHandle();
+            DownloadHandler downloadHandle = new DownloadHandler();
             downloadHandle.AbsoluteCompleted += (sender2, args) =>
             {
                 if (args.Success)
@@ -1288,12 +1288,12 @@ namespace v2rayN.Forms
             };
 
             AppendText(false, string.Format(Utils.StringsRes.I18N("MsgStartUpdating"), "v2rayCore"));
-            downloadHandle.CheckUpdateAsync(DownloadHandle.downloadType.v2rayCore);
+            downloadHandle.CheckUpdateAsync(DownloadHandler.downloadType.v2rayCore);
         }
 
         private void tsbCheckUpdateDomainList_Click(object sender, EventArgs e)
         {
-            DownloadHandle downloadHandle = new DownloadHandle();
+            DownloadHandler downloadHandle = new DownloadHandler();
             downloadHandle.AbsoluteCompleted += (sender2, args) =>
             {
                 if (args.Success)
@@ -1346,7 +1346,61 @@ namespace v2rayN.Forms
 
 
             AppendText(false, string.Format(Utils.StringsRes.I18N("MsgStartUpdating"), "Domain list"));
-            downloadHandle.CheckUpdateAsync(DownloadHandle.downloadType.domainList);
+            downloadHandle.CheckUpdateAsync(DownloadHandler.downloadType.domainList);
+        }
+
+        private void tsbCheckUpdateIPList_Click(object sender, EventArgs e)
+        {
+            DownloadHandler downloadHandle = new DownloadHandler();
+            downloadHandle.AbsoluteCompleted += (sender2, args) =>
+            {
+                if (args.Success)
+                {
+                    AppendText(false, string.Format(Utils.StringsRes.I18N("MsgParsingSuccessfully"), "IP list"));
+
+                    string url = args.Msg;
+                    Invoke((MethodInvoker)(delegate
+                    {
+                        askToDownload(downloadHandle, url);
+                    }));
+                }
+                else
+                {
+                    AppendText(false, args.Msg);
+                }
+            };
+            downloadHandle.UpdateCompleted += (sender2, args) =>
+            {
+                if (args.Success)
+                {
+                    AppendText(false, Utils.StringsRes.I18N("MsgDownloadIPListSuccessfully"));
+
+                    try
+                    {
+                        CloseV2ray();
+                        Global.reloadV2ray = true;
+                        LoadV2ray();
+
+                        AppendText(false, Utils.StringsRes.I18N("MsgReplaceIPListSuccessfully"));
+                    }
+                    catch (Exception ex)
+                    {
+                        AppendText(false, ex.Message);
+                    }
+                }
+                else
+                {
+                    AppendText(false, args.Msg);
+                }
+            };
+            downloadHandle.Error += (sender2, args) =>
+            {
+                AppendText(true, args.GetException().Message);
+            };
+
+
+            AppendText(false, string.Format(Utils.StringsRes.I18N("MsgStartUpdating"), "IP list"));
+            downloadHandle.CheckUpdateAsync(DownloadHandler.downloadType.ipList);
         }
 
         #endregion
@@ -1442,7 +1496,7 @@ namespace v2rayN.Forms
                     continue;
                 }
 
-                DownloadHandle downloadHandle3 = new DownloadHandle();
+                DownloadHandler downloadHandle3 = new DownloadHandler();
                 downloadHandle3.UpdateCompleted += (sender2, args) =>
                 {
                     if (args.Success)
@@ -1455,7 +1509,7 @@ namespace v2rayN.Forms
                             return;
                         }
 
-                        ConfigHandler.RemoveServerViaSubid(ref config, id);
+                        v2rayNConfigHandler.RemoveServerViaSubid(ref config, id);
                         AppendText(false, $"{hashCode}{Utils.StringsRes.I18N("MsgClearSubscription")}");
                         RefreshServers();
                         if (AddBatchServers(result, id) > 0)

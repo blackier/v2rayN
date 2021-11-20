@@ -111,6 +111,7 @@
             this.tsbV2rayWebsite = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbPromotion = new System.Windows.Forms.ToolStripButton();
             this.tsbCheckUpdateDomainList = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbCheckUpdateIPList = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -739,7 +740,8 @@
             this.tsbCheckUpdate.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbCheckUpdateN,
             this.tsbCheckUpdateCore,
-            this.tsbCheckUpdateDomainList});
+            this.tsbCheckUpdateDomainList,
+            this.tsbCheckUpdateIPList});
             this.tsbCheckUpdate.Image = ((System.Drawing.Image)(resources.GetObject("tsbCheckUpdate.Image")));
             this.tsbCheckUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbCheckUpdate.Name = "tsbCheckUpdate";
@@ -767,6 +769,13 @@
             this.tsbCheckUpdateDomainList.Size = new System.Drawing.Size(135, 22);
             this.tsbCheckUpdateDomainList.Text = "Domain list";
             this.tsbCheckUpdateDomainList.Click += new System.EventHandler(this.tsbCheckUpdateDomainList_Click);
+            // 
+            // tsbCheckUpdateIPList
+            // 
+            this.tsbCheckUpdateIPList.Name = "tsbCheckUpdateIPList";
+            this.tsbCheckUpdateIPList.Size = new System.Drawing.Size(135, 22);
+            this.tsbCheckUpdateIPList.Text = "IP list";
+            this.tsbCheckUpdateIPList.Click += new System.EventHandler(this.tsbCheckUpdateIPList_Click);
             // 
             // toolStripSeparator10
             // 
@@ -929,6 +938,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuAddVlessServer;
         private System.Windows.Forms.ToolStripMenuItem menuAddTrojanServer;
         private System.Windows.Forms.ToolStripMenuItem tsbCheckUpdateDomainList;
+        private System.Windows.Forms.ToolStripMenuItem tsbCheckUpdateIPList;
     }
 }
 

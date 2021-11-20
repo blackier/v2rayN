@@ -29,7 +29,7 @@ namespace Shadowsocks.WPF.Services
                 _uniqueConfigFile = $"privoxy_{_uid}.conf";
 
                 //FileManager.UncompressFile(Utils.Utilities.GetTempPath("ss_privoxy.exe"), Properties.Resources.privoxy_exe);
-                v2rayN.Utils.FileManager.UncompressFile(v2rayN.Utils.GetTempPath("v2rayN_privoxy.exe"), v2rayN.Properties.Resources.privoxy_exe);
+                v2rayN.Utils.FileManager.UncompressFile(v2rayN.Utils.GetTempPath("v2rayN_privoxy.exe"), v2rayN.Resources.Resources.privoxy_exe);
             }
             catch (IOException e)
             {
@@ -58,7 +58,7 @@ namespace Shadowsocks.WPF.Services
                 //privoxyConfig = privoxyConfig.Replace("__PRIVOXY_BIND_IP__", $"[{netSettings.Socks5ListeningAddress}]")
                 //    .Replace("__SOCKS_HOST__", "[::1]"); // TODO: make sure it's correct
                 //FileManager.ByteArrayToFile(Utils.Utilities.GetTempPath(_uniqueConfigFile), Encoding.UTF8.GetBytes(privoxyConfig));
-                string privoxyConfig = v2rayN.Properties.Resources.privoxy_conf;
+                string privoxyConfig = v2rayN.Resources.Resources.privoxy_conf;
                 _runningPort = listen_port;
                 privoxyConfig = privoxyConfig.Replace("__PRIVOXY_BIND_IP__", listen_address);
                 privoxyConfig = privoxyConfig.Replace("__PRIVOXY_BIND_PORT__", listen_port.ToString());

@@ -18,7 +18,7 @@ namespace v2rayN.Handler
     /// <summary>
     /// v2ray进程处理类
     /// </summary>
-    class V2rayHandler
+    class v2rayHandler
     {
         private static string v2rayConfigRes = Global.v2rayConfigFileName;
         private List<string> lstV2ray;
@@ -26,7 +26,7 @@ namespace v2rayN.Handler
         //private int processId = 0;
         private Process _process;
 
-        public V2rayHandler()
+        public v2rayHandler()
         {
             lstV2ray = new List<string>
             {
@@ -44,7 +44,7 @@ namespace v2rayN.Handler
             if (Global.reloadV2ray)
             {
                 string fileName = Utils.GetPath(v2rayConfigRes);
-                if (V2rayConfigHandler.GenerateClientConfig(config, fileName, false, out string msg) != 0)
+                if (v2rayConfigHandler.GenerateClientConfig(config, fileName, false, out string msg) != 0)
                 {
                     ShowMsg(false, msg);
                 }
@@ -63,7 +63,7 @@ namespace v2rayN.Handler
         public int LoadV2rayConfigString(Config.V2RayNConfig config, List<int> _selecteds)
         {
             int pid = -1;
-            string configStr = V2rayConfigHandler.GenerateClientSpeedtestConfigString(config, _selecteds, out string msg);
+            string configStr = v2rayConfigHandler.GenerateClientSpeedtestConfigString(config, _selecteds, out string msg);
             if (configStr == "")
             {
                 ShowMsg(false, msg);

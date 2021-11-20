@@ -12,13 +12,13 @@ namespace v2rayN.Handler
 {
     class StatisticsHandler
     {
-        private Config.V2RayNConfig config_;
-        private ServerStatistics serverStatistics_;
-        private StatsServiceClient client_;
-        private bool exitFlag_;
-        private Task loopTask_;
+        private Config.V2RayNConfig _config;
+        private ServerStatistics _serverStatistics;
+        private StatsServiceClient _client;
+        private bool _exitFlag;
+        private Task _loopTask;
 
-        Action<ulong, ulong, List<ServerStatItem>> updateFunc_;
+        private Action<ulong, ulong, List<ServerStatItem>> _updateFunc;
 
         public bool Enable
         {
@@ -30,34 +30,34 @@ namespace v2rayN.Handler
             get; set;
         }
 
-        public List<ServerStatItem> Statistic => serverStatistics_.server;
+        public List<ServerStatItem> Statistic => _serverStatistics.server;
 
         public StatisticsHandler(Config.V2RayNConfig config, Action<ulong, ulong, List<ServerStatItem>> update)
         {
-            config_ = config;
+            _config = config;
+            _updateFunc = update;
+            _exitFlag = false;
+            _client = new StatsServiceClient($"{Global.Loopback}:{Global.v2rayApiPort}");
+
             Enable = config.enableStatistics;
             UpdateUI = false;
-            updateFunc_ = update;
-            exitFlag_ = false;
-
-            client_ = new StatsServiceClient($"{Global.Loopback}:{Global.v2rayApiPort}");
 
             LoadFromFile();
 
-            loopTask_ = new Task(() => Run());
-            loopTask_.Start();
+            _loopTask = new Task(() => Run());
+            _loopTask.Start();
         }
 
         public void Close()
         {
             try
             {
-                exitFlag_ = true;
-                if (loopTask_.Status == TaskStatus.Running)
+                _exitFlag = true;
+                if (_loopTask.Status == TaskStatus.Running)
                 {
-                    loopTask_.Wait();
+                    _loopTask.Wait();
                 }                
-                client_.Shutdown();
+                _client.Shutdown();
             }
             catch (Exception ex)
             {
@@ -67,14 +67,14 @@ namespace v2rayN.Handler
 
         public void Run()
         {
-            while (!exitFlag_)
+            while (!_exitFlag)
             {
                 try
                 {
-                    var resStat = client_.QueryStats("", true);
+                    var resStat = _client.QueryStats("", true);
                     if (resStat != null)
                     {
-                        string itemId = config_.getItemId();
+                        string itemId = _config.getItemId();
                         ServerStatItem serverStatItem = GetServerStatItem(itemId);
 
                         ParseOutput(resStat, out ulong up, out ulong down);
@@ -86,10 +86,10 @@ namespace v2rayN.Handler
 
                         if (UpdateUI)
                         {
-                            updateFunc_(up, down, new List<ServerStatItem> { serverStatItem });
+                            _updateFunc(up, down, new List<ServerStatItem> { serverStatItem });
                         }
                     }
-                    Thread.Sleep(config_.statisticsFreshRate);
+                    Thread.Sleep(_config.statisticsFreshRate);
                 }
                 catch (Exception ex)
                 {
@@ -106,20 +106,20 @@ namespace v2rayN.Handler
                 if (!Utils.IsNullOrEmpty(result))
                 {
                     //转成Json
-                    serverStatistics_ = Utils.FromJson<ServerStatistics>(result);
+                    _serverStatistics = Utils.FromJson<ServerStatistics>(result);
                 }
 
-                if (serverStatistics_ == null)
+                if (_serverStatistics == null)
                 {
-                    serverStatistics_ = new ServerStatistics();
+                    _serverStatistics = new ServerStatistics();
                 }
-                if (serverStatistics_.server == null)
+                if (_serverStatistics.server == null)
                 {
-                    serverStatistics_.server = new List<ServerStatItem>();
+                    _serverStatistics.server = new List<ServerStatItem>();
                 }
 
                 long ticks = DateTime.Now.Date.Ticks;
-                foreach (ServerStatItem item in serverStatistics_.server)
+                foreach (ServerStatItem item in _serverStatistics.server)
                 {
                     if (item.dateNow != ticks)
                     {
@@ -139,7 +139,7 @@ namespace v2rayN.Handler
         {
             try
             {
-                Utils.ToJsonFile(serverStatistics_, Utils.GetPath(Global.StatisticLogOverall));
+                Utils.ToJsonFile(_serverStatistics, Utils.GetPath(Global.StatisticLogOverall));
             }
             catch (Exception ex)
             {
