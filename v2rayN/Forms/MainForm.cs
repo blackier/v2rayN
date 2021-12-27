@@ -32,7 +32,7 @@ namespace v2rayN.Forms
             {
                 v2rayHandler.V2rayStop();
 
-                HttpProxyHandler.CloseHttpAgent(config);
+                HttpProxyHandler.Update(config);
 
                 v2rayNConfigHandler.SaveConfig(ref config);
                 statistics?.SaveToFile();
@@ -328,9 +328,9 @@ namespace v2rayN.Forms
 
             toolSslSocksPort.Text = $"{Global.Loopback}:{config.inbound[0].localPort}";
 
-            if (config.listenerType != (int)ListenerType.noHttpProxy)
+            if (config.listenerType != ListenerType.closeSystemProxy)
             {
-                toolSslHttpPort.Text = $"{Global.Loopback}:{Global.httpPort}";
+                toolSslHttpPort.Text = $"{Global.Loopback}:{config.GetLocalPort(Global.InboundHttp)}";
             }
 
             notifyMain.Icon = MainFormHandler.Instance.GetNotifyIcon(config, Icon);
@@ -392,7 +392,7 @@ namespace v2rayN.Forms
             v2rayNConfigHandler.SaveConfig(ref config, false);
             statistics?.SaveToFile();
 
-            ChangePACButtonStatus(config.listenerType);
+            ChangeHttpProxyStatus(config.listenerType);
 
             tsbReload.Enabled = true;
         }
@@ -405,7 +405,7 @@ namespace v2rayN.Forms
             v2rayNConfigHandler.SaveConfig(ref config, false);
             statistics?.SaveToFile();
 
-            ChangePACButtonStatus(0);
+            ChangeHttpProxyStatus(0);
 
             v2rayHandler.V2rayStop();
         }
@@ -716,7 +716,7 @@ namespace v2rayN.Forms
                 //刷新
                 RefreshServers();
                 LoadV2ray();
-                HttpProxyHandler.RestartHttpAgent(config, true);
+                HttpProxyHandler.Update(config);
             }
         }
 
@@ -1102,38 +1102,23 @@ namespace v2rayN.Forms
 
         #region 系统代理相关
 
-        private void menuNotEnabledHttp_Click(object sender, EventArgs e)
+        private void menuOpenHttp_Click(object sender, EventArgs e)
         {
-            SetListenerType(ListenerType.noHttpProxy);
+            SetListenerType(ListenerType.openSystemProxy);
         }
-        private void menuGlobal_Click(object sender, EventArgs e)
+        private void menuCloseHttp_Click(object sender, EventArgs e)
         {
-            SetListenerType(ListenerType.GlobalHttp);
-        }
-        private void menuKeep_Click(object sender, EventArgs e)
-        {
-            SetListenerType(ListenerType.HttpOpenAndClear);
-        }
-        private void menuKeepNothing_Click(object sender, EventArgs e)
-        {
-            SetListenerType(ListenerType.HttpOpenOnly);
+            SetListenerType(ListenerType.closeSystemProxy);
         }
         private void SetListenerType(ListenerType type)
         {
             config.listenerType = type;
-            ChangePACButtonStatus(type);
+            ChangeHttpProxyStatus(type);
         }
 
-        private void ChangePACButtonStatus(ListenerType type)
+        private void ChangeHttpProxyStatus(ListenerType type)
         {
-            if (type != ListenerType.noHttpProxy)
-            {
-                HttpProxyHandler.RestartHttpAgent(config, false);
-            }
-            else
-            {
-                HttpProxyHandler.CloseHttpAgent(config);
-            }
+            HttpProxyHandler.Update(config);
 
             for (int k = 0; k < menuSysAgentMode.DropDownItems.Count; k++)
             {

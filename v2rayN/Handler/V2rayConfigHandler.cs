@@ -135,39 +135,30 @@ namespace v2rayN.Handler
         /// <returns></returns>
         private static int SetInbound(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
         {
-            // 默认使用socks
-            var inbound = new V2Ray.InboundObject()
-            {
-                Tag = "proxy",
-                Protocol = "socks",
-                Settings = new V2Ray.Protocols.Socks.InboundConfigurationObject()
-                {
-                    Udp = true,
-                },
-                Sniffing = new()
-                {
-                    Enabled = false,
-                },
-            };
+            // socks proxy
+            var socksInbound = V2Ray.InboundObject.DefaultLocalSocks;
+            socksInbound.Tag = "socksProxy";
             // 端口
-            inbound.Port = config.inbound[0].localPort;
+            socksInbound.Port = config.inbound[0].localPort;
             if (config.allowLANConn)
             {
-                inbound.Listen = "0.0.0.0";
+                socksInbound.Listen = "0.0.0.0";
             }
             else
             {
-                inbound.Listen = Global.Loopback;
+                socksInbound.Listen = Global.Loopback;
             }
-            // 开启udp
-            var inboundSettings = (V2Ray.Protocols.Socks.InboundConfigurationObject)inbound.Settings;
-            inboundSettings.Udp = config.inbound[0].udpEnabled;
-
             // 流量探测
-            inbound.Sniffing.Enabled = config.inbound[0].sniffingEnabled;
-            inbound.Sniffing.DestOverride = new() { "http", "tls" };
+            socksInbound.Sniffing.Enabled = config.inbound[0].sniffingEnabled;
 
-            v2rayConfig.Inbounds.Add(inbound);
+            // http proxy
+            var httpInbound = V2Ray.InboundObject.DefaultLocalHttp;
+            httpInbound.Tag = "httpProxy";
+            httpInbound.Port = config.inbound[0].localPort + 1;
+            httpInbound.Sniffing.Enabled = config.inbound[0].sniffingEnabled;
+
+            v2rayConfig.Inbounds.Add(socksInbound);
+            v2rayConfig.Inbounds.Add(httpInbound);
             return 0;
         }
 

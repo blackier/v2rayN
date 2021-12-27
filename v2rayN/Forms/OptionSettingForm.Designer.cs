@@ -193,10 +193,8 @@
             this.cmblistenerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmblistenerType.FormattingEnabled = true;
             this.cmblistenerType.Items.AddRange(new object[] {
-            "关闭http代理",
-            "打开http代理，配置系统代理",
-            "打开http代理，清除系统代理",
-            "打开http代理"});
+            "关闭系统代理",
+            "打开系统代理"});
             this.cmblistenerType.Location = new System.Drawing.Point(100, 47);
             this.cmblistenerType.Name = "cmblistenerType";
             this.cmblistenerType.Size = new System.Drawing.Size(276, 25);

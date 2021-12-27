@@ -101,33 +101,6 @@ namespace v2rayN.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to listen-address __PRIVOXY_BIND_IP__:__PRIVOXY_BIND_PORT__
-        ///toggle 0
-        ///logfile v2ray_privoxy.log
-        ///show-on-task-bar 0
-        ///activity-animation 0
-        ///forward-socks5 / 127.0.0.1:__SOCKS_PORT__ .
-        ///max-client-connections 2048
-        ///hide-console
-        ///.
-        /// </summary>
-        internal static string privoxy_conf {
-            get {
-                return ResourceManager.GetString("privoxy_conf", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] privoxy_exe {
-            get {
-                object obj = ResourceManager.GetObject("privoxy_exe", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap promotion {

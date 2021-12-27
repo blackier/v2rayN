@@ -201,38 +201,6 @@ namespace v2rayN
         }
 
         /// <summary>
-        /// 是否开启全局代理(http)
-        /// </summary>
-        public static bool sysAgent
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// socks端口
-        /// </summary>
-        public static int socksPort
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// http端口
-        /// </summary>
-        public static int httpPort
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// PAC端口
-        /// </summary>
-        public static int pacPort
-        {
-            get; set;
-        }
-
-        /// <summary>
         ///  
         /// </summary>
         public static readonly int v2rayApiPort = Utils.GetFreePort();
@@ -245,19 +213,6 @@ namespace v2rayN
         public static System.Threading.Mutex mutexObj
         {
             get; set;
-        }
-
-        private static Shadowsocks.WPF.Services.PrivoxyRunner privoxy_runner_instance;
-        public static Shadowsocks.WPF.Services.PrivoxyRunner privoxyRunner
-        {
-            get
-            {
-                if (privoxy_runner_instance == null)
-                {
-                    privoxy_runner_instance = new Shadowsocks.WPF.Services.PrivoxyRunner();
-                }
-                return privoxy_runner_instance;
-            }
         }
 
         #endregion

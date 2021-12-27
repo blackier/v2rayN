@@ -67,10 +67,8 @@
             this.notifyMain = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuSysAgentMode = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuNotEnabledHttp = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuGlobal = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuKeep = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuKeepNothing = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenHttp = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuCloseHttp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuServers = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddServers2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuScanScreen2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -432,41 +430,25 @@
             // menuSysAgentMode
             // 
             this.menuSysAgentMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuNotEnabledHttp,
-            this.menuGlobal,
-            this.menuKeep,
-            this.menuKeepNothing});
+            this.menuCloseHttp,
+            this.menuOpenHttp});
             this.menuSysAgentMode.Name = "menuSysAgentMode";
             this.menuSysAgentMode.Size = new System.Drawing.Size(200, 22);
             this.menuSysAgentMode.Text = "http代理";
             // 
-            // menuNotEnabledHttp
+            // menuCloseHttp
             // 
-            this.menuNotEnabledHttp.Name = "menuNotEnabledHttp";
-            this.menuNotEnabledHttp.Size = new System.Drawing.Size(231, 22);
-            this.menuNotEnabledHttp.Text = "关闭http代理";
-            this.menuNotEnabledHttp.Click += new System.EventHandler(this.menuNotEnabledHttp_Click);
+            this.menuCloseHttp.Name = "menuDelHttp";
+            this.menuCloseHttp.Size = new System.Drawing.Size(231, 22);
+            this.menuCloseHttp.Text = "关闭系统代理";
+            this.menuCloseHttp.Click += new System.EventHandler(this.menuCloseHttp_Click);
             // 
-            // menuGlobal
+            // menuOpenHttp
             // 
-            this.menuGlobal.Name = "menuGlobal";
-            this.menuGlobal.Size = new System.Drawing.Size(231, 22);
-            this.menuGlobal.Text = "打开http代理，配置系统代理";
-            this.menuGlobal.Click += new System.EventHandler(this.menuGlobal_Click);
-            // 
-            // menuKeep
-            // 
-            this.menuKeep.Name = "menuKeep";
-            this.menuKeep.Size = new System.Drawing.Size(231, 22);
-            this.menuKeep.Text = "打开http代理，清除系统代理";
-            this.menuKeep.Click += new System.EventHandler(this.menuKeep_Click);
-            // 
-            // menuKeepNothing
-            // 
-            this.menuKeepNothing.Name = "menuKeepNothing";
-            this.menuKeepNothing.Size = new System.Drawing.Size(231, 22);
-            this.menuKeepNothing.Text = "打开http代理";
-            this.menuKeepNothing.Click += new System.EventHandler(this.menuKeepNothing_Click);
+            this.menuOpenHttp.Name = "menuSetHttp";
+            this.menuOpenHttp.Size = new System.Drawing.Size(231, 22);
+            this.menuOpenHttp.Text = "打开系统代理";
+            this.menuOpenHttp.Click += new System.EventHandler(this.menuOpenHttp_Click);
             // 
             // menuServers
             // 
@@ -889,8 +871,8 @@
         private System.Windows.Forms.ToolStripMenuItem menuMoveBottom;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem menuSysAgentMode;
-        private System.Windows.Forms.ToolStripMenuItem menuGlobal;
-        private System.Windows.Forms.ToolStripMenuItem menuKeep;
+        private System.Windows.Forms.ToolStripMenuItem menuOpenHttp;
+        private System.Windows.Forms.ToolStripMenuItem menuCloseHttp;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuAddShadowsocksServer;
         private System.Windows.Forms.SplitContainer scMain;
@@ -928,10 +910,8 @@
         private System.Windows.Forms.ToolStripMenuItem menuRemoveDuplicateServer;
         private System.Windows.Forms.ToolStripMenuItem menuTcpingServer;
         private System.Windows.Forms.ToolStripMenuItem menuRealPingServer;
-        private System.Windows.Forms.ToolStripMenuItem menuNotEnabledHttp;
         private System.Windows.Forms.ToolStripMenuItem menuUpdateSubscriptions;
         private System.Windows.Forms.ToolStripMenuItem tsbV2rayWebsite;
-        private System.Windows.Forms.ToolStripMenuItem menuKeepNothing;
         private System.Windows.Forms.ToolStripMenuItem tsbTestMe;
         private System.Windows.Forms.ToolStripButton tsbReload;
         private System.Windows.Forms.ToolStripButton tsbQRCodeSwitch;

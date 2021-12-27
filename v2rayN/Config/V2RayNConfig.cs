@@ -304,10 +304,6 @@ namespace v2rayN.Config
             {
                 return GetLocalPort(Global.InboundSocks) + 1;
             }
-            else if (protocol == "pac")
-            {
-                return GetLocalPort(Global.InboundSocks) + 2;
-            }
             else if (protocol == "speedtest")
             {
                 return GetLocalPort(Global.InboundSocks) + 103;
