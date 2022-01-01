@@ -1528,28 +1528,5 @@ namespace v2rayN.Forms
         }
         #endregion
 
-        #region Language
-
-        private void tsbLanguageDef_Click(object sender, EventArgs e)
-        {
-            SetCurrentLanguage("en");
-        }
-
-        private void tsbLanguageZhHans_Click(object sender, EventArgs e)
-        {
-            SetCurrentLanguage("zh-Hans");
-        }
-        private void SetCurrentLanguage(string value)
-        {
-            Utils.RegWriteValue(Global.MyRegPath, Global.MyRegKeyLanguage, value);
-            //Application.Restart();
-        }
-
-
-
-
-        #endregion
-
-
     }
 }
