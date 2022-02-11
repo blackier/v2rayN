@@ -488,7 +488,7 @@ namespace v2rayN.Handler
             {
                 foreach (var server in config.remoteDNS.Split(','))
                 {
-                    v2rayConfig.Dns.Servers.Add(server);
+                    v2rayConfig.Dns.Servers.Add(server.TrimEx());
                 }
             }
 
@@ -636,7 +636,7 @@ namespace v2rayN.Handler
                         vmessItem.headerType = Global.None;
 
 
-                        vmessItem.configVersion = Utils.ToInt(vmessQRCode.v);
+                        vmessItem.configVersion = Utils.ToString(vmessQRCode.v);
                         vmessItem.remarks = Utils.ToString(vmessQRCode.ps);
                         vmessItem.address = Utils.ToString(vmessQRCode.add);
                         vmessItem.port = Utils.ToInt(vmessQRCode.port);
@@ -656,8 +656,6 @@ namespace v2rayN.Handler
                         vmessItem.path = Utils.ToString(vmessQRCode.path);
                         vmessItem.streamSecurity = Utils.ToString(vmessQRCode.tls);
                     }
-
-                    v2rayNConfigHandler.UpgradeServerVersion(ref vmessItem);
                 }
                 else if (result.StartsWith(Global.ssProtocol))
                 {

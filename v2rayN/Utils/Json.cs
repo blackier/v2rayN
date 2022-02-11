@@ -1,5 +1,7 @@
 ﻿using System.IO;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace v2rayN
 {
@@ -21,7 +23,7 @@ namespace v2rayN
         public static string ToJson(object obj, bool useCamelCase = false)
         {
             JsonSerializerOptions serializer_opts = useCamelCase ? new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase } : new JsonSerializerOptions();
-            string result = JsonSerializer.Serialize(obj, obj.GetType(), new JsonSerializerOptions { WriteIndented = true, IgnoreNullValues = true });
+            string result = JsonSerializer.Serialize(obj, obj.GetType(), new JsonSerializerOptions { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
             return result;
         }
 
@@ -45,13 +47,13 @@ namespace v2rayN
                     }
                     else
                     {
-                        serializer_opts = new JsonSerializerOptions() { WriteIndented = true, IgnoreNullValues = true };
+                        serializer_opts = new JsonSerializerOptions() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
                     }
                     if (caseInsensitive)
                     {
                         serializer_opts.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                     }
-
+                    serializer_opts.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
                     file.Write(JsonSerializer.Serialize(obj, obj.GetType(), serializer_opts));
                 }
                 result = 0;

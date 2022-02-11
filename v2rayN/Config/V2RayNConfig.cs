@@ -365,7 +365,7 @@ namespace v2rayN.Config
     {
         public VmessItem()
         {
-            configVersion = 1;
+            configVersion = Global.configVersion;
             address = string.Empty;
             port = 0;
             id = string.Empty;
@@ -455,7 +455,7 @@ namespace v2rayN.Config
         /// <summary>
         /// 版本(现在=2)
         /// </summary>
-        public int configVersion
+        public string configVersion
         {
             get; set;
         }
