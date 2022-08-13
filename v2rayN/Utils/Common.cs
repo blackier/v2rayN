@@ -68,8 +68,6 @@ namespace v2rayN
             return result;
         }
 
-        #region 转换函数
-
         /// <summary>
         /// List<string>转逗号分隔的字符串
         /// </summary>
@@ -283,11 +281,6 @@ namespace v2rayN
             result = list;
         }
 
-        #endregion
-
-
-        #region 数据检查
-
         /// <summary>
         /// 判断输入的是否是数字
         /// </summary>
@@ -391,10 +384,6 @@ namespace v2rayN
         {
             return Regex.IsMatch(input, pattern, RegexOptions.IgnoreCase);
         }
-
-        #endregion
-
-        #region 开机自动启动
 
         private static string autoRunName = "v2rayNAutoRun";
         private static string autoRunRegPath => @"Software\Microsoft\Windows\CurrentVersion\Run";//if (Environment.Is64BitProcess)//{//    return @"Software\Microsoft\Windows\CurrentVersion\Run";//}//else//{//    return @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run";//}
@@ -516,9 +505,6 @@ namespace v2rayN
                 regKey?.Close();
             }
         }
-        #endregion
-
-        #region 测速
 
         /// <summary>
         /// Ping
@@ -596,9 +582,6 @@ namespace v2rayN
             l.Stop();
             return port;
         }
-        #endregion
-
-        #region 杂项
 
         /// <summary>
         /// 取得版本
@@ -683,7 +666,6 @@ namespace v2rayN
             return string.Empty;
         }
 
-
         /// <summary>
         /// IsAdministrator
         /// </summary>
@@ -703,10 +685,6 @@ namespace v2rayN
                 return false;
             }
         }
-
-        #endregion
-
-        #region TempPath
 
         // return path to store temporary files
         public static string GetTempPath()
@@ -735,8 +713,6 @@ namespace v2rayN
             }
             return Encoding.UTF8.GetString(sb.ToArray());
         }
-
-        #endregion
 
     }
 }

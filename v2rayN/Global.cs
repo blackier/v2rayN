@@ -5,8 +5,6 @@ namespace v2rayN
 {
     class Global
     {
-        #region 常量
-
         public const string configVersion = "2";
 
         public const string v2rayWebsiteUrl = @"https://www.v2fly.org/";
@@ -70,11 +68,7 @@ namespace v2rayN
         /// </summary>
         public const string blockTag = "block";
 
-        /// <summary>
-        /// 
-        /// </summary>
         public const string StreamSecurity = "tls";
-        public const string StreamSecurityX = "xtls";
 
         public const string InboundSocks = "socks";
         public const string InboundHttp = "http";
@@ -190,10 +184,6 @@ namespace v2rayN
             geoAdAdress
         };
 
-        #endregion
-
-        #region 全局变量
-
         /// <summary>
         /// 是否需要重启服务V2ray
         /// </summary>
@@ -202,9 +192,6 @@ namespace v2rayN
             get; set;
         }
 
-        /// <summary>
-        ///  
-        /// </summary>
         public static readonly int v2rayApiPort = Utils.GetFreePort();
 
         public static Job processJob
@@ -216,7 +203,5 @@ namespace v2rayN
         {
             get; set;
         }
-
-        #endregion
     }
 }

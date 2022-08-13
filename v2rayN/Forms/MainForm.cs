@@ -17,16 +17,22 @@ namespace v2rayN.Forms
         private List<int> lvSelecteds = new List<int>();
         private StatisticsHandler statistics = null;
 
-        #region Window 事件
-
         public MainForm()
         {
             InitializeComponent();
 
-            notifyMain.Visible = true;
             Text = Utils.GetVersion();
-            WindowState = FormWindowState.Minimized;
-            ShowInTaskbar = false;
+
+            Global.processJob = new Job();
+
+            v2rayNConfigHandler.LoadConfig(ref config);
+            v2rayHandler = new v2rayHandler();
+            v2rayHandler.ProcessEvent += v2rayHandler_ProcessEvent;
+
+            if (config.enableStatistics)
+            {
+                statistics = new StatisticsHandler(config, UpdateStatisticsHandler);
+            }
 
             Application.ApplicationExit += (sender, args) =>
             {
@@ -38,20 +44,9 @@ namespace v2rayN.Forms
                 statistics?.SaveToFile();
                 statistics?.Close();
             };
-        }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            Global.processJob = new Job();
-            v2rayNConfigHandler.LoadConfig(ref config);
-            v2rayHandler = new v2rayHandler();
-            v2rayHandler.ProcessEvent += v2rayHandler_ProcessEvent;
-
-            if (config.enableStatistics)
-            {
-                statistics = new StatisticsHandler(config, UpdateStatisticsHandler);
-            }
-
+            InitServersView();
+            RestoreUI();
         }
 
         private void MainForm_VisibleChanged(object sender, EventArgs e)
@@ -71,11 +66,9 @@ namespace v2rayN.Forms
             }
         }
 
-        private void MainForm_Shown(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            InitServersView();
             RefreshServers();
-            RestoreUI();
 
             LoadV2ray();
 
@@ -92,38 +85,6 @@ namespace v2rayN.Forms
                 return;
             }
         }
-
-        private void MainForm_Resize(object sender, EventArgs e)
-        {
-            //if (this.WindowState == FormWindowState.Minimized)
-            //{
-            //    HideForm();
-            //}
-            //else
-            //{
-
-            //}
-        }
-
-
-        //private const int WM_QUERYENDSESSION = 0x0011;
-        //protected override void WndProc(ref Message m)
-        //{
-        //    switch (m.Msg)
-        //    {
-        //        case WM_QUERYENDSESSION:
-        //            Utils.SaveLog("Windows shutdown UnsetProxy");
-
-        //            ConfigHandler.ToJsonFile(config);
-        //            statistics?.SaveToFile();
-        //            ProxySetting.UnsetProxy();
-        //            m.Result = (IntPtr)1;
-        //            break;
-        //        default:
-        //            base.WndProc(ref m);
-        //            break;
-        //    }
-        //}
 
         private void RestoreUI()
         {
@@ -152,8 +113,6 @@ namespace v2rayN.Forms
             }
         }
 
-        #endregion
-
         #region 显示服务器 listview 和 menu
 
         /// <summary>
@@ -180,8 +139,8 @@ namespace v2rayN.Forms
 
             lvServers.Columns.Add("", 30);
             lvServers.Columns.Add(Utils.StringsRes.I18N("LvServiceType"), 80);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvAlias"), 80);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvAddress"), 120);
+            lvServers.Columns.Add(Utils.StringsRes.I18N("LvAlias"), 150);
+            lvServers.Columns.Add(Utils.StringsRes.I18N("LvAddress"), 150);
             lvServers.Columns.Add(Utils.StringsRes.I18N("LvPort"), 80);
             lvServers.Columns.Add(Utils.StringsRes.I18N("LvEncryptionMethod"), 100);
             lvServers.Columns.Add(Utils.StringsRes.I18N("LvTransportProtocol"), 100);
@@ -872,7 +831,6 @@ namespace v2rayN.Forms
 
         #endregion
 
-
         #region 提示信息
 
         /// <summary>
@@ -949,7 +907,6 @@ namespace v2rayN.Forms
         }
 
         #endregion
-
 
         #region 托盘事件
 
@@ -1131,7 +1088,6 @@ namespace v2rayN.Forms
         }
 
         #endregion
-
 
         #region CheckUpdate
 

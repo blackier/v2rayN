@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             ""}, -1, System.Drawing.SystemColors.WindowText, System.Drawing.SystemColors.Window, new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.scMain = new System.Windows.Forms.SplitContainer();
@@ -67,8 +67,8 @@
             this.notifyMain = new System.Windows.Forms.NotifyIcon(this.components);
             this.cmsMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuSysAgentMode = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuOpenHttp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCloseHttp = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenHttp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuServers = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddServers2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuScanScreen2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,13 +103,13 @@
             this.tsbCheckUpdate = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsbCheckUpdateN = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbCheckUpdateCore = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbCheckUpdateDomainList = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbCheckUpdateIPList = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbHelp = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsbAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbV2rayWebsite = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbPromotion = new System.Windows.Forms.ToolStripButton();
-            this.tsbCheckUpdateDomainList = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsbCheckUpdateIPList = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -149,9 +149,8 @@
             this.lvServers.FullRowSelect = true;
             this.lvServers.GridLines = true;
             this.lvServers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.lvServers.HideSelection = false;
             this.lvServers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.lvServers.Location = new System.Drawing.Point(0, 0);
             this.lvServers.Name = "lvServers";
             this.lvServers.Size = new System.Drawing.Size(814, 382);
@@ -438,15 +437,15 @@
             // 
             // menuCloseHttp
             // 
-            this.menuCloseHttp.Name = "menuDelHttp";
-            this.menuCloseHttp.Size = new System.Drawing.Size(231, 22);
+            this.menuCloseHttp.Name = "menuCloseHttp";
+            this.menuCloseHttp.Size = new System.Drawing.Size(148, 22);
             this.menuCloseHttp.Text = "关闭系统代理";
             this.menuCloseHttp.Click += new System.EventHandler(this.menuCloseHttp_Click);
             // 
             // menuOpenHttp
             // 
-            this.menuOpenHttp.Name = "menuSetHttp";
-            this.menuOpenHttp.Size = new System.Drawing.Size(231, 22);
+            this.menuOpenHttp.Name = "menuOpenHttp";
+            this.menuOpenHttp.Size = new System.Drawing.Size(148, 22);
             this.menuOpenHttp.Text = "打开系统代理";
             this.menuOpenHttp.Click += new System.EventHandler(this.menuOpenHttp_Click);
             // 
@@ -656,14 +655,14 @@
             // tsbSubSetting
             // 
             this.tsbSubSetting.Name = "tsbSubSetting";
-            this.tsbSubSetting.Size = new System.Drawing.Size(180, 22);
+            this.tsbSubSetting.Size = new System.Drawing.Size(100, 22);
             this.tsbSubSetting.Text = "设置";
             this.tsbSubSetting.Click += new System.EventHandler(this.tsbSubSetting_Click);
             // 
             // tsbSubUpdate
             // 
             this.tsbSubUpdate.Name = "tsbSubUpdate";
-            this.tsbSubUpdate.Size = new System.Drawing.Size(180, 22);
+            this.tsbSubUpdate.Size = new System.Drawing.Size(100, 22);
             this.tsbSubUpdate.Text = "更新";
             this.tsbSubUpdate.Click += new System.EventHandler(this.tsbSubUpdate_Click);
             // 
@@ -734,28 +733,28 @@
             // tsbCheckUpdateN
             // 
             this.tsbCheckUpdateN.Name = "tsbCheckUpdateN";
-            this.tsbCheckUpdateN.Size = new System.Drawing.Size(135, 22);
+            this.tsbCheckUpdateN.Size = new System.Drawing.Size(141, 22);
             this.tsbCheckUpdateN.Text = "v2rayN";
             this.tsbCheckUpdateN.Click += new System.EventHandler(this.tsbCheckUpdateN_Click);
             // 
             // tsbCheckUpdateCore
             // 
             this.tsbCheckUpdateCore.Name = "tsbCheckUpdateCore";
-            this.tsbCheckUpdateCore.Size = new System.Drawing.Size(135, 22);
+            this.tsbCheckUpdateCore.Size = new System.Drawing.Size(141, 22);
             this.tsbCheckUpdateCore.Text = "v2rayCore";
             this.tsbCheckUpdateCore.Click += new System.EventHandler(this.tsbCheckUpdateCore_Click);
             // 
             // tsbCheckUpdateDomainList
             // 
             this.tsbCheckUpdateDomainList.Name = "tsbCheckUpdateDomainList";
-            this.tsbCheckUpdateDomainList.Size = new System.Drawing.Size(135, 22);
+            this.tsbCheckUpdateDomainList.Size = new System.Drawing.Size(141, 22);
             this.tsbCheckUpdateDomainList.Text = "Domain list";
             this.tsbCheckUpdateDomainList.Click += new System.EventHandler(this.tsbCheckUpdateDomainList_Click);
             // 
             // tsbCheckUpdateIPList
             // 
             this.tsbCheckUpdateIPList.Name = "tsbCheckUpdateIPList";
-            this.tsbCheckUpdateIPList.Size = new System.Drawing.Size(135, 22);
+            this.tsbCheckUpdateIPList.Size = new System.Drawing.Size(141, 22);
             this.tsbCheckUpdateIPList.Text = "IP list";
             this.tsbCheckUpdateIPList.Click += new System.EventHandler(this.tsbCheckUpdateIPList_Click);
             // 
@@ -815,12 +814,12 @@
             this.MaximizeBox = true;
             this.MinimizeBox = true;
             this.Name = "MainForm";
+            this.ShowInTaskbar = false;
             this.Text = "v2rayN";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.VisibleChanged += new System.EventHandler(this.MainForm_VisibleChanged);
-            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.scMain.Panel1.ResumeLayout(false);
             this.scMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).EndInit();
