@@ -282,15 +282,8 @@ namespace v2rayN.Forms
 
         private void DisplayToolStatus()
         {
-            toolSslSocksPort.Text =
-            toolSslHttpPort.Text = "OFF";
-
             toolSslSocksPort.Text = $"{Global.Loopback}:{config.inbound[0].localPort}";
-
-            if (config.listenerType != ListenerType.closeSystemProxy)
-            {
-                toolSslHttpPort.Text = $"{Global.Loopback}:{config.GetLocalPort(Global.InboundHttp)}";
-            }
+            toolSslHttpPort.Text = $"{Global.Loopback}:{config.inbound[0].localPort + 1}";
 
             notifyMain.Icon = MainFormHandler.Instance.GetNotifyIcon(config, Icon);
         }

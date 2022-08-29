@@ -141,18 +141,15 @@ namespace v2rayN.Handler
             // 端口
             socksInbound.Port = config.inbound[0].localPort;
             if (config.allowLANConn)
-            {
                 socksInbound.Listen = "0.0.0.0";
-            }
             else
-            {
                 socksInbound.Listen = Global.Loopback;
-            }
             // 流量探测
             socksInbound.Sniffing.Enabled = config.inbound[0].sniffingEnabled;
 
             // http proxy
             var httpInbound = V2Ray.InboundObject.DefaultLocalHttp;
+            httpInbound.Listen = socksInbound.Listen;
             httpInbound.Tag = "httpProxy";
             httpInbound.Port = config.inbound[0].localPort + 1;
             httpInbound.Sniffing.Enabled = config.inbound[0].sniffingEnabled;
