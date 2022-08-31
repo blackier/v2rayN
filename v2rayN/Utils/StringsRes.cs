@@ -8,21 +8,11 @@ namespace v2rayN
     {
         public class StringsRes
         {
-            private static ResourceManager res = new ResourceManager("v2rayN.Localization.Strings", Assembly.GetExecutingAssembly());
-
-            private static string LoadString(ResourceManager resMgr, string key)
-            {
-                string value = resMgr.GetString(key);
-                if (value == null)
-                {
-                    throw new KeyNotFoundException($"key: {key}");
-                }
-                return value;
-            }
+            private static I18N _i18n = new I18N_zh_Hans();
 
             public static string I18N(string key)
             {
-                return LoadString(res, key);
+                return _i18n.GetString(key);
             }
         }
     }
