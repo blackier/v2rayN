@@ -339,6 +339,27 @@ namespace v2rayN.Handler
 
                 v2rayConfig.Outbounds.Add(outbound);
             }
+            else if (config.configType() == (int)EConfigType.ShadowsocksR)
+            {
+                var outbound = new V2Ray.OutboundObject();
+                outbound.Tag = Global.agentTag;
+                outbound.Protocol = "http";                
+
+                //远程服务器地址和端口
+                var settings = new V2Ray.Protocols.Socks.OutboundConfigurationObject();
+                settings.Servers.Add(new());
+                settings.Servers[0].Address = "127.0.0.1";
+                settings.Servers[0].Port = 1080;
+                outbound.Settings = settings;
+
+                //Mux
+                outbound.Mux = new();
+                outbound.Mux.Enabled = config.muxEnabled;
+                outbound.Mux.Concurrency = config.muxEnabled ? 8 : -1;
+
+                v2rayConfig.Outbounds.Add(outbound);
+
+            }
 
             // 设置直连，放前面作为主出站
             var freedomOutbound = new V2Ray.OutboundObject
@@ -488,7 +509,7 @@ namespace v2rayN.Handler
             {
                 foreach (var server in config.remoteDNS.Split(','))
                 {
-                    v2rayConfig.Dns.Servers.Add(server);
+                    v2rayConfig.Dns.Servers.Add(server.TrimEx());
                 }
             }
 
@@ -636,7 +657,7 @@ namespace v2rayN.Handler
                         vmessItem.headerType = Global.None;
 
 
-                        vmessItem.configVersion = Utils.ToInt(vmessQRCode.v);
+                        vmessItem.configVersion = Utils.ToString(vmessQRCode.v);
                         vmessItem.remarks = Utils.ToString(vmessQRCode.ps);
                         vmessItem.address = Utils.ToString(vmessQRCode.add);
                         vmessItem.port = Utils.ToInt(vmessQRCode.port);
@@ -656,8 +677,6 @@ namespace v2rayN.Handler
                         vmessItem.path = Utils.ToString(vmessQRCode.path);
                         vmessItem.streamSecurity = Utils.ToString(vmessQRCode.tls);
                     }
-
-                    v2rayNConfigHandler.UpgradeServerVersion(ref vmessItem);
                 }
                 else if (result.StartsWith(Global.ssProtocol))
                 {
@@ -746,6 +765,20 @@ namespace v2rayN.Handler
                     {
                         vmessItem.remarks = WebUtility.UrlDecode(remarks);
                     }
+                }
+                else if (result.StartsWith(Global.ssrProtocol))
+                {
+                    msg = Utils.StringsRes.I18N("ConfigurationFormatIncorrect");
+
+                    var ssrServer = new Shadowsocks.Model.Server(clipboardData, "");
+                    vmessItem.ssr = ssrServer;
+                    vmessItem.security = ssrServer.Method;
+                    vmessItem.id = ssrServer.Id;
+                    vmessItem.address = ssrServer.server;
+                    vmessItem.port = ssrServer.Server_Port;
+                    vmessItem.remarks = ssrServer.Remarks;
+                    vmessItem.network = ssrServer.Protocol;
+                    vmessItem.configType = (int)EConfigType.ShadowsocksR;
                 }
                 else
                 {

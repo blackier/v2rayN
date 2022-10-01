@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+	<PackageReference Include="ARSoft.Tools.Net.HMBSbige" Version="2.3.0" />
+	<PackageReference Include="CryptoBase" Version="1.6.0" />	  	  
+	<PackageReference Include="Shadowsocks.Protocol" Version="1.0.0" />
+	<PackageReference Include="System.Reactive.Linq" Version="5.0.0" />
     <PackageReference Include="Google.Protobuf" Version="3.14.0" />
     <PackageReference Include="Grpc.Core" Version="2.34.0" />
     <PackageReference Include="Grpc.Tools" Version="2.34.0">

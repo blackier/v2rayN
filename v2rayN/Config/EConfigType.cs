@@ -3,11 +3,12 @@ namespace v2rayN.Config
 {
     public enum EConfigType
     {
-        Vmess = 1,
-        Custom = 2,
-        Shadowsocks = 3,
-        Socks = 4,
-        VLESS = 5,
-        Trojan = 6
+        Custom = 0,
+        Vmess,
+        VLESS,
+        Trojan,
+        Socks,
+        Shadowsocks,
+        ShadowsocksR
     }
 }

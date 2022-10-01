@@ -81,6 +81,26 @@ namespace v2rayN.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] libsscrypto_dll {
+            get {
+                object obj = ResourceManager.GetObject("libsscrypto_dll", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] libsscrypto64_dll {
+            get {
+                object obj = ResourceManager.GetObject("libsscrypto64_dll", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap notify {

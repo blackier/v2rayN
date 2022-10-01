@@ -26,6 +26,8 @@ namespace v2rayN.Handler
         //private int processId = 0;
         private Process _process;
 
+        //ssr
+        private Shadowsocks.Controller.MainController ssrContrl;
         public v2rayHandler()
         {
             lstV2ray = new List<string>
@@ -51,7 +53,7 @@ namespace v2rayN.Handler
                 else
                 {
                     ShowMsg(true, msg);
-                    V2rayRestart();
+                    V2rayRestart(config);
                 }
             }
         }
@@ -81,9 +83,24 @@ namespace v2rayN.Handler
         /// <summary>
         /// V2ray重启
         /// </summary>
-        private void V2rayRestart()
+        private void V2rayRestart(Config.V2RayNConfig config)
         {
             V2rayStop();
+
+            // ssr作为核心代理模块来使用
+            // v2ray做前置代理
+            if (ssrContrl == null)
+            {
+                Shadowsocks.Model.Global.GuiConfig = new();
+                ssrContrl = new();
+            }
+            if(config.vmess[config.index].configType == (int)EConfigType.ShadowsocksR)
+            {
+                Shadowsocks.Model.Global.GuiConfig.Configs.Clear();
+                ssrContrl.AddServerBySsUrl(config.vmess[config.index].ssr.SsrLink);
+                ssrContrl.Reload();
+            }
+
             V2rayStart();
         }
 
@@ -94,6 +111,8 @@ namespace v2rayN.Handler
         {
             try
             {
+                ssrContrl?.Stop();
+
                 if (_process != null)
                 {
                     KillProcess(_process);

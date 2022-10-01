@@ -98,6 +98,14 @@ namespace v2rayN
         /// </summary>
         public const string ssProtocolLite = "shadowsocks";
         /// <summary>
+        /// shadowsocks
+        /// </summary>
+        public const string ssrProtocol = "ssr://";
+        /// <summary>
+        /// shadowsocks
+        /// </summary>
+        public const string ssrProtocolLite = "shadowsocksr";
+        /// <summary>
         /// socks
         /// </summary>
         public const string socksProtocol = "socks://";

@@ -141,13 +141,6 @@ namespace v2rayN.Handler
             else
             {
                 Global.reloadV2ray = true;
-
-                //版本升级
-                for (int i = 0; i < config.vmess.Count; i++)
-                {
-                    VmessItem vmessItem = config.vmess[i];
-                    UpgradeServerVersion(ref vmessItem);
-                }
             }
 
             return 0;
@@ -162,7 +155,7 @@ namespace v2rayN.Handler
         /// <returns></returns>
         public static int AddServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
         {
-            vmessItem.configVersion = 2;
+            vmessItem.configVersion = "2";
             vmessItem.configType = (int)EConfigType.Vmess;
 
             vmessItem.address = vmessItem.address.TrimEx();
@@ -604,7 +597,7 @@ namespace v2rayN.Handler
         /// <returns></returns>
         public static int AddShadowsocksServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
         {
-            vmessItem.configVersion = 2;
+            vmessItem.configVersion = "2";
             vmessItem.configType = (int)EConfigType.Shadowsocks;
 
             vmessItem.address = vmessItem.address.TrimEx();
@@ -645,7 +638,7 @@ namespace v2rayN.Handler
         /// <returns></returns>
         public static int AddSocksServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
         {
-            vmessItem.configVersion = 2;
+            vmessItem.configVersion = "2";
             vmessItem.configType = (int)EConfigType.Socks;
 
             vmessItem.address = vmessItem.address.TrimEx();
@@ -685,7 +678,7 @@ namespace v2rayN.Handler
         /// <returns></returns>
         public static int AddTrojanServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
         {
-            vmessItem.configVersion = 2;
+            vmessItem.configVersion = "2";
             vmessItem.configType = (int)EConfigType.Trojan;
 
             vmessItem.address = vmessItem.address.TrimEx();
@@ -716,75 +709,6 @@ namespace v2rayN.Handler
 
             ToJsonFile(config);
 
-            return 0;
-        }
-
-        /// <summary>
-        /// 配置文件版本升级
-        /// </summary>
-        /// <param name="vmessItem"></param>
-        /// <returns></returns>
-        public static int UpgradeServerVersion(ref VmessItem vmessItem)
-        {
-            try
-            {
-                if (vmessItem == null
-                    || vmessItem.configVersion == 2)
-                {
-                    return 0;
-                }
-                if (vmessItem.configType == (int)EConfigType.Vmess)
-                {
-                    string path = "";
-                    string host = "";
-                    string[] arrParameter;
-                    switch (vmessItem.network)
-                    {
-                        case "kcp":
-                            break;
-                        case "ws":
-                            //*ws(path+host),它们中间分号(;)隔开
-                            if (vmessItem.requestHost.IsNullOrEmpty())
-                            {
-                                break;
-                            }
-                            arrParameter = vmessItem.requestHost.Replace(" ", "").Split(';');
-                            if (arrParameter.Length > 0)
-                            {
-                                path = arrParameter[0];
-                            }
-                            if (arrParameter.Length > 1)
-                            {
-                                path = arrParameter[0];
-                                host = arrParameter[1];
-                            }
-                            vmessItem.path = path;
-                            vmessItem.requestHost = host;
-                            break;
-                        case "h2":
-                            //*h2 path
-                            arrParameter = vmessItem.requestHost.Replace(" ", "").Split(';');
-                            if (arrParameter.Length > 0)
-                            {
-                                path = arrParameter[0];
-                            }
-                            if (arrParameter.Length > 1)
-                            {
-                                path = arrParameter[0];
-                                host = arrParameter[1];
-                            }
-                            vmessItem.path = path;
-                            vmessItem.requestHost = host;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                vmessItem.configVersion = 2;
-            }
-            catch
-            {
-            }
             return 0;
         }
 
@@ -849,6 +773,19 @@ namespace v2rayN.Handler
                     {
                         countServers++;
                     }
+                }
+                else if (vmessItem.configType == (int)EConfigType.ShadowsocksR)
+                {
+                    //添加
+                    config.vmess.Add(vmessItem);
+                    if (config.vmess.Count == 1)
+                    {
+                        config.index = 0;
+                        Global.reloadV2ray = true;
+                    }
+
+                    ToJsonFile(config);
+                    countServers++;
                 }
             }
             return countServers;
@@ -1012,7 +949,7 @@ namespace v2rayN.Handler
         /// <returns></returns>
         public static int AddVlessServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
         {
-            vmessItem.configVersion = 2;
+            vmessItem.configVersion = "2";
             vmessItem.configType = (int)EConfigType.VLESS;
 
             vmessItem.address = vmessItem.address.TrimEx();
