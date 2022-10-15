@@ -286,7 +286,7 @@ namespace v2rayN.Handler
         /// DownloadString
         /// </summary> 
         /// <param name="url"></param>
-        public void WebDownloadString(string url)
+        public void WebDownloadString(string url, WebProxy webProxy = null)
         {
             string source = string.Empty;
             try
@@ -294,6 +294,7 @@ namespace v2rayN.Handler
                 Utils.SetSecurityProtocol();
 
                 WebClientEx ws = new WebClientEx();
+                ws.Proxy = webProxy;
                 ws.DownloadStringCompleted += Ws_DownloadStringCompleted;
                 ws.DownloadStringAsync(new Uri(url));
             }

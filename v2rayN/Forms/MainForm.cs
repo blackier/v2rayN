@@ -1464,8 +1464,13 @@ namespace v2rayN.Forms
                 {
                     AppendText(true, args.GetException().Message);
                 };
-
-                downloadHandle3.WebDownloadString(url);
+                WebProxy webProxy = null;
+                if (config.listenerType == ListenerType.openSystemProxy)
+                {
+                    int httpPort = config.GetLocalPort(Global.InboundHttp);
+                    webProxy = new WebProxy(Global.Loopback, httpPort);
+                }
+                downloadHandle3.WebDownloadString(url, webProxy);
                 AppendText(false, $"{hashCode}{Utils.StringsRes.I18N("MsgStartGettingSubscriptions")}");
             }
         }
