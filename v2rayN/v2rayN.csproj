@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Platforms>x86;x64;</Platforms>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -18,9 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.14.0" />
-    <PackageReference Include="Grpc.Core" Version="2.34.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.34.0">
+    <PackageReference Include="Google.Protobuf" Version="3.21.9" />
+    <PackageReference Include="Grpc.Core" Version="2.46.5" />
+    <PackageReference Include="Grpc.Tools" Version="2.50.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -37,30 +37,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Localization\Strings.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Strings.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Localization\Strings.zh-Hans.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Strings.zh-Hans.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Localization\Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Localization\Strings.zh-Hans.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.zh-Hans.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
