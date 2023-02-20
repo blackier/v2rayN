@@ -800,12 +800,12 @@ namespace v2rayN.Forms
             bgwScan.RunWorkerAsync();
         }
 
-        private int AddBatchServers(string clipboardData, string subid = "")
+        private int AddBatchServers(string clipboardData, string subid = "", string protocolFilter = "")
         {
             int counter;
             int _Add()
             {
-                return v2rayNConfigHandler.AddBatchServers(ref config, clipboardData, subid);
+                return v2rayNConfigHandler.AddBatchServers(ref config, clipboardData, subid, protocolFilter);
             }
             counter = _Add();
             if (counter < 1)
@@ -1419,6 +1419,7 @@ namespace v2rayN.Forms
             {
                 string id = config.subItem[k - 1].id.TrimEx();
                 string url = config.subItem[k - 1].url.TrimEx();
+                string protocolFilter = config.subItem[k - 1].protocolFilter.TrimEx();
                 string hashCode = $"{k}->";
                 if (config.subItem[k - 1].enabled == false)
                 {
@@ -1446,7 +1447,7 @@ namespace v2rayN.Forms
                         v2rayNConfigHandler.RemoveServerViaSubid(ref config, id);
                         AppendText(false, $"{hashCode}{Utils.StringsRes.I18N("MsgClearSubscription")}");
                         RefreshServers();
-                        if (AddBatchServers(result, id) > 0)
+                        if (AddBatchServers(result, id, protocolFilter) > 0)
                         {
                         }
                         else

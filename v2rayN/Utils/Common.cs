@@ -14,6 +14,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -167,6 +169,10 @@ namespace v2rayN
         {
             try
             {
+                Type typ = obj.GetType();
+                if (typ == typeof(JsonElement))
+                    return Convert.ToInt32(obj.ToString());
+
                 return Convert.ToInt32(obj);
             }
             catch

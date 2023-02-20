@@ -20,7 +20,7 @@ namespace v2rayN.Config
         /// <summary>
         /// 远程服务器端口
         /// </summary>
-        public string port { get; set; } = string.Empty;
+        public object port { get; set; } = null;
         /// <summary>
         /// 远程服务器ID
         /// </summary>

@@ -35,11 +35,15 @@
             this.txtRemarks = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtProtocolFilter = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.txtProtocolFilter);
             this.groupBox2.Controls.Add(this.chkEnabled);
             this.groupBox2.Controls.Add(this.btnRemove);
             this.groupBox2.Controls.Add(this.txtUrl);
@@ -87,7 +91,7 @@
             this.txtUrl.Margin = new System.Windows.Forms.Padding(4);
             this.txtUrl.Multiline = true;
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(386, 70);
+            this.txtUrl.Size = new System.Drawing.Size(386, 50);
             this.txtUrl.TabIndex = 23;
             this.txtUrl.Leave += new System.EventHandler(this.txtRemarks_Leave);
             // 
@@ -122,6 +126,26 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "地址(Address)";
             // 
+            // txtProtocolFilter
+            // 
+            this.txtProtocolFilter.Location = new System.Drawing.Point(98, 113);
+            this.txtProtocolFilter.Margin = new System.Windows.Forms.Padding(4);
+            this.txtProtocolFilter.Multiline = true;
+            this.txtProtocolFilter.Name = "txtProtocolFilter";
+            this.txtProtocolFilter.Size = new System.Drawing.Size(386, 30);
+            this.txtProtocolFilter.TabIndex = 26;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label1.Location = new System.Drawing.Point(8, 116);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 17);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "协议过滤( , )";
+            // 
             // SubSettingControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -147,5 +171,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.CheckBox chkEnabled;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtProtocolFilter;
     }
 }

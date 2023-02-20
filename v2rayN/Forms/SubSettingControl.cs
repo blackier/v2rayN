@@ -30,6 +30,7 @@ namespace v2rayN.Forms
                 txtRemarks.Text = subItem.remarks.ToString();
                 txtUrl.Text = subItem.url.ToString();
                 chkEnabled.Checked = subItem.enabled;
+                txtProtocolFilter.Text = subItem.protocolFilter.ToString();
             }
         }
         private void EndBindingSub()
@@ -39,6 +40,7 @@ namespace v2rayN.Forms
                 subItem.remarks = txtRemarks.Text.TrimEx();
                 subItem.url = txtUrl.Text.TrimEx();
                 subItem.enabled = chkEnabled.Checked;
+                subItem.protocolFilter = txtProtocolFilter.Text.TrimEx();
             }
         }
         private void txtRemarks_Leave(object sender, EventArgs e)

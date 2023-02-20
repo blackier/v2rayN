@@ -341,12 +341,12 @@ namespace v2rayN.Handler
                 {
                     VmessQRCode vmessQRCode = new VmessQRCode
                     {
-                        v = vmessItem.configVersion.ToString(),
+                        v = vmessItem.configVersion,
                         ps = vmessItem.remarks.TrimEx(), //备注也许很长 ;
                         add = vmessItem.address,
-                        port = vmessItem.port.ToString(),
+                        port = vmessItem.port,
                         id = vmessItem.id,
-                        aid = vmessItem.alterId.ToString(),
+                        aid = vmessItem.alterId,
                         net = vmessItem.network,
                         type = vmessItem.headerType,
                         host = vmessItem.requestHost,
@@ -719,7 +719,7 @@ namespace v2rayN.Handler
         /// <param name="clipboardData"></param>
         /// <param name="subid"></param>
         /// <returns>成功导入的数量</returns>
-        public static int AddBatchServers(ref Config.V2RayNConfig config, string clipboardData, string subid = "")
+        public static int AddBatchServers(ref Config.V2RayNConfig config, string clipboardData, string subid = "", string protocolFilter = "")
         {
             if (Utils.IsNullOrEmpty(clipboardData))
             {
@@ -729,6 +729,7 @@ namespace v2rayN.Handler
             int countServers = 0;
 
             string[] arrData = clipboardData.Split(Environment.NewLine.ToCharArray());
+            string[] arrProtocolFilter = protocolFilter.Split(",");
             foreach (string str in arrData)
             {
                 //maybe sub
@@ -746,28 +747,28 @@ namespace v2rayN.Handler
                     continue;
                 }
                 vmessItem.subid = subid;
-                if (vmessItem.configType == (int)EConfigType.Vmess)
+                if (vmessItem.configType == (int)EConfigType.Vmess && !arrProtocolFilter.Contains(EConfigType.Vmess.ToString()))
                 {
                     if (AddServer(ref config, vmessItem, -1) == 0)
                     {
                         countServers++;
                     }
                 }
-                else if (vmessItem.configType == (int)EConfigType.Shadowsocks)
+                else if (vmessItem.configType == (int)EConfigType.Shadowsocks && !arrProtocolFilter.Contains(EConfigType.Shadowsocks.ToString()))
                 {
                     if (AddShadowsocksServer(ref config, vmessItem, -1) == 0)
                     {
                         countServers++;
                     }
                 }
-                else if (vmessItem.configType == (int)EConfigType.Socks)
+                else if (vmessItem.configType == (int)EConfigType.Socks && !arrProtocolFilter.Contains(EConfigType.Socks.ToString()))
                 {
                     if (AddSocksServer(ref config, vmessItem, -1) == 0)
                     {
                         countServers++;
                     }
                 }
-                else if (vmessItem.configType == (int)EConfigType.Trojan)
+                else if (vmessItem.configType == (int)EConfigType.Trojan && !arrProtocolFilter.Contains(EConfigType.Trojan.ToString()))
                 {
                     if (AddTrojanServer(ref config, vmessItem, -1) == 0)
                     {

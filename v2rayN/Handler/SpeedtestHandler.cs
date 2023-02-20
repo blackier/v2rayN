@@ -206,6 +206,7 @@ namespace v2rayN.Handler
                 int httpPort = _config.GetLocalPort("speedtest");
 
                 WebProxy webProxy = new WebProxy(Global.Loopback, httpPort + itemIndex);
+                downloadHandle2.downloadFileName = "speedteset";
                 var ws = downloadHandle2.DownloadFileAsync(url, webProxy, timeout - 2);
 
                 Thread.Sleep(1000 * timeout);

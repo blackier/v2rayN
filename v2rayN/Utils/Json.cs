@@ -12,7 +12,7 @@ namespace v2rayN
         /// </summary>
         public static T FromJson<T>(string strJson, bool caseInsensitive = false)
         {
-            JsonSerializerOptions serializer_opts = caseInsensitive ? new JsonSerializerOptions() { PropertyNameCaseInsensitive = true } : new JsonSerializerOptions();
+            JsonSerializerOptions serializer_opts = caseInsensitive ? new JsonSerializerOptions() { PropertyNameCaseInsensitive = true, NumberHandling = JsonNumberHandling.AllowReadingFromString } : new JsonSerializerOptions();
             T obj = JsonSerializer.Deserialize<T>(strJson, serializer_opts);
             return obj;
         }

@@ -703,6 +703,8 @@ namespace v2rayN.Config
         /// enable
         /// </summary>
         public bool enabled { get; set; } = true;
+
+        public string protocolFilter { get; set; } = "";
     }
 
     [Serializable]

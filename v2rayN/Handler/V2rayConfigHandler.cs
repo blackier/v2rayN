@@ -267,6 +267,7 @@ namespace v2rayN.Handler
                 var settings = (V2Ray.Protocols.Shadowsocks.OutboundConfigurationObject)outbound.Settings;
 
                 //远程服务器地址和端口
+                settings.Servers.Add(new());
                 settings.Servers[0].Address = config.address();
                 settings.Servers[0].Port = config.port();
                 settings.Servers[0].Password = config.id();
