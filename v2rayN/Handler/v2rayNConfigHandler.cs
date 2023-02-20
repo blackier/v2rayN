@@ -728,7 +728,7 @@ namespace v2rayN.Handler
 
             int countServers = 0;
 
-            string[] arrData = clipboardData.Split(Environment.NewLine.ToCharArray());
+            string[] arrData = clipboardData.Split(Environment.NewLine.ToCharArray()).Distinct().ToArray();
             string[] arrProtocolFilter = protocolFilter.Split(",");
             foreach (string str in arrData)
             {
