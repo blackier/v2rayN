@@ -922,9 +922,12 @@ namespace v2rayN.Forms
 
         private void ShowForm()
         {
-            Visible = true;
-            ShowInTaskbar = true;
-            WindowState = FormWindowState.Normal;
+            if (WindowState == FormWindowState.Minimized || !Visible)
+            {
+                Visible = true;
+                ShowInTaskbar = true;
+                WindowState = FormWindowState.Normal;
+            }
 
             txtMsgBox.ScrollToCaret();
             if (config.index >= 0 && config.index < lvServers.Items.Count)
@@ -932,7 +935,11 @@ namespace v2rayN.Forms
                 lvServers.EnsureVisible(config.index); // workaround
             }
 
+            // According to some sources these steps gurantee that an app will be brought to foreground.
             Activate();
+            TopMost = true;
+            TopMost = false;
+            Focus();
         }
 
         private void HideForm()
