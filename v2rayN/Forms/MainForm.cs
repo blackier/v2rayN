@@ -604,6 +604,18 @@ namespace v2rayN.Forms
             SpeedtestHandler statistics = new SpeedtestHandler(ref config, ref v2rayHandler, lvSelecteds, actionType, UpdateSpeedtestHandler);
         }
 
+        private void SpeedtestAll(string actionType)
+        {
+            lvSelecteds.Clear();
+            for (int i = 0; i < lvServers.Items.Count; i++)
+            {
+                lvSelecteds.Add(i);
+            }
+
+            ClearTestResult();
+            SpeedtestHandler statistics = new SpeedtestHandler(ref config, ref v2rayHandler, lvSelecteds, actionType, UpdateSpeedtestHandler);
+        }
+
         private void tsbTestMe_Click(object sender, EventArgs e)
         {
             string result = httpProxyTest() + "ms";
@@ -1409,10 +1421,15 @@ namespace v2rayN.Forms
             UpdateSubscriptionProcess();
         }
 
+        private void tsbSubUpdateAndPing_Click(object sender, EventArgs e)
+        {
+            UpdateSubscriptionProcess(true);
+        }
+
         /// <summary>
         /// the subscription update process
         /// </summary>
-        private void UpdateSubscriptionProcess()
+        private void UpdateSubscriptionProcess(bool needSpeedtest = false)
         {
             AppendText(false, Utils.StringsRes.I18N("MsgUpdateSubscriptionStart"));
 
@@ -1462,6 +1479,9 @@ namespace v2rayN.Forms
                             AppendText(false, $"{hashCode}{Utils.StringsRes.I18N("MsgFailedImportSubscription")}");
                         }
                         AppendText(false, $"{hashCode}{Utils.StringsRes.I18N("MsgUpdateSubscriptionEnd")}");
+
+                        if (needSpeedtest)
+                            SpeedtestAll("realping");
                     }
                     else
                     {
