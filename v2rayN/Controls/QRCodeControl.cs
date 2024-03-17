@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
-using v2rayN.Handler;
+using v2rayN.Handlers;
 using v2rayN.Config;
+using v2rayN.Utils;
 
 namespace v2rayN.Forms
 {
@@ -25,14 +26,14 @@ namespace v2rayN.Forms
             if (Index >= 0)
             {
                 string url = v2rayNConfigHandler.GetVmessQRCode(config, Index);
-                if (Utils.IsNullOrEmpty(url))
+                if (Misc.IsNullOrEmpty(url))
                 {
                     picQRCode.Image = null;
                     txtUrl.Text = string.Empty;
                     return;
                 }
                 txtUrl.Text = url;
-                picQRCode.Image = Utils.QRCode.GetQRCode(url);                
+                picQRCode.Image = QRCode.GetQRCode(url);                
             }
         }
     }

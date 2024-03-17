@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using v2rayN.Config;
 using v2rayN.Extensions;
-using v2rayN.Handler;
+using v2rayN.Handlers;
 
 namespace v2rayN.Forms
 {
@@ -21,9 +21,7 @@ namespace v2rayN.Forms
         {
             InitializeComponent();
 
-            Text = Utils.GetVersion();
-
-            Global.processJob = new Job();
+            Text = Misc.GetVersion();
 
             v2rayNConfigHandler.LoadConfig(ref config);
             v2rayHandler = new v2rayHandler();
@@ -138,21 +136,21 @@ namespace v2rayN.Forms
             }
 
             lvServers.Columns.Add("", 30);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvServiceType"), 80);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvAlias"), 150);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvAddress"), 150);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvPort"), 80);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvEncryptionMethod"), 100);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvTransportProtocol"), 100);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvSubscription"), 80);
-            lvServers.Columns.Add(Utils.StringsRes.I18N("LvTestResults"), 100);
+            lvServers.Columns.Add(StringsRes.I18N("LvServiceType"), 80);
+            lvServers.Columns.Add(StringsRes.I18N("LvAlias"), 150);
+            lvServers.Columns.Add(StringsRes.I18N("LvAddress"), 150);
+            lvServers.Columns.Add(StringsRes.I18N("LvPort"), 80);
+            lvServers.Columns.Add(StringsRes.I18N("LvEncryptionMethod"), 100);
+            lvServers.Columns.Add(StringsRes.I18N("LvTransportProtocol"), 100);
+            lvServers.Columns.Add(StringsRes.I18N("LvSubscription"), 80);
+            lvServers.Columns.Add(StringsRes.I18N("LvTestResults"), 100);
 
             if (statistics != null && statistics.Enable)
             {
-                lvServers.Columns.Add(Utils.StringsRes.I18N("LvTodayDownloadDataAmount"), 100);
-                lvServers.Columns.Add(Utils.StringsRes.I18N("LvTodayUploadDataAmount"), 100);
-                lvServers.Columns.Add(Utils.StringsRes.I18N("LvTotalDownloadDataAmount"), 100);
-                lvServers.Columns.Add(Utils.StringsRes.I18N("LvTotalUploadDataAmount"), 100);
+                lvServers.Columns.Add(StringsRes.I18N("LvTodayDownloadDataAmount"), 100);
+                lvServers.Columns.Add(StringsRes.I18N("LvTodayUploadDataAmount"), 100);
+                lvServers.Columns.Add(StringsRes.I18N("LvTotalDownloadDataAmount"), 100);
+                lvServers.Columns.Add(StringsRes.I18N("LvTotalUploadDataAmount"), 100);
             }
             lvServers.EndUpdate();
         }
@@ -204,10 +202,10 @@ namespace v2rayN.Forms
                     ServerStatItem sItem = statistics.Statistic.Find(item_ => item_.itemId == item.getItemId());
                     if (sItem != null)
                     {
-                        totalUp = Utils.HumanFy(sItem.totalUp);
-                        totalDown = Utils.HumanFy(sItem.totalDown);
-                        todayUp = Utils.HumanFy(sItem.todayUp);
-                        todayDown = Utils.HumanFy(sItem.todayDown);
+                        totalUp = Misc.HumanFy(sItem.totalUp);
+                        totalDown = Misc.HumanFy(sItem.totalDown);
+                        todayUp = Misc.HumanFy(sItem.todayUp);
+                        todayDown = Misc.HumanFy(sItem.todayDown);
                     }
                     _addSubItem(lvItem, EServerColName.todayDown.ToString(), todayDown);
                     _addSubItem(lvItem, EServerColName.todayUp.ToString(), todayUp);
@@ -252,7 +250,7 @@ namespace v2rayN.Forms
             try
             {
                 ToolStripItem ts = (ToolStripItem)sender;
-                int index = Utils.ToInt(ts.Tag);
+                int index = Misc.ToInt(ts.Tag);
                 SetDefaultServer(index);
             }
             catch
@@ -289,9 +287,9 @@ namespace v2rayN.Forms
         }
         private void ssMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if (!Utils.IsNullOrEmpty(e.ClickedItem.Text))
+            if (!Misc.IsNullOrEmpty(e.ClickedItem.Text))
             {
-                Utils.SetClipboardData(e.ClickedItem.Text);
+                Misc.SetClipboardData(e.ClickedItem.Text);
             }
         }
 
@@ -305,7 +303,7 @@ namespace v2rayN.Forms
             try
             {
                 var tag = lvServers.Columns[e.Column].Tag?.ToString();
-                bool asc = Utils.IsNullOrEmpty(tag) ? true : !Convert.ToBoolean(tag);
+                bool asc = Misc.IsNullOrEmpty(tag) ? true : !Convert.ToBoolean(tag);
                 if (v2rayNConfigHandler.SortServers(ref config, (EServerColName)e.Column, asc) != 0)
                 {
                     return;
@@ -315,7 +313,7 @@ namespace v2rayN.Forms
             }
             catch (Exception ex)
             {
-                Utils.SaveLog(ex.Message, ex);
+                Log.SaveLog(ex.Message, ex);
             }
 
             if (e.Column < 0)
@@ -505,7 +503,7 @@ namespace v2rayN.Forms
             {
                 return;
             }
-            if (Utils.MsgBox.ShowYesNo(Utils.StringsRes.I18N("RemoveServer")) == DialogResult.No)
+            if (MsgBox.ShowYesNo(StringsRes.I18N("RemoveServer")) == DialogResult.No)
             {
                 return;
             }
@@ -521,7 +519,7 @@ namespace v2rayN.Forms
 
         private void menuRemoveDuplicateServer_Click(object sender, EventArgs e)
         {
-            Utils.DedupServerList(config.vmess, out List<VmessItem> servers, config.keepOlderDedupl);
+            Misc.DedupServerList(config.vmess, out List<VmessItem> servers, config.keepOlderDedupl);
             int oldCount = config.vmess.Count;
             int newCount = servers.Count;
             if (servers != null)
@@ -531,7 +529,7 @@ namespace v2rayN.Forms
             //刷新
             RefreshServers();
             LoadV2ray();
-            Utils.MsgBox.Show(string.Format(Utils.StringsRes.I18N("RemoveDuplicateServerResult"), oldCount, newCount));
+            MsgBox.Show(string.Format(StringsRes.I18N("RemoveDuplicateServerResult"), oldCount, newCount));
         }
 
         private void menuCopyServer_Click(object sender, EventArgs e)
@@ -601,7 +599,7 @@ namespace v2rayN.Forms
             }
 
             ClearTestResult();
-            SpeedtestHandler statistics = new SpeedtestHandler(ref config, ref v2rayHandler, lvSelecteds, actionType, UpdateSpeedtestHandler);
+            SpeedTestHandler statistics = new SpeedTestHandler(ref config, ref v2rayHandler, lvSelecteds, actionType, UpdateSpeedtestHandler);
         }
 
         private void SpeedtestAll(string actionType)
@@ -613,17 +611,17 @@ namespace v2rayN.Forms
             }
 
             ClearTestResult();
-            SpeedtestHandler statistics = new SpeedtestHandler(ref config, ref v2rayHandler, lvSelecteds, actionType, UpdateSpeedtestHandler);
+            SpeedTestHandler statistics = new SpeedTestHandler(ref config, ref v2rayHandler, lvSelecteds, actionType, UpdateSpeedtestHandler);
         }
 
         private void tsbTestMe_Click(object sender, EventArgs e)
         {
             string result = httpProxyTest() + "ms";
-            AppendText(false, string.Format(Utils.StringsRes.I18N("TestMeOutput"), result));
+            AppendText(false, string.Format(StringsRes.I18N("TestMeOutput"), result));
         }
         private int httpProxyTest()
         {
-            SpeedtestHandler statistics = new SpeedtestHandler(ref config, ref v2rayHandler, lvSelecteds, "", UpdateSpeedtestHandler);
+            SpeedTestHandler statistics = new SpeedTestHandler(ref config, ref v2rayHandler, lvSelecteds, "", UpdateSpeedtestHandler);
             return statistics.RunAvailabilityCheck();
         }
 
@@ -635,7 +633,7 @@ namespace v2rayN.Forms
             foreach (int v in lvSelecteds)
             {
                 string url = v2rayNConfigHandler.GetVmessQRCode(config, v);
-                if (Utils.IsNullOrEmpty(url))
+                if (Misc.IsNullOrEmpty(url))
                 {
                     continue;
                 }
@@ -644,8 +642,8 @@ namespace v2rayN.Forms
             }
             if (sb.Length > 0)
             {
-                Utils.SetClipboardData(sb.ToString());
-                AppendText(false, Utils.StringsRes.I18N("BatchExportURLSuccessfully"));
+                Misc.SetClipboardData(sb.ToString());
+                AppendText(false, StringsRes.I18N("BatchExportURLSuccessfully"));
                 //UI.Show(UIRes.I18N("BatchExportURLSuccessfully"));
             }
         }
@@ -658,7 +656,7 @@ namespace v2rayN.Forms
             foreach (int v in lvSelecteds)
             {
                 string url = v2rayNConfigHandler.GetVmessQRCode(config, v);
-                if (Utils.IsNullOrEmpty(url))
+                if (Misc.IsNullOrEmpty(url))
                 {
                     continue;
                 }
@@ -667,8 +665,8 @@ namespace v2rayN.Forms
             }
             if (sb.Length > 0)
             {
-                Utils.SetClipboardData(Utils.Base64Encode(sb.ToString()));
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("BatchExportSubscriptionSuccessfully"));
+                Misc.SetClipboardData(Misc.Base64Encode(sb.ToString()));
+                MsgBox.Show(StringsRes.I18N("BatchExportSubscriptionSuccessfully"));
             }
         }
 
@@ -705,7 +703,7 @@ namespace v2rayN.Forms
         {
             if (index < 0)
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("PleaseSelectServer"));
+                MsgBox.Show(StringsRes.I18N("PleaseSelectServer"));
                 return -1;
             }
             if (v2rayNConfigHandler.SetDefaultServer(ref config, index) == 0)
@@ -729,7 +727,7 @@ namespace v2rayN.Forms
             {
                 if (lvServers.SelectedIndices.Count <= 0)
                 {
-                    Utils.MsgBox.Show(Utils.StringsRes.I18N("PleaseSelectServer"));
+                    MsgBox.Show(StringsRes.I18N("PleaseSelectServer"));
                     return index;
                 }
 
@@ -748,7 +746,7 @@ namespace v2rayN.Forms
 
         private void menuAddCustomServer_Click(object sender, EventArgs e)
         {
-            Utils.MsgBox.Show(Utils.StringsRes.I18N("CustomServerTips"));
+            MsgBox.Show(StringsRes.I18N("CustomServerTips"));
 
             OpenFileDialog fileDialog = new OpenFileDialog
             {
@@ -760,7 +758,7 @@ namespace v2rayN.Forms
                 return;
             }
             string fileName = fileDialog.FileName;
-            if (Utils.IsNullOrEmpty(fileName))
+            if (Misc.IsNullOrEmpty(fileName))
             {
                 return;
             }
@@ -770,11 +768,11 @@ namespace v2rayN.Forms
                 //刷新
                 RefreshServers();
                 //LoadV2ray();
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("SuccessfullyImportedCustomServer"));
+                MsgBox.Show(StringsRes.I18N("SuccessfullyImportedCustomServer"));
             }
             else
             {
-                Utils.MsgBox.ShowWarning(Utils.StringsRes.I18N("FailedImportedCustomServer"));
+                MsgBox.ShowWarning(StringsRes.I18N("FailedImportedCustomServer"));
             }
         }
 
@@ -798,11 +796,11 @@ namespace v2rayN.Forms
 
         private void menuAddServers_Click(object sender, EventArgs e)
         {
-            string clipboardData = Utils.GetClipboardData();
+            string clipboardData = Misc.GetClipboardData();
             int result = AddBatchServers(clipboardData);
             if (result > 0)
             {
-                Utils.MsgBox.Show(string.Format(Utils.StringsRes.I18N("SuccessfullyImportedServerViaClipboard"), result));
+                MsgBox.Show(string.Format(StringsRes.I18N("SuccessfullyImportedServerViaClipboard"), result));
             }
         }
 
@@ -822,7 +820,7 @@ namespace v2rayN.Forms
             counter = _Add();
             if (counter < 1)
             {
-                clipboardData = Utils.Base64Decode(clipboardData);
+                clipboardData = Misc.Base64Decode(clipboardData);
                 counter = _Add();
             }
             RefreshServers();
@@ -992,7 +990,7 @@ namespace v2rayN.Forms
             {
                 up /= (ulong)(config.statisticsFreshRate / 1000f);
                 down /= (ulong)(config.statisticsFreshRate / 1000f);
-                toolSslServerSpeed.Text = string.Format("{0}/s↑ | {1}/s↓", Utils.HumanFy(up), Utils.HumanFy(down));
+                toolSslServerSpeed.Text = string.Format("{0}/s↑ | {1}/s↓", Misc.HumanFy(up), Misc.HumanFy(down));
 
                 List<string[]> datas = new List<string[]>();
                 for (int i = 0; i < config.vmess.Count; i++)
@@ -1004,10 +1002,10 @@ namespace v2rayN.Forms
                         {
                             lvServers.BeginUpdate();
 
-                            lvServers.Items[i].SubItems["todayDown"].Text = Utils.HumanFy(statistics[index].todayDown);
-                            lvServers.Items[i].SubItems["todayUp"].Text = Utils.HumanFy(statistics[index].todayUp);
-                            lvServers.Items[i].SubItems["totalDown"].Text = Utils.HumanFy(statistics[index].totalDown);
-                            lvServers.Items[i].SubItems["totalUp"].Text = Utils.HumanFy(statistics[index].totalUp);
+                            lvServers.Items[i].SubItems["todayDown"].Text = Misc.HumanFy(statistics[index].todayDown);
+                            lvServers.Items[i].SubItems["todayUp"].Text = Misc.HumanFy(statistics[index].todayUp);
+                            lvServers.Items[i].SubItems["totalDown"].Text = Misc.HumanFy(statistics[index].totalDown);
+                            lvServers.Items[i].SubItems["totalUp"].Text = Misc.HumanFy(statistics[index].totalUp);
 
                             lvServers.EndUpdate();
                         });
@@ -1016,7 +1014,7 @@ namespace v2rayN.Forms
             }
             catch (Exception ex)
             {
-                Utils.SaveLog(ex.Message, ex);
+                Log.SaveLog(ex.Message, ex);
             }
         }
 
@@ -1049,7 +1047,7 @@ namespace v2rayN.Forms
             int index = GetLvSelectedIndex();
             if (index < 0)
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("PleaseSelectServer"));
+                MsgBox.Show(StringsRes.I18N("PleaseSelectServer"));
                 return;
             }
             if (v2rayNConfigHandler.MoveServer(ref config, index, eMove) == 0)
@@ -1105,7 +1103,7 @@ namespace v2rayN.Forms
 
         private void askToDownload(DownloadHandler downloadHandle, string url)
         {
-            if (Utils.MsgBox.ShowYesNo(string.Format(Utils.StringsRes.I18N("DownloadYesNo"), url)) == DialogResult.Yes)
+            if (MsgBox.ShowYesNo(string.Format(StringsRes.I18N("DownloadYesNo"), url)) == DialogResult.Yes)
             {
                 if (httpProxyTest() > 0)
                 {
@@ -1126,7 +1124,7 @@ namespace v2rayN.Forms
             {
                 if (args.Success)
                 {
-                    AppendText(false, string.Format(Utils.StringsRes.I18N("MsgParsingSuccessfully"), "v2rayN"));
+                    AppendText(false, string.Format(StringsRes.I18N("MsgParsingSuccessfully"), "v2rayN"));
 
                     string url = args.Msg;
                     Invoke((MethodInvoker)(delegate
@@ -1143,18 +1141,18 @@ namespace v2rayN.Forms
             {
                 if (args.Success)
                 {
-                    AppendText(false, Utils.StringsRes.I18N("MsgDownloadV2rayCoreSuccessfully"));
+                    AppendText(false, StringsRes.I18N("MsgDownloadV2rayCoreSuccessfully"));
 
                     try
                     {
-                        string fileName = Utils.GetPath(downloadHandle.downloadFileName);
+                        string fileName = Misc.GetPath(downloadHandle.downloadFileName);
                         Process process = new Process
                         {
                             StartInfo = new ProcessStartInfo
                             {
                                 FileName = "v2rayUpgrade.exe",
                                 Arguments = "\"" + fileName + "\"",
-                                WorkingDirectory = Utils.StartupPath()
+                                WorkingDirectory = Misc.StartupPath()
                             }
                         };
                         process.Start();
@@ -1179,7 +1177,7 @@ namespace v2rayN.Forms
             };
 
 
-            AppendText(false, string.Format(Utils.StringsRes.I18N("MsgStartUpdating"), "v2rayN"));
+            AppendText(false, string.Format(StringsRes.I18N("MsgStartUpdating"), "v2rayN"));
             downloadHandle.CheckUpdateAsync(DownloadHandler.downloadType.v2rayN);
         }
 
@@ -1190,7 +1188,7 @@ namespace v2rayN.Forms
             {
                 if (args.Success)
                 {
-                    AppendText(false, string.Format(Utils.StringsRes.I18N("MsgParsingSuccessfully"), "v2rayCore"));
+                    AppendText(false, string.Format(StringsRes.I18N("MsgParsingSuccessfully"), "v2rayCore"));
 
                     string url = args.Msg;
                     Invoke((MethodInvoker)(delegate
@@ -1207,23 +1205,23 @@ namespace v2rayN.Forms
             {
                 if (args.Success)
                 {
-                    AppendText(false, Utils.StringsRes.I18N("MsgDownloadV2rayCoreSuccessfully"));
-                    AppendText(false, Utils.StringsRes.I18N("MsgUnpacking"));
+                    AppendText(false, StringsRes.I18N("MsgDownloadV2rayCoreSuccessfully"));
+                    AppendText(false, StringsRes.I18N("MsgUnpacking"));
 
                     try
                     {
                         CloseV2ray();
 
                         string fileName = downloadHandle.downloadFileName;
-                        fileName = Utils.GetPath(fileName);
-                        Utils.FileManager.ZipExtractToFile(fileName);
+                        fileName = Misc.GetPath(fileName);
+                        FileManager.ZipExtractToFile(fileName);
 
-                        AppendText(false, Utils.StringsRes.I18N("MsgUpdateV2rayCoreSuccessfullyMore"));
+                        AppendText(false, StringsRes.I18N("MsgUpdateV2rayCoreSuccessfullyMore"));
 
                         Global.reloadV2ray = true;
                         LoadV2ray();
 
-                        AppendText(false, Utils.StringsRes.I18N("MsgUpdateV2rayCoreSuccessfully"));
+                        AppendText(false, StringsRes.I18N("MsgUpdateV2rayCoreSuccessfully"));
                     }
                     catch (Exception ex)
                     {
@@ -1240,7 +1238,7 @@ namespace v2rayN.Forms
                 AppendText(true, args.GetException().Message);
             };
 
-            AppendText(false, string.Format(Utils.StringsRes.I18N("MsgStartUpdating"), "v2rayCore"));
+            AppendText(false, string.Format(StringsRes.I18N("MsgStartUpdating"), "v2rayCore"));
             downloadHandle.CheckUpdateAsync(DownloadHandler.downloadType.v2rayCore);
         }
 
@@ -1251,7 +1249,7 @@ namespace v2rayN.Forms
             {
                 if (args.Success)
                 {
-                    AppendText(false, string.Format(Utils.StringsRes.I18N("MsgParsingSuccessfully"), "Domain list"));
+                    AppendText(false, string.Format(StringsRes.I18N("MsgParsingSuccessfully"), "Domain list"));
 
                     string url = args.Msg;
                     Invoke((MethodInvoker)(delegate
@@ -1268,19 +1266,19 @@ namespace v2rayN.Forms
             {
                 if (args.Success)
                 {
-                    AppendText(false, Utils.StringsRes.I18N("MsgDownloadDomainListSuccessfully"));
+                    AppendText(false, StringsRes.I18N("MsgDownloadDomainListSuccessfully"));
 
                     try
                     {
                         CloseV2ray();
 
-                        Utils.FileManager.RemoveFile(Utils.GetPath("geosite.dat"));
-                        Utils.FileManager.RenameFile(Utils.GetPath(downloadHandle.downloadFileName), "geosite.dat");
+                        FileManager.RemoveFile(Misc.GetPath("geosite.dat"));
+                        FileManager.RenameFile(Misc.GetPath(downloadHandle.downloadFileName), "geosite.dat");
 
                         Global.reloadV2ray = true;
                         LoadV2ray();
 
-                        AppendText(false, Utils.StringsRes.I18N("MsgReplaceDomainListSuccessfully"));
+                        AppendText(false, StringsRes.I18N("MsgReplaceDomainListSuccessfully"));
                     }
                     catch (Exception ex)
                     {
@@ -1298,7 +1296,7 @@ namespace v2rayN.Forms
             };
 
 
-            AppendText(false, string.Format(Utils.StringsRes.I18N("MsgStartUpdating"), "Domain list"));
+            AppendText(false, string.Format(StringsRes.I18N("MsgStartUpdating"), "Domain list"));
             downloadHandle.CheckUpdateAsync(DownloadHandler.downloadType.domainList);
         }
 
@@ -1309,7 +1307,7 @@ namespace v2rayN.Forms
             {
                 if (args.Success)
                 {
-                    AppendText(false, string.Format(Utils.StringsRes.I18N("MsgParsingSuccessfully"), "IP list"));
+                    AppendText(false, string.Format(StringsRes.I18N("MsgParsingSuccessfully"), "IP list"));
 
                     string url = args.Msg;
                     Invoke((MethodInvoker)(delegate
@@ -1326,7 +1324,7 @@ namespace v2rayN.Forms
             {
                 if (args.Success)
                 {
-                    AppendText(false, Utils.StringsRes.I18N("MsgDownloadIPListSuccessfully"));
+                    AppendText(false, StringsRes.I18N("MsgDownloadIPListSuccessfully"));
 
                     try
                     {
@@ -1334,7 +1332,7 @@ namespace v2rayN.Forms
                         Global.reloadV2ray = true;
                         LoadV2ray();
 
-                        AppendText(false, Utils.StringsRes.I18N("MsgReplaceIPListSuccessfully"));
+                        AppendText(false, StringsRes.I18N("MsgReplaceIPListSuccessfully"));
                     }
                     catch (Exception ex)
                     {
@@ -1352,7 +1350,7 @@ namespace v2rayN.Forms
             };
 
 
-            AppendText(false, string.Format(Utils.StringsRes.I18N("MsgStartUpdating"), "IP list"));
+            AppendText(false, string.Format(StringsRes.I18N("MsgStartUpdating"), "IP list"));
             downloadHandle.CheckUpdateAsync(DownloadHandler.downloadType.ipList);
         }
 
@@ -1373,7 +1371,7 @@ namespace v2rayN.Forms
 
         private void tsbPromotion_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", $"{Utils.Base64Decode(Global.PromotionUrl)}");
+            Process.Start("explorer.exe", $"{Misc.Base64Decode(Global.PromotionUrl)}");
         }
         #endregion
 
@@ -1391,7 +1389,7 @@ namespace v2rayN.Forms
             ShowForm();
 
             string result = Convert.ToString(e.UserState);
-            if (Utils.IsNullOrEmpty(result))
+            if (Misc.IsNullOrEmpty(result))
             {
                 Utils.MsgBox.ShowWarning(Utils.StringsRes.I18N("NoValidQRcodeFound"));
             }
@@ -1431,11 +1429,11 @@ namespace v2rayN.Forms
         /// </summary>
         private void UpdateSubscriptionProcess(bool needSpeedtest = false)
         {
-            AppendText(false, Utils.StringsRes.I18N("MsgUpdateSubscriptionStart"));
+            AppendText(false, StringsRes.I18N("MsgUpdateSubscriptionStart"));
 
             if (config.subItem == null || config.subItem.Count <= 0)
             {
-                AppendText(false, Utils.StringsRes.I18N("MsgNoValidSubscription"));
+                AppendText(false, StringsRes.I18N("MsgNoValidSubscription"));
                 return;
             }
 
@@ -1449,9 +1447,9 @@ namespace v2rayN.Forms
                 {
                     continue;
                 }
-                if (Utils.IsNullOrEmpty(id) || Utils.IsNullOrEmpty(url))
+                if (Misc.IsNullOrEmpty(id) || Misc.IsNullOrEmpty(url))
                 {
-                    AppendText(false, $"{hashCode}{Utils.StringsRes.I18N("MsgNoValidSubscription")}");
+                    AppendText(false, $"{hashCode}{StringsRes.I18N("MsgNoValidSubscription")}");
                     continue;
                 }
 
@@ -1460,25 +1458,25 @@ namespace v2rayN.Forms
                 {
                     if (args.Success)
                     {
-                        AppendText(false, $"{hashCode}{Utils.StringsRes.I18N("MsgGetSubscriptionSuccessfully")}");
-                        string result = Utils.Base64Decode(args.Msg);
-                        if (Utils.IsNullOrEmpty(result))
+                        AppendText(false, $"{hashCode}{StringsRes.I18N("MsgGetSubscriptionSuccessfully")}");
+                        string result = Misc.Base64Decode(args.Msg);
+                        if (Misc.IsNullOrEmpty(result))
                         {
-                            AppendText(false, $"{hashCode}{Utils.StringsRes.I18N("MsgSubscriptionDecodingFailed")}");
+                            AppendText(false, $"{hashCode}{StringsRes.I18N("MsgSubscriptionDecodingFailed")}");
                             return;
                         }
 
                         v2rayNConfigHandler.RemoveServerViaSubid(ref config, id);
-                        AppendText(false, $"{hashCode}{Utils.StringsRes.I18N("MsgClearSubscription")}");
+                        AppendText(false, $"{hashCode}{StringsRes.I18N("MsgClearSubscription")}");
                         RefreshServers();
                         if (AddBatchServers(result, id, protocolFilter) > 0)
                         {
                         }
                         else
                         {
-                            AppendText(false, $"{hashCode}{Utils.StringsRes.I18N("MsgFailedImportSubscription")}");
+                            AppendText(false, $"{hashCode}{StringsRes.I18N("MsgFailedImportSubscription")}");
                         }
-                        AppendText(false, $"{hashCode}{Utils.StringsRes.I18N("MsgUpdateSubscriptionEnd")}");
+                        AppendText(false, $"{hashCode}{StringsRes.I18N("MsgUpdateSubscriptionEnd")}");
 
                         if (needSpeedtest)
                             SpeedtestAll("realping");
@@ -1499,7 +1497,7 @@ namespace v2rayN.Forms
                     webProxy = new WebProxy(Global.Loopback, httpPort);
                 }
                 downloadHandle3.WebDownloadString(url, webProxy);
-                AppendText(false, $"{hashCode}{Utils.StringsRes.I18N("MsgStartGettingSubscriptions")}");
+                AppendText(false, $"{hashCode}{StringsRes.I18N("MsgStartGettingSubscriptions")}");
             }
         }
 

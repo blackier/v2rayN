@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using v2rayN.Handler;
+using v2rayN.Handlers;
 using v2rayN.Config;
+using v2rayN.Utils;
 
 namespace v2rayN.Forms
 {
@@ -61,29 +62,29 @@ namespace v2rayN.Forms
             string security = cmbSecurity.Text;
             string remarks = txtRemarks.Text;
 
-            if (Utils.IsNullOrEmpty(address))
+            if (Misc.IsNullOrEmpty(address))
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillServerAddress"));
+                MsgBox.Show(StringsRes.I18N("FillServerAddress"));
                 return;
             }
-            if (Utils.IsNullOrEmpty(port) || !Utils.IsNumberic(port))
+            if (Misc.IsNullOrEmpty(port) || !Misc.IsNumberic(port))
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillCorrectServerPort"));
+                MsgBox.Show(StringsRes.I18N("FillCorrectServerPort"));
                 return;
             }
-            if (Utils.IsNullOrEmpty(id))
+            if (Misc.IsNullOrEmpty(id))
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillPassword"));
+                MsgBox.Show(StringsRes.I18N("FillPassword"));
                 return;
             }
-            if (Utils.IsNullOrEmpty(security))
+            if (Misc.IsNullOrEmpty(security))
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("PleaseSelectEncryption"));
+                MsgBox.Show(StringsRes.I18N("PleaseSelectEncryption"));
                 return;
             }
 
             vmessItem.address = address;
-            vmessItem.port = Utils.ToInt(port);
+            vmessItem.port = Misc.ToInt(port);
             vmessItem.id = id;
             vmessItem.security = security;
             vmessItem.remarks = remarks;
@@ -94,7 +95,7 @@ namespace v2rayN.Forms
             }
             else
             {
-                Utils.MsgBox.ShowWarning(Utils.StringsRes.I18N("OperationFailed"));
+                MsgBox.ShowWarning(StringsRes.I18N("OperationFailed"));
             }
         }
         private void btnClose_Click(object sender, EventArgs e)

@@ -145,14 +145,14 @@ namespace Shadowsocks.WPF.Services.SystemProxy
                 operational = false;
                 // Not on windows
                 //logger.Info("You are not running on Windows platform, system proxy will disable");
-                v2rayN.Utils.SaveLog("You are not running on Windows platform, system proxy will disable");
+                Log.SaveLog("You are not running on Windows platform, system proxy will disable");
             }
             catch (Win32Exception we)
             {
                 if (we.NativeErrorCode == 12178)
                 {
                     //logger.Warn("WPAD service is not running, system proxy will disable");
-                    v2rayN.Utils.SaveLog("WPAD service is not running, system proxy will disable");
+                    Log.SaveLog("WPAD service is not running, system proxy will disable");
                     // WPAD not running
                 }
                 else

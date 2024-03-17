@@ -1,4 +1,6 @@
-﻿namespace v2rayN.Forms
+﻿using v2rayN.Controls;
+
+namespace v2rayN.Forms
 {
     partial class MainForm
     {
@@ -32,7 +34,7 @@
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] { "" }, -1, System.Drawing.SystemColors.WindowText, System.Drawing.SystemColors.Window, new System.Drawing.Font("Microsoft YaHei UI", 9F));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             scMain = new System.Windows.Forms.SplitContainer();
-            lvServers = new Extensions.ListViewEx();
+            lvServers = new ListViewControl();
             cmsLv = new System.Windows.Forms.ContextMenuStrip(components);
             menuAddVmessServer = new System.Windows.Forms.ToolStripMenuItem();
             menuAddVlessServer = new System.Windows.Forms.ToolStripMenuItem();
@@ -782,7 +784,7 @@
         private System.Windows.Forms.GroupBox groupBoxServerList;
         private System.Windows.Forms.GroupBox groupBoxInfo;
         private System.Windows.Forms.TextBox txtMsgBox;
-        private v2rayN.Extensions.ListViewEx lvServers;
+        private ListViewControl lvServers;
         private System.Windows.Forms.NotifyIcon notifyMain;
         private System.Windows.Forms.ContextMenuStrip cmsMain;
         private System.Windows.Forms.ToolStripMenuItem menuExit;

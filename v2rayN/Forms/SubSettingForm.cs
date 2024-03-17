@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using v2rayN.Handler;
+using v2rayN.Handlers;
 using v2rayN.Config;
 
 namespace v2rayN.Forms
@@ -36,10 +36,10 @@ namespace v2rayN.Forms
             for (int k = config.subItem.Count - 1; k >= 0; k--)
             {
                 SubItem item = config.subItem[k];
-                if (Utils.IsNullOrEmpty(item.remarks)
-                    && Utils.IsNullOrEmpty(item.url))
+                if (Misc.IsNullOrEmpty(item.remarks)
+                    && Misc.IsNullOrEmpty(item.url))
                 {
-                    if (!Utils.IsNullOrEmpty(item.id))
+                    if (!Misc.IsNullOrEmpty(item.id))
                     {
                         v2rayNConfigHandler.RemoveServerViaSubid(ref config, item.id);
                     }
@@ -79,7 +79,7 @@ namespace v2rayN.Forms
             }
             else
             {
-                Utils.MsgBox.ShowWarning(Utils.StringsRes.I18N("OperationFailed"));
+                MsgBox.ShowWarning(StringsRes.I18N("OperationFailed"));
             }
         }
 

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using v2rayN.Handler;
+using v2rayN.Handlers;
 using v2rayN.Config;
+using v2rayN.Utils;
 
 namespace v2rayN.Forms
 {
@@ -82,7 +83,7 @@ namespace v2rayN.Forms
             cmbHeaderType.Items.Clear();
 
             string network = cmbNetwork.Text;
-            if (Utils.IsNullOrEmpty(network))
+            if (Misc.IsNullOrEmpty(network))
             {
                 cmbHeaderType.Items.Add(Global.None);
                 return;
@@ -123,31 +124,31 @@ namespace v2rayN.Forms
             string streamSecurity = cmbStreamSecurity.Text;
             string allowInsecure = cmbAllowInsecure.Text;
 
-            if (Utils.IsNullOrEmpty(address))
+            if (Misc.IsNullOrEmpty(address))
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillServerAddress"));
+                MsgBox.Show(StringsRes.I18N("FillServerAddress"));
                 return;
             }
-            if (Utils.IsNullOrEmpty(port) || !Utils.IsNumberic(port))
+            if (Misc.IsNullOrEmpty(port) || !Misc.IsNumberic(port))
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillCorrectServerPort"));
+                MsgBox.Show(StringsRes.I18N("FillCorrectServerPort"));
                 return;
             }
-            if (Utils.IsNullOrEmpty(id))
+            if (Misc.IsNullOrEmpty(id))
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillUUID"));
+                MsgBox.Show(StringsRes.I18N("FillUUID"));
                 return;
             }
-            if (Utils.IsNullOrEmpty(alterId) || !Utils.IsNumberic(alterId))
+            if (Misc.IsNullOrEmpty(alterId) || !Misc.IsNumberic(alterId))
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillCorrectAlterId"));
+                MsgBox.Show(StringsRes.I18N("FillCorrectAlterId"));
                 return;
             }
 
             vmessItem.address = address;
-            vmessItem.port = Utils.ToInt(port);
+            vmessItem.port = Misc.ToInt(port);
             vmessItem.id = id;
-            vmessItem.alterId = Utils.ToInt(alterId);
+            vmessItem.alterId = Misc.ToInt(alterId);
             vmessItem.security = security;
             vmessItem.network = network;
             vmessItem.remarks = remarks;
@@ -164,13 +165,13 @@ namespace v2rayN.Forms
             }
             else
             {
-                Utils.MsgBox.ShowWarning(Utils.StringsRes.I18N("OperationFailed"));
+                MsgBox.ShowWarning(StringsRes.I18N("OperationFailed"));
             }
         }
 
         private void btnGUID_Click(object sender, EventArgs e)
         {
-            txtId.Text = Utils.GetGUID();
+            txtId.Text = Misc.GetGUID();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -181,7 +182,7 @@ namespace v2rayN.Forms
         private void cmbStreamSecurity_SelectedIndexChanged(object sender, EventArgs e)
         {
             string security = cmbStreamSecurity.Text;
-            if (Utils.IsNullOrEmpty(security))
+            if (Misc.IsNullOrEmpty(security))
             {
                 panTlsMore.Hide();
             }

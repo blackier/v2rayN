@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("v2rayN")]
-[assembly: AssemblyCopyright("Copyright © 2019-2021 (GPLv3)")]
+[assembly: AssemblyCopyright("Copyright © 2019-2024 (GPLv3)")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

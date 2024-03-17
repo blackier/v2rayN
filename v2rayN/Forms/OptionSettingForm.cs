@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using v2rayN.Extensions;
-using v2rayN.Handler;
+using v2rayN.Handlers;
 
 namespace v2rayN.Forms
 {
@@ -63,9 +63,9 @@ namespace v2rayN.Forms
             cmbdomainStrategy.Text = config.domainStrategy;
             cmbroutingMode.SelectedIndex = 0;
 
-            txtUseragent.Text = Utils.List2String(config.useragent, true);
-            txtUserdirect.Text = Utils.List2String(config.userdirect, true);
-            txtUserblock.Text = Utils.List2String(config.userblock, true);
+            txtUseragent.Text = Misc.List2String(config.useragent, true);
+            txtUserdirect.Text = Misc.List2String(config.userdirect, true);
+            txtUserblock.Text = Misc.List2String(config.userblock, true);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace v2rayN.Forms
         private void InitGUI()
         {
             //开机自动启动
-            chkAutoRun.Checked = Utils.IsAutoRun();
+            chkAutoRun.Checked = Misc.IsAutoRun();
 
             chkAllowLANConn.Checked = config.allowLANConn;
             chkEnableStatistics.Checked = config.enableStatistics;
@@ -96,9 +96,9 @@ namespace v2rayN.Forms
 
             ComboItem[] cbSource = new ComboItem[]
             {
-                new ComboItem{ID = (int)Global.StatisticsFreshRate.quick, Text = Utils.StringsRes.I18N("QuickFresh")},
-                new ComboItem{ID = (int)Global.StatisticsFreshRate.medium, Text = Utils.StringsRes.I18N("MediumFresh")},
-                new ComboItem{ID = (int)Global.StatisticsFreshRate.slow, Text = Utils.StringsRes.I18N("SlowFresh")},
+                new ComboItem{ID = (int)Global.StatisticsFreshRate.quick, Text = StringsRes.I18N("QuickFresh")},
+                new ComboItem{ID = (int)Global.StatisticsFreshRate.medium, Text = StringsRes.I18N("MediumFresh")},
+                new ComboItem{ID = (int)Global.StatisticsFreshRate.slow, Text = StringsRes.I18N("SlowFresh")},
             };
             cbFreshrate.DataSource = cbSource;
 
@@ -148,7 +148,7 @@ namespace v2rayN.Forms
             }
             else
             {
-                Utils.MsgBox.ShowWarning(Utils.StringsRes.I18N("OperationFailed"));
+                MsgBox.ShowWarning(StringsRes.I18N("OperationFailed"));
             }
         }
 
@@ -170,17 +170,17 @@ namespace v2rayN.Forms
             string protocol = cmbprotocol.Text.TrimEx();
             bool udpEnabled = chkudpEnabled.Checked;
             bool sniffingEnabled = chksniffingEnabled.Checked;
-            if (Utils.IsNullOrEmpty(localPort) || !Utils.IsNumberic(localPort))
+            if (Misc.IsNullOrEmpty(localPort) || !Misc.IsNumberic(localPort))
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillLocalListeningPort"));
+                MsgBox.Show(StringsRes.I18N("FillLocalListeningPort"));
                 return -1;
             }
-            if (Utils.IsNullOrEmpty(protocol))
+            if (Misc.IsNullOrEmpty(protocol))
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("PleaseSelectProtocol"));
+                MsgBox.Show(StringsRes.I18N("PleaseSelectProtocol"));
                 return -1;
             }
-            config.inbound[0].localPort = Utils.ToInt(localPort);
+            config.inbound[0].localPort = Misc.ToInt(localPort);
             config.inbound[0].protocol = protocol;
             config.inbound[0].udpEnabled = udpEnabled;
             config.inbound[0].sniffingEnabled = sniffingEnabled;
@@ -218,9 +218,9 @@ namespace v2rayN.Forms
 
             config.domainStrategy = domainStrategy;
 
-            config.useragent = Utils.String2List(useragent);
-            config.userdirect = Utils.String2List(userdirect);
-            config.userblock = Utils.String2List(userblock);
+            config.useragent = Misc.String2List(useragent);
+            config.userdirect = Misc.String2List(userdirect);
+            config.userblock = Misc.String2List(userblock);
 
             return 0;
         }
@@ -239,22 +239,22 @@ namespace v2rayN.Forms
             string writeBufferSize = txtKcpwriteBufferSize.Text.TrimEx();
             bool congestion = chkKcpcongestion.Checked;
 
-            if (Utils.IsNullOrEmpty(mtu) || !Utils.IsNumberic(mtu)
-                || Utils.IsNullOrEmpty(tti) || !Utils.IsNumberic(tti)
-                || Utils.IsNullOrEmpty(uplinkCapacity) || !Utils.IsNumberic(uplinkCapacity)
-                || Utils.IsNullOrEmpty(downlinkCapacity) || !Utils.IsNumberic(downlinkCapacity)
-                || Utils.IsNullOrEmpty(readBufferSize) || !Utils.IsNumberic(readBufferSize)
-                || Utils.IsNullOrEmpty(writeBufferSize) || !Utils.IsNumberic(writeBufferSize))
+            if (Misc.IsNullOrEmpty(mtu) || !Misc.IsNumberic(mtu)
+                || Misc.IsNullOrEmpty(tti) || !Misc.IsNumberic(tti)
+                || Misc.IsNullOrEmpty(uplinkCapacity) || !Misc.IsNumberic(uplinkCapacity)
+                || Misc.IsNullOrEmpty(downlinkCapacity) || !Misc.IsNumberic(downlinkCapacity)
+                || Misc.IsNullOrEmpty(readBufferSize) || !Misc.IsNumberic(readBufferSize)
+                || Misc.IsNullOrEmpty(writeBufferSize) || !Misc.IsNumberic(writeBufferSize))
             {
-                Utils.MsgBox.Show(Utils.StringsRes.I18N("FillKcpParameters"));
+                MsgBox.Show(StringsRes.I18N("FillKcpParameters"));
                 return -1;
             }
-            config.kcpItem.mtu = Utils.ToInt(mtu);
-            config.kcpItem.tti = Utils.ToInt(tti);
-            config.kcpItem.uplinkCapacity = Utils.ToInt(uplinkCapacity);
-            config.kcpItem.downlinkCapacity = Utils.ToInt(downlinkCapacity);
-            config.kcpItem.readBufferSize = Utils.ToInt(readBufferSize);
-            config.kcpItem.writeBufferSize = Utils.ToInt(writeBufferSize);
+            config.kcpItem.mtu = Misc.ToInt(mtu);
+            config.kcpItem.tti = Misc.ToInt(tti);
+            config.kcpItem.uplinkCapacity = Misc.ToInt(uplinkCapacity);
+            config.kcpItem.downlinkCapacity = Misc.ToInt(downlinkCapacity);
+            config.kcpItem.readBufferSize = Misc.ToInt(readBufferSize);
+            config.kcpItem.writeBufferSize = Misc.ToInt(writeBufferSize);
             config.kcpItem.congestion = congestion;
 
             return 0;
@@ -267,7 +267,7 @@ namespace v2rayN.Forms
         private int SaveGUI()
         {
             //开机自动启动
-            Utils.SetAutoRun(chkAutoRun.Checked);
+            Misc.SetAutoRun(chkAutoRun.Checked);
 
             config.allowLANConn = chkAllowLANConn.Checked;
 
@@ -310,15 +310,15 @@ namespace v2rayN.Forms
             {
                 case 0:
                     // 代理
-                    txtUseragent.Text = Utils.List2String(Utils.String2List(txtUseragent.Text).Concat(new List<string>(address)).ToList(), true);
+                    txtUseragent.Text = Misc.List2String(Misc.String2List(txtUseragent.Text).Concat(new List<string>(address)).ToList(), true);
                     break;
                 case 1:
                     // 直连
-                    txtUserdirect.Text = Utils.List2String(Utils.String2List(txtUserdirect.Text).Concat(new List<string>(address)).ToList(), true);
+                    txtUserdirect.Text = Misc.List2String(Misc.String2List(txtUserdirect.Text).Concat(new List<string>(address)).ToList(), true);
                     break;
                 case 2:
                     // 禁止
-                    txtUserblock.Text = Utils.List2String(Utils.String2List(txtUserblock.Text).Concat(new List<string>(address)).ToList(), true);
+                    txtUserblock.Text = Misc.List2String(Misc.String2List(txtUserblock.Text).Concat(new List<string>(address)).ToList(), true);
                     break;
                 default:
                     break;

@@ -21,7 +21,7 @@ namespace v2rayN.Forms
             {
                 if (icon == null)
                 {
-                    string file = Utils.GetPath(Global.CustomIconName);
+                    string file = Misc.GetPath(Global.CustomIconName);
                     if (!System.IO.File.Exists(file))
                     {
                         return;
@@ -32,7 +32,7 @@ namespace v2rayN.Forms
             }
             catch (Exception e)
             {
-                Utils.SaveLog($"Loading custom icon failed: {e.Message}");
+                Log.SaveLog($"Loading custom icon failed: {e.Message}");
             }
         }
 
