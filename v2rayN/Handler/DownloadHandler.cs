@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
-using v2rayN.Extension;
+using v2rayN.Extensions;
 
 namespace v2rayN.Handler
 {

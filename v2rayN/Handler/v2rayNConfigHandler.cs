@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using v2rayN.Config;
-using v2rayN.Extension;
+using v2rayN.Extensions;
 
 namespace v2rayN.Handler
 {

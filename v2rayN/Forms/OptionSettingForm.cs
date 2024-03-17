@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using v2rayN.Extension;
+using v2rayN.Extensions;
 using v2rayN.Handler;
 
 namespace v2rayN.Forms

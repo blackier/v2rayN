@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using v2rayN.Config;
-using v2rayN.Extension;
+using v2rayN.Extensions;
 using V2Ray = Shadowsocks.Interop.V2Ray;
 using V2RayConfig = Shadowsocks.Interop.V2Ray.Config;
 

@@ -19,7 +19,7 @@ using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using v2rayN.Extension;
+using v2rayN.Extensions;
 
 namespace v2rayN
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using v2rayN.Extension;
+using v2rayN.Extensions;
 using v2rayN.Handler;
 
 

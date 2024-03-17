@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using v2rayN.Config;
-using v2rayN.Extension;
+using v2rayN.Extensions;
 using v2rayN.Handler;
 
 namespace v2rayN.Forms
