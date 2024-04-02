@@ -31,8 +31,8 @@ class v2rayHandler
         lstV2ray = new List<string>
         {
             "xray",
+            "v2ray",
             "wv2ray",
-            "v2ray"
         };
     }
 
@@ -137,7 +137,8 @@ class v2rayHandler
         }
     }
 
-    private string V2rayFindexe() {
+    private string V2rayFindexe()
+    {
         //查找v2ray文件是否存在
         string fileName = string.Empty;
         //lstV2ray.Reverse();
@@ -181,7 +182,8 @@ class v2rayHandler
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     CreateNoWindow = true,
-                    StandardOutputEncoding = Encoding.UTF8
+                    StandardOutputEncoding = Encoding.UTF8,
+                    Arguments = "run"
                 }
             };
             p.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
@@ -228,10 +230,9 @@ class v2rayHandler
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = fileName,
-                    Arguments = "-config stdin:",
+                    Arguments = $"run -c {Path.Combine(Misc.GetRealExeDir(), "config_test.json")}",
                     WorkingDirectory = Misc.StartupPath(),
                     UseShellExecute = false,
-                    RedirectStandardInput = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     CreateNoWindow = true,
@@ -246,11 +247,10 @@ class v2rayHandler
                     ShowMsg(false, msg);
                 }
             });
+            File.WriteAllText(Path.Combine(Misc.GetRealExeDir(), "config_test.json"), configStr);
+
             p.Start();
             p.BeginOutputReadLine();
-
-            p.StandardInput.Write(configStr);
-            p.StandardInput.Close();
 
             if (p.WaitForExit(1000))
             {
@@ -293,5 +293,5 @@ class v2rayHandler
         {
             Log.SaveLog(ex.Message, ex);
         }
-    }         
+    }
 }

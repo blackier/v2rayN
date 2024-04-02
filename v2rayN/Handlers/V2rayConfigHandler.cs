@@ -1011,9 +1011,7 @@ class v2rayConfigHandler
             foreach (int index in selecteds)
             {
                 if (configCopy.vmess[index].configType == (int)EConfigType.Custom)
-                {
                     continue;
-                }
 
                 configCopy.index = index;
 

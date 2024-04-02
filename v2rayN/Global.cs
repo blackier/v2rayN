@@ -7,7 +7,7 @@ class Global
 {
     public const string configVersion = "2";
 
-    public const string v2rayWebsiteUrl = @"https://www.v2fly.org/";
+    public const string v2rayWebsiteUrl = @"https://github.com/XTLS/Xray-core";
     public const string AboutUrl = @"https://github.com/blackier/v2rayN";
     public const string UpdateUrl = AboutUrl + @"/releases";
 

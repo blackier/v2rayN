@@ -47,8 +47,8 @@ class DownloadHandler
     public string downloadFileName;
     private readonly string nLatestUrl = "https://github.com/blackier/v2rayN/releases/latest";
     private const string nUrl = "https://github.com/blackier/v2rayN/releases/download/{0}/v2rayN.zip";
-    private readonly string coreLatestUrl = "https://github.com/v2fly/v2ray-core/releases/latest";
-    private const string coreUrl = "https://github.com/v2fly/v2ray-core/releases/download/{0}/v2ray-windows-{1}.zip";
+    private readonly string coreLatestUrl = "https://github.com/XTLS/Xray-core/releases/latest";
+    private const string coreUrl = "https://github.com/XTLS/Xray-core/releases/download/{0}/Xray-windows-{1}.zip";
     private readonly string geositeLatestUrl = "https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat";
     private const string geoipLastUrl = "https://github.com/v2fly/geoip/releases/latest/download/geoip.dat";
 
@@ -56,7 +56,6 @@ class DownloadHandler
 
     public async void CheckUpdateAsync(downloadType type)
     {
-        Misc.SetSecurityProtocol();
         HttpClientHandler webRequestHandler = new HttpClientHandler
         {
             AllowAutoRedirect = false
@@ -193,7 +192,6 @@ class DownloadHandler
         WebClient ws = new WebClient();
         try
         {
-            Misc.SetSecurityProtocol();
             UpdateCompleted?.Invoke(this, new ResultEventArgs(false, StringsRes.I18N("Downloading")));
 
             progressPercentage = -1;
@@ -288,13 +286,12 @@ class DownloadHandler
     {
         try
         {
-            Misc.SetSecurityProtocol();
-
             HttpClient httpClient = new(new HttpClientHandler
             {
                 Proxy = webProxy,
-                AllowAutoRedirect = false
+                AllowAutoRedirect = false,
             });
+            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.160 Safari/537.36");
             var result = await httpClient.GetStringAsync(url);
 
             if (!Misc.IsNullOrEmpty(result))

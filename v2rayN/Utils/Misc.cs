@@ -461,6 +461,11 @@ public class Misc
         return Application.StartupPath;
     }
 
+    public static string GetRealExeDir()
+    {
+        return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+    }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
     public static string RegReadValue(string path, string name, string def)
     {
@@ -573,14 +578,6 @@ public class Misc
         return lstIPAddress;
     }
 
-    public static void SetSecurityProtocol()
-    {
-        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
-                                   | SecurityProtocolType.Tls11
-                                   | SecurityProtocolType.Tls12;
-        ServicePointManager.DefaultConnectionLimit = 1024;
-    }
-
     public static int GetFreePort()
     {
         TcpListener l = new TcpListener(IPAddress.Loopback, 0);
@@ -673,26 +670,6 @@ public class Misc
         return string.Empty;
     }
 
-    /// <summary>
-    /// IsAdministrator
-    /// </summary>
-    /// <returns></returns>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
-    public static bool IsAdministrator()
-    {
-        try
-        {
-            WindowsIdentity current = WindowsIdentity.GetCurrent();
-            WindowsPrincipal windowsPrincipal = new WindowsPrincipal(current);
-            //WindowsBuiltInRole可以枚举出很多权限，例如系统用户、User、Guest等等
-            return windowsPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
     // return path to store temporary files
     public static string GetTempPath()
     {
@@ -703,22 +680,4 @@ public class Misc
         }
         return _tempPath;
     }
-
-    public static string GetTempPath(string filename)
-    {
-        return Path.Combine(GetTempPath(), filename);
-    }
-
-    public static string UnGzip(byte[] buf)
-    {
-        MemoryStream sb = new MemoryStream();
-        using (GZipStream input = new GZipStream(new MemoryStream(buf),
-        CompressionMode.Decompress,
-        false))
-        {
-            input.CopyTo(sb);
-        }
-        return Encoding.UTF8.GetString(sb.ToArray());
-    }
-
 }

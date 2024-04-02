@@ -15,8 +15,7 @@ class SpeedTestHandler
     private Config.V2RayNConfig _config;
     private v2rayHandler _v2rayHandler;
     private List<int> _selecteds;
-    Action<int, string> _updateFunc;
-
+    private Action<int, string> _updateFunc;
 
     public SpeedTestHandler(ref Config.V2RayNConfig config, ref v2rayHandler v2rayHandler, List<int> selecteds, string actionType, Action<int, string> update)
     {
@@ -105,9 +104,8 @@ class SpeedTestHandler
             foreach (int itemIndex in _selecteds)
             {
                 if (_config.vmess[itemIndex].configType == (int)EConfigType.Custom)
-                {
                     continue;
-                }
+
                 tasks.Add(Task.Run(() =>
                 {
                     try
@@ -260,20 +258,22 @@ class SpeedTestHandler
         responseTime = -1;
         try
         {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Proxy = webProxy;
+            request.Timeout = (int)TimeSpan.FromSeconds(5).TotalMilliseconds;
+
             Stopwatch timer = new Stopwatch();
             timer.Start();
 
-            HttpClient httpClient = new(new HttpClientHandler
-            {
-                Proxy = webProxy
-            });
-            var result = httpClient.GetAsync(url).GetAwaiter().GetResult();
+            var response = (HttpWebResponse)request.GetResponse();
 
             timer.Stop();
             responseTime = timer.Elapsed.Milliseconds;
 
-            if (!result.IsSuccessStatusCode)
-                responseTime = -1;
+            if (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.NoContent)
+            {
+                msg = response.StatusDescription;
+            }
         }
         catch (Exception ex)
         {
