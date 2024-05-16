@@ -31,5 +31,4 @@ class StatsServiceClient
             return null;
         }
     }
-
 }

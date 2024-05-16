@@ -22,9 +22,6 @@ namespace Shadowsocks.Interop.V2Ray.Outbound
             Tag = "";
         }
 
-        public static ProxySettingsObject Default => new()
-        {
-            TransportLayer = true,
-        };
+        public static ProxySettingsObject Default => new() { TransportLayer = true, };
     }
 }

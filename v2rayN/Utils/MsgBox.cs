@@ -8,10 +8,12 @@ public class MsgBox
     {
         MessageBox.Show(msg, "v2rayN", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
+
     public static void ShowWarning(string msg)
     {
         MessageBox.Show(msg, "v2rayN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
+
     public static void ShowError(string msg)
     {
         MessageBox.Show(msg, "v2rayN", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -22,4 +24,3 @@ public class MsgBox
         return MessageBox.Show(msg, "v2rayN", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
     }
 }
-

@@ -1,5 +1,5 @@
-using Shadowsocks.Interop.V2Ray.Policy;
 using System.Collections.Generic;
+using Shadowsocks.Interop.V2Ray.Policy;
 
 namespace Shadowsocks.Interop.V2Ray
 {
@@ -11,10 +11,6 @@ namespace Shadowsocks.Interop.V2Ray
         /// <summary>
         /// Gets the default policy object.
         /// </summary>
-        public static PolicyObject Default => new()
-        {
-            Levels = new(),
-            System = SystemPolicyObject.Default,
-        };
+        public static PolicyObject Default => new() { Levels = new(), System = SystemPolicyObject.Default, };
     }
 }

@@ -24,11 +24,7 @@ public class QRCode
             };
             // options.Hints，更多属性，也可以在这里添加。
 
-            BarcodeWriter writer = new BarcodeWriter
-            {
-                Format = BarcodeFormat.QR_CODE,
-                Options = options
-            };
+            BarcodeWriter writer = new BarcodeWriter { Format = BarcodeFormat.QR_CODE, Options = options };
             Bitmap bmp = writer.Write(strContent);
             img = (Image)bmp;
             return img;
@@ -45,31 +41,41 @@ public class QRCode
         {
             foreach (Screen screen in Screen.AllScreens)
             {
-                using (Bitmap fullImage = new Bitmap(screen.Bounds.Width,
-                                                screen.Bounds.Height))
+                using (Bitmap fullImage = new Bitmap(screen.Bounds.Width, screen.Bounds.Height))
                 {
                     using (Graphics g = Graphics.FromImage(fullImage))
                     {
-                        g.CopyFromScreen(screen.Bounds.X,
-                                         screen.Bounds.Y,
-                                         0, 0,
-                                         fullImage.Size,
-                                         CopyPixelOperation.SourceCopy);
+                        g.CopyFromScreen(
+                            screen.Bounds.X,
+                            screen.Bounds.Y,
+                            0,
+                            0,
+                            fullImage.Size,
+                            CopyPixelOperation.SourceCopy
+                        );
                     }
                     int maxTry = 10;
                     for (int i = 0; i < maxTry; i++)
                     {
                         int marginLeft = (int)((double)fullImage.Width * i / 2.5 / maxTry);
                         int marginTop = (int)((double)fullImage.Height * i / 2.5 / maxTry);
-                        Rectangle cropRect = new Rectangle(marginLeft, marginTop, fullImage.Width - marginLeft * 2, fullImage.Height - marginTop * 2);
+                        Rectangle cropRect = new Rectangle(
+                            marginLeft,
+                            marginTop,
+                            fullImage.Width - marginLeft * 2,
+                            fullImage.Height - marginTop * 2
+                        );
                         Bitmap target = new Bitmap(screen.Bounds.Width, screen.Bounds.Height);
 
                         double imageScale = (double)screen.Bounds.Width / (double)cropRect.Width;
                         using (Graphics g = Graphics.FromImage(target))
                         {
-                            g.DrawImage(fullImage, new Rectangle(0, 0, target.Width, target.Height),
-                                            cropRect,
-                                            GraphicsUnit.Pixel);
+                            g.DrawImage(
+                                fullImage,
+                                new Rectangle(0, 0, target.Width, target.Height),
+                                cropRect,
+                                GraphicsUnit.Pixel
+                            );
                         }
 
                         BitmapLuminanceSource source = new BitmapLuminanceSource(target);

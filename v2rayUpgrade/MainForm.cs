@@ -20,6 +20,7 @@ namespace v2rayUpgrade
                 fileName = args[0];
             }
         }
+
         private void showWarn(string message)
         {
             MessageBox.Show(message, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -43,8 +44,11 @@ namespace v2rayUpgrade
             catch (Exception ex)
             {
                 // Access may be denied without admin right. The user may not be an administrator.
-                showWarn("Failed to close v2rayN(关闭v2rayN失败).\n" +
-                    "Close it manually, or the upgrade may fail.(请手动关闭正在运行的v2rayN，否则可能升级失败。\n\n" + ex.StackTrace);
+                showWarn(
+                    "Failed to close v2rayN(关闭v2rayN失败).\n"
+                        + "Close it manually, or the upgrade may fail.(请手动关闭正在运行的v2rayN，否则可能升级失败。\n\n"
+                        + ex.StackTrace
+                );
             }
 
             StringBuilder sb = new StringBuilder();
@@ -66,7 +70,6 @@ namespace v2rayUpgrade
                 string thisAppOldFile = Application.ExecutablePath + ".tmp";
                 File.Delete(thisAppOldFile);
                 string startKey = "v2rayN/";
-
 
                 using (ZipArchive archive = ZipFile.OpenRead(fileName))
                 {
@@ -108,8 +111,9 @@ namespace v2rayUpgrade
             }
             if (sb.Length > 0)
             {
-                showWarn("Upgrade Failed,Hold ctrl + c to copy to clipboard.\n" +
-                    "(升级失败,按住ctrl+c可以复制到剪贴板)." + sb.ToString());
+                showWarn(
+                    "Upgrade Failed,Hold ctrl + c to copy to clipboard.\n" + "(升级失败,按住ctrl+c可以复制到剪贴板)." + sb.ToString()
+                );
                 return;
             }
 
@@ -133,6 +137,7 @@ namespace v2rayUpgrade
         {
             return Application.StartupPath;
         }
+
         public static string GetPath(string fileName)
         {
             string startupPath = StartupPath();

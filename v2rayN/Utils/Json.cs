@@ -12,7 +12,13 @@ public class Json
     /// </summary>
     public static T FromJson<T>(string strJson, bool caseInsensitive = false)
     {
-        JsonSerializerOptions serializer_opts = caseInsensitive ? new JsonSerializerOptions() { PropertyNameCaseInsensitive = true, NumberHandling = JsonNumberHandling.AllowReadingFromString } : new JsonSerializerOptions();
+        JsonSerializerOptions serializer_opts = caseInsensitive
+            ? new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true,
+                NumberHandling = JsonNumberHandling.AllowReadingFromString
+            }
+            : new JsonSerializerOptions();
         T obj = JsonSerializer.Deserialize<T>(strJson, serializer_opts);
         return obj;
     }
@@ -22,8 +28,18 @@ public class Json
     /// </summary>
     public static string ToJson(object obj, bool useCamelCase = false)
     {
-        JsonSerializerOptions serializer_opts = useCamelCase ? new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase } : new JsonSerializerOptions();
-        string result = JsonSerializer.Serialize(obj, obj.GetType(), new JsonSerializerOptions { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
+        JsonSerializerOptions serializer_opts = useCamelCase
+            ? new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
+            : new JsonSerializerOptions();
+        string result = JsonSerializer.Serialize(
+            obj,
+            obj.GetType(),
+            new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            }
+        );
         return result;
     }
 
@@ -47,7 +63,11 @@ public class Json
                 }
                 else
                 {
-                    serializer_opts = new JsonSerializerOptions() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+                    serializer_opts = new JsonSerializerOptions()
+                    {
+                        WriteIndented = true,
+                        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                    };
                 }
                 if (caseInsensitive)
                 {

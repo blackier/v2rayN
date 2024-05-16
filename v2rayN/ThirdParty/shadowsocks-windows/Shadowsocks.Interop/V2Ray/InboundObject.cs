@@ -20,23 +20,25 @@ namespace Shadowsocks.Interop.V2Ray
             Protocol = "";
         }
 
-        public static InboundObject DefaultLocalSocks => new()
-        {
-            Tag = "socks-in",
-            Listen = "127.0.0.1",
-            Port = 1080,
-            Protocol = "socks",
-            Settings = Protocols.Socks.InboundConfigurationObject.Default,
-            Sniffing = SniffingObject.Default,
-        };
+        public static InboundObject DefaultLocalSocks =>
+            new()
+            {
+                Tag = "socks-in",
+                Listen = "127.0.0.1",
+                Port = 1080,
+                Protocol = "socks",
+                Settings = Protocols.Socks.InboundConfigurationObject.Default,
+                Sniffing = SniffingObject.Default,
+            };
 
-        public static InboundObject DefaultLocalHttp => new()
-        {
-            Tag = "http-in",
-            Listen = "127.0.0.1",
-            Port = 8080,
-            Protocol = "http",
-            Sniffing = SniffingObject.Default,
-        };
+        public static InboundObject DefaultLocalHttp =>
+            new()
+            {
+                Tag = "http-in",
+                Listen = "127.0.0.1",
+                Port = 8080,
+                Protocol = "http",
+                Sniffing = SniffingObject.Default,
+            };
     }
 }

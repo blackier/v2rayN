@@ -6,37 +6,16 @@ namespace v2rayN.Config;
 [Serializable]
 public class ServerStatistics
 {
-    public List<ServerStatItem> server
-    {
-        get; set;
-    }
+    public List<ServerStatItem> server { get; set; }
 }
 
 [Serializable]
 public class ServerStatItem
 {
-    public string itemId
-    {
-        get; set;
-    }
-    public ulong totalUp
-    {
-        get; set;
-    }
-    public ulong totalDown
-    {
-        get; set;
-    }
-    public ulong todayUp
-    {
-        get; set;
-    }
-    public ulong todayDown
-    {
-        get; set;
-    }
-    public long dateNow
-    {
-        get; set;
-    }
+    public string itemId { get; set; }
+    public ulong totalUp { get; set; }
+    public ulong totalDown { get; set; }
+    public ulong todayUp { get; set; }
+    public ulong todayDown { get; set; }
+    public long dateNow { get; set; }
 }

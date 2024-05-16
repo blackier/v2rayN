@@ -27,14 +27,8 @@ namespace Shadowsocks.Interop.V2Ray.Routing
             DomainMatcher = "mph";
         }
 
-        public static RuleObject DefaultOutbound => new()
-        {
-            OutboundTag = "",
-        };
+        public static RuleObject DefaultOutbound => new() { OutboundTag = "", };
 
-        public static RuleObject DefaultBalancer => new()
-        {
-            BalancerTag = "",
-        };
+        public static RuleObject DefaultBalancer => new() { BalancerTag = "", };
     }
 }

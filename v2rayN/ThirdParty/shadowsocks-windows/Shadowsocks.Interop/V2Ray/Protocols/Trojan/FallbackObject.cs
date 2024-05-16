@@ -12,11 +12,12 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.Trojan
             Dest = 0;
         }
 
-        public static FallbackObject Default => new()
-        {
-            Alpn = "",
-            Path = "",
-            Xver = 0,
-        };
+        public static FallbackObject Default =>
+            new()
+            {
+                Alpn = "",
+                Path = "",
+                Xver = 0,
+            };
     }
 }

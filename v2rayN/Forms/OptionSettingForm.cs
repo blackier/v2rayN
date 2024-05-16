@@ -96,9 +96,9 @@ namespace v2rayN.Forms
 
             ComboItem[] cbSource = new ComboItem[]
             {
-                new ComboItem{ID = (int)Global.StatisticsFreshRate.quick, Text = StringsRes.I18N("QuickFresh")},
-                new ComboItem{ID = (int)Global.StatisticsFreshRate.medium, Text = StringsRes.I18N("MediumFresh")},
-                new ComboItem{ID = (int)Global.StatisticsFreshRate.slow, Text = StringsRes.I18N("SlowFresh")},
+                new ComboItem { ID = (int)Global.StatisticsFreshRate.quick, Text = StringsRes.I18N("QuickFresh") },
+                new ComboItem { ID = (int)Global.StatisticsFreshRate.medium, Text = StringsRes.I18N("MediumFresh") },
+                new ComboItem { ID = (int)Global.StatisticsFreshRate.slow, Text = StringsRes.I18N("SlowFresh") },
             };
             cbFreshrate.DataSource = cbSource;
 
@@ -117,7 +117,6 @@ namespace v2rayN.Forms
                     cbFreshrate.SelectedItem = cbSource[2];
                     break;
             }
-
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -185,7 +184,7 @@ namespace v2rayN.Forms
             config.inbound[0].udpEnabled = udpEnabled;
             config.inbound[0].sniffingEnabled = sniffingEnabled;
 
-            //日志     
+            //日志
             config.logEnabled = logEnabled;
             config.loglevel = loglevel;
 
@@ -208,7 +207,7 @@ namespace v2rayN.Forms
         /// <returns></returns>
         private int SaveRouting()
         {
-            //路由            
+            //路由
             string domainStrategy = cmbdomainStrategy.Text;
             string routingMode = cmbroutingMode.SelectedIndex.ToString();
 
@@ -239,12 +238,20 @@ namespace v2rayN.Forms
             string writeBufferSize = txtKcpwriteBufferSize.Text.TrimEx();
             bool congestion = chkKcpcongestion.Checked;
 
-            if (Misc.IsNullOrEmpty(mtu) || !Misc.IsNumberic(mtu)
-                || Misc.IsNullOrEmpty(tti) || !Misc.IsNumberic(tti)
-                || Misc.IsNullOrEmpty(uplinkCapacity) || !Misc.IsNumberic(uplinkCapacity)
-                || Misc.IsNullOrEmpty(downlinkCapacity) || !Misc.IsNumberic(downlinkCapacity)
-                || Misc.IsNullOrEmpty(readBufferSize) || !Misc.IsNumberic(readBufferSize)
-                || Misc.IsNullOrEmpty(writeBufferSize) || !Misc.IsNumberic(writeBufferSize))
+            if (
+                Misc.IsNullOrEmpty(mtu)
+                || !Misc.IsNumberic(mtu)
+                || Misc.IsNullOrEmpty(tti)
+                || !Misc.IsNumberic(tti)
+                || Misc.IsNullOrEmpty(uplinkCapacity)
+                || !Misc.IsNumberic(uplinkCapacity)
+                || Misc.IsNullOrEmpty(downlinkCapacity)
+                || !Misc.IsNumberic(downlinkCapacity)
+                || Misc.IsNullOrEmpty(readBufferSize)
+                || !Misc.IsNumberic(readBufferSize)
+                || Misc.IsNullOrEmpty(writeBufferSize)
+                || !Misc.IsNumberic(writeBufferSize)
+            )
             {
                 MsgBox.Show(StringsRes.I18N("FillKcpParameters"));
                 return -1;
@@ -310,36 +317,36 @@ namespace v2rayN.Forms
             {
                 case 0:
                     // 代理
-                    txtUseragent.Text = Misc.List2String(Misc.String2List(txtUseragent.Text).Concat(new List<string>(address)).ToList(), true);
+                    txtUseragent.Text = Misc.List2String(
+                        Misc.String2List(txtUseragent.Text).Concat(new List<string>(address)).ToList(),
+                        true
+                    );
                     break;
                 case 1:
                     // 直连
-                    txtUserdirect.Text = Misc.List2String(Misc.String2List(txtUserdirect.Text).Concat(new List<string>(address)).ToList(), true);
+                    txtUserdirect.Text = Misc.List2String(
+                        Misc.String2List(txtUserdirect.Text).Concat(new List<string>(address)).ToList(),
+                        true
+                    );
                     break;
                 case 2:
                     // 禁止
-                    txtUserblock.Text = Misc.List2String(Misc.String2List(txtUserblock.Text).Concat(new List<string>(address)).ToList(), true);
+                    txtUserblock.Text = Misc.List2String(
+                        Misc.String2List(txtUserblock.Text).Concat(new List<string>(address)).ToList(),
+                        true
+                    );
                     break;
                 default:
                     break;
             }
         }
 
-        private void groupBox4_Enter(object sender, EventArgs e)
-        {
-
-        }
+        private void groupBox4_Enter(object sender, EventArgs e) { }
     }
 
     class ComboItem
     {
-        public int ID
-        {
-            get; set;
-        }
-        public string Text
-        {
-            get; set;
-        }
+        public int ID { get; set; }
+        public string Text { get; set; }
     }
 }

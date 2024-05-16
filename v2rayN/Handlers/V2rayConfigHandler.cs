@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
@@ -158,8 +158,7 @@ class v2rayConfigHandler
     /// <returns></returns>
     private static int SetRouting(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
     {
-        if (v2rayConfig.Routing != null
-          && v2rayConfig.Routing.Rules != null)
+        if (v2rayConfig.Routing != null && v2rayConfig.Routing.Rules != null)
         {
             v2rayConfig.Routing.DomainStrategy = config.domainStrategy;
 
@@ -173,6 +172,7 @@ class v2rayConfigHandler
         }
         return 0;
     }
+
     private static int routingUserRule(List<string> userRule, string tag, ref V2RayConfig v2rayConfig)
     {
         if (userRule != null && userRule.Count > 0)
@@ -201,11 +201,13 @@ class v2rayConfigHandler
                 {
                     ipRule.Ip.Add(url);
                 }
-                else if (Misc.IsDomain(url)
+                else if (
+                    Misc.IsDomain(url)
                     || url.StartsWith("geosite:")
                     || url.StartsWith("regexp:")
                     || url.StartsWith("domain:")
-                    || url.StartsWith("full:"))
+                    || url.StartsWith("full:")
+                )
                 {
                     domainRule.Domain.Add(url);
                 }
@@ -250,7 +252,6 @@ class v2rayConfigHandler
             outbound.StreamSettings = streamSettings;
 
             v2rayConfig.Outbounds.Add(outbound);
-
         }
         else if (config.configType() == (int)EConfigType.Shadowsocks)
         {
@@ -270,17 +271,27 @@ class v2rayConfigHandler
             outbound.Mux.Concurrency = config.muxEnabled ? 8 : -1;
 
             v2rayConfig.Outbounds.Add(outbound);
-
         }
         else if (config.configType() == (int)EConfigType.Socks)
         {
-            var outbound = V2Ray.OutboundObject.GetSocks(Global.agentTag, new DnsEndPoint(config.address(), config.port()));
+            var outbound = V2Ray.OutboundObject.GetSocks(
+                Global.agentTag,
+                new DnsEndPoint(config.address(), config.port())
+            );
             var settings = (V2Ray.Protocols.Socks.OutboundConfigurationObject)outbound.Settings;
 
-            if (!Misc.IsNullOrEmpty(config.security())
-                && !Misc.IsNullOrEmpty(config.id()))
+            if (!Misc.IsNullOrEmpty(config.security()) && !Misc.IsNullOrEmpty(config.id()))
             {
-                settings.Servers[0].Users.Add(new() { User = config.security(), Pass = config.id(), Level = 1 });
+                settings
+                    .Servers[0]
+                    .Users.Add(
+                        new()
+                        {
+                            User = config.security(),
+                            Pass = config.id(),
+                            Level = 1
+                        }
+                    );
             }
 
             //Mux
@@ -305,7 +316,10 @@ class v2rayConfigHandler
             outbound.Mux.Enabled = config.muxEnabled;
             outbound.Mux.Concurrency = config.muxEnabled ? 8 : -1;
 
-            if (config.streamSecurity() == Global.StreamSecurityReality || config.streamSecurity() == Global.StreamSecurity)
+            if (
+                config.streamSecurity() == Global.StreamSecurityReality
+                || config.streamSecurity() == Global.StreamSecurity
+            )
             {
                 if (!Misc.IsNullOrEmpty(config.flow()))
                 {
@@ -323,7 +337,12 @@ class v2rayConfigHandler
         }
         else if (config.configType() == (int)EConfigType.Trojan)
         {
-            var outbound = V2Ray.OutboundObject.GetTrojan(Global.agentTag, config.address(), config.port(), config.id());
+            var outbound = V2Ray.OutboundObject.GetTrojan(
+                Global.agentTag,
+                config.address(),
+                config.port(),
+                config.id()
+            );
 
             //Mux
             outbound.Mux = new();
@@ -366,14 +385,17 @@ class v2rayConfigHandler
     /// <param name="iobound"></param>
     /// <param name="streamSettings"></param>
     /// <returns></returns>
-    private static int boundStreamSettings(Config.V2RayNConfig config, ref V2Ray.Transport.StreamSettingsObject streamSettings)
+    private static int boundStreamSettings(
+        Config.V2RayNConfig config,
+        ref V2Ray.Transport.StreamSettingsObject streamSettings
+    )
     {
-
         // 底层传输配置
         streamSettings.Network = config.network();
         string host = config.requestHost().TrimEx();
         string sni = config.node.sni;
-        string useragent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 YaBrowser/24.4.0.0 Safari/537.36";
+        string useragent =
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 YaBrowser/24.4.0.0 Safari/537.36";
         //if tls
         if (config.streamSecurity() == Global.StreamSecurity)
         {
@@ -454,10 +476,7 @@ class v2rayConfigHandler
                 {
                     Security = host,
                     Key = config.path(),
-                    Header = new()
-                    {
-                        Type = config.headerType()
-                    }
+                    Header = new() { Type = config.headerType() }
                 };
                 if (config.streamSecurity() == Global.StreamSecurity)
                 {
@@ -518,18 +537,11 @@ class v2rayConfigHandler
             v2rayConfig.Api = new()
             {
                 Tag = "api",
-                Services = new()
-                {
-                    "StatsService",
-                },
+                Services = new() { "StatsService", },
             };
             v2rayConfig.Policy = new()
             {
-                System = new()
-                {
-                    StatsOutboundUplink = true,
-                    StatsOutboundDownlink = true
-                }
+                System = new() { StatsOutboundUplink = true, StatsOutboundDownlink = true }
             };
 
             var apiInbound = new V2Ray.InboundObject
@@ -691,8 +703,8 @@ class v2rayConfigHandler
 
         try
         {
-            //载入配置文件 
-            string result = clipboardData.TrimEx();// Misc.GetClipboardData();
+            //载入配置文件
+            string result = clipboardData.TrimEx(); // Misc.GetClipboardData();
             if (Misc.IsNullOrEmpty(result))
             {
                 msg = StringsRes.I18N("FailedReadConfiguration");
@@ -720,7 +732,12 @@ class v2rayConfigHandler
                 {
                     return null;
                 }
-                if (profileItem.address.Length == 0 || profileItem.port == 0 || profileItem.security.Length == 0 || profileItem.id.Length == 0)
+                if (
+                    profileItem.address.Length == 0
+                    || profileItem.port == 0
+                    || profileItem.security.Length == 0
+                    || profileItem.id.Length == 0
+                )
                 {
                     return null;
                 }
@@ -772,10 +789,7 @@ class v2rayConfigHandler
 
     private static ProfileItem ResolveVmess4Kitsunebi(string result)
     {
-        ProfileItem vmessItem = new ProfileItem
-        {
-            configType = (int)EConfigType.Vmess
-        };
+        ProfileItem vmessItem = new ProfileItem { configType = (int)EConfigType.Vmess };
         result = result.Substring(Global.vmessProtocol.Length);
         int indexSplit = result.IndexOf("?");
         if (indexSplit > 0)
@@ -874,8 +888,14 @@ class v2rayConfigHandler
         return server;
     }
 
-    private static readonly Regex UrlFinder = new Regex(@"ss://(?<base64>[A-Za-z0-9+-/=_]+)(?:#(?<tag>\S+))?", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-    private static readonly Regex DetailsParser = new Regex(@"^((?<method>.+?):(?<password>.*)@(?<hostname>.+?):(?<port>\d+?))$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+    private static readonly Regex UrlFinder = new Regex(
+        @"ss://(?<base64>[A-Za-z0-9+-/=_]+)(?:#(?<tag>\S+))?",
+        RegexOptions.IgnoreCase | RegexOptions.Compiled
+    );
+    private static readonly Regex DetailsParser = new Regex(
+        @"^((?<method>.+?):(?<password>.*)@(?<hostname>.+?):(?<port>\d+?))$",
+        RegexOptions.IgnoreCase | RegexOptions.Compiled
+    );
 
     private static ProfileItem ResolveSSLegacy(string result)
     {
@@ -911,17 +931,13 @@ class v2rayConfigHandler
         return server;
     }
 
-
     private static readonly Regex StdVmessUserInfo = new Regex(
-        @"^(?<network>[a-z]+)(\+(?<streamSecurity>[a-z]+))?:(?<id>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})-(?<alterId>[0-9]+)$");
+        @"^(?<network>[a-z]+)(\+(?<streamSecurity>[a-z]+))?:(?<id>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})-(?<alterId>[0-9]+)$"
+    );
 
     private static ProfileItem ResolveStdVmess(string result)
     {
-        ProfileItem i = new ProfileItem
-        {
-            configType = (int)EConfigType.Vmess,
-            security = "auto"
-        };
+        ProfileItem i = new ProfileItem { configType = (int)EConfigType.Vmess, security = "auto" };
 
         Uri u = new Uri(result);
 
@@ -1005,10 +1021,7 @@ class v2rayConfigHandler
     private static ProfileItem? ResolveVmess(string result, out string msg)
     {
         msg = string.Empty;
-        var profileItem = new ProfileItem
-        {
-            configType = (int)EConfigType.Vmess
-        };
+        var profileItem = new ProfileItem { configType = (int)EConfigType.Vmess };
 
         result = result.Substring(Global.vmessProtocol.Length);
         result = Misc.Base64Decode(result);
@@ -1053,10 +1066,7 @@ class v2rayConfigHandler
 
     private static ProfileItem? ResolveSocks(string result)
     {
-        ProfileItem profileItem = new()
-        {
-            configType = (int)EConfigType.Socks
-        };
+        ProfileItem profileItem = new() { configType = (int)EConfigType.Socks };
         result = result.Substring(Global.socksProtocol.Length);
         //remark
         int indexRemark = result.IndexOf("#");
@@ -1064,16 +1074,16 @@ class v2rayConfigHandler
         {
             try
             {
-                profileItem.remarks = Misc.UrlDecode(result.Substring(indexRemark + 1, result.Length - indexRemark - 1));
+                profileItem.remarks = Misc.UrlDecode(
+                    result.Substring(indexRemark + 1, result.Length - indexRemark - 1)
+                );
             }
             catch { }
             result = result[..indexRemark];
         }
         //part decode
         int indexS = result.IndexOf("@");
-        if (indexS > 0)
-        {
-        }
+        if (indexS > 0) { }
         else
         {
             result = Misc.Base64Decode(result);
@@ -1110,12 +1120,13 @@ class v2rayConfigHandler
         {
             return null;
         }
-        ProfileItem server = new()
-        {
-            remarks = parsedUrl.GetComponents(UriComponents.Fragment, UriFormat.Unescaped),
-            address = parsedUrl.IdnHost,
-            port = parsedUrl.Port,
-        };
+        ProfileItem server =
+            new()
+            {
+                remarks = parsedUrl.GetComponents(UriComponents.Fragment, UriFormat.Unescaped),
+                address = parsedUrl.IdnHost,
+                port = parsedUrl.Port,
+            };
 
         // parse base64 UserInfo
         string rawUserInfo = parsedUrl.GetComponents(UriComponents.UserInfo, UriFormat.Unescaped);
@@ -1132,10 +1143,7 @@ class v2rayConfigHandler
 
     private static ProfileItem ResolveTrojan(string result)
     {
-        ProfileItem item = new()
-        {
-            configType = (int)EConfigType.Trojan
-        };
+        ProfileItem item = new() { configType = (int)EConfigType.Trojan };
 
         Uri url = new(result);
 
@@ -1208,11 +1216,7 @@ class v2rayConfigHandler
 
     private static ProfileItem ResolveStdVLESS(string result)
     {
-        ProfileItem item = new()
-        {
-            configType = (int)EConfigType.VLESS,
-            security = Global.None
-        };
+        ProfileItem item = new() { configType = (int)EConfigType.VLESS, security = Global.None };
 
         Uri url = new(result);
 

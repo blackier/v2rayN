@@ -28,10 +28,7 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.Socks
                     User = username!, // null check already performed at line 23.
                     Pass = password!,
                 };
-                Users = new()
-                {
-                    user,
-                };
+                Users = new() { user, };
             }
         }
     }

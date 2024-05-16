@@ -18,26 +18,28 @@ namespace Shadowsocks.Interop.V2Ray
         /// <summary>
         /// Gets the default configuration.
         /// </summary>
-        public static Config Default => new()
-        {
-            Log = new(),
-            Api = ApiObject.Default,
-            Dns = new(),
-            Routing = new(),
-            Policy = PolicyObject.Default,
-            Inbounds = new(),
-            Outbounds = new(),
-            Stats = new(),
-        };
+        public static Config Default =>
+            new()
+            {
+                Log = new(),
+                Api = ApiObject.Default,
+                Dns = new(),
+                Routing = new(),
+                Policy = PolicyObject.Default,
+                Inbounds = new(),
+                Outbounds = new(),
+                Stats = new(),
+            };
 
         /// <summary>
         /// Gets the speed test configuration.
         /// </summary>
-        public static Config SpeedTest => new ()
-        {
-            Routing = new(),
-            Inbounds = new(),
-            Outbounds = new(),
-        };
+        public static Config SpeedTest =>
+            new()
+            {
+                Routing = new(),
+                Inbounds = new(),
+                Outbounds = new(),
+            };
     }
 }

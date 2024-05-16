@@ -10,15 +10,16 @@ namespace Shadowsocks.Interop.V2Ray.Policy
         public bool? StatsUserDownlink { get; set; }
         public int? BufferSize { get; set; }
 
-        public static LevelPolicyObject Default => new()
-        {
-            Handshake = 4,
-            ConnIdle = 300,
-            UplinkOnly = 2,
-            DownlinkOnly = 5,
-            StatsUserUplink = false,
-            StatsUserDownlink = false,
-            BufferSize = 512,
-        };
+        public static LevelPolicyObject Default =>
+            new()
+            {
+                Handshake = 4,
+                ConnIdle = 300,
+                UplinkOnly = 2,
+                DownlinkOnly = 5,
+                StatsUserUplink = false,
+                StatsUserDownlink = false,
+                BufferSize = 512,
+            };
     }
 }

@@ -14,10 +14,7 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.Socks
 
         public OutboundConfigurationObject(DnsEndPoint socksEndPoint, string username = "", string password = "")
         {
-            Servers = new()
-            {
-                new(socksEndPoint, username, password),
-            };
+            Servers = new() { new(socksEndPoint, username, password), };
         }
     }
 }

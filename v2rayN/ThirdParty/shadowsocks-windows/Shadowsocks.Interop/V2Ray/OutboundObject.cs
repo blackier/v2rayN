@@ -1,7 +1,7 @@
-using Shadowsocks.Interop.V2Ray.Outbound;
-using Shadowsocks.Interop.V2Ray.Transport;
 //using Shadowsocks.Models;
 using System.Net;
+using Shadowsocks.Interop.V2Ray.Outbound;
+using Shadowsocks.Interop.V2Ray.Transport;
 
 namespace Shadowsocks.Interop.V2Ray
 {
@@ -29,12 +29,18 @@ namespace Shadowsocks.Interop.V2Ray
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static OutboundObject GetSocks(string name, DnsEndPoint socksEndPoint, string username = "", string password = "") => new()
-        {
-            Tag = name,
-            Protocol = "socks",
-            Settings = new Protocols.Socks.OutboundConfigurationObject(socksEndPoint, username, password),
-        };
+        public static OutboundObject GetSocks(
+            string name,
+            DnsEndPoint socksEndPoint,
+            string username = "",
+            string password = ""
+        ) =>
+            new()
+            {
+                Tag = name,
+                Protocol = "socks",
+                Settings = new Protocols.Socks.OutboundConfigurationObject(socksEndPoint, username, password),
+            };
 
         /// <summary>
         /// Gets the <see cref="OutboundObject"/> for the Shadowsocks server.
@@ -42,12 +48,16 @@ namespace Shadowsocks.Interop.V2Ray
         /// </summary>
         /// <param name="server"></param>
         /// <returns></returns>
-        public static OutboundObject GetShadowsocks(/*IServer server*/string tag_name) => new()
-        {
-            Tag = /*server.Name*/tag_name,
-            Protocol = "shadowsocks",
-            Settings = new Protocols.Shadowsocks.OutboundConfigurationObject(),
-        };
+        public static OutboundObject GetShadowsocks( /*IServer server*/
+            string tag_name
+        ) =>
+            new()
+            {
+                Tag = /*server.Name*/
+                tag_name,
+                Protocol = "shadowsocks",
+                Settings = new Protocols.Shadowsocks.OutboundConfigurationObject(),
+            };
 
         /// <summary>
         /// Gets the <see cref="OutboundObject"/> for the Trojan server.
@@ -56,12 +66,13 @@ namespace Shadowsocks.Interop.V2Ray
         /// <param name="port"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static OutboundObject GetTrojan(string name, string address, int port, string password) => new()
-        {
-            Tag = name,
-            Protocol = "trojan",
-            Settings = new Protocols.Trojan.OutboundConfigurationObject(address, port, password),
-        };
+        public static OutboundObject GetTrojan(string name, string address, int port, string password) =>
+            new()
+            {
+                Tag = name,
+                Protocol = "trojan",
+                Settings = new Protocols.Trojan.OutboundConfigurationObject(address, port, password),
+            };
 
         /// <summary>
         /// Gets the <see cref="OutboundObject"/> for the VMess server.
@@ -71,12 +82,14 @@ namespace Shadowsocks.Interop.V2Ray
         /// <param name="port"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static OutboundObject GetVMess(string name, string address, int port, string id) => new()
-        {
-            Tag = name,
-            Protocol = "vmess",
-            Settings = new Protocols.VMess.OutboundConfigurationObject(address, port, id),
-        };
+        public static OutboundObject GetVMess(string name, string address, int port, string id) =>
+            new()
+            {
+                Tag = name,
+                Protocol = "vmess",
+                Settings = new Protocols.VMess.OutboundConfigurationObject(address, port, id),
+            };
+
         /// <summary>
         /// Gets the <see cref="OutboundObject"/> for the VLESS server.
         /// </summary>
@@ -85,11 +98,12 @@ namespace Shadowsocks.Interop.V2Ray
         /// <param name="port"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static OutboundObject GetVLESS(string name, string address, int port, string id) => new()
-        {
-            Tag = name,
-            Protocol = "vless",
-            Settings = new Protocols.VLESS.OutboundConfigurationObject(address, port, id),
-        };
+        public static OutboundObject GetVLESS(string name, string address, int port, string id) =>
+            new()
+            {
+                Tag = name,
+                Protocol = "vless",
+                Settings = new Protocols.VLESS.OutboundConfigurationObject(address, port, id),
+            };
     }
 }

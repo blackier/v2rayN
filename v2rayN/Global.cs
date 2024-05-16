@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace v2rayN;
 
@@ -82,46 +81,57 @@ class Global
     /// vmess
     /// </summary>
     public const string vmessProtocol = "vmess://";
+
     /// <summary>
     /// vmess
     /// </summary>
     public const string vmessProtocolLite = "vmess";
+
     /// <summary>
     /// shadowsocks
     /// </summary>
     public const string ssProtocol = "ss://";
+
     /// <summary>
     /// shadowsocks
     /// </summary>
     public const string ssProtocolLite = "shadowsocks";
+
     /// <summary>
     /// socks
     /// </summary>
     public const string socksProtocol = "socks://";
+
     /// <summary>
     /// socks
     /// </summary>
     public const string socksProtocolLite = "socks";
+
     /// <summary>
     /// http
     /// </summary>
     public const string httpProtocol = "http://";
+
     /// <summary>
     /// https
     /// </summary>
     public const string httpsProtocol = "https://";
+
     /// <summary>
     /// vless
     /// </summary>
     public const string vlessProtocol = "vless://";
+
     /// <summary>
     /// vless
     /// </summary>
     public const string vlessProtocolLite = "vless";
+
     /// <summary>
     /// trojan
     /// </summary>
     public const string trojanProtocol = "trojan://";
+
     /// <summary>
     /// trojan
     /// </summary>
@@ -141,6 +151,7 @@ class Global
     /// Language
     /// </summary>
     public const string MyRegKeyLanguage = "CurrentLanguage";
+
     /// <summary>
     /// Icon
     /// </summary>
@@ -152,6 +163,7 @@ class Global
         medium = 2000,
         slow = 3000
     }
+
     public const string StatisticLogOverall = "StatisticLogOverall.json";
 
     /// <summary>
@@ -177,26 +189,15 @@ class Global
     /// <summary>
     /// 所有预设路由规则
     /// </summary>
-    public static readonly List<string[]> presetRoutingRules = new()
-    {
-        geoPrivateAdress,
-        geoCnAdress,
-        geoNoCnAdress,
-        geoAdAdress
-    };
+    public static readonly List<string[]> presetRoutingRules =
+        new() { geoPrivateAdress, geoCnAdress, geoNoCnAdress, geoAdAdress };
 
     /// <summary>
     /// 是否需要重启服务V2ray
     /// </summary>
-    public static bool reloadV2ray
-    {
-        get; set;
-    }
+    public static bool reloadV2ray { get; set; }
 
     public static readonly int v2rayApiPort = Misc.GetFreePort();
 
-    public static System.Threading.Mutex mutexObj
-    {
-        get; set;
-    }
+    public static System.Threading.Mutex mutexObj { get; set; }
 }

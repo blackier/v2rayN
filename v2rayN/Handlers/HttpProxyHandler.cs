@@ -1,7 +1,6 @@
 ﻿using System;
-using v2rayN.Config;
-
 using Shadowsocks.WPF.Services.SystemProxy;
+using v2rayN.Config;
 
 namespace v2rayN.Handlers;
 
@@ -9,10 +8,11 @@ namespace v2rayN.Handlers;
 /// 系统代理(http)模式
 /// </summary>
 public enum ListenerType
-{        
+{
     closeSystemProxy = 0,
     openSystemProxy
 }
+
 /// <summary>
 /// 系统代理(http)总处理
 /// </summary>
@@ -43,5 +43,4 @@ class HttpProxyHandler
         }
         return true;
     }
-
 }

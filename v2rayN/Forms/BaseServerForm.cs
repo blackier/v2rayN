@@ -13,6 +13,5 @@ namespace v2rayN.Forms
         {
             InitializeComponent();
         }
- 
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using Microsoft.VisualBasic.FileIO;
 using System.Text;
+using Microsoft.VisualBasic.FileIO;
 
 namespace v2rayN.Utils;
 
@@ -62,8 +62,7 @@ public class FileManager
             int n;
 
             using (FileStream fs = File.Create(fileName))
-            using (GZipStream input = new GZipStream(new MemoryStream(content),
-                    CompressionMode.Decompress, false))
+            using (GZipStream input = new GZipStream(new MemoryStream(content), CompressionMode.Decompress, false))
             {
                 while ((n = input.Read(buffer, 0, buffer.Length)) > 0)
                 {

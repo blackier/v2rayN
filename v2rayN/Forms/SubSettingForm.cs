@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using v2rayN.Handlers;
 using v2rayN.Config;
+using v2rayN.Handlers;
 
 namespace v2rayN.Forms
 {
@@ -36,8 +36,7 @@ namespace v2rayN.Forms
             for (int k = config.subItem.Count - 1; k >= 0; k--)
             {
                 SubItem item = config.subItem[k];
-                if (Misc.IsNullOrEmpty(item.remarks)
-                    && Misc.IsNullOrEmpty(item.url))
+                if (Misc.IsNullOrEmpty(item.remarks) && Misc.IsNullOrEmpty(item.url))
                 {
                     if (!Misc.IsNullOrEmpty(item.id))
                     {
@@ -94,7 +93,6 @@ namespace v2rayN.Forms
 
             RefreshSubsView();
         }
-
 
         private void AddSub()
         {

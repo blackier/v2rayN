@@ -7,7 +7,6 @@ using v2rayN.Config;
 
 namespace v2rayN.Handlers;
 
-
 /// <summary>
 /// 消息委托
 /// </summary>
@@ -23,17 +22,13 @@ class v2rayHandler
     private static string v2rayConfigRes = Global.v2rayConfigFileName;
     private List<string> lstV2ray;
     public event ProcessDelegate ProcessEvent;
+
     //private int processId = 0;
     private Process _process;
 
     public v2rayHandler()
     {
-        lstV2ray = new List<string>
-        {
-            "xray",
-            "v2ray",
-            "wv2ray",
-        };
+        lstV2ray = new List<string> { "xray", "v2ray", "wv2ray", };
     }
 
     /// <summary>
@@ -121,6 +116,7 @@ class v2rayHandler
             Log.SaveLog(ex.Message, ex);
         }
     }
+
     /// <summary>
     /// V2ray停止
     /// </summary>
@@ -154,7 +150,10 @@ class v2rayHandler
         }
         if (Misc.IsNullOrEmpty(fileName))
         {
-            string msg = string.Format(StringsRes.I18N("NotFoundCore"), @"https://github.com/v2fly/v2ray-core/releases");
+            string msg = string.Format(
+                StringsRes.I18N("NotFoundCore"),
+                @"https://github.com/v2fly/v2ray-core/releases"
+            );
             ShowMsg(false, msg);
         }
         return fileName;
@@ -170,7 +169,8 @@ class v2rayHandler
         try
         {
             string fileName = V2rayFindexe();
-            if (fileName == "") return;
+            if (fileName == "")
+                return;
 
             Process p = new Process
             {
@@ -186,14 +186,16 @@ class v2rayHandler
                     Arguments = "run"
                 }
             };
-            p.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
-            {
-                if (!String.IsNullOrEmpty(e.Data))
+            p.OutputDataReceived += new DataReceivedEventHandler(
+                (sender, e) =>
                 {
-                    string msg = e.Data + Environment.NewLine;
-                    ShowMsg(false, msg);
+                    if (!String.IsNullOrEmpty(e.Data))
+                    {
+                        string msg = e.Data + Environment.NewLine;
+                        ShowMsg(false, msg);
+                    }
                 }
-            });
+            );
             p.Start();
             p.PriorityClass = ProcessPriorityClass.High;
             p.BeginOutputReadLine();
@@ -204,7 +206,6 @@ class v2rayHandler
             {
                 throw new Exception(p.StandardError.ReadToEnd());
             }
-
         }
         catch (Exception ex)
         {
@@ -213,6 +214,7 @@ class v2rayHandler
             ShowMsg(true, msg);
         }
     }
+
     /// <summary>
     /// V2ray启动，新建进程，传入配置字符串
     /// </summary>
@@ -223,7 +225,8 @@ class v2rayHandler
         try
         {
             string fileName = V2rayFindexe();
-            if (fileName == "") return -1;
+            if (fileName == "")
+                return -1;
 
             Process p = new Process
             {
@@ -239,14 +242,16 @@ class v2rayHandler
                     StandardOutputEncoding = Encoding.UTF8
                 }
             };
-            p.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
-            {
-                if (!String.IsNullOrEmpty(e.Data))
+            p.OutputDataReceived += new DataReceivedEventHandler(
+                (sender, e) =>
                 {
-                    string msg = e.Data + Environment.NewLine;
-                    ShowMsg(false, msg);
+                    if (!String.IsNullOrEmpty(e.Data))
+                    {
+                        string msg = e.Data + Environment.NewLine;
+                        ShowMsg(false, msg);
+                    }
                 }
-            });
+            );
             File.WriteAllText(Path.Combine(Misc.GetRealExeDir(), "config_test.json"), configStr);
 
             p.Start();

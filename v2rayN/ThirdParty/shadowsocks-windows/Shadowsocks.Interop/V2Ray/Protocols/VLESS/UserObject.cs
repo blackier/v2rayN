@@ -19,10 +19,6 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.VLESS
             Encryption = encryption;
         }
 
-        public static UserObject Default => new()
-        {
-            Id = new Guid().ToString(),
-            Encryption = "none"
-        };
+        public static UserObject Default => new() { Id = new Guid().ToString(), Encryption = "none" };
     }
 }

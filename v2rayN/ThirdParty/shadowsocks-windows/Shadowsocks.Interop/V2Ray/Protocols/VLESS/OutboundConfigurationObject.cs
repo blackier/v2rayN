@@ -13,10 +13,7 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.VLESS
 
         public OutboundConfigurationObject(string address, int port, string id)
         {
-            Vnext = new()
-            {
-                new(address, port, id),
-            };
+            Vnext = new() { new(address, port, id), };
         }
     }
 }

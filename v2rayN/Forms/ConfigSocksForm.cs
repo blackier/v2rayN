@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
-using v2rayN.Handlers;
 using v2rayN.Config;
+using v2rayN.Handlers;
 
 namespace v2rayN.Forms
 {
     public partial class ConfigSocksForm : BaseServerForm
-    { 
-
+    {
         public ConfigSocksForm()
         {
             InitializeComponent();
@@ -38,7 +37,6 @@ namespace v2rayN.Forms
             txtSecurity.Text = vmessItem.security;
             txtRemarks.Text = vmessItem.remarks;
         }
-
 
         /// <summary>
         /// 清除设置
@@ -86,10 +84,10 @@ namespace v2rayN.Forms
                 MsgBox.ShowWarning(StringsRes.I18N("OperationFailed"));
             }
         }
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-        }        
-
+        }
     }
 }

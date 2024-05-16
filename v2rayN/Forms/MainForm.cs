@@ -96,7 +96,11 @@ namespace v2rayN.Forms
 
             for (int k = 0; k < lvServers.Columns.Count; k++)
             {
-                var width = v2rayNConfigHandler.GetformMainLvColWidth(ref config, ((EServerColName)k).ToString(), lvServers.Columns[k].Width);
+                var width = v2rayNConfigHandler.GetformMainLvColWidth(
+                    ref config,
+                    ((EServerColName)k).ToString(),
+                    lvServers.Columns[k].Width
+                );
                 lvServers.Columns[k].Width = width;
             }
         }
@@ -107,7 +111,11 @@ namespace v2rayN.Forms
 
             for (int k = 0; k < lvServers.Columns.Count; k++)
             {
-                v2rayNConfigHandler.AddformMainLvColWidth(ref config, ((EServerColName)k).ToString(), lvServers.Columns[k].Width);
+                v2rayNConfigHandler.AddformMainLvColWidth(
+                    ref config,
+                    ((EServerColName)k).ToString(),
+                    lvServers.Columns[k].Width
+                );
             }
         }
 
@@ -166,9 +174,9 @@ namespace v2rayN.Forms
             for (int k = 0; k < config.vmess.Count; k++)
             {
                 string totalUp = string.Empty,
-                        totalDown = string.Empty,
-                        todayUp = string.Empty,
-                        todayDown = string.Empty;
+                    totalDown = string.Empty,
+                    todayUp = string.Empty,
+                    todayDown = string.Empty;
 
                 ListViewItem lvItem = new ListViewItem();
                 if (config.index.Equals(k))
@@ -231,10 +239,7 @@ namespace v2rayN.Forms
                 ProfileItem item = config.vmess[k];
                 string name = item.getSummary();
 
-                ToolStripMenuItem ts = new ToolStripMenuItem(name)
-                {
-                    Tag = k
-                };
+                ToolStripMenuItem ts = new ToolStripMenuItem(name) { Tag = k };
                 if (config.index.Equals(k))
                 {
                     ts.Checked = true;
@@ -253,9 +258,7 @@ namespace v2rayN.Forms
                 int index = Misc.ToInt(ts.Tag);
                 SetDefaultServer(index);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         private void lvServers_SelectedIndexChanged(object sender, EventArgs e)
@@ -268,9 +271,7 @@ namespace v2rayN.Forms
                     index = lvServers.SelectedIndices[0];
                 }
             }
-            catch
-            {
-            }
+            catch { }
             if (index < 0)
             {
                 return;
@@ -285,6 +286,7 @@ namespace v2rayN.Forms
 
             notifyMain.Icon = MainFormHandler.Instance.GetNotifyIcon(config, Icon);
         }
+
         private void ssMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if (!Misc.IsNullOrEmpty(e.ClickedItem.Text))
@@ -320,7 +322,6 @@ namespace v2rayN.Forms
             {
                 return;
             }
-
         }
         #endregion
 
@@ -374,9 +375,7 @@ namespace v2rayN.Forms
                     index = lvServers.SelectedIndices[0];
                 }
             }
-            catch
-            {
-            }
+            catch { }
             if (index < 0)
             {
                 return;
@@ -393,6 +392,7 @@ namespace v2rayN.Forms
             }
             ShowServerForm(config.vmess[index].configType, index);
         }
+
         private void ShowServerForm(int configType, int index)
         {
             BaseServerForm fm;
@@ -425,7 +425,6 @@ namespace v2rayN.Forms
                 LoadV2ray();
             }
         }
-
 
         private void lvServers_KeyDown(object sender, KeyEventArgs e)
         {
@@ -497,7 +496,6 @@ namespace v2rayN.Forms
 
         private void menuRemoveServer_Click(object sender, EventArgs e)
         {
-
             int index = GetLvSelectedIndex();
             if (index < 0)
             {
@@ -514,7 +512,6 @@ namespace v2rayN.Forms
             //刷新
             RefreshServers();
             LoadV2ray();
-
         }
 
         private void menuRemoveDuplicateServer_Click(object sender, EventArgs e)
@@ -556,11 +553,11 @@ namespace v2rayN.Forms
             SetDefaultServer(index);
         }
 
-
         private void menuPingServer_Click(object sender, EventArgs e)
         {
             Speedtest("ping");
         }
+
         private void menuTcpingServer_Click(object sender, EventArgs e)
         {
             Speedtest("tcping");
@@ -591,6 +588,7 @@ namespace v2rayN.Forms
 
             Speedtest("speedtest");
         }
+
         private void Speedtest(string actionType)
         {
             if (GetLvSelectedIndex() < 0)
@@ -599,7 +597,13 @@ namespace v2rayN.Forms
             }
 
             ClearTestResult();
-            SpeedTestHandler statistics = new SpeedTestHandler(ref config, ref v2rayHandler, lvSelecteds, actionType, UpdateSpeedtestHandler);
+            SpeedTestHandler statistics = new SpeedTestHandler(
+                ref config,
+                ref v2rayHandler,
+                lvSelecteds,
+                actionType,
+                UpdateSpeedtestHandler
+            );
         }
 
         private void SpeedtestAll(string actionType)
@@ -611,7 +615,13 @@ namespace v2rayN.Forms
             }
 
             ClearTestResult();
-            SpeedTestHandler statistics = new SpeedTestHandler(ref config, ref v2rayHandler, lvSelecteds, actionType, UpdateSpeedtestHandler);
+            SpeedTestHandler statistics = new SpeedTestHandler(
+                ref config,
+                ref v2rayHandler,
+                lvSelecteds,
+                actionType,
+                UpdateSpeedtestHandler
+            );
         }
 
         private void tsbTestMe_Click(object sender, EventArgs e)
@@ -619,9 +629,16 @@ namespace v2rayN.Forms
             string result = httpProxyTest() + "ms";
             AppendText(false, string.Format(StringsRes.I18N("TestMeOutput"), result));
         }
+
         private int httpProxyTest()
         {
-            SpeedTestHandler statistics = new SpeedTestHandler(ref config, ref v2rayHandler, lvSelecteds, "", UpdateSpeedtestHandler);
+            SpeedTestHandler statistics = new SpeedTestHandler(
+                ref config,
+                ref v2rayHandler,
+                lvSelecteds,
+                "",
+                UpdateSpeedtestHandler
+            );
             return statistics.RunAvailabilityCheck();
         }
 
@@ -748,11 +765,7 @@ namespace v2rayN.Forms
         {
             MsgBox.Show(StringsRes.I18N("CustomServerTips"));
 
-            OpenFileDialog fileDialog = new OpenFileDialog
-            {
-                Multiselect = false,
-                Filter = "Config|*.json|All|*.*"
-            };
+            OpenFileDialog fileDialog = new OpenFileDialog { Multiselect = false, Filter = "Config|*.json|All|*.*" };
             if (fileDialog.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -847,6 +860,7 @@ namespace v2rayN.Forms
         }
 
         delegate void AppendTextDelegate(string text);
+
         void AppendText(bool notify, string msg)
         {
             try
@@ -857,9 +871,7 @@ namespace v2rayN.Forms
                     notifyMsg(msg);
                 }
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         void AppendText(string text)
@@ -929,7 +941,6 @@ namespace v2rayN.Forms
             Application.Exit();
         }
 
-
         private void ShowForm()
         {
             if (WindowState == FormWindowState.Minimized || !Visible)
@@ -969,6 +980,7 @@ namespace v2rayN.Forms
                 lvServers.Items[k].SubItems["testResult"].Text = txt;
             }
         }
+
         private void ClearTestResult()
         {
             foreach (int s in lvSelecteds)
@@ -976,12 +988,16 @@ namespace v2rayN.Forms
                 SetTestResult(s, "");
             }
         }
+
         private void UpdateSpeedtestHandler(int index, string msg)
         {
-            lvServers.Invoke((MethodInvoker)delegate
-            {
-                SetTestResult(index, msg);
-            });
+            lvServers.Invoke(
+                (MethodInvoker)
+                    delegate
+                    {
+                        SetTestResult(index, msg);
+                    }
+            );
         }
 
         private void UpdateStatisticsHandler(ulong up, ulong down, List<ServerStatItem> statistics)
@@ -998,17 +1014,28 @@ namespace v2rayN.Forms
                     int index = statistics.FindIndex(item_ => item_.itemId == config.vmess[i].getItemId());
                     if (index != -1)
                     {
-                        lvServers.Invoke((MethodInvoker)delegate
-                        {
-                            lvServers.BeginUpdate();
+                        lvServers.Invoke(
+                            (MethodInvoker)
+                                delegate
+                                {
+                                    lvServers.BeginUpdate();
 
-                            lvServers.Items[i].SubItems["todayDown"].Text = Misc.HumanFy(statistics[index].todayDown);
-                            lvServers.Items[i].SubItems["todayUp"].Text = Misc.HumanFy(statistics[index].todayUp);
-                            lvServers.Items[i].SubItems["totalDown"].Text = Misc.HumanFy(statistics[index].totalDown);
-                            lvServers.Items[i].SubItems["totalUp"].Text = Misc.HumanFy(statistics[index].totalUp);
+                                    lvServers.Items[i].SubItems["todayDown"].Text = Misc.HumanFy(
+                                        statistics[index].todayDown
+                                    );
+                                    lvServers.Items[i].SubItems["todayUp"].Text = Misc.HumanFy(
+                                        statistics[index].todayUp
+                                    );
+                                    lvServers.Items[i].SubItems["totalDown"].Text = Misc.HumanFy(
+                                        statistics[index].totalDown
+                                    );
+                                    lvServers.Items[i].SubItems["totalUp"].Text = Misc.HumanFy(
+                                        statistics[index].totalUp
+                                    );
 
-                            lvServers.EndUpdate();
-                        });
+                                    lvServers.EndUpdate();
+                                }
+                        );
                     }
                 }
             }
@@ -1057,6 +1084,7 @@ namespace v2rayN.Forms
                 //LoadV2ray();
             }
         }
+
         private void menuSelectAll_Click(object sender, EventArgs e)
         {
             foreach (ListViewItem item in lvServers.Items)
@@ -1073,10 +1101,12 @@ namespace v2rayN.Forms
         {
             SetListenerType(ListenerType.openSystemProxy);
         }
+
         private void menuCloseHttp_Click(object sender, EventArgs e)
         {
             SetListenerType(ListenerType.closeSystemProxy);
         }
+
         private void SetListenerType(ListenerType type)
         {
             config.listenerType = type;
@@ -1117,6 +1147,7 @@ namespace v2rayN.Forms
                 }
             }
         }
+
         private void tsbCheckUpdateN_Click(object sender, EventArgs e)
         {
             DownloadHandler downloadHandle = new DownloadHandler();
@@ -1127,10 +1158,14 @@ namespace v2rayN.Forms
                     AppendText(false, string.Format(StringsRes.I18N("MsgParsingSuccessfully"), "v2rayN"));
 
                     string url = args.Msg;
-                    Invoke((MethodInvoker)(delegate
-                    {
-                        askToDownload(downloadHandle, url);
-                    }));
+                    Invoke(
+                        (MethodInvoker)(
+                            delegate
+                            {
+                                askToDownload(downloadHandle, url);
+                            }
+                        )
+                    );
                 }
                 else
                 {
@@ -1176,7 +1211,6 @@ namespace v2rayN.Forms
                 AppendText(true, args.GetException().Message);
             };
 
-
             AppendText(false, string.Format(StringsRes.I18N("MsgStartUpdating"), "v2rayN"));
             downloadHandle.CheckUpdateAsync(DownloadHandler.downloadType.v2rayN);
         }
@@ -1191,10 +1225,14 @@ namespace v2rayN.Forms
                     AppendText(false, string.Format(StringsRes.I18N("MsgParsingSuccessfully"), "v2rayCore"));
 
                     string url = args.Msg;
-                    Invoke((MethodInvoker)(delegate
-                    {
-                        askToDownload(downloadHandle, url);
-                    }));
+                    Invoke(
+                        (MethodInvoker)(
+                            delegate
+                            {
+                                askToDownload(downloadHandle, url);
+                            }
+                        )
+                    );
                 }
                 else
                 {
@@ -1252,10 +1290,14 @@ namespace v2rayN.Forms
                     AppendText(false, string.Format(StringsRes.I18N("MsgParsingSuccessfully"), "Domain list"));
 
                     string url = args.Msg;
-                    Invoke((MethodInvoker)(delegate
-                    {
-                        askToDownload(downloadHandle, url);
-                    }));
+                    Invoke(
+                        (MethodInvoker)(
+                            delegate
+                            {
+                                askToDownload(downloadHandle, url);
+                            }
+                        )
+                    );
                 }
                 else
                 {
@@ -1295,7 +1337,6 @@ namespace v2rayN.Forms
                 AppendText(true, args.GetException().Message);
             };
 
-
             AppendText(false, string.Format(StringsRes.I18N("MsgStartUpdating"), "Domain list"));
             downloadHandle.CheckUpdateAsync(DownloadHandler.downloadType.domainList);
         }
@@ -1310,10 +1351,14 @@ namespace v2rayN.Forms
                     AppendText(false, string.Format(StringsRes.I18N("MsgParsingSuccessfully"), "IP list"));
 
                     string url = args.Msg;
-                    Invoke((MethodInvoker)(delegate
-                    {
-                        askToDownload(downloadHandle, url);
-                    }));
+                    Invoke(
+                        (MethodInvoker)(
+                            delegate
+                            {
+                                askToDownload(downloadHandle, url);
+                            }
+                        )
+                    );
                 }
                 else
                 {
@@ -1348,7 +1393,6 @@ namespace v2rayN.Forms
             {
                 AppendText(true, args.GetException().Message);
             };
-
 
             AppendText(false, string.Format(StringsRes.I18N("MsgStartUpdating"), "IP list"));
             downloadHandle.CheckUpdateAsync(DownloadHandler.downloadType.ipList);
@@ -1469,9 +1513,7 @@ namespace v2rayN.Forms
                         v2rayNConfigHandler.RemoveServerViaSubid(ref config, id);
                         AppendText(false, $"{hashCode}{StringsRes.I18N("MsgClearSubscription")}");
                         RefreshServers();
-                        if (AddBatchServers(result, id, protocolFilter) > 0)
-                        {
-                        }
+                        if (AddBatchServers(result, id, protocolFilter) > 0) { }
                         else
                         {
                             AppendText(false, $"{hashCode}{StringsRes.I18N("MsgFailedImportSubscription")}");
@@ -1507,6 +1549,5 @@ namespace v2rayN.Forms
             scMain.Panel2Collapsed = !bShow;
         }
         #endregion
-
     }
 }

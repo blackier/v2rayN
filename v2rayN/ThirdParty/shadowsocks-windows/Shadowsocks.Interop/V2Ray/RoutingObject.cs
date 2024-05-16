@@ -1,5 +1,5 @@
-using Shadowsocks.Interop.V2Ray.Routing;
 using System.Collections.Generic;
+using Shadowsocks.Interop.V2Ray.Routing;
 
 namespace Shadowsocks.Interop.V2Ray
 {
@@ -36,17 +36,14 @@ namespace Shadowsocks.Interop.V2Ray
             Rules = new();
         }
 
-        public static RoutingObject Default => new()
-        {
-            DomainStrategy = "IPOnDemand",
-            DomainMatcher = "mph",
-        };
+        public static RoutingObject Default => new() { DomainStrategy = "IPOnDemand", DomainMatcher = "mph", };
 
-        public static RoutingObject DefaultBalancers => new()
-        {
-            DomainStrategy = "IPOnDemand",
-            DomainMatcher = "mph",
-            Balancers = new(),
-        };
+        public static RoutingObject DefaultBalancers =>
+            new()
+            {
+                DomainStrategy = "IPOnDemand",
+                DomainMatcher = "mph",
+                Balancers = new(),
+            };
     }
 }

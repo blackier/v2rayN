@@ -23,15 +23,11 @@ namespace Shadowsocks.Interop.V2Ray
         /// <summary>
         /// Gets the default API object.
         /// </summary>
-        public static ApiObject Default => new()
-        {
-            Tag = "api",
-            Services = new()
+        public static ApiObject Default =>
+            new()
             {
-                "HandlerService",
-                "LoggerService",
-                "StatsService",
-            },
-        };
+                Tag = "api",
+                Services = new() { "HandlerService", "LoggerService", "StatsService", },
+            };
     }
 }

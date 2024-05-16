@@ -13,6 +13,7 @@ public class Log
     {
         SaveLog("info", new Exception(strContent));
     }
+
     public static void SaveLog(string strTitle, Exception ex)
     {
         try
@@ -34,7 +35,15 @@ public class Log
 
             string strContent = ex.ToString();
 
-            SwWrite.WriteLine(string.Format("{0}{1}[{2}]{3}", "--------------------------------", strTitle, DateTime.Now.ToString("HH:mm:ss"), "--------------------------------"));
+            SwWrite.WriteLine(
+                string.Format(
+                    "{0}{1}[{2}]{3}",
+                    "--------------------------------",
+                    strTitle,
+                    DateTime.Now.ToString("HH:mm:ss"),
+                    "--------------------------------"
+                )
+            );
             SwWrite.Write(strContent);
             SwWrite.WriteLine(Environment.NewLine);
             SwWrite.WriteLine(" ");

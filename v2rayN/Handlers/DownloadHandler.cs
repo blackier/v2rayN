@@ -44,6 +44,8 @@ class DownloadHandler
         domainList,
         ipList
     }
+
+    // csharpier-ignore-start
     public string downloadFileName;
     private readonly string nLatestUrl = "https://github.com/blackier/v2rayN/releases/latest";
     private const string nUrl = "https://github.com/blackier/v2rayN/releases/download/{0}/v2rayN.zip";
@@ -51,15 +53,13 @@ class DownloadHandler
     private const string coreUrl = "https://github.com/XTLS/Xray-core/releases/download/{0}/Xray-windows-{1}.zip";
     private readonly string geositeLatestUrl = "https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat";
     private const string geoipLastUrl = "https://github.com/v2fly/geoip/releases/latest/download/geoip.dat";
+    // csharpier-ignore-end
 
     #region Check for updates
 
     public async void CheckUpdateAsync(downloadType type)
     {
-        HttpClientHandler webRequestHandler = new HttpClientHandler
-        {
-            AllowAutoRedirect = false
-        };
+        HttpClientHandler webRequestHandler = new HttpClientHandler { AllowAutoRedirect = false };
         HttpClient httpClient = new HttpClient(webRequestHandler);
 
         string url = "";
@@ -105,7 +105,10 @@ class DownloadHandler
             string filePath = Misc.GetPath("V2ray.exe");
             if (!File.Exists(filePath))
             {
-                string msg = string.Format(StringsRes.I18N("NotFoundCore"), @"https://github.com/v2fly/v2ray-core/releases");
+                string msg = string.Format(
+                    StringsRes.I18N("NotFoundCore"),
+                    @"https://github.com/v2fly/v2ray-core/releases"
+                );
                 //ShowMsg(true, msg);
                 return "";
             }
@@ -124,13 +127,13 @@ class DownloadHandler
             string version = Regex.Match(echo, "V2Ray ([0-9.]+) \\(").Groups[1].Value;
             return version;
         }
-
         catch (Exception ex)
         {
             Log.SaveLog(ex.Message, ex);
             return "";
         }
     }
+
     private void responseHandler(downloadType type, string redirectUrl)
     {
         try
@@ -185,7 +188,7 @@ class DownloadHandler
 
     #endregion
 
-    #region Download 
+    #region Download
 
     public WebClient DownloadFileAsync(string url, WebProxy webProxy, int downloadTimeout)
     {
@@ -243,6 +246,7 @@ class DownloadHandler
             }
         }
     }
+
     void ws_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
     {
         try
@@ -253,7 +257,10 @@ class DownloadHandler
                 {
                     ((WebClient)sender).Dispose();
                     TimeSpan ts = (DateTime.Now - totalDatetime);
-                    string speed = string.Format("{0} M/s", (totalBytesToReceive / ts.TotalMilliseconds / 1000).ToString("#0.##"));
+                    string speed = string.Format(
+                        "{0} M/s",
+                        (totalBytesToReceive / ts.TotalMilliseconds / 1000).ToString("#0.##")
+                    );
                     UpdateCompleted(this, new ResultEventArgs(true, speed));
                     return;
                 }
@@ -261,7 +268,10 @@ class DownloadHandler
                 if (e.Error == null || Misc.IsNullOrEmpty(e.Error.ToString()))
                 {
                     TimeSpan ts = (DateTime.Now - totalDatetime);
-                    string speed = string.Format("{0} M/s", (totalBytesToReceive / ts.TotalMilliseconds / 1000).ToString("#0.##"));
+                    string speed = string.Format(
+                        "{0} M/s",
+                        (totalBytesToReceive / ts.TotalMilliseconds / 1000).ToString("#0.##")
+                    );
                     UpdateCompleted(this, new ResultEventArgs(true, speed));
                 }
                 else
@@ -280,18 +290,16 @@ class DownloadHandler
 
     /// <summary>
     /// DownloadString
-    /// </summary> 
+    /// </summary>
     /// <param name="url"></param>
     public async void WebDownloadString(string url, WebProxy webProxy = null)
     {
         try
         {
-            HttpClient httpClient = new(new HttpClientHandler
-            {
-                Proxy = webProxy,
-                AllowAutoRedirect = false,
-            });
-            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.160 Safari/537.36");
+            HttpClient httpClient = new(new HttpClientHandler { Proxy = webProxy, AllowAutoRedirect = false, });
+            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.160 Safari/537.36"
+            );
             var result = await httpClient.GetStringAsync(url);
 
             if (!Misc.IsNullOrEmpty(result))

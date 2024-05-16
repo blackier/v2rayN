@@ -13,10 +13,7 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.Trojan
 
         public OutboundConfigurationObject(string address, int port, string password)
         {
-            Servers = new()
-            {
-                new(address, port, password),
-            };
+            Servers = new() { new(address, port, password), };
         }
     }
 }

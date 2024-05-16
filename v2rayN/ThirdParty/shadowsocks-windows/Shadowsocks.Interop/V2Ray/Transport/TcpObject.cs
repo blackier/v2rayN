@@ -20,9 +20,6 @@ namespace Shadowsocks.Interop.V2Ray.Transport
             Header = new HeaderObject();
         }
 
-        public static TcpObject DefaultHttp => new()
-        {
-            Header = new HttpHeaderObject(),
-        };
+        public static TcpObject DefaultHttp => new() { Header = new HttpHeaderObject(), };
     }
 }

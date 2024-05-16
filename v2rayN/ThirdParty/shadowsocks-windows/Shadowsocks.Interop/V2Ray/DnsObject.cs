@@ -1,5 +1,5 @@
-using Shadowsocks.Interop.V2Ray.Dns;
 using System.Collections.Generic;
+using Shadowsocks.Interop.V2Ray.Dns;
 
 namespace Shadowsocks.Interop.V2Ray
 {

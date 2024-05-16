@@ -7,12 +7,13 @@ namespace Shadowsocks.Interop.V2Ray.Policy
         public bool StatsOutboundUplink { get; set; }
         public bool StatsOutboundDownlink { get; set; }
 
-        public static SystemPolicyObject Default => new()
-        {
-            StatsInboundUplink = true,
-            StatsInboundDownlink = true,
-            StatsOutboundUplink = true,
-            StatsOutboundDownlink = true,
-        };
+        public static SystemPolicyObject Default =>
+            new()
+            {
+                StatsInboundUplink = true,
+                StatsInboundDownlink = true,
+                StatsOutboundUplink = true,
+                StatsOutboundDownlink = true,
+            };
     }
 }

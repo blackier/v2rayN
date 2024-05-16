@@ -26,33 +26,22 @@ namespace Shadowsocks.Interop.V2Ray.Inbound
         public SniffingObject()
         {
             Enabled = true;
-            DestOverride = new()
-            {
-                "http",
-                "tls",
-            };
+            DestOverride = new() { "http", "tls", };
         }
 
-        public static SniffingObject Default => new()
-        {
-            Enabled = false,
-            DestOverride = new()
+        public static SniffingObject Default =>
+            new()
             {
-                "http",
-                "tls",
-            },
-        };
+                Enabled = false,
+                DestOverride = new() { "http", "tls", },
+            };
 
-        public static SniffingObject DefaultFakeDns => new()
-        {
-            Enabled = true,
-            DestOverride = new()
+        public static SniffingObject DefaultFakeDns =>
+            new()
             {
-                "http",
-                "tls",
-                "fakedns",
-            },
-            MetadataOnly = true,
-        };
+                Enabled = true,
+                DestOverride = new() { "http", "tls", "fakedns", },
+                MetadataOnly = true,
+            };
     }
 }

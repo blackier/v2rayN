@@ -11,6 +11,7 @@ public static class IQueryableExtension
     {
         return _OrderBy<T>(query, propertyName, false);
     }
+
     public static IOrderedQueryable<T> OrderByDescending<T>(this IQueryable<T> query, string propertyName)
     {
         return _OrderBy<T>(query, propertyName, true);
@@ -22,17 +23,23 @@ public static class IQueryableExtension
 
         PropertyInfo memberProp = typeof(T).GetProperty(propertyName);
 
-        MethodInfo method = typeof(IQueryableExtension).GetMethod(methodname)
-                                   .MakeGenericMethod(typeof(T), memberProp.PropertyType);
+        MethodInfo method = typeof(IQueryableExtension)
+            .GetMethod(methodname)
+            .MakeGenericMethod(typeof(T), memberProp.PropertyType);
 
         return (IOrderedQueryable<T>)method.Invoke(null, new object[] { query, memberProp });
     }
+
     public static IOrderedQueryable<T> OrderByInternal<T, TProp>(IQueryable<T> query, PropertyInfo memberProperty)
-    {//public
+    { //public
         return query.OrderBy(_GetLamba<T, TProp>(memberProperty));
     }
-    public static IOrderedQueryable<T> OrderByDescendingInternal<T, TProp>(IQueryable<T> query, PropertyInfo memberProperty)
-    {//public
+
+    public static IOrderedQueryable<T> OrderByDescendingInternal<T, TProp>(
+        IQueryable<T> query,
+        PropertyInfo memberProperty
+    )
+    { //public
         return query.OrderByDescending(_GetLamba<T, TProp>(memberProperty));
     }
 
@@ -44,7 +51,10 @@ public static class IQueryableExtension
         }
 
         ParameterExpression thisArg = Expression.Parameter(typeof(T));
-        Expression<Func<T, TProp>> lamba = Expression.Lambda<Func<T, TProp>>(Expression.Property(thisArg, memberProperty), thisArg);
+        Expression<Func<T, TProp>> lamba = Expression.Lambda<Func<T, TProp>>(
+            Expression.Property(thisArg, memberProperty),
+            thisArg
+        );
 
         return lamba;
     }

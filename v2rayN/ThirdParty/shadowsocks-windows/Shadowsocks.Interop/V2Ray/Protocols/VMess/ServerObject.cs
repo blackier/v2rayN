@@ -19,10 +19,7 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.VMess
         {
             Address = address;
             Port = port;
-            Users = new()
-            {
-                new(id),
-            };
+            Users = new() { new(id), };
         }
     }
 }

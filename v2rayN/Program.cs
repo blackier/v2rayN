@@ -16,14 +16,14 @@ static class Program
         Application.SetHighDpiMode(HighDpiMode.SystemAware);
         Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
         Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
-        AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
-
+        AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(
+            CurrentDomain_UnhandledException
+        );
 
         //AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
         if (!IsDuplicateInstance())
         {
-
             Log.SaveLog("v2rayN start up " + Misc.GetVersion());
 
             //设置语言环境
@@ -40,16 +40,16 @@ static class Program
         }
     }
 
-    /// <summary> 
+    /// <summary>
     /// 检查是否已在运行
-    /// </summary> 
+    /// </summary>
     public static bool IsDuplicateInstance()
     {
         //string name = "v2rayN";
 
         string name = Misc.GetExePath(); // Allow different locations to run
         name = name.Replace("\\", "/"); // https://stackoverflow.com/questions/20714120/could-not-find-a-part-of-the-path-error-while-creating-mutex
-        
+
         Global.mutexObj = new Mutex(false, name, out bool bCreatedNew);
         return !bCreatedNew;
     }

@@ -8,7 +8,7 @@ namespace v2rayN;
 
 public class I18N_zh_Hans : I18N
 {
-
+    // csharpier-ignore
     private Dictionary<string, string> _i18nDict_zh_Hans = new() {
 
         {"BatchExportSubscriptionSuccessfully"

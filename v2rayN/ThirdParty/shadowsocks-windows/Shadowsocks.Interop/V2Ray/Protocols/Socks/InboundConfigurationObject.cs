@@ -10,9 +10,6 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.Socks
         public string Ip { get; set; }
         public int? UserLevel { get; set; }
 
-        public static InboundConfigurationObject Default => new()
-        {
-            Udp = true,
-        };
+        public static InboundConfigurationObject Default => new() { Udp = true, };
     }
 }

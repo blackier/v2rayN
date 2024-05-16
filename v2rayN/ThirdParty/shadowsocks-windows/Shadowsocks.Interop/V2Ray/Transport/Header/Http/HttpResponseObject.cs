@@ -16,28 +16,11 @@ namespace Shadowsocks.Interop.V2Ray.Transport.Header.Http
             Reason = "OK";
             Headers = new()
             {
-                ["Content-Type"] = new()
-                {
-                    "application/octet-stream",
-                    "video/mpeg",
-                },
-                ["Transfer-Encoding"] = new()
-                {
-                    "chunked",
-                },
-                ["Connection"] = new()
-                {
-                    "keep-alive",
-                },
-                ["Pragma"] = new()
-                {
-                    "no-cache",
-                },
-                ["Cache-Control"] = new()
-                {
-                    "private",
-                    "no-cache",
-                },
+                ["Content-Type"] = new() { "application/octet-stream", "video/mpeg", },
+                ["Transfer-Encoding"] = new() { "chunked", },
+                ["Connection"] = new() { "keep-alive", },
+                ["Pragma"] = new() { "no-cache", },
+                ["Cache-Control"] = new() { "private", "no-cache", },
             };
         }
     }

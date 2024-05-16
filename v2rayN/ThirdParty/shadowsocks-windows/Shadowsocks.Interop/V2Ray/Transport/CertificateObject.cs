@@ -15,16 +15,8 @@ namespace Shadowsocks.Interop.V2Ray.Transport
             Usage = "encipherment";
         }
 
-        public static CertificateObject DefaultFromFile => new()
-        {
-            CertificateFile = "",
-            KeyFile = "",
-        };
+        public static CertificateObject DefaultFromFile => new() { CertificateFile = "", KeyFile = "", };
 
-        public static CertificateObject DefaultEmbedded => new()
-        {
-            Certificate = new(),
-            Key = new(),
-        };
+        public static CertificateObject DefaultEmbedded => new() { Certificate = new(), Key = new(), };
     }
 }

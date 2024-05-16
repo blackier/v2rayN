@@ -26,10 +26,6 @@ namespace Shadowsocks.Interop.V2Ray.Inbound
             Strategy = "always";
         }
 
-        public static AllocateObject Default => new()
-        {
-            Refresh = 5,
-            Concurrency = 3,
-        };
+        public static AllocateObject Default => new() { Refresh = 5, Concurrency = 3, };
     }
 }

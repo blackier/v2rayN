@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
-using v2rayN.Handlers;
 using v2rayN.Config;
+using v2rayN.Handlers;
 using v2rayN.Utils;
 
 namespace v2rayN.Forms
 {
     public partial class ConfigVLESSForm : BaseServerForm
-    { 
-
+    {
         public ConfigVLESSForm()
         {
             InitializeComponent();
@@ -48,7 +47,6 @@ namespace v2rayN.Forms
             cmbAllowInsecure.Text = vmessItem.allowInsecure;
         }
 
-
         /// <summary>
         /// 清除设置
         /// </summary>
@@ -68,7 +66,6 @@ namespace v2rayN.Forms
             cmbAllowInsecure.Text = "";
             txtPath.Text = "";
         }
-
 
         private void cmbNetwork_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -102,9 +99,7 @@ namespace v2rayN.Forms
                 cmbHeaderType.Items.Add("dtls");
                 cmbHeaderType.Items.Add("wireguard");
             }
-            else
-            {
-            }
+            else { }
             cmbHeaderType.Text = Global.None;
         }
 
@@ -139,7 +134,6 @@ namespace v2rayN.Forms
                 MsgBox.Show(StringsRes.I18N("FillUUID"));
                 return;
             }
-
 
             vmessItem.address = address;
             vmessItem.port = Misc.ToInt(port);
@@ -187,6 +181,5 @@ namespace v2rayN.Forms
                 panTlsMore.Show();
             }
         }
-
     }
 }

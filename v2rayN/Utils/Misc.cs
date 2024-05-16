@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
@@ -20,6 +19,7 @@ using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using Microsoft.Win32;
 using v2rayN.Extensions;
 using v2rayN.Utils;
 
@@ -45,9 +45,7 @@ public class Misc
                 result = reader.ReadToEnd();
             }
         }
-        catch
-        {
-        }
+        catch { }
         return result;
     }
 
@@ -66,9 +64,7 @@ public class Misc
                 result = reader.ReadToEnd();
             }
         }
-        catch
-        {
-        }
+        catch { }
         return result;
     }
 
@@ -95,6 +91,7 @@ public class Misc
             return string.Empty;
         }
     }
+
     /// <summary>
     /// 逗号分隔的字符串,转List<string>
     /// </summary>
@@ -141,13 +138,14 @@ public class Misc
     {
         try
         {
-            plainText = plainText.Trim()
-                  .Replace(Environment.NewLine, "")
-                  .Replace("\n", "")
-                  .Replace("\r", "")
-                  .Replace('_', '/')
-                  .Replace('-', '+')
-                  .Replace(" ", "");
+            plainText = plainText
+                .Trim()
+                .Replace(Environment.NewLine, "")
+                .Replace("\n", "")
+                .Replace("\r", "")
+                .Replace('_', '/')
+                .Replace('-', '+')
+                .Replace(" ", "");
 
             if (plainText.Length % 4 > 0)
             {
@@ -203,6 +201,7 @@ public class Misc
 
         return result;
     }
+
     /// <summary>
     /// 转Int
     /// </summary>
@@ -291,7 +290,11 @@ public class Misc
         return $"{string.Format("{0:f1}", result)} {unit}";
     }
 
-    public static void DedupServerList(List<Config.ProfileItem> source, out List<Config.ProfileItem> result, bool keepOlder)
+    public static void DedupServerList(
+        List<Config.ProfileItem> source,
+        out List<Config.ProfileItem> result,
+        bool keepOlder
+    )
     {
         List<Config.ProfileItem> list = new List<Config.ProfileItem>();
         if (!keepOlder)
@@ -301,18 +304,18 @@ public class Misc
 
         bool _isAdded(Config.ProfileItem o, Config.ProfileItem n)
         {
-            return o.configVersion == n.configVersion &&
-                o.configType == n.configType &&
-                o.address == n.address &&
-                o.port == n.port &&
-                o.id == n.id &&
-                o.alterId == n.alterId &&
-                o.security == n.security &&
-                o.network == n.network &&
-                o.headerType == n.headerType &&
-                o.requestHost == n.requestHost &&
-                o.path == n.path &&
-                o.streamSecurity == n.streamSecurity;
+            return o.configVersion == n.configVersion
+                && o.configType == n.configType
+                && o.address == n.address
+                && o.port == n.port
+                && o.id == n.id
+                && o.alterId == n.alterId
+                && o.security == n.security
+                && o.network == n.network
+                && o.headerType == n.headerType
+                && o.requestHost == n.requestHost
+                && o.path == n.path
+                && o.streamSecurity == n.streamSecurity;
             // skip (will remove) different remarks
         }
         foreach (Config.ProfileItem item in source)
@@ -369,7 +372,7 @@ public class Misc
     /// <summary>
     /// 验证IP地址是否合法
     /// </summary>
-    /// <param name="ip"></param>        
+    /// <param name="ip"></param>
     public static bool IsIP(string ip)
     {
         //如果为空
@@ -394,7 +397,6 @@ public class Misc
             }
         }
 
-
         //模式字符串
         string pattern = @"^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$";
 
@@ -405,7 +407,7 @@ public class Misc
     /// <summary>
     /// 验证Domain地址是否合法
     /// </summary>
-    /// <param name="domain"></param>        
+    /// <param name="domain"></param>
     public static bool IsDomain(string domain)
     {
         //如果为空
@@ -428,14 +430,14 @@ public class Misc
     /// 验证输入字符串是否与模式字符串匹配，匹配返回true
     /// </summary>
     /// <param name="input">输入字符串</param>
-    /// <param name="pattern">模式字符串</param>        
+    /// <param name="pattern">模式字符串</param>
     public static bool IsMatch(string input, string pattern)
     {
         return Regex.IsMatch(input, pattern, RegexOptions.IgnoreCase);
     }
 
     private static string autoRunName = "v2rayNAutoRun";
-    private static string autoRunRegPath => @"Software\Microsoft\Windows\CurrentVersion\Run";//if (Environment.Is64BitProcess)//{//    return @"Software\Microsoft\Windows\CurrentVersion\Run";//}//else//{//    return @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run";//}
+    private static string autoRunRegPath => @"Software\Microsoft\Windows\CurrentVersion\Run"; //if (Environment.Is64BitProcess)//{//    return @"Software\Microsoft\Windows\CurrentVersion\Run";//}//else//{//    return @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run";//}
 
     /// <summary>
     /// 开机自动启动
@@ -449,9 +451,7 @@ public class Misc
             string exePath = GetExePath();
             RegWriteValue(autoRunRegPath, autoRunName, run ? exePath : "");
         }
-        catch
-        {
-        }
+        catch { }
     }
 
     /// <summary>
@@ -469,9 +469,7 @@ public class Misc
                 return true;
             }
         }
-        catch
-        {
-        }
+        catch { }
         return false;
     }
 
@@ -508,7 +506,11 @@ public class Misc
         return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Interoperability",
+        "CA1416:Validate platform compatibility",
+        Justification = "<Pending>"
+    )]
     public static string RegReadValue(string path, string name, string def)
     {
         RegistryKey regKey = null;
@@ -525,9 +527,7 @@ public class Misc
                 return value;
             }
         }
-        catch
-        {
-        }
+        catch { }
         finally
         {
             regKey?.Close();
@@ -535,7 +535,11 @@ public class Misc
         return def;
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Interoperability",
+        "CA1416:Validate platform compatibility",
+        Justification = "<Pending>"
+    )]
     public static void RegWriteValue(string path, string name, string value)
     {
         RegistryKey regKey = null;
@@ -551,9 +555,7 @@ public class Misc
                 regKey?.SetValue(name, value);
             }
         }
-        catch
-        {
-        }
+        catch { }
         finally
         {
             regKey?.Close();
@@ -614,9 +616,7 @@ public class Misc
                 }
             }
         }
-        catch
-        {
-        }
+        catch { }
         return lstIPAddress;
     }
 
@@ -638,9 +638,11 @@ public class Misc
         try
         {
             string location = GetExePath();
-            return string.Format("v2rayN - V{0} - {1}",
-                    FileVersionInfo.GetVersionInfo(location).FileVersion.ToString(),
-                    File.GetLastWriteTime(location).ToString("yyyy/MM/dd"));
+            return string.Format(
+                "v2rayN - V{0} - {1}",
+                FileVersionInfo.GetVersionInfo(location).FileVersion.ToString(),
+                File.GetLastWriteTime(location).ToString("yyyy/MM/dd")
+            );
         }
         catch
         {
@@ -675,9 +677,7 @@ public class Misc
             }
             return strData;
         }
-        catch
-        {
-        }
+        catch { }
         return strData;
     }
 
@@ -691,9 +691,7 @@ public class Misc
         {
             Clipboard.SetText(strData);
         }
-        catch
-        {
-        }
+        catch { }
     }
 
     /// <summary>
@@ -706,9 +704,7 @@ public class Misc
         {
             return Guid.NewGuid().ToString("D");
         }
-        catch
-        {
-        }
+        catch { }
         return string.Empty;
     }
 

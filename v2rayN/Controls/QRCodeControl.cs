@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
-using v2rayN.Handlers;
 using v2rayN.Config;
+using v2rayN.Handlers;
 using v2rayN.Utils;
 
 namespace v2rayN.Forms
@@ -11,9 +11,10 @@ namespace v2rayN.Forms
         {
             InitializeComponent();
         }
+
         private void QRCodeControl_Load(object sender, System.EventArgs e)
         {
-            txtUrl.MouseUp += txtUrl_MouseUp;      
+            txtUrl.MouseUp += txtUrl_MouseUp;
         }
 
         void txtUrl_MouseUp(object sender, MouseEventArgs e)
@@ -33,7 +34,7 @@ namespace v2rayN.Forms
                     return;
                 }
                 txtUrl.Text = url;
-                picQRCode.Image = QRCode.GetQRCode(url);                
+                picQRCode.Image = QRCode.GetQRCode(url);
             }
         }
     }

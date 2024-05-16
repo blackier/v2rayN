@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using v2rayN.Handlers;
 using v2rayN.Config;
+using v2rayN.Handlers;
 
 namespace v2rayN.Forms
 {
@@ -31,14 +31,12 @@ namespace v2rayN.Forms
         /// </summary>
         private void BindingServer()
         {
-
             txtAddress.Text = vmessItem.address;
             txtPort.Text = vmessItem.port.ToString();
             txtId.Text = vmessItem.id;
             txtRequestHost.Text = vmessItem.requestHost;
             txtRemarks.Text = vmessItem.remarks;
         }
-
 
         /// <summary>
         /// 清除设置
@@ -74,7 +72,7 @@ namespace v2rayN.Forms
             {
                 MsgBox.Show(StringsRes.I18N("FillPassword"));
                 return;
-            } 
+            }
 
             vmessItem.address = address;
             vmessItem.port = Misc.ToInt(port);
@@ -91,10 +89,10 @@ namespace v2rayN.Forms
                 MsgBox.ShowWarning(StringsRes.I18N("OperationFailed"));
             }
         }
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
-
     }
 }

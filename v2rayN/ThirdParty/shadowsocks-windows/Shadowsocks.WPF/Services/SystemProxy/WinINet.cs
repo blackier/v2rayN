@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
+
 //using NLog;
 
 namespace Shadowsocks.WPF.Services.SystemProxy
@@ -98,6 +99,7 @@ namespace Shadowsocks.WPF.Services.SystemProxy
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         private void Dispose(bool disposing)
         {
             if (disposing)
@@ -134,6 +136,7 @@ namespace Shadowsocks.WPF.Services.SystemProxy
         private static WinINetSetting initialSetting;
 
         public static bool operational { get; private set; } = true;
+
         static WinINet()
         {
             try
@@ -171,9 +174,12 @@ namespace Shadowsocks.WPF.Services.SystemProxy
         {
             List<InternetPerConnectionOption> options = new List<InternetPerConnectionOption>
             {
-                GetOption(InternetPerConnectionOptionEnum.Flags,InternetPerConnectionFlags.Proxy|InternetPerConnectionFlags.Direct),
-                GetOption(InternetPerConnectionOptionEnum.ProxyServer,server),
-                GetOption(InternetPerConnectionOptionEnum.ProxyBypass,bypass),
+                GetOption(
+                    InternetPerConnectionOptionEnum.Flags,
+                    InternetPerConnectionFlags.Proxy | InternetPerConnectionFlags.Direct
+                ),
+                GetOption(InternetPerConnectionOptionEnum.ProxyServer, server),
+                GetOption(InternetPerConnectionOptionEnum.ProxyBypass, bypass),
             };
             Exec(options);
         }
@@ -182,8 +188,11 @@ namespace Shadowsocks.WPF.Services.SystemProxy
         {
             List<InternetPerConnectionOption> options = new List<InternetPerConnectionOption>
             {
-                GetOption(InternetPerConnectionOptionEnum.Flags,InternetPerConnectionFlags.AutoProxyUrl|InternetPerConnectionFlags.Direct),
-                GetOption(InternetPerConnectionOptionEnum.AutoConfigUrl,url),
+                GetOption(
+                    InternetPerConnectionOptionEnum.Flags,
+                    InternetPerConnectionFlags.AutoProxyUrl | InternetPerConnectionFlags.Direct
+                ),
+                GetOption(InternetPerConnectionOptionEnum.AutoConfigUrl, url),
             };
             Exec(options);
         }
@@ -192,7 +201,7 @@ namespace Shadowsocks.WPF.Services.SystemProxy
         {
             List<InternetPerConnectionOption> options = new List<InternetPerConnectionOption>
             {
-                GetOption(InternetPerConnectionOptionEnum.Flags,InternetPerConnectionFlags.Direct),
+                GetOption(InternetPerConnectionOptionEnum.Flags, InternetPerConnectionFlags.Direct),
             };
             Exec(options);
         }
@@ -206,10 +215,10 @@ namespace Shadowsocks.WPF.Services.SystemProxy
         {
             List<InternetPerConnectionOption> options = new List<InternetPerConnectionOption>
             {
-                GetOption(InternetPerConnectionOptionEnum.Flags,setting.Flags),
-                GetOption(InternetPerConnectionOptionEnum.ProxyServer,setting.ProxyServer),
-                GetOption(InternetPerConnectionOptionEnum.ProxyBypass,setting.ProxyBypass),
-                GetOption(InternetPerConnectionOptionEnum.AutoConfigUrl,setting.AutoConfigUrl),
+                GetOption(InternetPerConnectionOptionEnum.Flags, setting.Flags),
+                GetOption(InternetPerConnectionOptionEnum.ProxyServer, setting.ProxyServer),
+                GetOption(InternetPerConnectionOptionEnum.ProxyBypass, setting.ProxyBypass),
+                GetOption(InternetPerConnectionOptionEnum.AutoConfigUrl, setting.AutoConfigUrl),
             };
             Exec(options);
         }
@@ -229,14 +238,19 @@ namespace Shadowsocks.WPF.Services.SystemProxy
 
             List<InternetPerConnectionOption> options = new List<InternetPerConnectionOption>
             {
-                new InternetPerConnectionOption{dwOption = (int)InternetPerConnectionOptionEnum.FlagsUI},
-                new InternetPerConnectionOption{dwOption = (int)InternetPerConnectionOptionEnum.ProxyServer},
-                new InternetPerConnectionOption{dwOption = (int)InternetPerConnectionOptionEnum.ProxyBypass},
-                new InternetPerConnectionOption{dwOption = (int)InternetPerConnectionOptionEnum.AutoConfigUrl},
+                new InternetPerConnectionOption { dwOption = (int)InternetPerConnectionOptionEnum.FlagsUI },
+                new InternetPerConnectionOption { dwOption = (int)InternetPerConnectionOptionEnum.ProxyServer },
+                new InternetPerConnectionOption { dwOption = (int)InternetPerConnectionOptionEnum.ProxyBypass },
+                new InternetPerConnectionOption { dwOption = (int)InternetPerConnectionOptionEnum.AutoConfigUrl },
             };
 
             (IntPtr unmanagedList, int listSize) = PrepareOptionList(options, "");
-            bool ok = InternetQueryOption(IntPtr.Zero, (int)InternetOptions.PerConnectionOption, unmanagedList, ref listSize);
+            bool ok = InternetQueryOption(
+                IntPtr.Zero,
+                (int)InternetOptions.PerConnectionOption,
+                unmanagedList,
+                ref listSize
+            );
             if (!ok)
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
@@ -244,7 +258,9 @@ namespace Shadowsocks.WPF.Services.SystemProxy
 
             WinINetSetting proxy = new WinINetSetting();
 
-            InternetPerConnectionOptionList ret = Marshal.PtrToStructure<InternetPerConnectionOptionList>(unmanagedList);
+            InternetPerConnectionOptionList ret = Marshal.PtrToStructure<InternetPerConnectionOptionList>(
+                unmanagedList
+            );
             IntPtr p = ret.pOptions;
             int nOption = ret.OptionCount;
             List<InternetPerConnectionOption> outOptions = new List<InternetPerConnectionOption>();
@@ -282,30 +298,17 @@ namespace Shadowsocks.WPF.Services.SystemProxy
         private static InternetPerConnectionOption GetOption(
             InternetPerConnectionOptionEnum option,
             InternetPerConnectionFlags flag
-            )
-        {
-            return new InternetPerConnectionOption
-            {
-                dwOption = (int)option,
-                Value =
-                {
-                    dwValue = (int)flag,
-                }
-            };
-        }
-
-        private static InternetPerConnectionOption GetOption(
-            InternetPerConnectionOptionEnum option,
-            string param
         )
         {
+            return new InternetPerConnectionOption { dwOption = (int)option, Value = { dwValue = (int)flag, } };
+        }
+
+        private static InternetPerConnectionOption GetOption(InternetPerConnectionOptionEnum option, string param)
+        {
             return new InternetPerConnectionOption
             {
                 dwOption = (int)option,
-                Value =
-                {
-                    pszValue = Marshal.StringToCoTaskMemAuto(param),
-                }
+                Value = { pszValue = Marshal.StringToCoTaskMemAuto(param), }
             };
         }
 
@@ -325,9 +328,7 @@ namespace Shadowsocks.WPF.Services.SystemProxy
             {
                 pOptions = buf,
                 OptionCount = options.Count,
-                Connection = string.IsNullOrEmpty(connName)
-                    ? IntPtr.Zero
-                    : Marshal.StringToHGlobalAuto(connName),
+                Connection = string.IsNullOrEmpty(connName) ? IntPtr.Zero : Marshal.StringToHGlobalAuto(connName),
                 OptionError = 0,
             };
             int listSize = Marshal.SizeOf(optionList);
@@ -363,35 +364,20 @@ namespace Shadowsocks.WPF.Services.SystemProxy
 
             (IntPtr unmanagedList, int listSize) = PrepareOptionList(options, connName);
 
-            bool ok = InternetSetOption(
-                IntPtr.Zero,
-                (int)InternetOptions.PerConnectionOption,
-                unmanagedList,
-                listSize
-            );
+            bool ok = InternetSetOption(IntPtr.Zero, (int)InternetOptions.PerConnectionOption, unmanagedList, listSize);
 
             if (!ok)
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
             ClearOptionList(unmanagedList);
-            ok = InternetSetOption(
-                IntPtr.Zero,
-                (int)InternetOptions.ProxySettingChanged,
-                IntPtr.Zero,
-                0
-            );
+            ok = InternetSetOption(IntPtr.Zero, (int)InternetOptions.ProxySettingChanged, IntPtr.Zero, 0);
             if (!ok)
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
 
-            ok = InternetSetOption(
-                IntPtr.Zero,
-                (int)InternetOptions.Refresh,
-                IntPtr.Zero,
-                0
-            );
+            ok = InternetSetOption(IntPtr.Zero, (int)InternetOptions.Refresh, IntPtr.Zero, 0);
             if (!ok)
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
@@ -399,10 +385,20 @@ namespace Shadowsocks.WPF.Services.SystemProxy
         }
 
         [DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern bool InternetSetOption(IntPtr hInternet, int dwOption, IntPtr lpBuffer, int dwBufferLength);
+        public static extern bool InternetSetOption(
+            IntPtr hInternet,
+            int dwOption,
+            IntPtr lpBuffer,
+            int dwBufferLength
+        );
 
         [DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern bool InternetQueryOption(IntPtr hInternet, uint dwOption, IntPtr lpBuffer, ref int lpdwBufferLength);
+        private static extern bool InternetQueryOption(
+            IntPtr hInternet,
+            uint dwOption,
+            IntPtr lpBuffer,
+            ref int lpdwBufferLength
+        );
         #endregion
     }
 }

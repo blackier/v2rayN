@@ -17,7 +17,13 @@ class SpeedTestHandler
     private List<int> _selecteds;
     private Action<int, string> _updateFunc;
 
-    public SpeedTestHandler(ref Config.V2RayNConfig config, ref v2rayHandler v2rayHandler, List<int> selecteds, string actionType, Action<int, string> update)
+    public SpeedTestHandler(
+        ref Config.V2RayNConfig config,
+        ref v2rayHandler v2rayHandler,
+        List<int> selecteds,
+        string actionType,
+        Action<int, string> update
+    )
     {
         _config = config;
         _v2rayHandler = v2rayHandler;
@@ -70,23 +76,26 @@ class SpeedTestHandler
         }
     }
 
-
     private void RunPing()
     {
-        RunPingSub((int index) =>
-        {
-            long time = Misc.Ping(_config.vmess[index].address);
-            _updateFunc(index, FormatOut(time, "ms"));
-        });
+        RunPingSub(
+            (int index) =>
+            {
+                long time = Misc.Ping(_config.vmess[index].address);
+                _updateFunc(index, FormatOut(time, "ms"));
+            }
+        );
     }
 
     private void RunTcping()
     {
-        RunPingSub((int index) =>
-        {
-            int time = GetTcpingTime(_config.vmess[index].address, _config.vmess[index].port);
-            _updateFunc(index, FormatOut(time, "ms"));
-        });
+        RunPingSub(
+            (int index) =>
+            {
+                int time = GetTcpingTime(_config.vmess[index].address, _config.vmess[index].port);
+                _updateFunc(index, FormatOut(time, "ms"));
+            }
+        );
     }
 
     private void RunRealPing()
@@ -106,21 +115,25 @@ class SpeedTestHandler
                 if (_config.vmess[itemIndex].configType == (int)EConfigType.Custom)
                     continue;
 
-                tasks.Add(Task.Run(() =>
-                {
-                    try
+                tasks.Add(
+                    Task.Run(() =>
                     {
-                        WebProxy webProxy = new WebProxy(Global.Loopback, httpPort + itemIndex);
-                        int responseTime = -1;
-                        string status = GetRealPingTime(_config.speedPingTestUrl, webProxy, out responseTime);
-                        string output = Misc.IsNullOrEmpty(status) ? FormatOut(responseTime, "ms") : FormatOut(status, "");
-                        _updateFunc(itemIndex, output);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.SaveLog(ex.Message, ex);
-                    }
-                }));
+                        try
+                        {
+                            WebProxy webProxy = new WebProxy(Global.Loopback, httpPort + itemIndex);
+                            int responseTime = -1;
+                            string status = GetRealPingTime(_config.speedPingTestUrl, webProxy, out responseTime);
+                            string output = Misc.IsNullOrEmpty(status)
+                                ? FormatOut(responseTime, "ms")
+                                : FormatOut(status, "");
+                            _updateFunc(itemIndex, output);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.SaveLog(ex.Message, ex);
+                        }
+                    })
+                );
                 //Thread.Sleep(100);
             }
             Task.WaitAll(tasks.ToArray());
@@ -131,7 +144,8 @@ class SpeedTestHandler
         }
         finally
         {
-            if (pid > 0) _v2rayHandler.V2rayStopPid(pid);
+            if (pid > 0)
+                _v2rayHandler.V2rayStopPid(pid);
         }
     }
 
@@ -214,9 +228,9 @@ class SpeedTestHandler
 
             Thread.Sleep(1000 * 2);
         }
-        if (pid > 0) _v2rayHandler.V2rayStopPid(pid);
+        if (pid > 0)
+            _v2rayHandler.V2rayStopPid(pid);
     }
-
 
     private int GetTcpingTime(string url, int port)
     {
@@ -282,6 +296,7 @@ class SpeedTestHandler
         }
         return msg;
     }
+
     private string FormatOut(object time, string unit)
     {
         if (time.ToString().Equals("-1"))

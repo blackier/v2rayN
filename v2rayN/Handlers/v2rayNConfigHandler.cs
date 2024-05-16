@@ -22,7 +22,7 @@ class v2rayNConfigHandler
     /// <returns></returns>
     public static int LoadConfig(ref Config.V2RayNConfig config)
     {
-        //载入配置文件 
+        //载入配置文件
         string result = Misc.LoadResource(Misc.GetPath(configRes));
         if (!Misc.IsNullOrEmpty(result))
         {
@@ -130,11 +130,7 @@ class v2rayNConfigHandler
             config.subItem = new List<SubItem>();
         }
 
-        if (config == null
-            || config.index < 0
-            || config.vmess.Count <= 0
-            || config.index > config.vmess.Count - 1
-            )
+        if (config == null || config.index < 0 || config.vmess.Count <= 0 || config.index > config.vmess.Count - 1)
         {
             Global.reloadV2ray = false;
         }
@@ -212,7 +208,6 @@ class v2rayNConfigHandler
         //删除
         config.vmess.RemoveAt(index);
 
-
         //移除的是活动的
         if (config.index.Equals(index))
         {
@@ -226,7 +221,7 @@ class v2rayNConfigHandler
             }
             Global.reloadV2ray = true;
         }
-        else if (index < config.index)//移除活动之前的
+        else if (index < config.index) //移除活动之前的
         {
             config.index--;
             Global.reloadV2ray = true;
@@ -357,7 +352,6 @@ class v2rayNConfigHandler
                 url = Json.ToJson(vmessQRCode);
                 url = Misc.Base64Encode(url);
                 url = string.Format("{0}{1}", Global.vmessProtocol, url);
-
             }
             else if (vmessItem.configType == (int)EConfigType.Shadowsocks)
             {
@@ -366,11 +360,13 @@ class v2rayNConfigHandler
                 {
                     remark = "#" + WebUtility.UrlEncode(vmessItem.remarks);
                 }
-                url = string.Format("{0}:{1}@{2}:{3}",
+                url = string.Format(
+                    "{0}:{1}@{2}:{3}",
                     vmessItem.security,
                     vmessItem.id,
                     vmessItem.address,
-                    vmessItem.port);
+                    vmessItem.port
+                );
                 url = Misc.Base64Encode(url);
                 url = string.Format("{0}{1}{2}", Global.ssProtocol, url, remark);
             }
@@ -381,11 +377,13 @@ class v2rayNConfigHandler
                 {
                     remark = "#" + WebUtility.UrlEncode(vmessItem.remarks);
                 }
-                url = string.Format("{0}:{1}@{2}:{3}",
+                url = string.Format(
+                    "{0}:{1}@{2}:{3}",
                     vmessItem.security,
                     vmessItem.id,
                     vmessItem.address,
-                    vmessItem.port);
+                    vmessItem.port
+                );
                 url = Misc.Base64Encode(url);
                 url = string.Format("{0}{1}{2}", Global.socksProtocol, url, remark);
             }
@@ -401,15 +399,10 @@ class v2rayNConfigHandler
                 {
                     query = string.Format("?sni={0}", vmessItem.requestHost);
                 }
-                url = string.Format("{0}@{1}:{2}",
-                    vmessItem.id,
-                    vmessItem.address,
-                    vmessItem.port);
+                url = string.Format("{0}@{1}:{2}", vmessItem.id, vmessItem.address, vmessItem.port);
                 url = string.Format("{0}{1}{2}{3}", Global.trojanProtocol, url, query, remark);
             }
-            else
-            {
-            }
+            else { }
             return url;
         }
         catch
@@ -519,7 +512,6 @@ class v2rayNConfigHandler
                     }
                     break;
                 }
-
         }
         Global.reloadV2ray = true;
 
@@ -668,7 +660,6 @@ class v2rayNConfigHandler
         return 0;
     }
 
-
     /// <summary>
     /// 添加服务器或编辑
     /// </summary>
@@ -678,7 +669,7 @@ class v2rayNConfigHandler
     /// <returns></returns>
     public static int AddTrojanServer(ref Config.V2RayNConfig config, ProfileItem vmessItem, int index)
     {
-        vmessItem.configVersion = Global.configVersion; ;
+        vmessItem.configVersion = Global.configVersion;
         vmessItem.configType = (int)EConfigType.Trojan;
 
         vmessItem.address = vmessItem.address.TrimEx();
@@ -719,7 +710,12 @@ class v2rayNConfigHandler
     /// <param name="clipboardData"></param>
     /// <param name="subid"></param>
     /// <returns>成功导入的数量</returns>
-    public static int AddBatchServers(ref Config.V2RayNConfig config, string clipboardData, string subid = "", string protocolFilter = "")
+    public static int AddBatchServers(
+        ref Config.V2RayNConfig config,
+        string clipboardData,
+        string subid = "",
+        string protocolFilter = ""
+    )
     {
         if (Misc.IsNullOrEmpty(clipboardData))
         {
@@ -747,28 +743,40 @@ class v2rayNConfigHandler
                 continue;
             }
             vmessItem.subid = subid;
-            if (vmessItem.configType == (int)EConfigType.Vmess && !arrProtocolFilter.Contains(EConfigType.Vmess.ToString()))
+            if (
+                vmessItem.configType == (int)EConfigType.Vmess
+                && !arrProtocolFilter.Contains(EConfigType.Vmess.ToString())
+            )
             {
                 if (AddServer(ref config, vmessItem, -1) == 0)
                 {
                     countServers++;
                 }
             }
-            else if (vmessItem.configType == (int)EConfigType.Shadowsocks && !arrProtocolFilter.Contains(EConfigType.Shadowsocks.ToString()))
+            else if (
+                vmessItem.configType == (int)EConfigType.Shadowsocks
+                && !arrProtocolFilter.Contains(EConfigType.Shadowsocks.ToString())
+            )
             {
                 if (AddShadowsocksServer(ref config, vmessItem, -1) == 0)
                 {
                     countServers++;
                 }
             }
-            else if (vmessItem.configType == (int)EConfigType.Socks && !arrProtocolFilter.Contains(EConfigType.Socks.ToString()))
+            else if (
+                vmessItem.configType == (int)EConfigType.Socks
+                && !arrProtocolFilter.Contains(EConfigType.Socks.ToString())
+            )
             {
                 if (AddSocksServer(ref config, vmessItem, -1) == 0)
                 {
                     countServers++;
                 }
             }
-            else if (vmessItem.configType == (int)EConfigType.Trojan && !arrProtocolFilter.Contains(EConfigType.Trojan.ToString()))
+            else if (
+                vmessItem.configType == (int)EConfigType.Trojan
+                && !arrProtocolFilter.Contains(EConfigType.Trojan.ToString())
+            )
             {
                 if (AddTrojanServer(ref config, vmessItem, -1) == 0)
                 {
@@ -871,6 +879,7 @@ class v2rayNConfigHandler
         }
         return 0;
     }
+
     public static int GetformMainLvColWidth(ref Config.V2RayNConfig config, string name, int width)
     {
         if (config.uiItem.mainLvColWidth == null)
@@ -977,5 +986,4 @@ class v2rayNConfigHandler
 
         return 0;
     }
-
 }

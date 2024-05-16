@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
-using v2rayN.Extensions;
 using v2rayN.Config;
+using v2rayN.Extensions;
 
 namespace v2rayN.Forms
 {
     public delegate void ChangeEventHandler(object sender, EventArgs e);
+
     public partial class SubSettingControl : UserControl
     {
         public event ChangeEventHandler OnButtonClicked;
-
 
         public SubItem subItem { get; set; }
 
@@ -33,6 +33,7 @@ namespace v2rayN.Forms
                 txtProtocolFilter.Text = subItem.protocolFilter.ToString();
             }
         }
+
         private void EndBindingSub()
         {
             if (subItem != null)
@@ -43,6 +44,7 @@ namespace v2rayN.Forms
                 subItem.protocolFilter = txtProtocolFilter.Text.TrimEx();
             }
         }
+
         private void txtRemarks_Leave(object sender, EventArgs e)
         {
             EndBindingSub();
