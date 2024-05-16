@@ -9,5 +9,6 @@ namespace Shadowsocks.Interop.V2Ray.Transport
         public List<string> Alpn { get; set; }
         public List<CertificateObject> Certificates { get; set; }
         public bool DisableSystemRoot { get; set; }
+        public string Fingerprint { get; set; }
     }
 }

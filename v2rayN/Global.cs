@@ -69,13 +69,14 @@ class Global
     public const string blockTag = "block";
 
     public const string StreamSecurity = "tls";
+    public const string StreamSecurityReality = "reality";
 
     public const string InboundSocks = "socks";
     public const string InboundHttp = "http";
     public const string Loopback = "127.0.0.1";
     public const string InboundAPITagName = "api";
     public const string InboundAPIProtocal = "dokodemo-door";
-
+    public const string GrpcGunMode = "gun";
 
     /// <summary>
     /// vmess

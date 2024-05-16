@@ -4,7 +4,6 @@ using v2rayN.Extensions;
 using v2rayN.Handlers;
 using v2rayN.Utils;
 
-
 namespace v2rayN.Config;
 
 /// <summary>
@@ -16,299 +15,208 @@ public class V2RayNConfig
     /// <summary>
     /// 本地监听
     /// </summary>
-    public List<InItem> inbound
-    {
-        get; set;
-    }
+    public List<InItem> inbound { get; set; }
 
     /// <summary>
     /// 代理模式
     /// </summary>
-    public ListenerType listenerType
-    {
-        get; set;
-    }
+    public ListenerType listenerType { get; set; }
 
     /// <summary>
     /// 允许日志
     /// </summary>
-    public bool logEnabled
-    {
-        get; set;
-    }
+    public bool logEnabled { get; set; }
 
     /// <summary>
     /// 日志等级
     /// </summary>
-    public string loglevel
-    {
-        get; set;
-    }
+    public string loglevel { get; set; }
 
     /// <summary>
     /// 允许Mux多路复用
     /// </summary>
-    public bool muxEnabled
-    {
-        get; set;
-    }
+    public bool muxEnabled { get; set; }
 
     /// <summary>
     /// 是否允许不安全连接
     /// </summary>
-    public bool defAllowInsecure
-    {
-        get; set;
-    }
+    public bool defAllowInsecure { get; set; }
 
     /// <summary>
     /// 自定义远程DNS
     /// </summary>
-    public string remoteDNS
-    {
-        get; set;
-    }
+    public string remoteDNS { get; set; }
 
     /// <summary>
     /// 域名解析策略
     /// </summary>
-    public string domainStrategy
-    {
-        get; set;
-    }
+    public string domainStrategy { get; set; }
 
     /// <summary>
     /// 路由模式
     /// </summary>
-    public string routingMode
-    {
-        get; set;
-    }
+    public string routingMode { get; set; }
 
     /// <summary>
     /// 用户自定义需代理的网址或ip
     /// </summary>
-    public List<string> useragent
-    {
-        get; set;
-    }
+    public List<string> useragent { get; set; }
 
     /// <summary>
     /// 用户自定义直连的网址或ip
     /// </summary>
-    public List<string> userdirect
-    {
-        get; set;
-    }
+    public List<string> userdirect { get; set; }
 
     /// <summary>
     /// 用户自定义阻止的网址或ip
     /// </summary>
-    public List<string> userblock
-    {
-        get; set;
-    }
+    public List<string> userblock { get; set; }
 
     /// <summary>
     /// KcpItem
     /// </summary>
-    public KcpItem kcpItem
-    {
-        get; set;
-    }
+    public KcpItem kcpItem { get; set; }
 
     /// <summary>
     /// 允许来自局域网的连接
     /// </summary>
-    public bool allowLANConn
-    {
-        get; set;
-    }
+    public bool allowLANConn { get; set; }
 
     /// <summary>
     /// 启用实时网速和流量统计
     /// </summary>
-    public bool enableStatistics
-    {
-        get; set;
-    }
+    public bool enableStatistics { get; set; }
 
     /// <summary>
     /// 去重时优先保留较旧（顶部）节点
     /// </summary>
-    public bool keepOlderDedupl
-    {
-        get; set;
-    }
+    public bool keepOlderDedupl { get; set; }
 
     /// <summary>
     /// 网速刷新率
     /// </summary>
-    public int statisticsFreshRate
-    {
-        get; set;
-    }
+    public int statisticsFreshRate { get; set; }
 
     /// <summary>
     /// 自定义服务器下载测速url
     /// </summary>
-    public string speedTestUrl
-    {
-        get; set;
-    }
+    public string speedTestUrl { get; set; }
+
     /// <summary>
     /// 自定义“服务器真连接延迟”测试url
     /// </summary>
-    public string speedPingTestUrl
-    {
-        get; set;
-    }
+    public string speedPingTestUrl { get; set; }
 
     /// <summary>
     /// 订阅
     /// </summary>
-    public List<SubItem> subItem
-    {
-        get; set;
-    }
+    public List<SubItem> subItem { get; set; }
+
     /// <summary>
     /// UI
     /// </summary>
-    public UIItem uiItem
-    {
-        get; set;
-    }
+    public UIItem uiItem { get; set; }
 
     /// <summary>
     /// 活动服务配置序号
     /// </summary>
-    public int index
-    {
-        get; set;
-    }
+    public int index { get; set; }
 
     /// <summary>
     /// vmess服务器信息
     /// </summary>
-    public List<VmessItem> vmess
+    public List<ProfileItem> vmess { get; set; }
+
+    public ProfileItem node
     {
-        get; set;
+        get
+        {
+            if (index < 0 || index >= vmess.Count)
+                return null;
+            return vmess[index];
+        }
     }
 
     #region 函数
 
     public string address()
     {
-        if (index < 0)
-        {
-            return string.Empty;
-        }
-        return vmess[index].address.TrimEx();
+        return node?.address.Trim() ?? string.Empty;
     }
 
     public int port()
     {
-        if (index < 0)
-        {
-            return 10808;
-        }
-        return vmess[index].port;
+        return node?.port ?? 10808;
     }
 
     public string id()
     {
-        if (index < 0)
-        {
-            return string.Empty;
-        }
-        return vmess[index].id.TrimEx();
+        return node?.id.TrimEx() ?? string.Empty;
     }
 
     public int alterId()
     {
-        if (index < 0)
-        {
-            return 0;
-        }
-        return vmess[index].alterId;
+        return node?.alterId ?? 0;
     }
 
     public string security()
     {
-        if (index < 0)
-        {
-            return string.Empty;
-        }
-        return vmess[index].security.TrimEx();
+        return node?.security.TrimEx() ?? string.Empty;
     }
 
     public string remarks()
     {
-        if (index < 0)
-        {
-            return string.Empty;
-        }
-        return vmess[index].remarks.TrimEx();
+        return node?.remarks.TrimEx() ?? string.Empty;
     }
+
     public string network()
     {
-        if (index < 0 || Misc.IsNullOrEmpty(vmess[index].network))
-        {
+        if (node == null || Misc.IsNullOrEmpty(node.network))
             return Global.DefaultNetwork;
-        }
-        return vmess[index].network.TrimEx();
+        return node.network.TrimEx();
     }
+
     public string headerType()
     {
-        if (index < 0 || Misc.IsNullOrEmpty(vmess[index].headerType))
-        {
+        if (node == null || Misc.IsNullOrEmpty(node.headerType))
             return Global.None;
-        }
-        return vmess[index].headerType.Replace(" ", "").TrimEx();
+        return node.headerType.Replace(" ", "").TrimEx();
     }
+
     public string requestHost()
     {
-        if (index < 0 || Misc.IsNullOrEmpty(vmess[index].requestHost))
-        {
+        if (node == null || Misc.IsNullOrEmpty(node.requestHost))
             return string.Empty;
-        }
-        return vmess[index].requestHost.Replace(" ", "").TrimEx();
+        return node.requestHost.Replace(" ", "").TrimEx();
     }
+
     public string path()
     {
-        if (index < 0 || Misc.IsNullOrEmpty(vmess[index].path))
-        {
+        if (node == null || Misc.IsNullOrEmpty(node.path))
             return string.Empty;
-        }
-        return vmess[index].path.Replace(" ", "").TrimEx();
+        return node.path.Replace(" ", "").TrimEx();
     }
+
     public string streamSecurity()
     {
-        if (index < 0 || Misc.IsNullOrEmpty(vmess[index].streamSecurity))
-        {
+        if (node == null || Misc.IsNullOrEmpty(node.streamSecurity))
             return string.Empty;
-        }
-        return vmess[index].streamSecurity;
+        return node.streamSecurity.TrimEx();
     }
+
     public bool allowInsecure()
     {
-        if (index < 0 || Misc.IsNullOrEmpty(vmess[index].allowInsecure))
-        {
+        if (node == null || Misc.IsNullOrEmpty(node.allowInsecure))
             return defAllowInsecure;
-        }
         return Convert.ToBoolean(vmess[index].allowInsecure);
     }
 
     public int GetLocalPort(string protocol)
     {
         if (protocol == Global.InboundHttp)
-        {
             return GetLocalPort(Global.InboundSocks) + 1;
-        }
-        else if (protocol == "speedtest")
-        {
+        if (protocol == "speedtest")
             return GetLocalPort(Global.InboundSocks) + 103;
-        }
 
         int localPort = 0;
         foreach (InItem inItem in inbound)
@@ -324,49 +232,55 @@ public class V2RayNConfig
 
     public int configType()
     {
-        if (index < 0)
-        {
-            return 0;
-        }
-        return vmess[index].configType;
+        return node?.configType ?? 0;
     }
 
     public string getSummary()
     {
-        if (index < 0)
-        {
-            return string.Empty;
-        }
-        return vmess[index].getSummary();
+        return node?.getSummary() ?? string.Empty;
     }
 
     public string getItemId()
     {
-        if (index < 0)
-        {
-            return string.Empty;
-        }
-
-        return vmess[index].getItemId();
+        return node?.getItemId() ?? string.Empty;
     }
+
     public string flow()
     {
-        if (index < 0)
-        {
+        return node?.flow.TrimEx() ?? string.Empty;
+    }
+
+    public List<string> alpn()
+    {
+        if (node == null)
+            return null;
+
+        if (Misc.IsNullOrEmpty(node.alpn))
+            return null;
+
+        return Misc.String2List(node.alpn);
+    }
+
+    public string fingerprint()
+    {
+        if (node == null)
             return string.Empty;
-        }
-        return vmess[index].flow.TrimEx();
+
+        if (Misc.IsNullOrEmpty(node.fingerprint))
+            return string.Empty;
+
+        return node.fingerprint;
     }
     #endregion
-
 }
 
 [Serializable]
-public class VmessItem
+public class ProfileItem
 {
-    public VmessItem()
+    public ProfileItem()
     {
         configVersion = Global.configVersion;
+        configType = (int)EConfigType.Vmess;
         address = string.Empty;
         port = 0;
         id = string.Empty;
@@ -379,10 +293,9 @@ public class VmessItem
         path = string.Empty;
         streamSecurity = string.Empty;
         allowInsecure = string.Empty;
-        configType = (int)EConfigType.Vmess;
-        testResult = string.Empty;
         subid = string.Empty;
         flow = string.Empty;
+        testResult = string.Empty;
     }
 
     public string getSummary()
@@ -425,6 +338,7 @@ public class VmessItem
         }
         return summary;
     }
+
     public string getSubRemarks(V2RayNConfig config)
     {
         string subRemarks = string.Empty;
@@ -456,133 +370,104 @@ public class VmessItem
     /// <summary>
     /// 版本(现在=2)
     /// </summary>
-    public string configVersion
-    {
-        get; set;
-    }
+    public string configVersion { get; set; }
 
     /// <summary>
     /// 远程服务器地址
     /// </summary>
-    public string address
-    {
-        get; set;
-    }
+    public string address { get; set; }
+
     /// <summary>
     /// 远程服务器端口
     /// </summary>
-    public int port
-    {
-        get; set;
-    }
+    public int port { get; set; }
+
     /// <summary>
     /// 远程服务器ID
     /// </summary>
-    public string id
-    {
-        get; set;
-    }
+    public string id { get; set; }
+
     /// <summary>
     /// 远程服务器额外ID
     /// </summary>
-    public int alterId
-    {
-        get; set;
-    }
+    public int alterId { get; set; }
+
     /// <summary>
     /// 本地安全策略
     /// </summary>
-    public string security
-    {
-        get; set;
-    }
+    public string security { get; set; }
+
     /// <summary>
     /// tcp,kcp,ws,h2,quic
     /// </summary>
-    public string network
-    {
-        get; set;
-    }
+    public string network { get; set; }
+
     /// <summary>
     /// 备注或别名
     /// </summary>
-    public string remarks
-    {
-        get; set;
-    }
+    public string remarks { get; set; }
 
     /// <summary>
     /// 伪装类型
     /// </summary>
-    public string headerType
-    {
-        get; set;
-    }
+    public string headerType { get; set; }
 
     /// <summary>
     /// 伪装的域名
     /// </summary>
-    public string requestHost
-    {
-        get; set;
-    }
+    public string requestHost { get; set; }
 
     /// <summary>
     /// ws h2 path
     /// </summary>
-    public string path
-    {
-        get; set;
-    }
+    public string path { get; set; }
 
     /// <summary>
     /// 底层传输安全
     /// </summary>
-    public string streamSecurity
-    {
-        get; set;
-    }
+    public string streamSecurity { get; set; }
 
     /// <summary>
     /// 是否允许不安全连接（用于客户端）
     /// </summary>
-    public string allowInsecure
-    {
-        get; set;
-    }
-
+    public string allowInsecure { get; set; }
 
     /// <summary>
     /// config type(1=normal,2=custom)
     /// </summary>
-    public int configType
-    {
-        get; set;
-    }
+    public int configType { get; set; }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    public string testResult
-    {
-        get; set;
-    }
+    public string testResult { get; set; }
 
     /// <summary>
     /// SubItem id
     /// </summary>
-    public string subid
-    {
-        get; set;
-    }
+    public string subid { get; set; }
+    public bool isSub { get; set; } = true;
 
     /// <summary>
     /// VLESS flow
     /// </summary>
-    public string flow
-    {
-        get; set;
-    }
+    public string flow { get; set; }
+
+    /// <summary>
+    /// tls sni
+    /// </summary>
+    public string sni { get; set; }
+
+    /// <summary>
+    /// tls alpn
+    /// </summary>
+    public string alpn { get; set; } = string.Empty;
+    public int preSocksPort { get; set; }
+    public string fingerprint { get; set; }
+    public bool displayLog { get; set; } = true;
+    public string publicKey { get; set; }
+    public string shortId { get; set; }
+    public string spiderX { get; set; }
 }
 
 [Serializable]
@@ -591,26 +476,17 @@ public class InItem
     /// <summary>
     /// 本地监听端口
     /// </summary>
-    public int localPort
-    {
-        get; set;
-    }
+    public int localPort { get; set; }
 
     /// <summary>
     /// 协议，默认为socks
     /// </summary>
-    public string protocol
-    {
-        get; set;
-    }
+    public string protocol { get; set; }
 
     /// <summary>
     /// 允许udp
     /// </summary>
-    public bool udpEnabled
-    {
-        get; set;
-    }
+    public bool udpEnabled { get; set; }
 
     /// <summary>
     /// 开启流量探测
@@ -621,105 +497,28 @@ public class InItem
 [Serializable]
 public class KcpItem
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public int mtu
-    {
-        get; set;
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    public int tti
-    {
-        get; set;
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    public int uplinkCapacity
-    {
-        get; set;
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    public int downlinkCapacity
-    {
-        get; set;
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    public bool congestion
-    {
-        get; set;
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    public int readBufferSize
-    {
-        get; set;
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    public int writeBufferSize
-    {
-        get; set;
-    }
+    public int mtu { get; set; }
+    public int tti { get; set; }
+    public int uplinkCapacity { get; set; }
+    public int downlinkCapacity { get; set; }
+    public bool congestion { get; set; }
+    public int readBufferSize { get; set; }
+    public int writeBufferSize { get; set; }
 }
-
 
 [Serializable]
 public class SubItem
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public string id
-    {
-        get; set;
-    }
-
-    /// <summary>
-    /// 备注
-    /// </summary>
-    public string remarks
-    {
-        get; set;
-    }
-
-    /// <summary>
-    /// url
-    /// </summary>
-    public string url
-    {
-        get; set;
-    }
-
-    /// <summary>
-    /// enable
-    /// </summary>
+    public string id { get; set; }
+    public string remarks { get; set; }
+    public string url { get; set; }
     public bool enabled { get; set; } = true;
-
     public string protocolFilter { get; set; } = "";
 }
 
 [Serializable]
 public class UIItem
 {
-
-
-    public System.Drawing.Size mainSize
-    {
-        get; set;
-    }
-
-    public Dictionary<string, int> mainLvColWidth
-    {
-        get; set;
-    }
+    public System.Drawing.Size mainSize { get; set; }
+    public Dictionary<string, int> mainLvColWidth { get; set; }
 }

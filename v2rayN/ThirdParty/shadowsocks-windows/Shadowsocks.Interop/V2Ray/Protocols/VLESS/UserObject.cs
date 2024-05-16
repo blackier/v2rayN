@@ -11,6 +11,7 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.VLESS
         public string Email { get; set; }
         public int? Level { get; set; }
         public string Encryption { get; set; }
+        public string Flow { get; set; }
 
         public UserObject(string id = "", string encryption = "none")
         {

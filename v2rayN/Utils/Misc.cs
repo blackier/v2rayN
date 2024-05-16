@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -140,11 +141,13 @@ public class Misc
     {
         try
         {
-            plainText = plainText.TrimEx()
-              .Replace(Environment.NewLine, "")
-              .Replace("\n", "")
-              .Replace("\r", "")
-              .Replace(" ", "");
+            plainText = plainText.Trim()
+                  .Replace(Environment.NewLine, "")
+                  .Replace("\n", "")
+                  .Replace("\r", "")
+                  .Replace('_', '/')
+                  .Replace('-', '+')
+                  .Replace(" ", "");
 
             if (plainText.Length % 4 > 0)
             {
@@ -161,6 +164,45 @@ public class Misc
         }
     }
 
+    public static string UrlEncode(string url)
+    {
+        return Uri.EscapeDataString(url);
+        //return  HttpUtility.UrlEncode(url);
+    }
+
+    public static string UrlDecode(string url)
+    {
+        return Uri.UnescapeDataString(url);
+        //return HttpUtility.UrlDecode(url);
+    }
+
+    public static NameValueCollection ParseQueryString(string query)
+    {
+        var result = new NameValueCollection(StringComparer.OrdinalIgnoreCase);
+        if (IsNullOrEmpty(query))
+        {
+            return result;
+        }
+
+        var parts = query[1..].Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
+        foreach (var part in parts)
+        {
+            var keyValue = part.Split(['=']);
+            if (keyValue.Length != 2)
+            {
+                continue;
+            }
+            var key = Uri.UnescapeDataString(keyValue[0]);
+            var val = Uri.UnescapeDataString(keyValue[1]);
+
+            if (result[key] is null)
+            {
+                result.Add(key, val);
+            }
+        }
+
+        return result;
+    }
     /// <summary>
     /// 转Int
     /// </summary>
@@ -249,15 +291,15 @@ public class Misc
         return $"{string.Format("{0:f1}", result)} {unit}";
     }
 
-    public static void DedupServerList(List<Config.VmessItem> source, out List<Config.VmessItem> result, bool keepOlder)
+    public static void DedupServerList(List<Config.ProfileItem> source, out List<Config.ProfileItem> result, bool keepOlder)
     {
-        List<Config.VmessItem> list = new List<Config.VmessItem>();
+        List<Config.ProfileItem> list = new List<Config.ProfileItem>();
         if (!keepOlder)
         {
             source.Reverse(); // Remove the early items first
         }
 
-        bool _isAdded(Config.VmessItem o, Config.VmessItem n)
+        bool _isAdded(Config.ProfileItem o, Config.ProfileItem n)
         {
             return o.configVersion == n.configVersion &&
                 o.configType == n.configType &&
@@ -273,7 +315,7 @@ public class Misc
                 o.streamSecurity == n.streamSecurity;
             // skip (will remove) different remarks
         }
-        foreach (Config.VmessItem item in source)
+        foreach (Config.ProfileItem item in source)
         {
             if (!list.Exists(i => _isAdded(i, item)))
             {

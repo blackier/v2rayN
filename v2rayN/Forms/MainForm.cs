@@ -183,7 +183,7 @@ namespace v2rayN.Forms
                     lvItem.BackColor = Color.WhiteSmoke;
                 }
 
-                VmessItem item = config.vmess[k];
+                ProfileItem item = config.vmess[k];
 
                 void _addSubItem(ListViewItem i, string name, string text)
                 {
@@ -228,7 +228,7 @@ namespace v2rayN.Forms
             List<ToolStripMenuItem> lst = new List<ToolStripMenuItem>();
             for (int k = 0; k < config.vmess.Count; k++)
             {
-                VmessItem item = config.vmess[k];
+                ProfileItem item = config.vmess[k];
                 string name = item.getSummary();
 
                 ToolStripMenuItem ts = new ToolStripMenuItem(name)
@@ -519,7 +519,7 @@ namespace v2rayN.Forms
 
         private void menuRemoveDuplicateServer_Click(object sender, EventArgs e)
         {
-            Misc.DedupServerList(config.vmess, out List<VmessItem> servers, config.keepOlderDedupl);
+            Misc.DedupServerList(config.vmess, out List<ProfileItem> servers, config.keepOlderDedupl);
             int oldCount = config.vmess.Count;
             int newCount = servers.Count;
             if (servers != null)

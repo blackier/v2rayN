@@ -36,7 +36,7 @@ class v2rayNConfigHandler
                 index = -1,
                 logEnabled = false,
                 loglevel = "warning",
-                vmess = new List<VmessItem>(),
+                vmess = new List<ProfileItem>(),
 
                 //Mux
                 muxEnabled = false,
@@ -153,7 +153,7 @@ class v2rayNConfigHandler
     /// <param name="vmessItem"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    public static int AddServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
+    public static int AddServer(ref Config.V2RayNConfig config, ProfileItem vmessItem, int index)
     {
         vmessItem.configVersion = Global.configVersion;
         vmessItem.configType = (int)EConfigType.Vmess;
@@ -250,7 +250,7 @@ class v2rayNConfigHandler
             return -1;
         }
 
-        VmessItem vmessItem = new VmessItem
+        ProfileItem vmessItem = new ProfileItem
         {
             configVersion = config.vmess[index].configVersion,
             address = config.vmess[index].address,
@@ -336,7 +336,7 @@ class v2rayNConfigHandler
         {
             string url = string.Empty;
 
-            VmessItem vmessItem = config.vmess[index];
+            ProfileItem vmessItem = config.vmess[index];
             if (vmessItem.configType == (int)EConfigType.Vmess)
             {
                 VmessQRCode vmessQRCode = new VmessQRCode
@@ -440,7 +440,7 @@ class v2rayNConfigHandler
                     {
                         return 0;
                     }
-                    VmessItem vmess = Misc.DeepCopy(config.vmess[index]);
+                    ProfileItem vmess = Misc.DeepCopy(config.vmess[index]);
                     config.vmess.RemoveAt(index);
                     config.vmess.Insert(0, vmess);
                     if (index < config.index)
@@ -463,7 +463,7 @@ class v2rayNConfigHandler
                     {
                         return 0;
                     }
-                    VmessItem vmess = Misc.DeepCopy(config.vmess[index]);
+                    ProfileItem vmess = Misc.DeepCopy(config.vmess[index]);
                     config.vmess.RemoveAt(index);
                     config.vmess.Insert(index - 1, vmess);
                     if (index == config.index + 1)
@@ -483,7 +483,7 @@ class v2rayNConfigHandler
                     {
                         return 0;
                     }
-                    VmessItem vmess = Misc.DeepCopy(config.vmess[index]);
+                    ProfileItem vmess = Misc.DeepCopy(config.vmess[index]);
                     config.vmess.RemoveAt(index);
                     config.vmess.Insert(index + 1, vmess);
                     if (index == config.index - 1)
@@ -502,7 +502,7 @@ class v2rayNConfigHandler
                     {
                         return 0;
                     }
-                    VmessItem vmess = Misc.DeepCopy(config.vmess[index]);
+                    ProfileItem vmess = Misc.DeepCopy(config.vmess[index]);
                     config.vmess.RemoveAt(index);
                     config.vmess.Add(vmess);
                     if (index < config.index)
@@ -548,7 +548,7 @@ class v2rayNConfigHandler
             return -1;
         }
 
-        VmessItem vmessItem = new VmessItem
+        ProfileItem vmessItem = new ProfileItem
         {
             address = newFileName,
             configType = (int)EConfigType.Custom,
@@ -574,7 +574,7 @@ class v2rayNConfigHandler
     /// <param name="vmessItem"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    public static int EditCustomServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
+    public static int EditCustomServer(ref Config.V2RayNConfig config, ProfileItem vmessItem, int index)
     {
         //修改
         config.vmess[index] = vmessItem;
@@ -595,7 +595,7 @@ class v2rayNConfigHandler
     /// <param name="vmessItem"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    public static int AddShadowsocksServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
+    public static int AddShadowsocksServer(ref Config.V2RayNConfig config, ProfileItem vmessItem, int index)
     {
         vmessItem.configVersion = Global.configVersion;
         vmessItem.configType = (int)EConfigType.Shadowsocks;
@@ -636,7 +636,7 @@ class v2rayNConfigHandler
     /// <param name="vmessItem"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    public static int AddSocksServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
+    public static int AddSocksServer(ref Config.V2RayNConfig config, ProfileItem vmessItem, int index)
     {
         vmessItem.configVersion = Global.configVersion;
         vmessItem.configType = (int)EConfigType.Socks;
@@ -676,7 +676,7 @@ class v2rayNConfigHandler
     /// <param name="vmessItem"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    public static int AddTrojanServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
+    public static int AddTrojanServer(ref Config.V2RayNConfig config, ProfileItem vmessItem, int index)
     {
         vmessItem.configVersion = Global.configVersion; ;
         vmessItem.configType = (int)EConfigType.Trojan;
@@ -741,7 +741,7 @@ class v2rayNConfigHandler
                 }
                 continue;
             }
-            VmessItem vmessItem = v2rayConfigHandler.ImportFromClipboardConfig(str, out string msg);
+            ProfileItem vmessItem = v2rayConfigHandler.ImportFromClipboardConfig(str, out string msg);
             if (vmessItem == null)
             {
                 continue;
@@ -935,7 +935,7 @@ class v2rayNConfigHandler
     /// <param name="vmessItem"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-    public static int AddVlessServer(ref Config.V2RayNConfig config, VmessItem vmessItem, int index)
+    public static int AddVlessServer(ref Config.V2RayNConfig config, ProfileItem vmessItem, int index)
     {
         vmessItem.configVersion = Global.configVersion;
         vmessItem.configType = (int)EConfigType.VLESS;

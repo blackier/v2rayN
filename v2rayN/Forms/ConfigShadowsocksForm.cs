@@ -23,7 +23,7 @@ namespace v2rayN.Forms
             }
             else
             {
-                vmessItem = new VmessItem();
+                vmessItem = new ProfileItem();
                 ClearServer();
             }
         }

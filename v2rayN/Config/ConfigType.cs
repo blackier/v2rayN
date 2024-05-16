@@ -41,3 +41,15 @@ public enum EServerColName
     totalDown,
     totalUp
 }
+
+public enum ETransport
+{
+    tcp,
+    kcp,
+    ws,
+    httpupgrade,
+    h2,
+    http,
+    quic,
+    grpc
+}
