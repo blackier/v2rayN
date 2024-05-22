@@ -146,11 +146,12 @@ namespace v2rayN.Forms
             // 
             // lvServers
             // 
+            lvServers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             lvServers.ContextMenuStrip = cmsLv;
             lvServers.Dock = System.Windows.Forms.DockStyle.Fill;
             lvServers.FullRowSelect = true;
             lvServers.GridLines = true;
-            lvServers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            lvServers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Clickable;
             lvServers.Items.AddRange(new System.Windows.Forms.ListViewItem[] { listViewItem1 });
             lvServers.Location = new System.Drawing.Point(0, 0);
             lvServers.Name = "lvServers";

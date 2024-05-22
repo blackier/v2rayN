@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Media.Media3D;
 using ImageGlass.Base;
 using ImageGlass.Base.WinApi;
 using v2rayN.Config;
@@ -197,11 +198,8 @@ namespace v2rayN.Forms
         private void InitServersView()
         {
             lvServers.BeginUpdate();
-            if (lvServers.Items.Count > 0)
-            {
-                lvServers.Items.Clear();
-                lvServers.HeaderStyle = ColumnHeaderStyle.Clickable;
-            }
+            lvServers.SmallImageList = new ImageList() { ImageSize = new Size(1, 24) };
+            lvServers.Items.Clear();
 
             lvServers.Columns.Add("", 30);
             lvServers.Columns.Add(StringsRes.I18N("LvServiceType"), 80);
@@ -358,29 +356,23 @@ namespace v2rayN.Forms
         private void lvServers_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             if (e.Column < 0)
-            {
                 return;
-            }
 
             try
             {
                 var tag = lvServers.Columns[e.Column].Tag?.ToString();
                 bool asc = Misc.IsNullOrEmpty(tag) ? true : !Convert.ToBoolean(tag);
                 if (v2rayNConfigHandler.SortServers(ref config, (EServerColName)e.Column, asc) != 0)
-                {
                     return;
-                }
+
                 lvServers.Columns[e.Column].Tag = Convert.ToString(asc);
+                lvServers.SortColumnIndex = e.Column > 0 ? e.Column : -1;
+                lvServers.SortColumnOrder = asc ? SortOrder.Ascending : SortOrder.Descending;
                 RefreshServers();
             }
             catch (Exception ex)
             {
                 Log.SaveLog(ex.Message, ex);
-            }
-
-            if (e.Column < 0)
-            {
-                return;
             }
         }
         #endregion
