@@ -289,23 +289,17 @@ namespace v2rayN.Forms
         /// </summary>
         private void RefreshServersMenu()
         {
-            menuServers.DropDownItems.Clear();
-
-            List<ToolStripMenuItem> lst = new List<ToolStripMenuItem>();
+            var dropDownMenu = new ImageGlass.UI.ModernMenu(components) { Theme = _theme };
             for (int k = 0; k < config.vmess.Count; k++)
             {
-                ProfileItem item = config.vmess[k];
-                string name = item.getSummary();
-
-                ToolStripMenuItem ts = new ToolStripMenuItem(name) { Tag = k };
-                if (config.index.Equals(k))
-                {
-                    ts.Checked = true;
-                }
+                ToolStripMenuItem ts = new ToolStripMenuItem(config.vmess[k].getSummary()) { Tag = k };
                 ts.Click += new EventHandler(ts_Click);
-                lst.Add(ts);
+                if (config.index.Equals(k))
+                    ts.Checked = true;
+
+                dropDownMenu.Items.Add(ts);
             }
-            menuServers.DropDownItems.AddRange(lst.ToArray());
+            //menuServers.DropDown = dropDownMenu;
         }
 
         private void ts_Click(object sender, EventArgs e)
