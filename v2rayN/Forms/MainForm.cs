@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using ImageGlass.Base;
+using ImageGlass.Base.WinApi;
 using v2rayN.Config;
 using v2rayN.Extensions;
 using v2rayN.Handlers;
@@ -17,9 +19,42 @@ namespace v2rayN.Forms
         private List<int> lvSelecteds = new List<int>();
         private StatisticsHandler statistics = null;
 
+        private ImageGlass.UI.IgTheme _theme { get; set; }
+
         public MainForm()
         {
             InitializeComponent();
+
+            // Kobe-Light
+            _theme = new ImageGlass.UI.IgTheme();
+            _theme.Settings.IsDarkMode = false;
+            _theme.Colors.ToolbarBgColor = ThemeColor("#F5F6F700");
+            _theme.Colors.ToolbarTextColor = ThemeColor("#000");
+            _theme.Colors.ToolbarItemHoverColor = ThemeColor("accent:70");
+            _theme.Colors.ToolbarItemActiveColor = ThemeColor("accent:120");
+            _theme.Colors.ToolbarItemSelectedColor = ThemeColor("accent:100");
+            _theme.Colors.MenuBgColor = ThemeColor("#F5F6F7");
+            _theme.Colors.MenuBgHoverColor = ThemeColor("accent:120");
+            _theme.Colors.MenuTextColor = ThemeColor("#000");
+            _theme.Colors.MenuTextHoverColor = ThemeColor("#000");
+
+            cmsLv.Theme = _theme;
+            cmsMain.Theme = _theme;
+
+            var tsbSubDropDownMenu = new ImageGlass.UI.ModernMenu(components) { Theme = _theme };
+            while (tsbSub.DropDownItems.Count > 0)
+                tsbSubDropDownMenu.Items.Add(tsbSub.DropDownItems[0]);
+            tsbSub.DropDown = tsbSubDropDownMenu;
+
+            var tsbCheckUpdateDropDownMenu = new ImageGlass.UI.ModernMenu(components) { Theme = _theme };
+            while (tsbCheckUpdate.DropDownItems.Count > 0)
+                tsbCheckUpdateDropDownMenu.Items.Add(tsbCheckUpdate.DropDownItems[0]);
+            tsbCheckUpdate.DropDown = tsbCheckUpdateDropDownMenu;
+
+            var tsbHelpDropDownMenu = new ImageGlass.UI.ModernMenu(components) { Theme = _theme };
+            while (tsbHelp.DropDownItems.Count > 0)
+                tsbHelpDropDownMenu.Items.Add(tsbHelp.DropDownItems[0]);
+            tsbHelp.DropDown = tsbHelpDropDownMenu;
 
             Text = Misc.GetVersion();
 
@@ -45,6 +80,31 @@ namespace v2rayN.Forms
 
             InitServersView();
             RestoreUI();
+        }
+
+        public Color ThemeColor(string? value)
+        {
+            Color colorItem;
+            var systemAccentColor = WinColorsApi.GetAccentColor(true);
+            if (value.StartsWith(Const.THEME_SYSTEM_ACCENT_COLOR, StringComparison.InvariantCultureIgnoreCase))
+            {
+                // example: accent:180
+                var valueArr = value.Split(':', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                var accentAlpha = 255;
+
+                // adjust accent color alpha
+                if (valueArr.Length > 1)
+                {
+                    _ = int.TryParse(valueArr[1], out accentAlpha);
+                }
+
+                colorItem = systemAccentColor.Blend(Color.White, 0.7f, accentAlpha);
+            }
+            else
+            {
+                colorItem = BHelper.ColorFromHex(value);
+            }
+            return colorItem;
         }
 
         private void MainForm_VisibleChanged(object sender, EventArgs e)

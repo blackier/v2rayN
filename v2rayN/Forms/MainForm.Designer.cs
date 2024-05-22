@@ -33,9 +33,9 @@ namespace v2rayN.Forms
             components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] { "" }, -1, System.Drawing.SystemColors.WindowText, System.Drawing.SystemColors.Window, new System.Drawing.Font("Microsoft YaHei UI", 9F));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            scMain = new System.Windows.Forms.SplitContainer();
+            scMain = new ImageGlass.UI.ModernSplitContainer();
             lvServers = new ListViewControl();
-            cmsLv = new System.Windows.Forms.ContextMenuStrip(components);
+            cmsLv = new ImageGlass.UI.ModernMenu(components);
             menuAddVmessServer = new System.Windows.Forms.ToolStripMenuItem();
             menuAddVlessServer = new System.Windows.Forms.ToolStripMenuItem();
             menuAddShadowsocksServer = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,7 +66,7 @@ namespace v2rayN.Forms
             tsbServer = new System.Windows.Forms.ToolStripDropDownButton();
             qrCodeControl = new QRCodeControl();
             notifyMain = new System.Windows.Forms.NotifyIcon(components);
-            cmsMain = new System.Windows.Forms.ContextMenuStrip(components);
+            cmsMain = new ImageGlass.UI.ModernMenu(components);
             menuSysAgentMode = new System.Windows.Forms.ToolStripMenuItem();
             menuCloseHttp = new System.Windows.Forms.ToolStripMenuItem();
             menuOpenHttp = new System.Windows.Forms.ToolStripMenuItem();
@@ -170,6 +170,7 @@ namespace v2rayN.Forms
             cmsLv.ImageScalingSize = new System.Drawing.Size(20, 20);
             cmsLv.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuAddVmessServer, menuAddVlessServer, menuAddShadowsocksServer, menuAddSocksServer, menuAddTrojanServer, menuAddServers, menuScanScreen, toolStripSeparator1, menuRemoveServer, menuRemoveDuplicateServer, menuCopyServer, menuSetDefaultServer, toolStripSeparator3, menuMoveTop, menuMoveUp, menuMoveDown, menuMoveBottom, menuSelectAll, toolStripSeparator9, menuPingServer, menuTcpingServer, menuRealPingServer, menuSpeedServer, tsbTestMe, toolStripSeparator6, menuExport2ShareUrl, menuExport2SubContent });
             cmsLv.Name = "cmsLv";
+            cmsLv.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             cmsLv.Size = new System.Drawing.Size(250, 534);
             // 
             // menuAddVmessServer
@@ -211,14 +212,16 @@ namespace v2rayN.Forms
             // 
             menuAddServers.Name = "menuAddServers";
             menuAddServers.Size = new System.Drawing.Size(249, 22);
-            menuAddServers.Text = "从剪贴板导入bulk URL (Ctrl+V)";
+            menuAddServers.Text = "从剪贴板导入bulk URL";
+            menuAddServers.ShortcutKeyDisplayString = "Ctrl+V";
             menuAddServers.Click += menuAddServers_Click;
             // 
             // menuScanScreen
             // 
             menuScanScreen.Name = "menuScanScreen";
             menuScanScreen.Size = new System.Drawing.Size(249, 22);
-            menuScanScreen.Text = "从屏幕扫描QR code (Ctrl+S)";
+            menuScanScreen.Text = "从屏幕扫描QR code";
+            menuScanScreen.ShortcutKeyDisplayString = "Ctrl+S";
             menuScanScreen.Click += menuScanScreen_Click;
             // 
             // toolStripSeparator1
@@ -230,7 +233,8 @@ namespace v2rayN.Forms
             // 
             menuRemoveServer.Name = "menuRemoveServer";
             menuRemoveServer.Size = new System.Drawing.Size(249, 22);
-            menuRemoveServer.Text = "删除服务器 (Delete)";
+            menuRemoveServer.Text = "删除服务器";
+            menuRemoveServer.ShortcutKeyDisplayString = "Delete";
             menuRemoveServer.Click += menuRemoveServer_Click;
             // 
             // menuRemoveDuplicateServer
@@ -251,7 +255,8 @@ namespace v2rayN.Forms
             // 
             menuSetDefaultServer.Name = "menuSetDefaultServer";
             menuSetDefaultServer.Size = new System.Drawing.Size(249, 22);
-            menuSetDefaultServer.Text = "启动服务器 (Enter)";
+            menuSetDefaultServer.Text = "启动服务器";
+            menuSetDefaultServer.ShortcutKeyDisplayString = "Enter";
             menuSetDefaultServer.Click += menuSetDefaultServer_Click;
             // 
             // toolStripSeparator3
@@ -263,35 +268,40 @@ namespace v2rayN.Forms
             // 
             menuMoveTop.Name = "menuMoveTop";
             menuMoveTop.Size = new System.Drawing.Size(249, 22);
-            menuMoveTop.Text = "移到顶部 (T)";
+            menuMoveTop.Text = "移到顶部";
+            menuMoveTop.ShortcutKeyDisplayString = "T";
             menuMoveTop.Click += menuMoveTop_Click;
             // 
             // menuMoveUp
             // 
             menuMoveUp.Name = "menuMoveUp";
             menuMoveUp.Size = new System.Drawing.Size(249, 22);
-            menuMoveUp.Text = "向上移 (U)";
+            menuMoveUp.Text = "向上移";
+            menuMoveUp.ShortcutKeyDisplayString = "U";
             menuMoveUp.Click += menuMoveUp_Click;
             // 
             // menuMoveDown
             // 
             menuMoveDown.Name = "menuMoveDown";
             menuMoveDown.Size = new System.Drawing.Size(249, 22);
-            menuMoveDown.Text = "向下移 (D)";
+            menuMoveDown.Text = "向下移";
+            menuMoveDown.ShortcutKeyDisplayString = "D";
             menuMoveDown.Click += menuMoveDown_Click;
             // 
             // menuMoveBottom
             // 
             menuMoveBottom.Name = "menuMoveBottom";
             menuMoveBottom.Size = new System.Drawing.Size(249, 22);
-            menuMoveBottom.Text = "移到底部 (B)";
+            menuMoveBottom.Text = "移到底部";
+            menuMoveBottom.ShortcutKeyDisplayString = "B";
             menuMoveBottom.Click += menuMoveBottom_Click;
             // 
             // menuSelectAll
             // 
             menuSelectAll.Name = "menuSelectAll";
             menuSelectAll.Size = new System.Drawing.Size(249, 22);
-            menuSelectAll.Text = "选择全部 (Ctrl+A)";
+            menuSelectAll.Text = "选择全部";
+            menuSelectAll.ShortcutKeyDisplayString = "Ctrl+A";
             menuSelectAll.Click += menuSelectAll_Click;
             // 
             // toolStripSeparator9
@@ -303,28 +313,32 @@ namespace v2rayN.Forms
             // 
             menuPingServer.Name = "menuPingServer";
             menuPingServer.Size = new System.Drawing.Size(249, 22);
-            menuPingServer.Text = "测试服务器ping值 (Ctrl+P)";
+            menuPingServer.Text = "测试服务器ping值";
+            menuPingServer.ShortcutKeyDisplayString = "Ctrl+P";
             menuPingServer.Click += menuPingServer_Click;
             // 
             // menuTcpingServer
             // 
             menuTcpingServer.Name = "menuTcpingServer";
             menuTcpingServer.Size = new System.Drawing.Size(249, 22);
-            menuTcpingServer.Text = "测试服务器tcp延迟 (Ctrl+O)";
+            menuTcpingServer.Text = "测试服务器tcp延迟";
+            menuTcpingServer.ShortcutKeyDisplayString = "Ctrl+O";
             menuTcpingServer.Click += menuTcpingServer_Click;
             // 
             // menuRealPingServer
             // 
             menuRealPingServer.Name = "menuRealPingServer";
             menuRealPingServer.Size = new System.Drawing.Size(249, 22);
-            menuRealPingServer.Text = "测试服务器真延迟 (Ctrl+R)";
+            menuRealPingServer.Text = "测试服务器真延迟";
+            menuRealPingServer.ShortcutKeyDisplayString = "Ctrl+R";
             menuRealPingServer.Click += menuRealPingServer_Click;
             // 
             // menuSpeedServer
             // 
             menuSpeedServer.Name = "menuSpeedServer";
             menuSpeedServer.Size = new System.Drawing.Size(249, 22);
-            menuSpeedServer.Text = "测试服务器下载速度 (Ctrl+T)";
+            menuSpeedServer.Text = "测试服务器下载速度";
+            menuSpeedServer.ShortcutKeyDisplayString = "Ctrl+T";
             menuSpeedServer.Click += menuSpeedServer_Click;
             // 
             // tsbTestMe
@@ -343,7 +357,8 @@ namespace v2rayN.Forms
             // 
             menuExport2ShareUrl.Name = "menuExport2ShareUrl";
             menuExport2ShareUrl.Size = new System.Drawing.Size(249, 22);
-            menuExport2ShareUrl.Text = "导出分享链接到剪贴板 (Ctrl+C)";
+            menuExport2ShareUrl.Text = "导出分享链接到剪贴板";
+            menuExport2ShareUrl.ShortcutKeyDisplayString = "Ctrl+C";
             menuExport2ShareUrl.Click += menuExport2ShareUrl_Click;
             // 
             // menuExport2SubContent
@@ -384,12 +399,9 @@ namespace v2rayN.Forms
             // 
             cmsMain.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             cmsMain.ImageScalingSize = new System.Drawing.Size(20, 20);
-            cmsMain.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             cmsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuSysAgentMode, menuServers, menuAddServers2, menuScanScreen2, menuUpdateSubscriptions, toolStripSeparator2, menuExit });
             cmsMain.Name = "contextMenuStrip1";
             cmsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            cmsMain.ShowCheckMargin = true;
-            cmsMain.ShowImageMargin = false;
             cmsMain.Size = new System.Drawing.Size(201, 142);
             // 
             // menuSysAgentMode
@@ -786,12 +798,12 @@ namespace v2rayN.Forms
         private System.Windows.Forms.TextBox txtMsgBox;
         private ListViewControl lvServers;
         private System.Windows.Forms.NotifyIcon notifyMain;
-        private System.Windows.Forms.ContextMenuStrip cmsMain;
+        private ImageGlass.UI.ModernMenu cmsMain;
         private System.Windows.Forms.ToolStripMenuItem menuExit;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem menuServers;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ContextMenuStrip cmsLv;
+        private ImageGlass.UI.ModernMenu cmsLv;
         private System.Windows.Forms.ToolStripMenuItem menuAddVmessServer;
         private System.Windows.Forms.ToolStripMenuItem menuRemoveServer;
         private System.Windows.Forms.ToolStripMenuItem menuSetDefaultServer;
@@ -815,7 +827,7 @@ namespace v2rayN.Forms
         private System.Windows.Forms.ToolStripMenuItem menuCloseHttp;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuAddShadowsocksServer;
-        private System.Windows.Forms.SplitContainer scMain;
+        private ImageGlass.UI.ModernSplitContainer scMain;
         private QRCodeControl qrCodeControl;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripDropDownButton tsbCheckUpdate;
