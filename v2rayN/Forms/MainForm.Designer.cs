@@ -33,7 +33,7 @@ namespace v2rayN.Forms
             components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] { "" }, -1, System.Drawing.SystemColors.WindowText, System.Drawing.SystemColors.Window, new System.Drawing.Font("Microsoft YaHei UI", 9F));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            scMain = new ImageGlass.UI.ModernSplitContainer();
+            scMain = new System.Windows.Forms.SplitContainer();
             lvServers = new ListViewControl();
             cmsLv = new ImageGlass.UI.ModernMenu(components);
             menuAddVmessServer = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,7 +152,6 @@ namespace v2rayN.Forms
             lvServers.FullRowSelect = true;
             lvServers.GridLines = true;
             lvServers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Clickable;
-            lvServers.Items.AddRange(new System.Windows.Forms.ListViewItem[] { listViewItem1 });
             lvServers.Location = new System.Drawing.Point(0, 0);
             lvServers.Name = "lvServers";
             lvServers.Size = new System.Drawing.Size(814, 382);
@@ -828,7 +827,7 @@ namespace v2rayN.Forms
         private System.Windows.Forms.ToolStripMenuItem menuCloseHttp;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuAddShadowsocksServer;
-        private ImageGlass.UI.ModernSplitContainer scMain;
+        private System.Windows.Forms.SplitContainer scMain;
         private QRCodeControl qrCodeControl;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripDropDownButton tsbCheckUpdate;
