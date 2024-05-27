@@ -23,6 +23,8 @@ namespace Shadowsocks.Interop.V2Ray.Inbound
         /// </summary>
         public bool MetadataOnly { get; set; }
 
+        public bool RouteOnly { get; set; }
+
         public SniffingObject()
         {
             Enabled = true;

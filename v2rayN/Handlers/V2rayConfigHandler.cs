@@ -137,6 +137,7 @@ class v2rayConfigHandler
             socksInbound.Listen = Global.Loopback;
         // 流量探测
         socksInbound.Sniffing.Enabled = config.inbound[0].sniffingEnabled;
+        socksInbound.Sniffing.RouteOnly = config.inbound[0].sniffingEnabled;
 
         // http proxy
         var httpInbound = V2Ray.InboundObject.DefaultLocalHttp;
@@ -144,6 +145,7 @@ class v2rayConfigHandler
         httpInbound.Tag = "httpProxy";
         httpInbound.Port = config.inbound[0].localPort + 1;
         httpInbound.Sniffing.Enabled = config.inbound[0].sniffingEnabled;
+        httpInbound.Sniffing.RouteOnly = config.inbound[0].sniffingEnabled;
 
         v2rayConfig.Inbounds.Add(socksInbound);
         v2rayConfig.Inbounds.Add(httpInbound);
