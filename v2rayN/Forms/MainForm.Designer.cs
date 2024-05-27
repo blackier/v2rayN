@@ -47,6 +47,7 @@ namespace v2rayN.Forms
             menuRemoveServer = new System.Windows.Forms.ToolStripMenuItem();
             menuRemoveDuplicateServer = new System.Windows.Forms.ToolStripMenuItem();
             menuCopyServer = new System.Windows.Forms.ToolStripMenuItem();
+            menuEditServer = new System.Windows.Forms.ToolStripMenuItem();
             menuSetDefaultServer = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             menuMoveTop = new System.Windows.Forms.ToolStripMenuItem();
@@ -161,14 +162,14 @@ namespace v2rayN.Forms
             lvServers.ColumnClick += lvServers_ColumnClick;
             lvServers.SelectedIndexChanged += lvServers_SelectedIndexChanged;
             lvServers.Click += lvServers_Click;
-            lvServers.DoubleClick += lvServers_DoubleClick;
+            lvServers.DoubleClick += menuSetDefaultServer_Click;
             lvServers.KeyDown += lvServers_KeyDown;
             // 
             // cmsLv
             // 
             cmsLv.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             cmsLv.ImageScalingSize = new System.Drawing.Size(20, 20);
-            cmsLv.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuAddVmessServer, menuAddVlessServer, menuAddShadowsocksServer, menuAddSocksServer, menuAddTrojanServer, menuAddServers, menuScanScreen, toolStripSeparator1, menuRemoveServer, menuRemoveDuplicateServer, menuCopyServer, menuSetDefaultServer, toolStripSeparator3, menuMoveTop, menuMoveUp, menuMoveDown, menuMoveBottom, menuSelectAll, toolStripSeparator9, menuPingServer, menuTcpingServer, menuRealPingServer, menuSpeedServer, tsbTestMe, toolStripSeparator6, menuExport2ShareUrl, menuExport2SubContent });
+            cmsLv.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuAddVmessServer, menuAddVlessServer, menuAddShadowsocksServer, menuAddSocksServer, menuAddTrojanServer, menuAddServers, menuScanScreen, toolStripSeparator1, menuRemoveServer, menuRemoveDuplicateServer, menuCopyServer, menuEditServer, menuSetDefaultServer, toolStripSeparator3, menuMoveTop, menuMoveUp, menuMoveDown, menuMoveBottom, menuSelectAll, toolStripSeparator9, menuPingServer, menuTcpingServer, menuRealPingServer, menuSpeedServer, tsbTestMe, toolStripSeparator6, menuExport2ShareUrl, menuExport2SubContent });
             cmsLv.Name = "cmsLv";
             cmsLv.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             cmsLv.Size = new System.Drawing.Size(250, 534);
@@ -250,6 +251,13 @@ namespace v2rayN.Forms
             menuCopyServer.Size = new System.Drawing.Size(249, 22);
             menuCopyServer.Text = "克隆服务器";
             menuCopyServer.Click += menuCopyServer_Click;
+            // 
+            // menuEditServer
+            // 
+            menuEditServer.Name = "menuEditServer";
+            menuEditServer.Size = new System.Drawing.Size(249, 22);
+            menuEditServer.Text = "编辑服务器";
+            menuEditServer.Click += lvServers_DoubleClick;
             // 
             // menuSetDefaultServer
             // 
@@ -806,6 +814,7 @@ namespace v2rayN.Forms
         private ImageGlass.UI.ModernMenu cmsLv;
         private System.Windows.Forms.ToolStripMenuItem menuAddVmessServer;
         private System.Windows.Forms.ToolStripMenuItem menuRemoveServer;
+        private System.Windows.Forms.ToolStripMenuItem menuEditServer;
         private System.Windows.Forms.ToolStripMenuItem menuSetDefaultServer;
         private System.Windows.Forms.ToolStripMenuItem menuCopyServer;
         private System.Windows.Forms.ToolStripMenuItem menuPingServer;

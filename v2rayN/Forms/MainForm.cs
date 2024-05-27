@@ -282,6 +282,8 @@ namespace v2rayN.Forms
                 lvServers.Items.Add(lvItem);
             }
             lvServers.EndUpdate();
+            if (config.index < config.vmess.Count)
+                lvServers.EnsureVisible(config.index);
         }
 
         /// <summary>
