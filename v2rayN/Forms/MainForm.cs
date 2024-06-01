@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -1048,13 +1048,24 @@ namespace v2rayN.Forms
             );
         }
 
-        private void UpdateStatisticsHandler(ulong up, ulong down, List<ServerStatItem> statistics)
+        private void UpdateStatisticsHandler(
+            ulong proxyUp,
+            ulong proxyDown,
+            ulong directUp,
+            ulong directDown,
+            List<ServerStatItem> statistics
+        )
         {
             try
             {
-                up /= (ulong)(config.statisticsFreshRate / 1000f);
-                down /= (ulong)(config.statisticsFreshRate / 1000f);
-                toolSslServerSpeed.Text = string.Format("{0}/s↑ | {1}/s↓", Misc.HumanFy(up), Misc.HumanFy(down));
+                directUp /= (ulong)(config.statisticsFreshRate / 1000f);
+                directDown /= (ulong)(config.statisticsFreshRate / 1000f);
+                proxyUp /= (ulong)(config.statisticsFreshRate / 1000f);
+                proxyDown /= (ulong)(config.statisticsFreshRate / 1000f);
+
+                toolSslServerSpeed.Text = string.Format(
+                    $"Direct:{Misc.HumanFy(directUp),9}/s↑ | {Misc.HumanFy(directDown) + "/s↓",-13} Proxy:{Misc.HumanFy(proxyUp),9}/s↑ | {Misc.HumanFy(proxyDown) + "/s↓",-13}"
+                );
 
                 List<string[]> datas = new List<string[]>();
                 for (int i = 0; i < config.vmess.Count; i++)

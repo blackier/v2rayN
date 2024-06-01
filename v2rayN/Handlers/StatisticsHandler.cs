@@ -18,7 +18,14 @@ class StatisticsHandler
     private bool _exitFlag;
     private Task _loopTask;
 
-    private Action<ulong, ulong, List<ServerStatItem>> _updateFunc;
+    public delegate void OnStatisticsUpdated(
+        ulong proxyUp,
+        ulong proxyDown,
+        ulong directUp,
+        ulong directDown,
+        List<ServerStatItem> items
+    );
+    private OnStatisticsUpdated _onStatisticUpdated;
 
     public bool Enable { get; set; }
 
@@ -26,10 +33,10 @@ class StatisticsHandler
 
     public List<ServerStatItem> Statistic => _serverStatistics.server;
 
-    public StatisticsHandler(V2RayNConfig config, Action<ulong, ulong, List<ServerStatItem>> update)
+    public StatisticsHandler(V2RayNConfig config, OnStatisticsUpdated update)
     {
         _config = config;
-        _updateFunc = update;
+        _onStatisticUpdated = update;
         _exitFlag = false;
         _client = new StatsServiceClient($"{Global.Loopback}:{Global.v2rayApiPort}");
 
@@ -71,16 +78,22 @@ class StatisticsHandler
                     string itemId = _config.getItemId();
                     ServerStatItem serverStatItem = GetServerStatItem(itemId);
 
-                    ParseOutput(resStat, out ulong up, out ulong down);
+                    ParseOutput(
+                        resStat,
+                        out ulong proxyUp,
+                        out ulong proxyDown,
+                        out ulong directUp,
+                        out ulong directDown
+                    );
 
-                    serverStatItem.todayUp += up;
-                    serverStatItem.todayDown += down;
-                    serverStatItem.totalUp += up;
-                    serverStatItem.totalDown += down;
+                    serverStatItem.todayUp += proxyUp;
+                    serverStatItem.todayDown += proxyDown;
+                    serverStatItem.totalUp += proxyUp;
+                    serverStatItem.totalDown += proxyDown;
 
                     if (UpdateUI)
                     {
-                        _updateFunc(up, down, new List<ServerStatItem> { serverStatItem });
+                        _onStatisticUpdated(proxyUp, proxyDown, directUp, directDown, new List<ServerStatItem> { serverStatItem });
                     }
                 }
                 Thread.Sleep(_config.statisticsFreshRate);
@@ -169,10 +182,18 @@ class StatisticsHandler
         return Statistic[cur];
     }
 
-    private void ParseOutput(Google.Protobuf.Collections.RepeatedField<Stat> source, out ulong up, out ulong down)
+    private void ParseOutput(
+        Google.Protobuf.Collections.RepeatedField<Stat> source,
+        out ulong proxyUp,
+        out ulong proxyDown,
+        out ulong directUp,
+        out ulong directDown
+    )
     {
-        up = 0;
-        down = 0;
+        proxyUp = 0;
+        proxyDown = 0;
+        directUp = 0;
+        directDown = 0;
         try
         {
             foreach (Stat stat in source)
@@ -191,11 +212,22 @@ class StatisticsHandler
                 {
                     if (type == "uplink")
                     {
-                        up = (ulong)value;
+                        proxyUp = (ulong)value;
                     }
                     else if (type == "downlink")
                     {
-                        down = (ulong)value;
+                        proxyDown = (ulong)value;
+                    }
+                }
+                else if (name == Global.directTag)
+                {
+                    if (type == "uplink")
+                    {
+                        directUp = (ulong)value;
+                    }
+                    else if (type == "downlink")
+                    {
+                        directDown = (ulong)value;
                     }
                 }
             }

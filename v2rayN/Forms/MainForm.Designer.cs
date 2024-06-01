@@ -518,7 +518,7 @@ namespace v2rayN.Forms
             // 
             // ssMain
             // 
-            ssMain.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            ssMain.Font = new System.Drawing.Font("Consolas", 9F);
             ssMain.ImageScalingSize = new System.Drawing.Size(24, 24);
             ssMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolSslSocksPortLab, toolSslSocksPort, toolSslBlank1, toolSslHttpPortLab, toolSslHttpPort, toolSslBlank3, toolSslServerSpeed, toolSslBlank4 });
             ssMain.Location = new System.Drawing.Point(3, 219);
@@ -564,13 +564,9 @@ namespace v2rayN.Forms
             // 
             // toolSslServerSpeed
             // 
-            toolSslServerSpeed.AutoSize = false;
-            toolSslServerSpeed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             toolSslServerSpeed.Name = "toolSslServerSpeed";
-            toolSslServerSpeed.RightToLeft = System.Windows.Forms.RightToLeft.No;
             toolSslServerSpeed.Size = new System.Drawing.Size(220, 23);
             toolSslServerSpeed.Text = "SPEED Disabled";
-            toolSslServerSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // toolSslBlank4
             // 
