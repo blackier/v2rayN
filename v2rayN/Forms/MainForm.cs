@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -226,6 +226,16 @@ namespace v2rayN.Forms
         /// </summary>
         private void RefreshServersView()
         {
+            int bottomItemIndex = lvServers.TopItem?.Index ?? 0;
+            for (; bottomItemIndex < lvServers.Items.Count; bottomItemIndex++)
+            {
+                if (!lvServers.Items[bottomItemIndex].Bounds.IntersectsWith(lvServers.ClientRectangle))
+                {
+                    bottomItemIndex -= 2;
+                    break;
+                }
+            }
+
             lvServers.BeginUpdate();
             lvServers.Items.Clear();
 
@@ -282,7 +292,10 @@ namespace v2rayN.Forms
                 lvServers.Items.Add(lvItem);
             }
             lvServers.EndUpdate();
-            if (config.index < config.vmess.Count)
+
+            if (bottomItemIndex < lvServers.Items.Count)
+                lvServers.EnsureVisible(bottomItemIndex);
+            else if (config.index < lvServers.Items.Count)
                 lvServers.EnsureVisible(config.index);
         }
 
