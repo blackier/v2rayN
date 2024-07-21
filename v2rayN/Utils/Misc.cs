@@ -404,6 +404,20 @@ public class Misc
         return IsMatch(ip, pattern);
     }
 
+    public static bool IsIpv6(string ip)
+    {
+        if (IPAddress.TryParse(ip, out IPAddress? address))
+        {
+            return address.AddressFamily switch
+            {
+                AddressFamily.InterNetwork => false,
+                AddressFamily.InterNetworkV6 => true,
+                _ => false,
+            };
+        }
+        return false;
+    }
+
     /// <summary>
     /// 验证Domain地址是否合法
     /// </summary>
@@ -698,24 +712,38 @@ public class Misc
     /// 取得GUID
     /// </summary>
     /// <returns></returns>
-    public static string GetGUID()
+    public static string GetGUID(bool full = true)
     {
         try
         {
-            return Guid.NewGuid().ToString("D");
+            if (full)
+            {
+                return Guid.NewGuid().ToString("D");
+            }
+            else
+            {
+                return BitConverter.ToInt64(Guid.NewGuid().ToByteArray(), 0).ToString();
+            }
         }
-        catch { }
+        catch (Exception ex) { }
         return string.Empty;
     }
 
     // return path to store temporary files
-    public static string GetTempPath()
+    public static string GetTempPath(string filename = "")
     {
-        string _tempPath = Path.Combine(StartupPath(), "v2ray_win_temp");
+        string _tempPath = Path.Combine(StartupPath(), "guiTemps");
         if (!Directory.Exists(_tempPath))
         {
             Directory.CreateDirectory(_tempPath);
         }
-        return _tempPath;
+        if (Misc.IsNullOrEmpty(filename))
+        {
+            return _tempPath;
+        }
+        else
+        {
+            return Path.Combine(_tempPath, filename);
+        }
     }
 }

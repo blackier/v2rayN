@@ -208,7 +208,7 @@ public class V2RayNConfig
     {
         if (node == null || Misc.IsNullOrEmpty(node.allowInsecure))
             return defAllowInsecure;
-        return Convert.ToBoolean(vmess[index].allowInsecure);
+        return Convert.ToBoolean(node.allowInsecure);
     }
 
     public int GetLocalPort(string protocol)
@@ -228,11 +228,6 @@ public class V2RayNConfig
             }
         }
         return localPort;
-    }
-
-    public int configType()
-    {
-        return node?.configType ?? 0;
     }
 
     public string getSummary()
@@ -280,7 +275,7 @@ public class ProfileItem
     public ProfileItem()
     {
         configVersion = Global.configVersion;
-        configType = (int)EConfigType.Vmess;
+        configType = EConfigType.VMess;
         address = string.Empty;
         port = 0;
         id = string.Empty;
@@ -317,19 +312,19 @@ public class ProfileItem
         }
         switch (configType)
         {
-            case (int)EConfigType.Vmess:
+            case EConfigType.VMess:
                 summary += string.Format("{0}({1}:{2})", remarks, addr, port);
                 break;
-            case (int)EConfigType.Shadowsocks:
+            case EConfigType.Shadowsocks:
                 summary += string.Format("{0}({1}:{2})", remarks, addr, port);
                 break;
-            case (int)EConfigType.Socks:
+            case EConfigType.Socks:
                 summary += string.Format("{0}({1}:{2})", remarks, addr, port);
                 break;
-            case (int)EConfigType.VLESS:
+            case EConfigType.VLESS:
                 summary += string.Format("{0}({1}:{2})", remarks, addr, port);
                 break;
-            case (int)EConfigType.Trojan:
+            case EConfigType.Trojan:
                 summary += string.Format("{0}({1}:{2})", remarks, addr, port);
                 break;
             default:
@@ -435,7 +430,7 @@ public class ProfileItem
     /// <summary>
     /// config type(1=normal,2=custom)
     /// </summary>
-    public int configType { get; set; }
+    public EConfigType configType { get; set; }
 
     /// <summary>
     ///

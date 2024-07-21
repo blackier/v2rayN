@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using v2rayN.Config;
 using v2rayN.Extensions;
+using v2rayN.Handlers.Fmt;
 
 namespace v2rayN.Handlers;
 
@@ -152,7 +153,7 @@ class v2rayNConfigHandler
     public static int AddServer(ref Config.V2RayNConfig config, ProfileItem vmessItem, int index)
     {
         vmessItem.configVersion = Global.configVersion;
-        vmessItem.configType = (int)EConfigType.Vmess;
+        vmessItem.configType = EConfigType.VMess;
 
         vmessItem.address = vmessItem.address.TrimEx();
         vmessItem.id = vmessItem.id.TrimEx();
@@ -332,7 +333,7 @@ class v2rayNConfigHandler
             string url = string.Empty;
 
             ProfileItem vmessItem = config.vmess[index];
-            if (vmessItem.configType == (int)EConfigType.Vmess)
+            if (vmessItem.configType == EConfigType.VMess)
             {
                 VmessQRCode vmessQRCode = new VmessQRCode
                 {
@@ -353,7 +354,7 @@ class v2rayNConfigHandler
                 url = Misc.Base64Encode(url);
                 url = string.Format("{0}{1}", Global.vmessProtocol, url);
             }
-            else if (vmessItem.configType == (int)EConfigType.Shadowsocks)
+            else if (vmessItem.configType == EConfigType.Shadowsocks)
             {
                 string remark = string.Empty;
                 if (!Misc.IsNullOrEmpty(vmessItem.remarks))
@@ -370,7 +371,7 @@ class v2rayNConfigHandler
                 url = Misc.Base64Encode(url);
                 url = string.Format("{0}{1}{2}", Global.ssProtocol, url, remark);
             }
-            else if (vmessItem.configType == (int)EConfigType.Socks)
+            else if (vmessItem.configType == EConfigType.Socks)
             {
                 string remark = string.Empty;
                 if (!Misc.IsNullOrEmpty(vmessItem.remarks))
@@ -387,7 +388,7 @@ class v2rayNConfigHandler
                 url = Misc.Base64Encode(url);
                 url = string.Format("{0}{1}{2}", Global.socksProtocol, url, remark);
             }
-            else if (vmessItem.configType == (int)EConfigType.Trojan)
+            else if (vmessItem.configType == EConfigType.Trojan)
             {
                 string remark = string.Empty;
                 if (!Misc.IsNullOrEmpty(vmessItem.remarks))
@@ -543,7 +544,7 @@ class v2rayNConfigHandler
         ProfileItem vmessItem = new ProfileItem
         {
             address = newFileName,
-            configType = (int)EConfigType.Custom,
+            configType = EConfigType.Custom,
             remarks = string.Format("import custom@{0}", DateTime.Now.ToShortDateString())
         };
 
@@ -590,7 +591,7 @@ class v2rayNConfigHandler
     public static int AddShadowsocksServer(ref Config.V2RayNConfig config, ProfileItem vmessItem, int index)
     {
         vmessItem.configVersion = Global.configVersion;
-        vmessItem.configType = (int)EConfigType.Shadowsocks;
+        vmessItem.configType = EConfigType.Shadowsocks;
 
         vmessItem.address = vmessItem.address.TrimEx();
         vmessItem.id = vmessItem.id.TrimEx();
@@ -631,7 +632,7 @@ class v2rayNConfigHandler
     public static int AddSocksServer(ref Config.V2RayNConfig config, ProfileItem vmessItem, int index)
     {
         vmessItem.configVersion = Global.configVersion;
-        vmessItem.configType = (int)EConfigType.Socks;
+        vmessItem.configType = EConfigType.Socks;
 
         vmessItem.address = vmessItem.address.TrimEx();
 
@@ -670,7 +671,7 @@ class v2rayNConfigHandler
     public static int AddTrojanServer(ref Config.V2RayNConfig config, ProfileItem vmessItem, int index)
     {
         vmessItem.configVersion = Global.configVersion;
-        vmessItem.configType = (int)EConfigType.Trojan;
+        vmessItem.configType = EConfigType.Trojan;
 
         vmessItem.address = vmessItem.address.TrimEx();
         vmessItem.id = vmessItem.id.TrimEx();
@@ -737,51 +738,24 @@ class v2rayNConfigHandler
                 }
                 continue;
             }
-            ProfileItem vmessItem = v2rayConfigHandler.ImportFromClipboardConfig(str, out string msg);
-            if (vmessItem == null)
+            ProfileItem profileItem = FmtHandler.ResolveConfig(str, out string msg);
+            if (profileItem == null)
             {
                 continue;
             }
-            vmessItem.subid = subid;
-            if (
-                vmessItem.configType == (int)EConfigType.Vmess
-                && !arrProtocolFilter.Contains(EConfigType.Vmess.ToString())
-            )
+            profileItem.subid = subid;
+            var addStatus = profileItem.configType switch
             {
-                if (AddServer(ref config, vmessItem, -1) == 0)
-                {
-                    countServers++;
-                }
-            }
-            else if (
-                vmessItem.configType == (int)EConfigType.Shadowsocks
-                && !arrProtocolFilter.Contains(EConfigType.Shadowsocks.ToString())
-            )
+                EConfigType.VMess => AddServer(ref config, profileItem, -1),
+                EConfigType.Shadowsocks => AddShadowsocksServer(ref config, profileItem, -1),
+                EConfigType.Socks => AddSocksServer(ref config, profileItem, -1),
+                EConfigType.Trojan => AddTrojanServer(ref config, profileItem, -1),
+                EConfigType.VLESS => AddVlessServer(ref config, profileItem, -1),
+                _ => -1,
+            };
+            if (addStatus == 0)
             {
-                if (AddShadowsocksServer(ref config, vmessItem, -1) == 0)
-                {
-                    countServers++;
-                }
-            }
-            else if (
-                vmessItem.configType == (int)EConfigType.Socks
-                && !arrProtocolFilter.Contains(EConfigType.Socks.ToString())
-            )
-            {
-                if (AddSocksServer(ref config, vmessItem, -1) == 0)
-                {
-                    countServers++;
-                }
-            }
-            else if (
-                vmessItem.configType == (int)EConfigType.Trojan
-                && !arrProtocolFilter.Contains(EConfigType.Trojan.ToString())
-            )
-            {
-                if (AddTrojanServer(ref config, vmessItem, -1) == 0)
-                {
-                    countServers++;
-                }
+                countServers++;
             }
         }
         return countServers;
@@ -947,7 +921,7 @@ class v2rayNConfigHandler
     public static int AddVlessServer(ref Config.V2RayNConfig config, ProfileItem vmessItem, int index)
     {
         vmessItem.configVersion = Global.configVersion;
-        vmessItem.configType = (int)EConfigType.VLESS;
+        vmessItem.configType = EConfigType.VLESS;
 
         vmessItem.address = vmessItem.address.TrimEx();
         vmessItem.id = vmessItem.id.TrimEx();

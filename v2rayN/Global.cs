@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using v2rayN.Config;
 
 namespace v2rayN;
 
@@ -76,6 +77,34 @@ class Global
     public const string InboundAPITagName = "api";
     public const string InboundAPIProtocal = "dokodemo-door";
     public const string GrpcGunMode = "gun";
+    public const string GrpcMultiMode = "multi";
+
+    public static readonly Dictionary<EConfigType, string> ProtocolShares =
+        new()
+        {
+            { EConfigType.VMess, "vmess://" },
+            { EConfigType.Shadowsocks, "ss://" },
+            { EConfigType.Socks, "socks://" },
+            { EConfigType.VLESS, "vless://" },
+            { EConfigType.Trojan, "trojan://" },
+            { EConfigType.Hysteria2, "hysteria2://" },
+            { EConfigType.Tuic, "tuic://" },
+            { EConfigType.Wireguard, "wireguard://" }
+        };
+
+    public static readonly Dictionary<EConfigType, string> ProtocolTypes =
+        new()
+        {
+            { EConfigType.VMess, "vmess" },
+            { EConfigType.Shadowsocks, "shadowsocks" },
+            { EConfigType.Socks, "socks" },
+            { EConfigType.Http, "http" },
+            { EConfigType.VLESS, "vless" },
+            { EConfigType.Trojan, "trojan" },
+            { EConfigType.Hysteria2, "hysteria2" },
+            { EConfigType.Tuic, "tuic" },
+            { EConfigType.Wireguard, "wireguard" }
+        };
 
     /// <summary>
     /// vmess

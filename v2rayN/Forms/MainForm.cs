@@ -454,24 +454,24 @@ namespace v2rayN.Forms
             ShowServerForm(config.vmess[index].configType, index);
         }
 
-        private void ShowServerForm(int configType, int index)
+        private void ShowServerForm(EConfigType configType, int index)
         {
             BaseServerForm fm;
             switch (configType)
             {
-                case (int)EConfigType.Vmess:
+                case EConfigType.VMess:
                     fm = new ConfigVMessForm();
                     break;
-                case (int)EConfigType.Shadowsocks:
+                case EConfigType.Shadowsocks:
                     fm = new ConfigShadowsocksForm();
                     break;
-                case (int)EConfigType.Socks:
+                case EConfigType.Socks:
                     fm = new ConfigSocksForm();
                     break;
-                case (int)EConfigType.VLESS:
+                case EConfigType.VLESS:
                     fm = new ConfigVLESSForm();
                     break;
-                case (int)EConfigType.Trojan:
+                case EConfigType.Trojan:
                     fm = new ConfigTrojanForm();
                     break;
                 default:
@@ -547,12 +547,12 @@ namespace v2rayN.Forms
 
         private void menuAddVmessServer_Click(object sender, EventArgs e)
         {
-            ShowServerForm((int)EConfigType.Vmess, -1);
+            ShowServerForm(EConfigType.VMess, -1);
         }
 
         private void menuAddVlessServer_Click(object sender, EventArgs e)
         {
-            ShowServerForm((int)EConfigType.VLESS, -1);
+            ShowServerForm(EConfigType.VLESS, -1);
         }
 
         private void menuRemoveServer_Click(object sender, EventArgs e)
@@ -852,19 +852,19 @@ namespace v2rayN.Forms
 
         private void menuAddShadowsocksServer_Click(object sender, EventArgs e)
         {
-            ShowServerForm((int)EConfigType.Shadowsocks, -1);
+            ShowServerForm(EConfigType.Shadowsocks, -1);
             ShowForm();
         }
 
         private void menuAddSocksServer_Click(object sender, EventArgs e)
         {
-            ShowServerForm((int)EConfigType.Socks, -1);
+            ShowServerForm(EConfigType.Socks, -1);
             ShowForm();
         }
 
         private void menuAddTrojanServer_Click(object sender, EventArgs e)
         {
-            ShowServerForm((int)EConfigType.Trojan, -1);
+            ShowServerForm(EConfigType.Trojan, -1);
             ShowForm();
         }
 

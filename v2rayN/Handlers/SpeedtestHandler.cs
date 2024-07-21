@@ -54,7 +54,7 @@ class SpeedTestHandler
         {
             foreach (int index in _selecteds)
             {
-                if (_config.vmess[index].configType == (int)EConfigType.Custom)
+                if (_config.vmess[index].configType == EConfigType.Custom)
                 {
                     continue;
                 }
@@ -112,7 +112,7 @@ class SpeedTestHandler
             List<Task> tasks = new List<Task>();
             foreach (int itemIndex in _selecteds)
             {
-                if (_config.vmess[itemIndex].configType == (int)EConfigType.Custom)
+                if (_config.vmess[itemIndex].configType == EConfigType.Custom)
                     continue;
 
                 tasks.Add(
@@ -211,7 +211,7 @@ class SpeedTestHandler
                 break;
             }
 
-            if (_config.vmess[itemIndex].configType == (int)EConfigType.Custom)
+            if (_config.vmess[itemIndex].configType == EConfigType.Custom)
             {
                 continue;
             }

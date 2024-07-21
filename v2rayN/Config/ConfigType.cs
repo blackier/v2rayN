@@ -8,12 +8,16 @@ namespace v2rayN.Config;
 
 public enum EConfigType
 {
-    Vmess = 1,
+    VMess = 1,
     Custom = 2,
     Shadowsocks = 3,
     Socks = 4,
     VLESS = 5,
-    Trojan = 6
+    Trojan = 6,
+    Hysteria2 = 7,
+    Tuic = 8,
+    Wireguard = 9,
+    Http = 10
 }
 
 public enum EMove
@@ -48,6 +52,7 @@ public enum ETransport
     kcp,
     ws,
     httpupgrade,
+    splithttp,
     h2,
     http,
     quic,
