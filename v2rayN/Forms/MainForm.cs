@@ -189,7 +189,7 @@ namespace v2rayN.Forms
         {
             RefreshServersView();
             //lvServers.AutoResizeColumns();
-            RefreshServersMenu();
+            //RefreshServersMenu();
         }
 
         /// <summary>
@@ -295,7 +295,7 @@ namespace v2rayN.Forms
 
             if (bottomItemIndex < lvServers.Items.Count)
                 lvServers.EnsureVisible(bottomItemIndex);
-            else if (config.index < lvServers.Items.Count)
+            else if (config.index > 0 && config.index < lvServers.Items.Count)
                 lvServers.EnsureVisible(config.index);
         }
 
@@ -314,7 +314,7 @@ namespace v2rayN.Forms
 
                 dropDownMenu.Items.Add(ts);
             }
-            //menuServers.DropDown = dropDownMenu;
+            menuServers.DropDown = dropDownMenu;
         }
 
         private void ts_Click(object sender, EventArgs e)
@@ -1077,7 +1077,7 @@ namespace v2rayN.Forms
                 proxyDown /= (ulong)(config.statisticsFreshRate / 1000f);
 
                 toolSslServerSpeed.Text = string.Format(
-                    $"Direct:{Misc.HumanFy(directUp),9}/s↑ | {Misc.HumanFy(directDown) + "/s↓",-13} Proxy:{Misc.HumanFy(proxyUp),9}/s↑ | {Misc.HumanFy(proxyDown) + "/s↓",-13}"
+                    $"Direct:{Misc.HumanFy(directUp), 9}/s↑ | {Misc.HumanFy(directDown) + "/s↓", -13} Proxy:{Misc.HumanFy(proxyUp), 9}/s↑ | {Misc.HumanFy(proxyDown) + "/s↓", -13}"
                 );
 
                 List<string[]> datas = new List<string[]>();
