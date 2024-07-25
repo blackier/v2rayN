@@ -24,7 +24,6 @@ namespace Shadowsocks.Interop.V2Ray.Routing
         public RuleObject()
         {
             Type = "field";
-            DomainMatcher = "mph";
         }
 
         public static RuleObject DefaultOutbound => new() { OutboundTag = "", };

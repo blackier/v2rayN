@@ -15,7 +15,7 @@ namespace Shadowsocks.Interop.V2Ray
         /// <summary>
         /// Gets or sets the domain matcher used for routing.
         /// Default value: "linear".
-        /// Available values: "linear" | "mph"
+        /// Available values: "linear" | "hybrid"
         /// </summary>
         public string DomainMatcher { get; set; }
 
@@ -32,17 +32,17 @@ namespace Shadowsocks.Interop.V2Ray
         public RoutingObject()
         {
             DomainStrategy = "AsIs";
-            DomainMatcher = "mph";
+            DomainMatcher = "hybrid";
             Rules = new();
         }
 
-        public static RoutingObject Default => new() { DomainStrategy = "IPOnDemand", DomainMatcher = "mph", };
+        public static RoutingObject Default => new() { DomainStrategy = "IPOnDemand", DomainMatcher = "hybrid", };
 
         public static RoutingObject DefaultBalancers =>
             new()
             {
                 DomainStrategy = "IPOnDemand",
-                DomainMatcher = "mph",
+                DomainMatcher = "hybrid",
                 Balancers = new(),
             };
     }

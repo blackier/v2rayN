@@ -51,8 +51,8 @@ class DownloadHandler
     private const string nUrl = "https://github.com/blackier/v2rayN/releases/download/{0}/v2rayN.zip";
     private readonly string coreLatestUrl = "https://github.com/XTLS/Xray-core/releases/latest";
     private const string coreUrl = "https://github.com/XTLS/Xray-core/releases/download/{0}/Xray-windows-{1}.zip";
-    private readonly string geositeLatestUrl = "https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat";
-    private const string geoipLastUrl = "https://github.com/v2fly/geoip/releases/latest/download/geoip.dat";
+    private readonly string geositeLatestUrl = "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat";
+    private const string geoipLastUrl = "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat";
     // csharpier-ignore-end
 
     #region Check for updates

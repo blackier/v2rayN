@@ -1385,10 +1385,6 @@ namespace v2rayN.Forms
                     try
                     {
                         CloseV2ray();
-
-                        FileManager.RemoveFile(Misc.GetPath("geosite.dat"));
-                        FileManager.RenameFile(Misc.GetPath(downloadHandle.downloadFileName), "geosite.dat");
-
                         Global.reloadV2ray = true;
                         LoadV2ray();
 
