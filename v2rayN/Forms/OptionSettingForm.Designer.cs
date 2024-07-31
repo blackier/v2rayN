@@ -1,877 +1,856 @@
-﻿namespace v2rayN.Forms
+﻿namespace v2rayN.Forms;
+
+partial class OptionSettingForm
 {
-    partial class OptionSettingForm
+    /// <summary>
+    /// Required designer variable.
+    /// </summary>
+    private System.ComponentModel.IContainer components = null;
+
+    /// <summary>
+    /// Clean up any resources being used.
+    /// </summary>
+    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    protected override void Dispose(bool disposing)
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        if (disposing && (components != null))
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
+            components.Dispose();
         }
-
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            this.btnClose = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkdefAllowInsecure = new System.Windows.Forms.CheckBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.cmblistenerType = new System.Windows.Forms.ComboBox();
-            this.chksniffingEnabled = new System.Windows.Forms.CheckBox();
-            this.txtremoteDNS = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.chkmuxEnabled = new System.Windows.Forms.CheckBox();
-            this.cmbprotocol = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.chkudpEnabled = new System.Windows.Forms.CheckBox();
-            this.chklogEnabled = new System.Windows.Forms.CheckBox();
-            this.cmbloglevel = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtlocalPort = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tabControl_Routing = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.txtUseragent = new System.Windows.Forms.TextBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.txtUserdirect = new System.Windows.Forms.TextBox();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.txtUserblock = new System.Windows.Forms.TextBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cmbroutingMode = new System.Windows.Forms.ComboBox();
-            this.linkLabelRoutingDoc = new System.Windows.Forms.LinkLabel();
-            this.labRoutingTips = new System.Windows.Forms.Label();
-            this.cmbdomainStrategy = new System.Windows.Forms.ComboBox();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.chkKcpcongestion = new System.Windows.Forms.CheckBox();
-            this.txtKcpmtu = new System.Windows.Forms.TextBox();
-            this.txtKcpwriteBufferSize = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtKcptti = new System.Windows.Forms.TextBox();
-            this.txtKcpreadBufferSize = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtKcpuplinkCapacity = new System.Windows.Forms.TextBox();
-            this.txtKcpdownlinkCapacity = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.chkAutoRun = new System.Windows.Forms.CheckBox();
-            this.chkKeepOlderDedupl = new System.Windows.Forms.CheckBox();
-            this.chkAllowLANConn = new System.Windows.Forms.CheckBox();
-            this.cbFreshrate = new System.Windows.Forms.ComboBox();
-            this.chkEnableStatistics = new System.Windows.Forms.CheckBox();
-            this.lbFreshrate = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.tabControl_Routing.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage5.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.tabPage6.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.tabPage7.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // btnClose
-            // 
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnClose.Location = new System.Drawing.Point(247, 12);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 35);
-            this.btnClose.TabIndex = 7;
-            this.btnClose.Text = "&取消";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 10);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(720, 439);
-            this.tabControl1.TabIndex = 10;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(712, 409);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Core: 基础设置";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.chkdefAllowInsecure);
-            this.groupBox1.Controls.Add(this.label16);
-            this.groupBox1.Controls.Add(this.cmblistenerType);
-            this.groupBox1.Controls.Add(this.chksniffingEnabled);
-            this.groupBox1.Controls.Add(this.txtremoteDNS);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.chkmuxEnabled);
-            this.groupBox1.Controls.Add(this.cmbprotocol);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.chkudpEnabled);
-            this.groupBox1.Controls.Add(this.chklogEnabled);
-            this.groupBox1.Controls.Add(this.cmbloglevel);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.txtlocalPort);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(706, 403);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            // 
-            // chkdefAllowInsecure
-            // 
-            this.chkdefAllowInsecure.AutoSize = true;
-            this.chkdefAllowInsecure.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkdefAllowInsecure.Location = new System.Drawing.Point(100, 186);
-            this.chkdefAllowInsecure.Name = "chkdefAllowInsecure";
-            this.chkdefAllowInsecure.Size = new System.Drawing.Size(99, 21);
-            this.chkdefAllowInsecure.TabIndex = 35;
-            this.chkdefAllowInsecure.Text = "跳过证书校验";
-            this.chkdefAllowInsecure.UseVisualStyleBackColor = true;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label16.Location = new System.Drawing.Point(6, 50);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(56, 17);
-            this.label16.TabIndex = 34;
-            this.label16.Text = "代理模式";
-            // 
-            // cmblistenerType
-            // 
-            this.cmblistenerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmblistenerType.FormattingEnabled = true;
-            this.cmblistenerType.Items.AddRange(new object[] {
-            "关闭系统代理",
-            "打开系统代理"});
-            this.cmblistenerType.Location = new System.Drawing.Point(100, 47);
-            this.cmblistenerType.Name = "cmblistenerType";
-            this.cmblistenerType.Size = new System.Drawing.Size(276, 25);
-            this.cmblistenerType.TabIndex = 33;
-            // 
-            // chksniffingEnabled
-            // 
-            this.chksniffingEnabled.AutoSize = true;
-            this.chksniffingEnabled.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chksniffingEnabled.Location = new System.Drawing.Point(100, 105);
-            this.chksniffingEnabled.Name = "chksniffingEnabled";
-            this.chksniffingEnabled.Size = new System.Drawing.Size(75, 21);
-            this.chksniffingEnabled.TabIndex = 31;
-            this.chksniffingEnabled.Text = "流量探测";
-            this.chksniffingEnabled.UseVisualStyleBackColor = true;
-            // 
-            // txtremoteDNS
-            // 
-            this.txtremoteDNS.Location = new System.Drawing.Point(6, 244);
-            this.txtremoteDNS.Multiline = true;
-            this.txtremoteDNS.Name = "txtremoteDNS";
-            this.txtremoteDNS.Size = new System.Drawing.Size(694, 153);
-            this.txtremoteDNS.TabIndex = 30;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 224);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(213, 17);
-            this.label14.TabIndex = 29;
-            this.label14.Text = "自定义DNS服务器，复数时逗号(,)分割";
-            // 
-            // chkmuxEnabled
-            // 
-            this.chkmuxEnabled.AutoSize = true;
-            this.chkmuxEnabled.Location = new System.Drawing.Point(100, 132);
-            this.chkmuxEnabled.Name = "chkmuxEnabled";
-            this.chkmuxEnabled.Size = new System.Drawing.Size(75, 21);
-            this.chkmuxEnabled.TabIndex = 20;
-            this.chkmuxEnabled.Text = "多路复用";
-            this.chkmuxEnabled.UseVisualStyleBackColor = true;
-            // 
-            // cmbprotocol
-            // 
-            this.cmbprotocol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbprotocol.Enabled = false;
-            this.cmbprotocol.FormattingEnabled = true;
-            this.cmbprotocol.Items.AddRange(new object[] {
-            "socks",
-            "http"});
-            this.cmbprotocol.Location = new System.Drawing.Point(279, 16);
-            this.cmbprotocol.Name = "cmbprotocol";
-            this.cmbprotocol.Size = new System.Drawing.Size(97, 25);
-            this.cmbprotocol.TabIndex = 12;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(184, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 17);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "协议(Protocol)";
-            // 
-            // chkudpEnabled
-            // 
-            this.chkudpEnabled.AutoSize = true;
-            this.chkudpEnabled.Location = new System.Drawing.Point(100, 78);
-            this.chkudpEnabled.Name = "chkudpEnabled";
-            this.chkudpEnabled.Size = new System.Drawing.Size(52, 21);
-            this.chkudpEnabled.TabIndex = 10;
-            this.chkudpEnabled.Text = "UDP";
-            this.chkudpEnabled.UseVisualStyleBackColor = true;
-            // 
-            // chklogEnabled
-            // 
-            this.chklogEnabled.AutoSize = true;
-            this.chklogEnabled.Location = new System.Drawing.Point(100, 159);
-            this.chklogEnabled.Name = "chklogEnabled";
-            this.chklogEnabled.Size = new System.Drawing.Size(99, 21);
-            this.chklogEnabled.TabIndex = 9;
-            this.chklogEnabled.Text = "记录本地日志";
-            this.chklogEnabled.UseVisualStyleBackColor = true;
-            // 
-            // cmbloglevel
-            // 
-            this.cmbloglevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbloglevel.FormattingEnabled = true;
-            this.cmbloglevel.Items.AddRange(new object[] {
-            "debug",
-            "info",
-            "warning",
-            "error",
-            "none"});
-            this.cmbloglevel.Location = new System.Drawing.Point(503, 16);
-            this.cmbloglevel.Name = "cmbloglevel";
-            this.cmbloglevel.Size = new System.Drawing.Size(97, 25);
-            this.cmbloglevel.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(382, 19);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(115, 17);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "日志等级(LogLevel)";
-            // 
-            // txtlocalPort
-            // 
-            this.txtlocalPort.Location = new System.Drawing.Point(100, 16);
-            this.txtlocalPort.Name = "txtlocalPort";
-            this.txtlocalPort.Size = new System.Drawing.Size(78, 23);
-            this.txtlocalPort.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 17);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "监听端口(Port)";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.groupBox2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(712, 409);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Core: 路由设置";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.tabControl_Routing);
-            this.groupBox2.Controls.Add(this.panel3);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(706, 403);
-            this.groupBox2.TabIndex = 12;
-            this.groupBox2.TabStop = false;
-            // 
-            // tabControl_Routing
-            // 
-            this.tabControl_Routing.Controls.Add(this.tabPage3);
-            this.tabControl_Routing.Controls.Add(this.tabPage4);
-            this.tabControl_Routing.Controls.Add(this.tabPage5);
-            this.tabControl_Routing.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl_Routing.Location = new System.Drawing.Point(3, 113);
-            this.tabControl_Routing.Name = "tabControl_Routing";
-            this.tabControl_Routing.SelectedIndex = 0;
-            this.tabControl_Routing.Size = new System.Drawing.Size(700, 287);
-            this.tabControl_Routing.TabIndex = 12;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.txtUseragent);
-            this.tabPage3.Location = new System.Drawing.Point(4, 26);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(692, 257);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "代理";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // txtUseragent
-            // 
-            this.txtUseragent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUseragent.Location = new System.Drawing.Point(3, 3);
-            this.txtUseragent.MaxLength = 0;
-            this.txtUseragent.Multiline = true;
-            this.txtUseragent.Name = "txtUseragent";
-            this.txtUseragent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtUseragent.Size = new System.Drawing.Size(686, 251);
-            this.txtUseragent.TabIndex = 0;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.txtUserdirect);
-            this.tabPage4.Location = new System.Drawing.Point(4, 26);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(692, 257);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "直连";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // txtUserdirect
-            // 
-            this.txtUserdirect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUserdirect.Location = new System.Drawing.Point(3, 3);
-            this.txtUserdirect.MaxLength = 0;
-            this.txtUserdirect.Multiline = true;
-            this.txtUserdirect.Name = "txtUserdirect";
-            this.txtUserdirect.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtUserdirect.Size = new System.Drawing.Size(686, 251);
-            this.txtUserdirect.TabIndex = 1;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.txtUserblock);
-            this.tabPage5.Location = new System.Drawing.Point(4, 26);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(692, 257);
-            this.tabPage5.TabIndex = 2;
-            this.tabPage5.Text = "黑名单";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // txtUserblock
-            // 
-            this.txtUserblock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUserblock.Location = new System.Drawing.Point(3, 3);
-            this.txtUserblock.MaxLength = 0;
-            this.txtUserblock.Multiline = true;
-            this.txtUserblock.Name = "txtUserblock";
-            this.txtUserblock.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtUserblock.Size = new System.Drawing.Size(686, 251);
-            this.txtUserblock.TabIndex = 1;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.cmbroutingMode);
-            this.panel3.Controls.Add(this.linkLabelRoutingDoc);
-            this.panel3.Controls.Add(this.labRoutingTips);
-            this.panel3.Controls.Add(this.cmbdomainStrategy);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(3, 19);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(700, 94);
-            this.panel3.TabIndex = 19;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 37);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 17);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "预设路由规则";
-            // 
-            // cmbroutingMode
-            // 
-            this.cmbroutingMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbroutingMode.FormattingEnabled = true;
-            this.cmbroutingMode.Items.AddRange(new object[] {
-            "下拉选择添加",
-            "清空",
-            "私有地址",
-            "常见大陆地址",
-            "常见非大陆地址",
-            "常见广告地址"});
-            this.cmbroutingMode.Location = new System.Drawing.Point(93, 34);
-            this.cmbroutingMode.Name = "cmbroutingMode";
-            this.cmbroutingMode.Size = new System.Drawing.Size(160, 25);
-            this.cmbroutingMode.TabIndex = 14;
-            this.cmbroutingMode.SelectedIndexChanged += new System.EventHandler(this.cmbroutingMode_SelectedIndexChanged);
-            // 
-            // linkLabelRoutingDoc
-            // 
-            this.linkLabelRoutingDoc.AutoSize = true;
-            this.linkLabelRoutingDoc.LinkColor = System.Drawing.Color.Black;
-            this.linkLabelRoutingDoc.Location = new System.Drawing.Point(7, 6);
-            this.linkLabelRoutingDoc.Margin = new System.Windows.Forms.Padding(0);
-            this.linkLabelRoutingDoc.Name = "linkLabelRoutingDoc";
-            this.linkLabelRoutingDoc.Size = new System.Drawing.Size(56, 17);
-            this.linkLabelRoutingDoc.TabIndex = 19;
-            this.linkLabelRoutingDoc.TabStop = true;
-            this.linkLabelRoutingDoc.Text = "域名解析";
-            this.linkLabelRoutingDoc.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelRoutingDoc_LinkClicked);
-            // 
-            // labRoutingTips
-            // 
-            this.labRoutingTips.AutoSize = true;
-            this.labRoutingTips.ForeColor = System.Drawing.Color.Black;
-            this.labRoutingTips.Location = new System.Drawing.Point(7, 71);
-            this.labRoutingTips.Margin = new System.Windows.Forms.Padding(1);
-            this.labRoutingTips.Name = "labRoutingTips";
-            this.labRoutingTips.Padding = new System.Windows.Forms.Padding(1);
-            this.labRoutingTips.Size = new System.Drawing.Size(245, 19);
-            this.labRoutingTips.TabIndex = 13;
-            this.labRoutingTips.Text = "*设置路由规则，逗号 (,)分割，支持域名和IP";
-            // 
-            // cmbdomainStrategy
-            // 
-            this.cmbdomainStrategy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbdomainStrategy.FormattingEnabled = true;
-            this.cmbdomainStrategy.Items.AddRange(new object[] {
-            "AsIs",
-            "IPIfNonMatch",
-            "IPOnDemand"});
-            this.cmbdomainStrategy.Location = new System.Drawing.Point(93, 3);
-            this.cmbdomainStrategy.Name = "cmbdomainStrategy";
-            this.cmbdomainStrategy.Size = new System.Drawing.Size(160, 25);
-            this.cmbdomainStrategy.TabIndex = 16;
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Controls.Add(this.groupBox3);
-            this.tabPage6.Location = new System.Drawing.Point(4, 26);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(712, 409);
-            this.tabPage6.TabIndex = 2;
-            this.tabPage6.Text = "Core: KCP设置";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.chkKcpcongestion);
-            this.groupBox3.Controls.Add(this.txtKcpmtu);
-            this.groupBox3.Controls.Add(this.txtKcpwriteBufferSize);
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.txtKcptti);
-            this.groupBox3.Controls.Add(this.txtKcpreadBufferSize);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.txtKcpuplinkCapacity);
-            this.groupBox3.Controls.Add(this.txtKcpdownlinkCapacity);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(3, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(706, 403);
-            this.groupBox3.TabIndex = 21;
-            this.groupBox3.TabStop = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 19);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(30, 17);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "mtu";
-            // 
-            // chkKcpcongestion
-            // 
-            this.chkKcpcongestion.AutoSize = true;
-            this.chkKcpcongestion.Location = new System.Drawing.Point(104, 103);
-            this.chkKcpcongestion.Name = "chkKcpcongestion";
-            this.chkKcpcongestion.Size = new System.Drawing.Size(91, 21);
-            this.chkKcpcongestion.TabIndex = 20;
-            this.chkKcpcongestion.Text = "congestion";
-            this.chkKcpcongestion.UseVisualStyleBackColor = true;
-            // 
-            // txtKcpmtu
-            // 
-            this.txtKcpmtu.Location = new System.Drawing.Point(105, 16);
-            this.txtKcpmtu.Name = "txtKcpmtu";
-            this.txtKcpmtu.Size = new System.Drawing.Size(100, 23);
-            this.txtKcpmtu.TabIndex = 5;
-            // 
-            // txtKcpwriteBufferSize
-            // 
-            this.txtKcpwriteBufferSize.Location = new System.Drawing.Point(385, 74);
-            this.txtKcpwriteBufferSize.Name = "txtKcpwriteBufferSize";
-            this.txtKcpwriteBufferSize.Size = new System.Drawing.Size(100, 23);
-            this.txtKcpwriteBufferSize.TabIndex = 15;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(270, 19);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(19, 17);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "tti";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(270, 77);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(94, 17);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "writeBufferSize";
-            // 
-            // txtKcptti
-            // 
-            this.txtKcptti.Location = new System.Drawing.Point(385, 16);
-            this.txtKcptti.Name = "txtKcptti";
-            this.txtKcptti.Size = new System.Drawing.Size(100, 23);
-            this.txtKcptti.TabIndex = 7;
-            // 
-            // txtKcpreadBufferSize
-            // 
-            this.txtKcpreadBufferSize.Location = new System.Drawing.Point(105, 74);
-            this.txtKcpreadBufferSize.Name = "txtKcpreadBufferSize";
-            this.txtKcpreadBufferSize.Size = new System.Drawing.Size(100, 23);
-            this.txtKcpreadBufferSize.TabIndex = 13;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 48);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(92, 17);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "uplinkCapacity";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 77);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(93, 17);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "readBufferSize";
-            // 
-            // txtKcpuplinkCapacity
-            // 
-            this.txtKcpuplinkCapacity.Location = new System.Drawing.Point(105, 45);
-            this.txtKcpuplinkCapacity.Name = "txtKcpuplinkCapacity";
-            this.txtKcpuplinkCapacity.Size = new System.Drawing.Size(100, 23);
-            this.txtKcpuplinkCapacity.TabIndex = 9;
-            // 
-            // txtKcpdownlinkCapacity
-            // 
-            this.txtKcpdownlinkCapacity.Location = new System.Drawing.Point(385, 45);
-            this.txtKcpdownlinkCapacity.Name = "txtKcpdownlinkCapacity";
-            this.txtKcpdownlinkCapacity.Size = new System.Drawing.Size(100, 23);
-            this.txtKcpdownlinkCapacity.TabIndex = 11;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(270, 45);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(109, 17);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "downlinkCapacity";
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.groupBox4);
-            this.tabPage7.Location = new System.Drawing.Point(4, 26);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(712, 409);
-            this.tabPage7.TabIndex = 3;
-            this.tabPage7.Text = "v2rayN设置";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.chkAutoRun);
-            this.groupBox4.Controls.Add(this.chkKeepOlderDedupl);
-            this.groupBox4.Controls.Add(this.chkAllowLANConn);
-            this.groupBox4.Controls.Add(this.cbFreshrate);
-            this.groupBox4.Controls.Add(this.chkEnableStatistics);
-            this.groupBox4.Controls.Add(this.lbFreshrate);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(3, 3);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(706, 403);
-            this.groupBox4.TabIndex = 34;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
-            // 
-            // chkAutoRun
-            // 
-            this.chkAutoRun.AutoSize = true;
-            this.chkAutoRun.Location = new System.Drawing.Point(6, 22);
-            this.chkAutoRun.Name = "chkAutoRun";
-            this.chkAutoRun.Size = new System.Drawing.Size(75, 21);
-            this.chkAutoRun.TabIndex = 23;
-            this.chkAutoRun.Text = "开机启动";
-            this.chkAutoRun.UseVisualStyleBackColor = true;
-            // 
-            // chkKeepOlderDedupl
-            // 
-            this.chkKeepOlderDedupl.AutoSize = true;
-            this.chkKeepOlderDedupl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkKeepOlderDedupl.Location = new System.Drawing.Point(6, 103);
-            this.chkKeepOlderDedupl.Name = "chkKeepOlderDedupl";
-            this.chkKeepOlderDedupl.Size = new System.Drawing.Size(159, 21);
-            this.chkKeepOlderDedupl.TabIndex = 33;
-            this.chkKeepOlderDedupl.Text = "去重时保留序号较小的项";
-            this.chkKeepOlderDedupl.UseVisualStyleBackColor = true;
-            // 
-            // chkAllowLANConn
-            // 
-            this.chkAllowLANConn.AutoSize = true;
-            this.chkAllowLANConn.Location = new System.Drawing.Point(6, 49);
-            this.chkAllowLANConn.Name = "chkAllowLANConn";
-            this.chkAllowLANConn.Size = new System.Drawing.Size(135, 21);
-            this.chkAllowLANConn.TabIndex = 29;
-            this.chkAllowLANConn.Text = "允许来自LAN的连接";
-            this.chkAllowLANConn.UseVisualStyleBackColor = true;
-            // 
-            // cbFreshrate
-            // 
-            this.cbFreshrate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFreshrate.FormattingEnabled = true;
-            this.cbFreshrate.Location = new System.Drawing.Point(107, 130);
-            this.cbFreshrate.Name = "cbFreshrate";
-            this.cbFreshrate.Size = new System.Drawing.Size(105, 25);
-            this.cbFreshrate.TabIndex = 32;
-            // 
-            // chkEnableStatistics
-            // 
-            this.chkEnableStatistics.AutoSize = true;
-            this.chkEnableStatistics.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chkEnableStatistics.Location = new System.Drawing.Point(6, 76);
-            this.chkEnableStatistics.Name = "chkEnableStatistics";
-            this.chkEnableStatistics.Size = new System.Drawing.Size(159, 21);
-            this.chkEnableStatistics.TabIndex = 29;
-            this.chkEnableStatistics.Text = "流量计速，需要重启软件";
-            this.chkEnableStatistics.UseVisualStyleBackColor = true;
-            // 
-            // lbFreshrate
-            // 
-            this.lbFreshrate.AutoSize = true;
-            this.lbFreshrate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lbFreshrate.Location = new System.Drawing.Point(21, 133);
-            this.lbFreshrate.Name = "lbFreshrate";
-            this.lbFreshrate.Size = new System.Drawing.Size(80, 17);
-            this.lbFreshrate.TabIndex = 30;
-            this.lbFreshrate.Text = "计速刷新频率";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.tableLayoutPanel1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 449);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(720, 60);
-            this.panel2.TabIndex = 11;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.btnOK, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnClose, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(720, 60);
-            this.tableLayoutPanel1.TabIndex = 9;
-            // 
-            // btnOK
-            // 
-            this.btnOK.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnOK.Location = new System.Drawing.Point(398, 12);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 35);
-            this.btnOK.TabIndex = 8;
-            this.btnOK.Text = "&确定";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(720, 10);
-            this.panel1.TabIndex = 9;
-            // 
-            // OptionSettingForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(720, 509);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(11479, 1022, 11479, 1022);
-            this.Name = "OptionSettingForm";
-            this.Text = "Settings";
-            this.Load += new System.EventHandler(this.OptionSettingForm_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.tabControl_Routing.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.tabPage6.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.tabPage7.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-
-        }
-
-        #endregion
-
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cmbloglevel;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtlocalPort;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox chklogEnabled;
-        private System.Windows.Forms.CheckBox chkudpEnabled;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox cmbprotocol;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox chkmuxEnabled;
-        private System.Windows.Forms.TabControl tabControl_Routing;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Label labRoutingTips;
-        private System.Windows.Forms.TextBox txtUseragent;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TextBox txtUserdirect;
-        private System.Windows.Forms.TextBox txtUserblock;
-        private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.TextBox txtKcpmtu;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtKcptti;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtKcpwriteBufferSize;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtKcpreadBufferSize;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtKcpdownlinkCapacity;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtKcpuplinkCapacity;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox chkKcpcongestion;
-        private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.CheckBox chkAutoRun;
-        private System.Windows.Forms.CheckBox chkAllowLANConn;
-        private System.Windows.Forms.TextBox txtremoteDNS;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ComboBox cmbdomainStrategy;
-        private System.Windows.Forms.ComboBox cmbroutingMode;
-        private System.Windows.Forms.CheckBox chksniffingEnabled;
-        private System.Windows.Forms.CheckBox chkEnableStatistics;
-        private System.Windows.Forms.ComboBox cbFreshrate;
-        private System.Windows.Forms.Label lbFreshrate;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ComboBox cmblistenerType;
-        private System.Windows.Forms.CheckBox chkKeepOlderDedupl;
-        private System.Windows.Forms.LinkLabel linkLabelRoutingDoc;
-        private System.Windows.Forms.CheckBox chkdefAllowInsecure;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label3;
+        base.Dispose(disposing);
     }
+
+    #region Windows Form Designer generated code
+
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
+    private void InitializeComponent()
+    {
+        btnClose = new System.Windows.Forms.Button();
+        tabControl1 = new System.Windows.Forms.TabControl();
+        tabPage1 = new System.Windows.Forms.TabPage();
+        groupBox1 = new System.Windows.Forms.GroupBox();
+        chkdefAllowInsecure = new System.Windows.Forms.CheckBox();
+        label16 = new System.Windows.Forms.Label();
+        cmblistenerType = new System.Windows.Forms.ComboBox();
+        chksniffingEnabled = new System.Windows.Forms.CheckBox();
+        txtremoteDNS = new System.Windows.Forms.TextBox();
+        label14 = new System.Windows.Forms.Label();
+        chkmuxEnabled = new System.Windows.Forms.CheckBox();
+        cmbprotocol = new System.Windows.Forms.ComboBox();
+        label1 = new System.Windows.Forms.Label();
+        chkudpEnabled = new System.Windows.Forms.CheckBox();
+        chklogEnabled = new System.Windows.Forms.CheckBox();
+        cmbloglevel = new System.Windows.Forms.ComboBox();
+        label5 = new System.Windows.Forms.Label();
+        txtlocalPort = new System.Windows.Forms.TextBox();
+        label2 = new System.Windows.Forms.Label();
+        tabPage2 = new System.Windows.Forms.TabPage();
+        groupBox2 = new System.Windows.Forms.GroupBox();
+        tabControl_Routing = new System.Windows.Forms.TabControl();
+        tabPage3 = new System.Windows.Forms.TabPage();
+        txtUseragent = new System.Windows.Forms.TextBox();
+        tabPage4 = new System.Windows.Forms.TabPage();
+        txtUserdirect = new System.Windows.Forms.TextBox();
+        tabPage5 = new System.Windows.Forms.TabPage();
+        txtUserblock = new System.Windows.Forms.TextBox();
+        panel3 = new System.Windows.Forms.Panel();
+        label3 = new System.Windows.Forms.Label();
+        cmbroutingMode = new System.Windows.Forms.ComboBox();
+        linkLabelRoutingDoc = new System.Windows.Forms.LinkLabel();
+        labRoutingTips = new System.Windows.Forms.Label();
+        cmbdomainStrategy = new System.Windows.Forms.ComboBox();
+        tabPage6 = new System.Windows.Forms.TabPage();
+        groupBox3 = new System.Windows.Forms.GroupBox();
+        label6 = new System.Windows.Forms.Label();
+        chkKcpcongestion = new System.Windows.Forms.CheckBox();
+        txtKcpmtu = new System.Windows.Forms.TextBox();
+        txtKcpwriteBufferSize = new System.Windows.Forms.TextBox();
+        label7 = new System.Windows.Forms.Label();
+        label10 = new System.Windows.Forms.Label();
+        txtKcptti = new System.Windows.Forms.TextBox();
+        txtKcpreadBufferSize = new System.Windows.Forms.TextBox();
+        label9 = new System.Windows.Forms.Label();
+        label11 = new System.Windows.Forms.Label();
+        txtKcpuplinkCapacity = new System.Windows.Forms.TextBox();
+        txtKcpdownlinkCapacity = new System.Windows.Forms.TextBox();
+        label8 = new System.Windows.Forms.Label();
+        tabPage7 = new System.Windows.Forms.TabPage();
+        groupBox4 = new System.Windows.Forms.GroupBox();
+        chkAutoRun = new System.Windows.Forms.CheckBox();
+        chkKeepOlderDedupl = new System.Windows.Forms.CheckBox();
+        chkAllowLANConn = new System.Windows.Forms.CheckBox();
+        cbFreshrate = new System.Windows.Forms.ComboBox();
+        chkEnableStatistics = new System.Windows.Forms.CheckBox();
+        lbFreshrate = new System.Windows.Forms.Label();
+        panel2 = new System.Windows.Forms.Panel();
+        tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+        btnOK = new System.Windows.Forms.Button();
+        panel1 = new System.Windows.Forms.Panel();
+        tabControl1.SuspendLayout();
+        tabPage1.SuspendLayout();
+        groupBox1.SuspendLayout();
+        tabPage2.SuspendLayout();
+        groupBox2.SuspendLayout();
+        tabControl_Routing.SuspendLayout();
+        tabPage3.SuspendLayout();
+        tabPage4.SuspendLayout();
+        tabPage5.SuspendLayout();
+        panel3.SuspendLayout();
+        tabPage6.SuspendLayout();
+        groupBox3.SuspendLayout();
+        tabPage7.SuspendLayout();
+        groupBox4.SuspendLayout();
+        panel2.SuspendLayout();
+        tableLayoutPanel1.SuspendLayout();
+        SuspendLayout();
+        // 
+        // btnClose
+        // 
+        btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+        btnClose.Dock = System.Windows.Forms.DockStyle.Right;
+        btnClose.Location = new System.Drawing.Point(247, 12);
+        btnClose.Name = "btnClose";
+        btnClose.Size = new System.Drawing.Size(75, 35);
+        btnClose.TabIndex = 7;
+        btnClose.Text = "&取消";
+        btnClose.UseVisualStyleBackColor = true;
+        btnClose.Click += btnClose_Click;
+        // 
+        // tabControl1
+        // 
+        tabControl1.Controls.Add(tabPage1);
+        tabControl1.Controls.Add(tabPage2);
+        tabControl1.Controls.Add(tabPage6);
+        tabControl1.Controls.Add(tabPage7);
+        tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+        tabControl1.Location = new System.Drawing.Point(0, 10);
+        tabControl1.Name = "tabControl1";
+        tabControl1.SelectedIndex = 0;
+        tabControl1.Size = new System.Drawing.Size(720, 439);
+        tabControl1.TabIndex = 10;
+        // 
+        // tabPage1
+        // 
+        tabPage1.Controls.Add(groupBox1);
+        tabPage1.Location = new System.Drawing.Point(4, 26);
+        tabPage1.Name = "tabPage1";
+        tabPage1.Padding = new System.Windows.Forms.Padding(3);
+        tabPage1.Size = new System.Drawing.Size(712, 409);
+        tabPage1.TabIndex = 0;
+        tabPage1.Text = "Core: 基础设置";
+        tabPage1.UseVisualStyleBackColor = true;
+        // 
+        // groupBox1
+        // 
+        groupBox1.Controls.Add(chkdefAllowInsecure);
+        groupBox1.Controls.Add(label16);
+        groupBox1.Controls.Add(cmblistenerType);
+        groupBox1.Controls.Add(chksniffingEnabled);
+        groupBox1.Controls.Add(txtremoteDNS);
+        groupBox1.Controls.Add(label14);
+        groupBox1.Controls.Add(chkmuxEnabled);
+        groupBox1.Controls.Add(cmbprotocol);
+        groupBox1.Controls.Add(label1);
+        groupBox1.Controls.Add(chkudpEnabled);
+        groupBox1.Controls.Add(chklogEnabled);
+        groupBox1.Controls.Add(cmbloglevel);
+        groupBox1.Controls.Add(label5);
+        groupBox1.Controls.Add(txtlocalPort);
+        groupBox1.Controls.Add(label2);
+        groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+        groupBox1.Location = new System.Drawing.Point(3, 3);
+        groupBox1.Name = "groupBox1";
+        groupBox1.Size = new System.Drawing.Size(706, 403);
+        groupBox1.TabIndex = 6;
+        groupBox1.TabStop = false;
+        // 
+        // chkdefAllowInsecure
+        // 
+        chkdefAllowInsecure.AutoSize = true;
+        chkdefAllowInsecure.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+        chkdefAllowInsecure.Location = new System.Drawing.Point(100, 186);
+        chkdefAllowInsecure.Name = "chkdefAllowInsecure";
+        chkdefAllowInsecure.Size = new System.Drawing.Size(99, 21);
+        chkdefAllowInsecure.TabIndex = 35;
+        chkdefAllowInsecure.Text = "跳过证书校验";
+        chkdefAllowInsecure.UseVisualStyleBackColor = true;
+        // 
+        // label16
+        // 
+        label16.AutoSize = true;
+        label16.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+        label16.Location = new System.Drawing.Point(6, 50);
+        label16.Name = "label16";
+        label16.Size = new System.Drawing.Size(56, 17);
+        label16.TabIndex = 34;
+        label16.Text = "代理模式";
+        // 
+        // cmblistenerType
+        // 
+        cmblistenerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        cmblistenerType.FormattingEnabled = true;
+        cmblistenerType.Items.AddRange(new object[] { "关闭系统代理", "打开系统代理" });
+        cmblistenerType.Location = new System.Drawing.Point(100, 47);
+        cmblistenerType.Name = "cmblistenerType";
+        cmblistenerType.Size = new System.Drawing.Size(276, 25);
+        cmblistenerType.TabIndex = 33;
+        // 
+        // chksniffingEnabled
+        // 
+        chksniffingEnabled.AutoSize = true;
+        chksniffingEnabled.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+        chksniffingEnabled.Location = new System.Drawing.Point(100, 105);
+        chksniffingEnabled.Name = "chksniffingEnabled";
+        chksniffingEnabled.Size = new System.Drawing.Size(75, 21);
+        chksniffingEnabled.TabIndex = 31;
+        chksniffingEnabled.Text = "流量探测";
+        chksniffingEnabled.UseVisualStyleBackColor = true;
+        // 
+        // txtremoteDNS
+        // 
+        txtremoteDNS.Location = new System.Drawing.Point(6, 244);
+        txtremoteDNS.Multiline = true;
+        txtremoteDNS.Name = "txtremoteDNS";
+        txtremoteDNS.Size = new System.Drawing.Size(694, 153);
+        txtremoteDNS.TabIndex = 30;
+        // 
+        // label14
+        // 
+        label14.AutoSize = true;
+        label14.Location = new System.Drawing.Point(6, 224);
+        label14.Name = "label14";
+        label14.Size = new System.Drawing.Size(213, 17);
+        label14.TabIndex = 29;
+        label14.Text = "自定义DNS服务器，复数时逗号(,)分割";
+        // 
+        // chkmuxEnabled
+        // 
+        chkmuxEnabled.AutoSize = true;
+        chkmuxEnabled.Location = new System.Drawing.Point(100, 132);
+        chkmuxEnabled.Name = "chkmuxEnabled";
+        chkmuxEnabled.Size = new System.Drawing.Size(75, 21);
+        chkmuxEnabled.TabIndex = 20;
+        chkmuxEnabled.Text = "多路复用";
+        chkmuxEnabled.UseVisualStyleBackColor = true;
+        // 
+        // cmbprotocol
+        // 
+        cmbprotocol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        cmbprotocol.Enabled = false;
+        cmbprotocol.FormattingEnabled = true;
+        cmbprotocol.Items.AddRange(new object[] { "socks", "http" });
+        cmbprotocol.Location = new System.Drawing.Point(279, 16);
+        cmbprotocol.Name = "cmbprotocol";
+        cmbprotocol.Size = new System.Drawing.Size(97, 25);
+        cmbprotocol.TabIndex = 12;
+        // 
+        // label1
+        // 
+        label1.AutoSize = true;
+        label1.Location = new System.Drawing.Point(184, 19);
+        label1.Name = "label1";
+        label1.Size = new System.Drawing.Size(89, 17);
+        label1.TabIndex = 11;
+        label1.Text = "协议(Protocol)";
+        // 
+        // chkudpEnabled
+        // 
+        chkudpEnabled.AutoSize = true;
+        chkudpEnabled.Location = new System.Drawing.Point(100, 78);
+        chkudpEnabled.Name = "chkudpEnabled";
+        chkudpEnabled.Size = new System.Drawing.Size(52, 21);
+        chkudpEnabled.TabIndex = 10;
+        chkudpEnabled.Text = "UDP";
+        chkudpEnabled.UseVisualStyleBackColor = true;
+        // 
+        // chklogEnabled
+        // 
+        chklogEnabled.AutoSize = true;
+        chklogEnabled.Location = new System.Drawing.Point(100, 159);
+        chklogEnabled.Name = "chklogEnabled";
+        chklogEnabled.Size = new System.Drawing.Size(99, 21);
+        chklogEnabled.TabIndex = 9;
+        chklogEnabled.Text = "记录本地日志";
+        chklogEnabled.UseVisualStyleBackColor = true;
+        // 
+        // cmbloglevel
+        // 
+        cmbloglevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        cmbloglevel.FormattingEnabled = true;
+        cmbloglevel.Items.AddRange(new object[] { "debug", "info", "warning", "error", "none" });
+        cmbloglevel.Location = new System.Drawing.Point(503, 16);
+        cmbloglevel.Name = "cmbloglevel";
+        cmbloglevel.Size = new System.Drawing.Size(97, 25);
+        cmbloglevel.TabIndex = 6;
+        // 
+        // label5
+        // 
+        label5.AutoSize = true;
+        label5.Location = new System.Drawing.Point(382, 19);
+        label5.Name = "label5";
+        label5.Size = new System.Drawing.Size(115, 17);
+        label5.TabIndex = 8;
+        label5.Text = "日志等级(LogLevel)";
+        // 
+        // txtlocalPort
+        // 
+        txtlocalPort.Location = new System.Drawing.Point(100, 16);
+        txtlocalPort.Name = "txtlocalPort";
+        txtlocalPort.Size = new System.Drawing.Size(78, 23);
+        txtlocalPort.TabIndex = 3;
+        // 
+        // label2
+        // 
+        label2.AutoSize = true;
+        label2.Location = new System.Drawing.Point(6, 19);
+        label2.Name = "label2";
+        label2.Size = new System.Drawing.Size(88, 17);
+        label2.TabIndex = 2;
+        label2.Text = "监听端口(Port)";
+        // 
+        // tabPage2
+        // 
+        tabPage2.Controls.Add(groupBox2);
+        tabPage2.Location = new System.Drawing.Point(4, 26);
+        tabPage2.Name = "tabPage2";
+        tabPage2.Padding = new System.Windows.Forms.Padding(3);
+        tabPage2.Size = new System.Drawing.Size(712, 409);
+        tabPage2.TabIndex = 1;
+        tabPage2.Text = "Core: 路由设置";
+        tabPage2.UseVisualStyleBackColor = true;
+        // 
+        // groupBox2
+        // 
+        groupBox2.Controls.Add(tabControl_Routing);
+        groupBox2.Controls.Add(panel3);
+        groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+        groupBox2.Location = new System.Drawing.Point(3, 3);
+        groupBox2.Name = "groupBox2";
+        groupBox2.Size = new System.Drawing.Size(706, 403);
+        groupBox2.TabIndex = 12;
+        groupBox2.TabStop = false;
+        // 
+        // tabControl_Routing
+        // 
+        tabControl_Routing.Controls.Add(tabPage3);
+        tabControl_Routing.Controls.Add(tabPage4);
+        tabControl_Routing.Controls.Add(tabPage5);
+        tabControl_Routing.Dock = System.Windows.Forms.DockStyle.Fill;
+        tabControl_Routing.Location = new System.Drawing.Point(3, 113);
+        tabControl_Routing.Name = "tabControl_Routing";
+        tabControl_Routing.SelectedIndex = 0;
+        tabControl_Routing.Size = new System.Drawing.Size(700, 287);
+        tabControl_Routing.TabIndex = 12;
+        // 
+        // tabPage3
+        // 
+        tabPage3.Controls.Add(txtUseragent);
+        tabPage3.Location = new System.Drawing.Point(4, 26);
+        tabPage3.Name = "tabPage3";
+        tabPage3.Padding = new System.Windows.Forms.Padding(3);
+        tabPage3.Size = new System.Drawing.Size(692, 257);
+        tabPage3.TabIndex = 0;
+        tabPage3.Text = "代理";
+        tabPage3.UseVisualStyleBackColor = true;
+        // 
+        // txtUseragent
+        // 
+        txtUseragent.Dock = System.Windows.Forms.DockStyle.Fill;
+        txtUseragent.Location = new System.Drawing.Point(3, 3);
+        txtUseragent.MaxLength = 0;
+        txtUseragent.Multiline = true;
+        txtUseragent.Name = "txtUseragent";
+        txtUseragent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+        txtUseragent.Size = new System.Drawing.Size(686, 251);
+        txtUseragent.TabIndex = 0;
+        // 
+        // tabPage4
+        // 
+        tabPage4.Controls.Add(txtUserdirect);
+        tabPage4.Location = new System.Drawing.Point(4, 26);
+        tabPage4.Name = "tabPage4";
+        tabPage4.Padding = new System.Windows.Forms.Padding(3);
+        tabPage4.Size = new System.Drawing.Size(692, 257);
+        tabPage4.TabIndex = 1;
+        tabPage4.Text = "直连";
+        tabPage4.UseVisualStyleBackColor = true;
+        // 
+        // txtUserdirect
+        // 
+        txtUserdirect.Dock = System.Windows.Forms.DockStyle.Fill;
+        txtUserdirect.Location = new System.Drawing.Point(3, 3);
+        txtUserdirect.MaxLength = 0;
+        txtUserdirect.Multiline = true;
+        txtUserdirect.Name = "txtUserdirect";
+        txtUserdirect.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+        txtUserdirect.Size = new System.Drawing.Size(686, 251);
+        txtUserdirect.TabIndex = 1;
+        // 
+        // tabPage5
+        // 
+        tabPage5.Controls.Add(txtUserblock);
+        tabPage5.Location = new System.Drawing.Point(4, 26);
+        tabPage5.Name = "tabPage5";
+        tabPage5.Padding = new System.Windows.Forms.Padding(3);
+        tabPage5.Size = new System.Drawing.Size(692, 257);
+        tabPage5.TabIndex = 2;
+        tabPage5.Text = "黑名单";
+        tabPage5.UseVisualStyleBackColor = true;
+        // 
+        // txtUserblock
+        // 
+        txtUserblock.Dock = System.Windows.Forms.DockStyle.Fill;
+        txtUserblock.Location = new System.Drawing.Point(3, 3);
+        txtUserblock.MaxLength = 0;
+        txtUserblock.Multiline = true;
+        txtUserblock.Name = "txtUserblock";
+        txtUserblock.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+        txtUserblock.Size = new System.Drawing.Size(686, 251);
+        txtUserblock.TabIndex = 1;
+        // 
+        // panel3
+        // 
+        panel3.Controls.Add(label3);
+        panel3.Controls.Add(cmbroutingMode);
+        panel3.Controls.Add(linkLabelRoutingDoc);
+        panel3.Controls.Add(labRoutingTips);
+        panel3.Controls.Add(cmbdomainStrategy);
+        panel3.Dock = System.Windows.Forms.DockStyle.Top;
+        panel3.Location = new System.Drawing.Point(3, 19);
+        panel3.Name = "panel3";
+        panel3.Size = new System.Drawing.Size(700, 94);
+        panel3.TabIndex = 19;
+        // 
+        // label3
+        // 
+        label3.AutoSize = true;
+        label3.Location = new System.Drawing.Point(7, 37);
+        label3.Name = "label3";
+        label3.Size = new System.Drawing.Size(80, 17);
+        label3.TabIndex = 20;
+        label3.Text = "预设路由规则";
+        // 
+        // cmbroutingMode
+        // 
+        cmbroutingMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        cmbroutingMode.FormattingEnabled = true;
+        cmbroutingMode.Items.AddRange(new object[] { "下拉选择添加", "清空", "私有地址", "常见大陆地址", "常见非大陆地址", "常见广告地址" });
+        cmbroutingMode.Location = new System.Drawing.Point(93, 34);
+        cmbroutingMode.Name = "cmbroutingMode";
+        cmbroutingMode.Size = new System.Drawing.Size(160, 25);
+        cmbroutingMode.TabIndex = 14;
+        cmbroutingMode.SelectedIndexChanged += cmbroutingMode_SelectedIndexChanged;
+        // 
+        // linkLabelRoutingDoc
+        // 
+        linkLabelRoutingDoc.AutoSize = true;
+        linkLabelRoutingDoc.LinkColor = System.Drawing.Color.Black;
+        linkLabelRoutingDoc.Location = new System.Drawing.Point(7, 6);
+        linkLabelRoutingDoc.Margin = new System.Windows.Forms.Padding(0);
+        linkLabelRoutingDoc.Name = "linkLabelRoutingDoc";
+        linkLabelRoutingDoc.Size = new System.Drawing.Size(56, 17);
+        linkLabelRoutingDoc.TabIndex = 19;
+        linkLabelRoutingDoc.TabStop = true;
+        linkLabelRoutingDoc.Text = "域名解析";
+        linkLabelRoutingDoc.LinkClicked += linkLabelRoutingDoc_LinkClicked;
+        // 
+        // labRoutingTips
+        // 
+        labRoutingTips.AutoSize = true;
+        labRoutingTips.ForeColor = System.Drawing.Color.Black;
+        labRoutingTips.Location = new System.Drawing.Point(7, 71);
+        labRoutingTips.Margin = new System.Windows.Forms.Padding(1);
+        labRoutingTips.Name = "labRoutingTips";
+        labRoutingTips.Padding = new System.Windows.Forms.Padding(1);
+        labRoutingTips.Size = new System.Drawing.Size(245, 19);
+        labRoutingTips.TabIndex = 13;
+        labRoutingTips.Text = "*设置路由规则，逗号 (,)分割，支持域名和IP";
+        // 
+        // cmbdomainStrategy
+        // 
+        cmbdomainStrategy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        cmbdomainStrategy.FormattingEnabled = true;
+        cmbdomainStrategy.Items.AddRange(new object[] { "AsIs", "IPIfNonMatch", "IPOnDemand" });
+        cmbdomainStrategy.Location = new System.Drawing.Point(93, 3);
+        cmbdomainStrategy.Name = "cmbdomainStrategy";
+        cmbdomainStrategy.Size = new System.Drawing.Size(160, 25);
+        cmbdomainStrategy.TabIndex = 16;
+        // 
+        // tabPage6
+        // 
+        tabPage6.Controls.Add(groupBox3);
+        tabPage6.Location = new System.Drawing.Point(4, 26);
+        tabPage6.Name = "tabPage6";
+        tabPage6.Padding = new System.Windows.Forms.Padding(3);
+        tabPage6.Size = new System.Drawing.Size(712, 409);
+        tabPage6.TabIndex = 2;
+        tabPage6.Text = "Core: KCP设置";
+        tabPage6.UseVisualStyleBackColor = true;
+        // 
+        // groupBox3
+        // 
+        groupBox3.Controls.Add(label6);
+        groupBox3.Controls.Add(chkKcpcongestion);
+        groupBox3.Controls.Add(txtKcpmtu);
+        groupBox3.Controls.Add(txtKcpwriteBufferSize);
+        groupBox3.Controls.Add(label7);
+        groupBox3.Controls.Add(label10);
+        groupBox3.Controls.Add(txtKcptti);
+        groupBox3.Controls.Add(txtKcpreadBufferSize);
+        groupBox3.Controls.Add(label9);
+        groupBox3.Controls.Add(label11);
+        groupBox3.Controls.Add(txtKcpuplinkCapacity);
+        groupBox3.Controls.Add(txtKcpdownlinkCapacity);
+        groupBox3.Controls.Add(label8);
+        groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+        groupBox3.Location = new System.Drawing.Point(3, 3);
+        groupBox3.Name = "groupBox3";
+        groupBox3.Size = new System.Drawing.Size(706, 403);
+        groupBox3.TabIndex = 21;
+        groupBox3.TabStop = false;
+        // 
+        // label6
+        // 
+        label6.AutoSize = true;
+        label6.Location = new System.Drawing.Point(6, 19);
+        label6.Name = "label6";
+        label6.Size = new System.Drawing.Size(30, 17);
+        label6.TabIndex = 4;
+        label6.Text = "mtu";
+        // 
+        // chkKcpcongestion
+        // 
+        chkKcpcongestion.AutoSize = true;
+        chkKcpcongestion.Location = new System.Drawing.Point(104, 103);
+        chkKcpcongestion.Name = "chkKcpcongestion";
+        chkKcpcongestion.Size = new System.Drawing.Size(91, 21);
+        chkKcpcongestion.TabIndex = 20;
+        chkKcpcongestion.Text = "congestion";
+        chkKcpcongestion.UseVisualStyleBackColor = true;
+        // 
+        // txtKcpmtu
+        // 
+        txtKcpmtu.Location = new System.Drawing.Point(105, 16);
+        txtKcpmtu.Name = "txtKcpmtu";
+        txtKcpmtu.Size = new System.Drawing.Size(100, 23);
+        txtKcpmtu.TabIndex = 5;
+        // 
+        // txtKcpwriteBufferSize
+        // 
+        txtKcpwriteBufferSize.Location = new System.Drawing.Point(385, 74);
+        txtKcpwriteBufferSize.Name = "txtKcpwriteBufferSize";
+        txtKcpwriteBufferSize.Size = new System.Drawing.Size(100, 23);
+        txtKcpwriteBufferSize.TabIndex = 15;
+        // 
+        // label7
+        // 
+        label7.AutoSize = true;
+        label7.Location = new System.Drawing.Point(270, 19);
+        label7.Name = "label7";
+        label7.Size = new System.Drawing.Size(19, 17);
+        label7.TabIndex = 6;
+        label7.Text = "tti";
+        // 
+        // label10
+        // 
+        label10.AutoSize = true;
+        label10.Location = new System.Drawing.Point(270, 77);
+        label10.Name = "label10";
+        label10.Size = new System.Drawing.Size(94, 17);
+        label10.TabIndex = 14;
+        label10.Text = "writeBufferSize";
+        // 
+        // txtKcptti
+        // 
+        txtKcptti.Location = new System.Drawing.Point(385, 16);
+        txtKcptti.Name = "txtKcptti";
+        txtKcptti.Size = new System.Drawing.Size(100, 23);
+        txtKcptti.TabIndex = 7;
+        // 
+        // txtKcpreadBufferSize
+        // 
+        txtKcpreadBufferSize.Location = new System.Drawing.Point(105, 74);
+        txtKcpreadBufferSize.Name = "txtKcpreadBufferSize";
+        txtKcpreadBufferSize.Size = new System.Drawing.Size(100, 23);
+        txtKcpreadBufferSize.TabIndex = 13;
+        // 
+        // label9
+        // 
+        label9.AutoSize = true;
+        label9.Location = new System.Drawing.Point(6, 48);
+        label9.Name = "label9";
+        label9.Size = new System.Drawing.Size(92, 17);
+        label9.TabIndex = 8;
+        label9.Text = "uplinkCapacity";
+        // 
+        // label11
+        // 
+        label11.AutoSize = true;
+        label11.Location = new System.Drawing.Point(6, 77);
+        label11.Name = "label11";
+        label11.Size = new System.Drawing.Size(93, 17);
+        label11.TabIndex = 12;
+        label11.Text = "readBufferSize";
+        // 
+        // txtKcpuplinkCapacity
+        // 
+        txtKcpuplinkCapacity.Location = new System.Drawing.Point(105, 45);
+        txtKcpuplinkCapacity.Name = "txtKcpuplinkCapacity";
+        txtKcpuplinkCapacity.Size = new System.Drawing.Size(100, 23);
+        txtKcpuplinkCapacity.TabIndex = 9;
+        // 
+        // txtKcpdownlinkCapacity
+        // 
+        txtKcpdownlinkCapacity.Location = new System.Drawing.Point(385, 45);
+        txtKcpdownlinkCapacity.Name = "txtKcpdownlinkCapacity";
+        txtKcpdownlinkCapacity.Size = new System.Drawing.Size(100, 23);
+        txtKcpdownlinkCapacity.TabIndex = 11;
+        // 
+        // label8
+        // 
+        label8.AutoSize = true;
+        label8.Location = new System.Drawing.Point(270, 45);
+        label8.Name = "label8";
+        label8.Size = new System.Drawing.Size(109, 17);
+        label8.TabIndex = 10;
+        label8.Text = "downlinkCapacity";
+        // 
+        // tabPage7
+        // 
+        tabPage7.Controls.Add(groupBox4);
+        tabPage7.Location = new System.Drawing.Point(4, 26);
+        tabPage7.Name = "tabPage7";
+        tabPage7.Padding = new System.Windows.Forms.Padding(3);
+        tabPage7.Size = new System.Drawing.Size(712, 409);
+        tabPage7.TabIndex = 3;
+        tabPage7.Text = "v2rayN设置";
+        tabPage7.UseVisualStyleBackColor = true;
+        // 
+        // groupBox4
+        // 
+        groupBox4.Controls.Add(chkAutoRun);
+        groupBox4.Controls.Add(chkKeepOlderDedupl);
+        groupBox4.Controls.Add(chkAllowLANConn);
+        groupBox4.Controls.Add(cbFreshrate);
+        groupBox4.Controls.Add(chkEnableStatistics);
+        groupBox4.Controls.Add(lbFreshrate);
+        groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+        groupBox4.Location = new System.Drawing.Point(3, 3);
+        groupBox4.Name = "groupBox4";
+        groupBox4.Size = new System.Drawing.Size(706, 403);
+        groupBox4.TabIndex = 34;
+        groupBox4.TabStop = false;
+        // 
+        // chkAutoRun
+        // 
+        chkAutoRun.AutoSize = true;
+        chkAutoRun.Location = new System.Drawing.Point(6, 22);
+        chkAutoRun.Name = "chkAutoRun";
+        chkAutoRun.Size = new System.Drawing.Size(75, 21);
+        chkAutoRun.TabIndex = 23;
+        chkAutoRun.Text = "开机启动";
+        chkAutoRun.UseVisualStyleBackColor = true;
+        // 
+        // chkKeepOlderDedupl
+        // 
+        chkKeepOlderDedupl.AutoSize = true;
+        chkKeepOlderDedupl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+        chkKeepOlderDedupl.Location = new System.Drawing.Point(6, 103);
+        chkKeepOlderDedupl.Name = "chkKeepOlderDedupl";
+        chkKeepOlderDedupl.Size = new System.Drawing.Size(159, 21);
+        chkKeepOlderDedupl.TabIndex = 33;
+        chkKeepOlderDedupl.Text = "去重时保留序号较小的项";
+        chkKeepOlderDedupl.UseVisualStyleBackColor = true;
+        // 
+        // chkAllowLANConn
+        // 
+        chkAllowLANConn.AutoSize = true;
+        chkAllowLANConn.Location = new System.Drawing.Point(6, 49);
+        chkAllowLANConn.Name = "chkAllowLANConn";
+        chkAllowLANConn.Size = new System.Drawing.Size(135, 21);
+        chkAllowLANConn.TabIndex = 29;
+        chkAllowLANConn.Text = "允许来自LAN的连接";
+        chkAllowLANConn.UseVisualStyleBackColor = true;
+        // 
+        // cbFreshrate
+        // 
+        cbFreshrate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        cbFreshrate.FormattingEnabled = true;
+        cbFreshrate.Location = new System.Drawing.Point(107, 130);
+        cbFreshrate.Name = "cbFreshrate";
+        cbFreshrate.Size = new System.Drawing.Size(105, 25);
+        cbFreshrate.TabIndex = 32;
+        // 
+        // chkEnableStatistics
+        // 
+        chkEnableStatistics.AutoSize = true;
+        chkEnableStatistics.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+        chkEnableStatistics.Location = new System.Drawing.Point(6, 76);
+        chkEnableStatistics.Name = "chkEnableStatistics";
+        chkEnableStatistics.Size = new System.Drawing.Size(159, 21);
+        chkEnableStatistics.TabIndex = 29;
+        chkEnableStatistics.Text = "流量计速，需要重启软件";
+        chkEnableStatistics.UseVisualStyleBackColor = true;
+        // 
+        // lbFreshrate
+        // 
+        lbFreshrate.AutoSize = true;
+        lbFreshrate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+        lbFreshrate.Location = new System.Drawing.Point(21, 133);
+        lbFreshrate.Name = "lbFreshrate";
+        lbFreshrate.Size = new System.Drawing.Size(80, 17);
+        lbFreshrate.TabIndex = 30;
+        lbFreshrate.Text = "计速刷新频率";
+        // 
+        // panel2
+        // 
+        panel2.Controls.Add(tableLayoutPanel1);
+        panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+        panel2.Location = new System.Drawing.Point(0, 449);
+        panel2.Name = "panel2";
+        panel2.Size = new System.Drawing.Size(720, 60);
+        panel2.TabIndex = 11;
+        // 
+        // tableLayoutPanel1
+        // 
+        tableLayoutPanel1.ColumnCount = 3;
+        tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+        tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+        tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+        tableLayoutPanel1.Controls.Add(btnOK, 2, 1);
+        tableLayoutPanel1.Controls.Add(btnClose, 0, 1);
+        tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+        tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+        tableLayoutPanel1.Name = "tableLayoutPanel1";
+        tableLayoutPanel1.RowCount = 3;
+        tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+        tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
+        tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+        tableLayoutPanel1.Size = new System.Drawing.Size(720, 60);
+        tableLayoutPanel1.TabIndex = 9;
+        // 
+        // btnOK
+        // 
+        btnOK.Dock = System.Windows.Forms.DockStyle.Left;
+        btnOK.Location = new System.Drawing.Point(398, 12);
+        btnOK.Name = "btnOK";
+        btnOK.Size = new System.Drawing.Size(75, 35);
+        btnOK.TabIndex = 8;
+        btnOK.Text = "&确定";
+        btnOK.UseVisualStyleBackColor = true;
+        btnOK.Click += btnOK_Click;
+        // 
+        // panel1
+        // 
+        panel1.Dock = System.Windows.Forms.DockStyle.Top;
+        panel1.Location = new System.Drawing.Point(0, 0);
+        panel1.Name = "panel1";
+        panel1.Size = new System.Drawing.Size(720, 10);
+        panel1.TabIndex = 9;
+        // 
+        // OptionSettingForm
+        // 
+        AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+        CancelButton = btnClose;
+        ClientSize = new System.Drawing.Size(720, 509);
+        Controls.Add(tabControl1);
+        Controls.Add(panel2);
+        Controls.Add(panel1);
+        FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+        Margin = new System.Windows.Forms.Padding(11479, 1022, 11479, 1022);
+        Name = "OptionSettingForm";
+        Text = "Settings";
+        Load += OptionSettingForm_Load;
+        tabControl1.ResumeLayout(false);
+        tabPage1.ResumeLayout(false);
+        groupBox1.ResumeLayout(false);
+        groupBox1.PerformLayout();
+        tabPage2.ResumeLayout(false);
+        groupBox2.ResumeLayout(false);
+        tabControl_Routing.ResumeLayout(false);
+        tabPage3.ResumeLayout(false);
+        tabPage3.PerformLayout();
+        tabPage4.ResumeLayout(false);
+        tabPage4.PerformLayout();
+        tabPage5.ResumeLayout(false);
+        tabPage5.PerformLayout();
+        panel3.ResumeLayout(false);
+        panel3.PerformLayout();
+        tabPage6.ResumeLayout(false);
+        groupBox3.ResumeLayout(false);
+        groupBox3.PerformLayout();
+        tabPage7.ResumeLayout(false);
+        groupBox4.ResumeLayout(false);
+        groupBox4.PerformLayout();
+        panel2.ResumeLayout(false);
+        tableLayoutPanel1.ResumeLayout(false);
+        ResumeLayout(false);
+    }
+
+    #endregion
+
+    private System.Windows.Forms.Button btnClose;
+    private System.Windows.Forms.Button btnOK;
+    private System.Windows.Forms.GroupBox groupBox1;
+    private System.Windows.Forms.ComboBox cmbloglevel;
+    private System.Windows.Forms.Label label5;
+    private System.Windows.Forms.TextBox txtlocalPort;
+    private System.Windows.Forms.Label label2;
+    private System.Windows.Forms.CheckBox chklogEnabled;
+    private System.Windows.Forms.CheckBox chkudpEnabled;
+    private System.Windows.Forms.Panel panel1;
+    private System.Windows.Forms.TabControl tabControl1;
+    private System.Windows.Forms.TabPage tabPage1;
+    private System.Windows.Forms.TabPage tabPage2;
+    private System.Windows.Forms.Panel panel2;
+    private System.Windows.Forms.GroupBox groupBox2;
+    private System.Windows.Forms.ComboBox cmbprotocol;
+    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.CheckBox chkmuxEnabled;
+    private System.Windows.Forms.TabControl tabControl_Routing;
+    private System.Windows.Forms.TabPage tabPage3;
+    private System.Windows.Forms.TabPage tabPage4;
+    private System.Windows.Forms.Label labRoutingTips;
+    private System.Windows.Forms.TextBox txtUseragent;
+    private System.Windows.Forms.TabPage tabPage5;
+    private System.Windows.Forms.TextBox txtUserdirect;
+    private System.Windows.Forms.TextBox txtUserblock;
+    private System.Windows.Forms.TabPage tabPage6;
+    private System.Windows.Forms.TextBox txtKcpmtu;
+    private System.Windows.Forms.Label label6;
+    private System.Windows.Forms.TextBox txtKcptti;
+    private System.Windows.Forms.Label label7;
+    private System.Windows.Forms.TextBox txtKcpwriteBufferSize;
+    private System.Windows.Forms.Label label10;
+    private System.Windows.Forms.TextBox txtKcpreadBufferSize;
+    private System.Windows.Forms.Label label11;
+    private System.Windows.Forms.TextBox txtKcpdownlinkCapacity;
+    private System.Windows.Forms.Label label8;
+    private System.Windows.Forms.TextBox txtKcpuplinkCapacity;
+    private System.Windows.Forms.Label label9;
+    private System.Windows.Forms.CheckBox chkKcpcongestion;
+    private System.Windows.Forms.TabPage tabPage7;
+    private System.Windows.Forms.CheckBox chkAutoRun;
+    private System.Windows.Forms.CheckBox chkAllowLANConn;
+    private System.Windows.Forms.TextBox txtremoteDNS;
+    private System.Windows.Forms.Label label14;
+    private System.Windows.Forms.Panel panel3;
+    private System.Windows.Forms.ComboBox cmbdomainStrategy;
+    private System.Windows.Forms.ComboBox cmbroutingMode;
+    private System.Windows.Forms.CheckBox chksniffingEnabled;
+    private System.Windows.Forms.CheckBox chkEnableStatistics;
+    private System.Windows.Forms.ComboBox cbFreshrate;
+    private System.Windows.Forms.Label lbFreshrate;
+    private System.Windows.Forms.Label label16;
+    private System.Windows.Forms.ComboBox cmblistenerType;
+    private System.Windows.Forms.CheckBox chkKeepOlderDedupl;
+    private System.Windows.Forms.LinkLabel linkLabelRoutingDoc;
+    private System.Windows.Forms.CheckBox chkdefAllowInsecure;
+    private System.Windows.Forms.GroupBox groupBox3;
+    private System.Windows.Forms.GroupBox groupBox4;
+    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+    private System.Windows.Forms.Label label3;
 }

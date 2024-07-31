@@ -2,38 +2,37 @@
 using System.Windows.Forms;
 using v2rayN.Config;
 
-namespace v2rayN.Forms
+namespace v2rayN.Forms;
+
+public partial class BaseForm : Form
 {
-    public partial class BaseForm : Form
+    protected static Config.V2RayNConfig config;
+    protected static System.Drawing.Icon icon;
+
+    public BaseForm()
     {
-        protected static Config.V2RayNConfig config;
-        protected static System.Drawing.Icon icon;
+        InitializeComponent();
+        LoadCustomIcon();
+    }
 
-        public BaseForm()
+    private void LoadCustomIcon()
+    {
+        try
         {
-            InitializeComponent();
-            LoadCustomIcon();
-        }
-
-        private void LoadCustomIcon()
-        {
-            try
+            if (icon == null)
             {
-                if (icon == null)
+                string file = Misc.GetPath(Global.CustomIconName);
+                if (!System.IO.File.Exists(file))
                 {
-                    string file = Misc.GetPath(Global.CustomIconName);
-                    if (!System.IO.File.Exists(file))
-                    {
-                        return;
-                    }
-                    icon = new System.Drawing.Icon(file);
+                    return;
                 }
-                this.Icon = icon;
+                icon = new System.Drawing.Icon(file);
             }
-            catch (Exception e)
-            {
-                Log.SaveLog($"Loading custom icon failed: {e.Message}");
-            }
+            this.Icon = icon;
+        }
+        catch (Exception e)
+        {
+            Log.SaveLog($"Loading custom icon failed: {e.Message}");
         }
     }
 }
