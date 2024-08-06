@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using v2rayN.Extensions;
 using v2rayN.Handlers;
 using v2rayN.Utils;
@@ -43,9 +44,27 @@ public class V2RayNConfig
     public bool defAllowInsecure { get; set; }
 
     /// <summary>
+    /// 开启fakedns
+    /// </summary>
+    public bool fakednsEnabled { get; set; }
+
+    /// <summary>
+    /// 本地DNS服务
+    /// </summary>
+    public bool localDNSEnabled { get; set; }
+
+    /// <summary>
     /// 自定义远程DNS
     /// </summary>
     public string remoteDNS { get; set; }
+
+    public List<string> CustomDNS()
+    {
+        if (!string.IsNullOrWhiteSpace(remoteDNS))        
+            return remoteDNS.Split(',').Select(item => item.TrimEx()).ToList();
+        
+        return null;
+    }
 
     /// <summary>
     /// 域名解析策略
@@ -60,7 +79,7 @@ public class V2RayNConfig
     /// <summary>
     /// 用户自定义需代理的网址或ip
     /// </summary>
-    public List<string> useragent { get; set; }
+    public List<string> userproxy { get; set; }
 
     /// <summary>
     /// 用户自定义直连的网址或ip

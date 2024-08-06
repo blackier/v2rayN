@@ -81,9 +81,9 @@ class v2rayNConfigHandler
         {
             config.routingMode = "0";
         }
-        if (config.useragent == null)
+        if (config.userproxy == null)
         {
-            config.useragent = new List<string>();
+            config.userproxy = new List<string>();
         }
         if (config.userdirect == null)
         {

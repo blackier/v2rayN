@@ -14,7 +14,7 @@ namespace Shadowsocks.Interop.V2Ray.Dns
         /// Gets or sets the DNS server port.
         /// Defaults to 53.
         /// </summary>
-        public int Port { get; set; }
+        public int? Port { get; set; }
 
         /// <summary>
         /// Gets or sets the client IP
@@ -37,9 +37,9 @@ namespace Shadowsocks.Interop.V2Ray.Dns
         public ServerObject()
         {
             Address = "";
-            Port = 53;
             Domains = new();
-            ExpectIPs = new();
         }
+
+        public static ServerObject DefaultFakeDNS() => new() { Address = "fakedns", Domains = new() };
     }
 }

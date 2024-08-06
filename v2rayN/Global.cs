@@ -18,6 +18,9 @@ class Global
     public const string SpeedPingTestUrl = @"https://www.google.com/generate_204";
     public const string AvailabilityTestUrl = @"https://www.google.com/generate_204";
 
+    public static readonly List<string> DomainDNSAddress = ["223.5.5.5", "223.6.6.6", "localhost"];
+    public static readonly List<string> DomainOverseaDNSAddress = ["1.1.1.1", "8.8.8.8"];
+
     /// <summary>
     /// PromotionUrl
     /// </summary>
@@ -56,7 +59,7 @@ class Global
     /// <summary>
     /// 代理 tag值
     /// </summary>
-    public const string agentTag = "proxy";
+    public const string proxyTag = "proxy";
 
     /// <summary>
     /// 直连 tag值
@@ -67,6 +70,11 @@ class Global
     /// 阻止 tag值
     /// </summary>
     public const string blockTag = "block";
+
+    public const string dnsServerTag = "dns-server";
+    public const string dnsInTag = "dns-int";
+    public const string dnsOutTag = "dns-out";
+    public const int dnsPort = 53;
 
     public const string StreamSecurity = "tls";
     public const string StreamSecurityReality = "reality";

@@ -70,6 +70,7 @@ partial class MainForm
         menuSysAgentMode = new System.Windows.Forms.ToolStripMenuItem();
         menuCloseHttp = new System.Windows.Forms.ToolStripMenuItem();
         menuOpenHttp = new System.Windows.Forms.ToolStripMenuItem();
+        menuOpenSocks = new System.Windows.Forms.ToolStripMenuItem();
         menuServers = new System.Windows.Forms.ToolStripMenuItem();
         menuAddServers2 = new System.Windows.Forms.ToolStripMenuItem();
         menuScanScreen2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -436,11 +437,11 @@ partial class MainForm
         cmsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuSysAgentMode, menuServers, menuAddServers2, menuScanScreen2, menuUpdateSubscriptions, toolStripSeparator2, menuExit });
         cmsMain.Name = "contextMenuStrip1";
         cmsMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-        cmsMain.Size = new System.Drawing.Size(201, 142);
+        cmsMain.Size = new System.Drawing.Size(201, 164);
         // 
         // menuSysAgentMode
         // 
-        menuSysAgentMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuCloseHttp, menuOpenHttp });
+        menuSysAgentMode.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuCloseHttp, menuOpenHttp, menuOpenSocks });
         menuSysAgentMode.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
         menuSysAgentMode.Name = "menuSysAgentMode";
         menuSysAgentMode.Size = new System.Drawing.Size(200, 22);
@@ -449,16 +450,24 @@ partial class MainForm
         // menuCloseHttp
         // 
         menuCloseHttp.Name = "menuCloseHttp";
-        menuCloseHttp.Size = new System.Drawing.Size(148, 22);
+        menuCloseHttp.Size = new System.Drawing.Size(189, 22);
         menuCloseHttp.Text = "关闭系统代理";
         menuCloseHttp.Click += menuCloseHttp_Click;
         // 
         // menuOpenHttp
         // 
         menuOpenHttp.Name = "menuOpenHttp";
-        menuOpenHttp.Size = new System.Drawing.Size(148, 22);
-        menuOpenHttp.Text = "打开系统代理";
+        menuOpenHttp.Size = new System.Drawing.Size(189, 22);
+        menuOpenHttp.Text = "打开系统代理(http)";
         menuOpenHttp.Click += menuOpenHttp_Click;
+        // 
+        // menuOpenSocks
+        // 
+        menuOpenSocks.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+        menuOpenSocks.Name = "menuOpenSocks";
+        menuOpenSocks.Size = new System.Drawing.Size(189, 22);
+        menuOpenSocks.Text = "打开系统代理(socks)";
+        menuOpenSocks.Click += menuOpenSocks_Click;
         // 
         // menuServers
         // 
@@ -861,6 +870,7 @@ partial class MainForm
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
     private System.Windows.Forms.ToolStripMenuItem menuSysAgentMode;
     private System.Windows.Forms.ToolStripMenuItem menuOpenHttp;
+    private System.Windows.Forms.ToolStripMenuItem menuOpenSocks;
     private System.Windows.Forms.ToolStripMenuItem menuCloseHttp;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripMenuItem menuAddShadowsocksServer;

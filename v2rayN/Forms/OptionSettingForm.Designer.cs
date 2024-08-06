@@ -57,6 +57,7 @@ partial class OptionSettingForm
         tabPage5 = new System.Windows.Forms.TabPage();
         txtUserblock = new System.Windows.Forms.TextBox();
         panel3 = new System.Windows.Forms.Panel();
+        fakedns_checkbox = new System.Windows.Forms.CheckBox();
         label3 = new System.Windows.Forms.Label();
         cmbroutingMode = new System.Windows.Forms.ComboBox();
         linkLabelRoutingDoc = new System.Windows.Forms.LinkLabel();
@@ -89,6 +90,7 @@ partial class OptionSettingForm
         tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
         btnOK = new System.Windows.Forms.Button();
         panel1 = new System.Windows.Forms.Panel();
+        dnsserver_checkbox = new System.Windows.Forms.CheckBox();
         tabControl1.SuspendLayout();
         tabPage1.SuspendLayout();
         groupBox1.SuspendLayout();
@@ -413,6 +415,8 @@ partial class OptionSettingForm
         // 
         // panel3
         // 
+        panel3.Controls.Add(dnsserver_checkbox);
+        panel3.Controls.Add(fakedns_checkbox);
         panel3.Controls.Add(label3);
         panel3.Controls.Add(cmbroutingMode);
         panel3.Controls.Add(linkLabelRoutingDoc);
@@ -423,6 +427,16 @@ partial class OptionSettingForm
         panel3.Name = "panel3";
         panel3.Size = new System.Drawing.Size(700, 94);
         panel3.TabIndex = 19;
+        // 
+        // fakedns_checkbox
+        // 
+        fakedns_checkbox.AutoSize = true;
+        fakedns_checkbox.Location = new System.Drawing.Point(259, 5);
+        fakedns_checkbox.Name = "fakedns_checkbox";
+        fakedns_checkbox.Size = new System.Drawing.Size(80, 21);
+        fakedns_checkbox.TabIndex = 37;
+        fakedns_checkbox.Text = "FakeDNS";
+        fakedns_checkbox.UseVisualStyleBackColor = true;
         // 
         // label3
         // 
@@ -751,6 +765,16 @@ partial class OptionSettingForm
         panel1.Size = new System.Drawing.Size(720, 10);
         panel1.TabIndex = 9;
         // 
+        // dnsserver_checkbox
+        // 
+        dnsserver_checkbox.AutoSize = true;
+        dnsserver_checkbox.Location = new System.Drawing.Point(345, 5);
+        dnsserver_checkbox.Name = "dnsserver_checkbox";
+        dnsserver_checkbox.Size = new System.Drawing.Size(77, 21);
+        dnsserver_checkbox.TabIndex = 38;
+        dnsserver_checkbox.Text = "DNS服务";
+        dnsserver_checkbox.UseVisualStyleBackColor = true;
+        // 
         // OptionSettingForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -853,4 +877,6 @@ partial class OptionSettingForm
     private System.Windows.Forms.GroupBox groupBox4;
     private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     private System.Windows.Forms.Label label3;
+    private System.Windows.Forms.CheckBox fakedns_checkbox;
+    private System.Windows.Forms.CheckBox dnsserver_checkbox;
 }

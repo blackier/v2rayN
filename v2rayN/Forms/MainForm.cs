@@ -59,6 +59,8 @@ public partial class MainForm : BaseForm
 
         Text = Misc.GetVersion();
 
+        PACHandler.ProcessEvent += v2rayHandler_ProcessEvent;
+
         v2rayNConfigHandler.LoadConfig(ref config);
         v2rayHandler = new v2rayHandler();
         v2rayHandler.ProcessEvent += v2rayHandler_ProcessEvent;
@@ -72,7 +74,7 @@ public partial class MainForm : BaseForm
         {
             v2rayHandler.V2rayStop();
 
-            HttpProxyHandler.Update(config);
+            SystemProxyHandler.Update(config);
 
             v2rayNConfigHandler.SaveConfig(ref config);
             statistics?.SaveToFile();
@@ -143,6 +145,7 @@ public partial class MainForm : BaseForm
             HideForm();
             return;
         }
+        PACHandler.StopListenner();
     }
 
     private void RestoreUI()
@@ -756,7 +759,7 @@ public partial class MainForm : BaseForm
             //刷新
             RefreshServers();
             LoadV2ray();
-            HttpProxyHandler.Update(config);
+            SystemProxyHandler.Update(config);
         }
     }
 
@@ -1171,7 +1174,12 @@ public partial class MainForm : BaseForm
 
     private void menuOpenHttp_Click(object sender, EventArgs e)
     {
-        SetListenerType(ListenerType.openSystemProxy);
+        SetListenerType(ListenerType.openSystemProxyHttp);
+    }
+
+    private void menuOpenSocks_Click(object sender, EventArgs e)
+    {
+        SetListenerType(ListenerType.openSystemProxySocks);
     }
 
     private void menuCloseHttp_Click(object sender, EventArgs e)
@@ -1187,7 +1195,7 @@ public partial class MainForm : BaseForm
 
     private void ChangeHttpProxyStatus(ListenerType type)
     {
-        HttpProxyHandler.Update(config);
+        SystemProxyHandler.Update(config);
 
         for (int k = 0; k < menuSysAgentMode.DropDownItems.Count; k++)
         {
@@ -1601,7 +1609,7 @@ public partial class MainForm : BaseForm
                 AppendText(true, args.GetException().Message);
             };
             WebProxy webProxy = null;
-            if (config.listenerType == ListenerType.openSystemProxy)
+            if (config.listenerType == ListenerType.openSystemProxyHttp)
             {
                 int httpPort = config.GetLocalPort(Global.InboundHttp);
                 webProxy = new WebProxy(Global.Loopback, httpPort);

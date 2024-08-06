@@ -93,7 +93,13 @@ class StatisticsHandler
 
                     if (UpdateUI)
                     {
-                        _onStatisticUpdated(proxyUp, proxyDown, directUp, directDown, new List<ServerStatItem> { serverStatItem });
+                        _onStatisticUpdated(
+                            proxyUp,
+                            proxyDown,
+                            directUp,
+                            directDown,
+                            new List<ServerStatItem> { serverStatItem }
+                        );
                     }
                 }
                 Thread.Sleep(_config.statisticsFreshRate);
@@ -208,7 +214,7 @@ class StatisticsHandler
                 name = nStr[1];
                 type = nStr[3];
 
-                if (name == Global.agentTag)
+                if (name == Global.proxyTag)
                 {
                     if (type == "uplink")
                     {

@@ -7,14 +7,14 @@ using v2rayN.Handlers;
 
 namespace v2rayN.Forms;
 
-class ComboItem
-{
-    public int ID { get; set; }
-    public string Text { get; set; }
-}
-
 public partial class OptionSettingForm : BaseForm
 {
+    class ComboItem
+    {
+        public int ID { get; set; }
+        public string Text { get; set; }
+    }
+
     public OptionSettingForm()
     {
         InitializeComponent();
@@ -69,9 +69,12 @@ public partial class OptionSettingForm : BaseForm
         cmbdomainStrategy.Text = config.domainStrategy;
         cmbroutingMode.SelectedIndex = 0;
 
-        txtUseragent.Text = Misc.List2String(config.useragent, true);
+        txtUseragent.Text = Misc.List2String(config.userproxy, true);
         txtUserdirect.Text = Misc.List2String(config.userdirect, true);
         txtUserblock.Text = Misc.List2String(config.userblock, true);
+
+        fakedns_checkbox.Checked = config.fakednsEnabled;
+        dnsserver_checkbox.Checked = config.localDNSEnabled;
     }
 
     /// <summary>
@@ -223,9 +226,12 @@ public partial class OptionSettingForm : BaseForm
 
         config.domainStrategy = domainStrategy;
 
-        config.useragent = Misc.String2List(useragent);
+        config.userproxy = Misc.String2List(useragent);
         config.userdirect = Misc.String2List(userdirect);
         config.userblock = Misc.String2List(userblock);
+
+        config.fakednsEnabled = fakedns_checkbox.Checked;
+        config.localDNSEnabled = dnsserver_checkbox.Checked;
 
         return 0;
     }

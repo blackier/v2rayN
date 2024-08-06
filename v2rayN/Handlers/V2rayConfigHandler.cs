@@ -7,6 +7,8 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using Shadowsocks.Interop.V2Ray.Dns;
+using Shadowsocks.Interop.V2Ray.Inbound;
 using v2rayN.Config;
 using v2rayN.Extensions;
 using V2Ray = Shadowsocks.Interop.V2Ray;
@@ -54,14 +56,14 @@ class v2rayConfigHandler
             //本地端口
             SetInbound(config, ref v2rayConfig);
 
+            //dns
+            SetDNS(config, ref v2rayConfig);
+
             //路由
             SetRouting(config, ref v2rayConfig);
 
             //outbound
             SetOutbound(config, ref v2rayConfig);
-
-            //dns
-            SetDNS(config, ref v2rayConfig);
 
             // 统计配置
             SetAPI(config, ref v2rayConfig);
@@ -136,6 +138,8 @@ class v2rayConfigHandler
         else
             socksInbound.Listen = Global.Loopback;
         // 流量探测
+        if (config.fakednsEnabled)
+            socksInbound.Sniffing = SniffingObject.DefaultFakeDns;
         socksInbound.Sniffing.Enabled = config.inbound[0].sniffingEnabled;
         socksInbound.Sniffing.RouteOnly = config.inbound[0].sniffingEnabled;
 
@@ -144,11 +148,31 @@ class v2rayConfigHandler
         httpInbound.Listen = socksInbound.Listen;
         httpInbound.Tag = "httpProxy";
         httpInbound.Port = config.inbound[0].localPort + 1;
+
+        if (config.fakednsEnabled)
+            httpInbound.Sniffing = SniffingObject.DefaultFakeDns;
         httpInbound.Sniffing.Enabled = config.inbound[0].sniffingEnabled;
         httpInbound.Sniffing.RouteOnly = config.inbound[0].sniffingEnabled;
 
         v2rayConfig.Inbounds.Add(socksInbound);
         v2rayConfig.Inbounds.Add(httpInbound);
+
+        // dns入口
+        if (config.localDNSEnabled)
+        {
+            var dnsInbound = new V2Ray.InboundObject
+            {
+                Tag = Global.dnsInTag,
+                Listen = Global.Loopback,
+                Port = Global.dnsPort,
+                Protocol = Global.InboundAPIProtocal,
+                Settings = new V2Ray.Protocols.Dokodemo_door.InboundConfigurationObject(
+                    Global.DomainOverseaDNSAddress.First(),
+                    "tcp,udp"
+                )
+            };
+            v2rayConfig.Inbounds.Add(dnsInbound);
+        }
         return 0;
     }
 
@@ -158,24 +182,54 @@ class v2rayConfigHandler
     /// <param name="config"></param>
     /// <param name="v2rayConfig"></param>
     /// <returns></returns>
-    private static int SetRouting(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
+    private static int SetRouting(V2RayNConfig config, ref V2RayConfig v2rayConfig)
     {
-        if (v2rayConfig.Routing != null && v2rayConfig.Routing.Rules != null)
-        {
-            v2rayConfig.Routing.DomainStrategy = config.domainStrategy;
+        v2rayConfig.Routing.DomainStrategy = config.domainStrategy;
 
-            //自定义
-            //需代理
-            routingUserRule(config.useragent, Global.agentTag, ref v2rayConfig);
-            //直连
-            routingUserRule(config.userdirect, Global.directTag, ref v2rayConfig);
-            //阻止
-            routingUserRule(config.userblock, Global.blockTag, ref v2rayConfig);
-        }
+        // DNS设置
+        // DNS本地服务入口
+        var dnsHostRule = new V2Ray.Routing.RuleObject
+        {
+            Type = "field",
+            InboundTag = new() { Global.dnsInTag },
+            OutboundTag = Global.dnsOutTag,
+        };
+        v2rayConfig.Routing.Rules.Add(dnsHostRule);
+
+        // DNS代理固定的几个
+        var dnsServerProxyRule = new V2Ray.Routing.RuleObject
+        {
+            Type = "field",
+            Ip = Global.DomainOverseaDNSAddress,
+            OutboundTag = Global.proxyTag,
+        };
+        v2rayConfig.Routing.Rules.Add(dnsServerProxyRule);
+
+        // DNS其他直接直连
+        var dnsServerDirectRule = new V2Ray.Routing.RuleObject
+        {
+            Type = "field",
+            InboundTag = new() { Global.dnsServerTag },
+            OutboundTag = Global.directTag,
+        };
+        v2rayConfig.Routing.Rules.Add(dnsServerDirectRule);
+
+        //自定义
+        //需代理
+        routingUserRule(config.userproxy, Global.proxyTag, ref v2rayConfig, config);
+        //直连
+        routingUserRule(config.userdirect, Global.directTag, ref v2rayConfig, config);
+        //阻止
+        routingUserRule(config.userblock, Global.blockTag, ref v2rayConfig, config);
         return 0;
     }
 
-    private static int routingUserRule(List<string> userRule, string tag, ref V2RayConfig v2rayConfig)
+    private static int routingUserRule(
+        List<string> userRule,
+        string tag,
+        ref V2RayConfig v2rayConfig,
+        V2RayNConfig config
+    )
     {
         if (userRule != null && userRule.Count > 0)
         {
@@ -222,6 +276,20 @@ class v2rayConfigHandler
             {
                 v2rayConfig.Routing.Rules.Add(domainRule);
             }
+            // dns server direct
+            if (tag == Global.directTag)
+            {
+                var directDNSItem = new ServerObject();
+                directDNSItem.Domains = domainRule.Domain.ToList();
+
+                var customDNS = config.CustomDNS();
+                if (customDNS != null && customDNS.Any())
+                    directDNSItem.Address = customDNS.FirstOrDefault();
+                else
+                    directDNSItem.Address = Global.DomainDNSAddress.FirstOrDefault();
+
+                v2rayConfig.Dns.Servers.Insert(0, directDNSItem);
+            }
         }
         return 0;
     }
@@ -234,9 +302,10 @@ class v2rayConfigHandler
     /// <returns></returns>
     private static int SetOutbound(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
     {
+        // 设置代理，放前面作为主出站
         if (config.node.configType == EConfigType.VMess)
         {
-            var outbound = V2Ray.OutboundObject.GetVMess(Global.agentTag, config.address(), config.port(), config.id());
+            var outbound = V2Ray.OutboundObject.GetVMess(Global.proxyTag, config.address(), config.port(), config.id());
 
             var settings = (V2Ray.Protocols.VMess.OutboundConfigurationObject)outbound.Settings;
             settings.Vnext[0].Users[0].AlterId = config.alterId();
@@ -257,7 +326,7 @@ class v2rayConfigHandler
         }
         else if (config.node.configType == EConfigType.Shadowsocks)
         {
-            var outbound = V2Ray.OutboundObject.GetShadowsocks(Global.agentTag);
+            var outbound = V2Ray.OutboundObject.GetShadowsocks(Global.proxyTag);
             var settings = (V2Ray.Protocols.Shadowsocks.OutboundConfigurationObject)outbound.Settings;
 
             //远程服务器地址和端口
@@ -277,7 +346,7 @@ class v2rayConfigHandler
         else if (config.node.configType == EConfigType.Socks)
         {
             var outbound = V2Ray.OutboundObject.GetSocks(
-                Global.agentTag,
+                Global.proxyTag,
                 new DnsEndPoint(config.address(), config.port())
             );
             var settings = (V2Ray.Protocols.Socks.OutboundConfigurationObject)outbound.Settings;
@@ -305,7 +374,7 @@ class v2rayConfigHandler
         }
         else if (config.node.configType == EConfigType.VLESS)
         {
-            var outbound = V2Ray.OutboundObject.GetVLESS(Global.agentTag, config.address(), config.port(), config.id());
+            var outbound = V2Ray.OutboundObject.GetVLESS(Global.proxyTag, config.address(), config.port(), config.id());
 
             var settings = (V2Ray.Protocols.VLESS.OutboundConfigurationObject)outbound.Settings;
 
@@ -340,7 +409,7 @@ class v2rayConfigHandler
         else if (config.node.configType == EConfigType.Trojan)
         {
             var outbound = V2Ray.OutboundObject.GetTrojan(
-                Global.agentTag,
+                Global.proxyTag,
                 config.address(),
                 config.port(),
                 config.id()
@@ -359,7 +428,7 @@ class v2rayConfigHandler
             v2rayConfig.Outbounds.Add(outbound);
         }
 
-        // 设置直连，放前面作为主出站
+        // 设置直连
         var freedomOutbound = new V2Ray.OutboundObject
         {
             Protocol = "freedom",
@@ -367,6 +436,10 @@ class v2rayConfigHandler
             Settings = new V2Ray.Protocols.Freedom.OutboundConfigurationObject()
         };
         v2rayConfig.Outbounds.Add(freedomOutbound);
+
+        // dns解析
+        var dnsOutbound = new V2Ray.OutboundObject { Protocol = "dns", Tag = Global.dnsOutTag };
+        v2rayConfig.Outbounds.Add(dnsOutbound);
 
         // 设置黑名单
         var blackholeOutbound = new V2Ray.OutboundObject
@@ -521,13 +594,19 @@ class v2rayConfigHandler
     /// <returns></returns>
     private static int SetDNS(Config.V2RayNConfig config, ref V2RayConfig v2rayConfig)
     {
-        if (!string.IsNullOrWhiteSpace(config.remoteDNS))
+        v2rayConfig.Dns.Tag = Global.dnsServerTag;
+        if (config.fakednsEnabled)
+            v2rayConfig.Dns.Servers.Add("fakedns");
+
+        var customDns = config.CustomDNS();
+        if (customDns != null)
         {
-            foreach (var server in config.remoteDNS.Split(','))
-            {
-                v2rayConfig.Dns.Servers.Add(server.TrimEx());
-            }
+            foreach (var dnsip in customDns)
+                v2rayConfig.Dns.Servers.Add(dnsip);
         }
+
+        foreach (var dnsip in Global.DomainOverseaDNSAddress)
+            v2rayConfig.Dns.Servers.Add(dnsip);
 
         return 0;
     }
@@ -666,14 +745,14 @@ class v2rayConfigHandler
 
                 V2RayConfig v2rayConfigCopy = V2RayConfig.SpeedTest;
                 SetOutbound(configCopy, ref v2rayConfigCopy);
-                v2rayConfigCopy.Outbounds[0].Tag = Global.agentTag + port.ToString();
+                v2rayConfigCopy.Outbounds[0].Tag = Global.proxyTag + port.ToString();
                 v2rayConfig.Outbounds.Add(v2rayConfigCopy.Outbounds[0]);
 
                 v2rayConfig.Routing.Rules.Add(
                     new()
                     {
                         InboundTag = new() { Global.InboundHttp + port.ToString() },
-                        OutboundTag = Global.agentTag + port.ToString(),
+                        OutboundTag = Global.proxyTag + port.ToString(),
                     }
                 );
             }

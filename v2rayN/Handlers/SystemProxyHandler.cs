@@ -10,13 +10,14 @@ namespace v2rayN.Handlers;
 public enum ListenerType
 {
     closeSystemProxy = 0,
-    openSystemProxy
+    openSystemProxyHttp,
+    openSystemProxySocks
 }
 
 /// <summary>
 /// 系统代理(http)总处理
 /// </summary>
-class HttpProxyHandler
+class SystemProxyHandler
 {
     public static bool Update(Config.V2RayNConfig config)
     {
@@ -27,12 +28,20 @@ class HttpProxyHandler
             {
                 return false;
             }
+
             switch (config.listenerType)
             {
-                case ListenerType.openSystemProxy:
+                case ListenerType.openSystemProxyHttp:
+                    PACHandler.StopListenner();
                     WinINet.ProxyGlobal($"{Global.Loopback}:{port}", string.Empty);
                     break;
+                case ListenerType.openSystemProxySocks:
+                    string pacUrl = "http://127.0.0.1:8008/pac/";
+                    PACHandler.StartListener(new[] { pacUrl });
+                    WinINet.ProxyPAC(pacUrl + "socks.pac");
+                    break;
                 default:
+                    PACHandler.StopListenner();
                     WinINet.Reset();
                     break;
             }
