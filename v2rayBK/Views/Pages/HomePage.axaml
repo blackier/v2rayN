@@ -1,0 +1,154 @@
+<UserControl
+    x:Class="v2rayBK.Views.Pages.HomePage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="using:v2rayBK.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:v2rayBK.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:v2rayBK.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="local:HomePage"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <converter:FileSizeToFriendlyStringConverter x:Key="FileSizeToFriendlyStringConverter" />
+    </UserControl.Resources>
+    <Grid RowDefinitions="*, Auto, 180, Auto">
+        <Grid RowDefinitions="Auto, *">
+            <Menu>
+                <MenuItem Header="Subscribe">
+                    <MenuItem
+                        Name="subscribe_settings_menuitem"
+                        Click="subscribe_settings_menuitem_Click"
+                        Header="Settings" />
+                    <MenuItem Command="{Binding ViewModel.PullCurrentSubscribeCommand}" Header="Pull Current" />
+                    <MenuItem
+                        Header="Pull Current with Proxy"
+                        IsChecked="{Binding ViewModel.v2RayBKConfig.PullSubscribeWithProxy, Mode=TwoWay}"
+                        ToggleType="CheckBox" />
+                    <MenuItem Command="{Binding ViewModel.v2RayBKConfig.SeepTestServerCommand}" Header="Speed Test" />
+                    <MenuItem
+                        Header="Speed Test after Pull"
+                        IsChecked="{Binding ViewModel.v2RayBKConfig.SpeedTestAfterPullSubscribe, Mode=TwoWay}"
+                        ToggleType="CheckBox" />
+                </MenuItem>
+                <MenuItem Header="Share" />
+                <MenuItem Command="{Binding ViewModel.RestartServerCommand}" Header="Restart Server" />
+                <MenuItem Header="Help">
+                    <MenuItem Header="Check for Updates">
+                        <MenuItem Click="check_update_xray_menuitem_Click" Header="XRay-core" />
+                        <MenuItem Header="Domain List" />
+                        <MenuItem Header="IP List" />
+                    </MenuItem>
+                    <MenuItem Header="Project">
+                        <MenuItem Header="v2rayBK" />
+                        <MenuItem Header="XRay-core" />
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+            <TabControl
+                Grid.Row="1"
+                Padding="0"
+                ItemsSource="{Binding ViewModel.v2RayBKConfig.ServerGroup, Mode=OneWay}"
+                SelectedIndex="{Binding ViewModel.v2RayBKConfig.ServerGroupSeletedIndex}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate DataType="vm:ServerGroupInfo">
+                        <TextBlock FontSize="16" Text="{Binding Name}" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate DataType="vm:ServerGroupInfo">
+                        <DataGrid
+                            Name="server_list_datagrid"
+                            BorderBrush="Gray"
+                            BorderThickness="1"
+                            CanUserReorderColumns="False"
+                            CanUserResizeColumns="True"
+                            CanUserSortColumns="True"
+                            DoubleTapped="server_list_datagrid_DoubleTapped"
+                            GridLinesVisibility="All"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding Servers}"
+                            SelectedIndex="{Binding ServerSeletedIndexCache}">
+                            <DataGrid.Columns>
+                                <DataGridCheckBoxColumn Binding="{Binding IsSeletedServer, Mode=OneWay}" />
+                                <DataGridTextColumn Binding="{Binding ConfigType, Mode=OneWay}" Header="Type" />
+                                <DataGridTextColumn Binding="{Binding Remarks, Mode=OneWay}" Header="Remarks" />
+                                <DataGridTextColumn Binding="{Binding Address, Mode=OneWay}" Header="Address" />
+                                <DataGridTextColumn Binding="{Binding Port, Mode=OneWay}" Header="Port" />
+                                <DataGridTextColumn Binding="{Binding Security, Mode=OneWay}" Header="Security" />
+                                <DataGridTextColumn Binding="{Binding Network}" Header="Network" />
+                                <DataGridTextColumn
+                                    Width="125"
+                                    Binding="{Binding TestResult}"
+                                    Header="TestResult" />
+                                <DataGridTextColumn Binding="{Binding TodayDown, Mode=OneWay, Converter={StaticResource FileSizeToFriendlyStringConverter}}" Header="TodayDown" />
+                                <DataGridTextColumn Binding="{Binding TodayUp, Mode=OneWay, Converter={StaticResource FileSizeToFriendlyStringConverter}}" Header="TodayUp" />
+                                <DataGridTextColumn Binding="{Binding TotalDown, Mode=OneWay, Converter={StaticResource FileSizeToFriendlyStringConverter}}" Header="TotalDown" />
+                                <DataGridTextColumn Binding="{Binding TotalUp, Mode=OneWay, Converter={StaticResource FileSizeToFriendlyStringConverter}}" Header="TotalUp" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </Grid>
+        <GridSplitter Grid.Row="1" ShowsPreview="True" />
+        <ThemeVariantScope Grid.Row="2" RequestedThemeVariant="Dark">
+            <Grid Background="{DynamicResource SolidBackgroundFillColorBaseBrush}" TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}">
+                <TextBox
+                    Name="log_textbox"
+                    AcceptsReturn="True"
+                    CornerRadius="0"
+                    FontSize="12"
+                    IsReadOnly="True"
+                    MaxLines="999"
+                    TextWrapping="Wrap" />
+
+            </Grid>
+        </ThemeVariantScope>
+        <DockPanel Grid.Row="3" Height="25">
+            <DockPanel.Styles>
+                <Style Selector="TextBlock">
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+            </DockPanel.Styles>
+            <StackPanel
+                Margin="4,0"
+                DockPanel.Dock="Left"
+                Orientation="Horizontal">
+                <TextBlock Text="Socks5: 127.0.0.1:" />
+                <TextBlock Width="150" Text="{Binding ViewModel.v2RayBKConfig.SocksInboundPort}" />
+                <TextBlock Text="Http: 127.0.0.1:" />
+                <TextBlock Width="150" Text="{Binding ViewModel.v2RayBKConfig.HttpInboundPort}" />
+            </StackPanel>
+            <StackPanel
+                HorizontalAlignment="Right"
+                DockPanel.Dock="Right"
+                Orientation="Horizontal">
+                <TextBlock Text="Direct ↑↓ " />
+                <TextBlock
+                    Width="75"
+                    Text="{Binding ViewModel.v2RayBKConfig.DirectSpeedUp, Converter={StaticResource FileSizeToFriendlyStringConverter}}"
+                    TextAlignment="Center" />
+                <TextBlock Text="/" />
+                <TextBlock
+                    Width="75"
+                    Text="{Binding ViewModel.v2RayBKConfig.DirectSpeedDown, Converter={StaticResource FileSizeToFriendlyStringConverter}}"
+                    TextAlignment="Center" />
+                <TextBlock Text="Proxy ↑↓ " />
+                <TextBlock
+                    Width="75"
+                    Text="{Binding ViewModel.v2RayBKConfig.ProxySpeedUp, Converter={StaticResource FileSizeToFriendlyStringConverter}}"
+                    TextAlignment="Center" />
+                <TextBlock Text="/" />
+                <TextBlock
+                    Width="75"
+                    Text="{Binding ViewModel.v2RayBKConfig.ProxySpeedDown, Converter={StaticResource FileSizeToFriendlyStringConverter}}"
+                    TextAlignment="Center" />
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+
+</UserControl>

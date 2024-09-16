@@ -1,9 +1,5 @@
 ﻿.vs
 
-v2rayN/bin
-v2rayN/obj
-v2rayN/*.csproj.user
-
-v2rayUpgrade/bin
-v2rayUpgrade/obj
-v2rayUpgrade/*.csproj.user
+*/bin
+*/obj
+*/*.csproj.user

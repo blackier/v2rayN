@@ -1,0 +1,35 @@
+<UserControl
+    x:Class="v2rayBK.Views.Pages.MainPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lang="using:v2rayBK.Lang"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:FluentAvalonia.UI.Controls"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <ui:NavigationView
+        x:Name="root_navigationview"
+        IsBackButtonVisible="False"
+        IsSettingsVisible="False"
+        IsTabStop="False"
+        PaneDisplayMode="Top"
+        SelectionChanged="root_navigationview_SelectionChanged">
+        <ui:NavigationView.MenuItems>
+            <ui:NavigationViewItem x:Name="home_navitem" IconSource="Home" />
+        </ui:NavigationView.MenuItems>
+
+        <ui:NavigationView.FooterMenuItems>
+            <ui:NavigationViewItemSeparator />
+            <ui:NavigationViewItem x:Name="settings_navitem" IconSource="Settings" />
+        </ui:NavigationView.FooterMenuItems>
+
+        <ui:Frame
+            x:Name="root_frame"
+            Navigated="root_frame_Navigated"
+            Navigating="root_frame_Navigating" />
+
+    </ui:NavigationView>
+</UserControl>
