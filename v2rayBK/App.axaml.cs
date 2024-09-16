@@ -94,6 +94,11 @@ public partial class App : Application
         _host.Dispose();
     }
 
+    public static App? Get()
+    {
+        return App.Current as App;
+    }
+
     public static T GetRequiredService<T>()
         where T : class
     {
@@ -148,7 +153,7 @@ public partial class App : Application
         MainWindow.ShowWindow();
     }
 
-    private void tray_system_proxy_NativeMenuItem_Click(object? sender, System.EventArgs e)
+    public void tray_system_proxy_NativeMenuItem_Click(object? sender, System.EventArgs e)
     {
         LoadTrayIcon();
         SystemProxyHandler.Update(v2rayBKConfig);

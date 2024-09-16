@@ -64,6 +64,11 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
         }
     }
 
+    private void system_proxy_NativeMenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        App.Get()?.tray_system_proxy_NativeMenuItem_Click(sender, e);
+    }
+
     private ScrollViewer? _log_textbox_ScrollViewer;
 
     void IRecipient<MessageType.LogMessage>.Receive(MessageType.LogMessage message)
