@@ -7,8 +7,7 @@
     xmlns:lang="using:v2rayBK.Lang"
     xmlns:local="using:v2rayBK"
     xmlns:sty="using:FluentAvalonia.Styling"
-    x:DataType="local:App"
-    RequestedThemeVariant="Light">
+    x:DataType="local:App">
     <!--  "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options.  -->
 
     <Application.Resources>

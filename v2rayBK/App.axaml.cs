@@ -76,6 +76,19 @@ public partial class App : Application
     {
         await _host.StartAsync();
 
+        // Ö÷Ìâ
+        switch (v2rayBKConfig.AppTheme)
+        {
+            case AppTheme.Dark:
+                RequestedThemeVariant = ThemeVariant.Dark;
+                break;
+            case AppTheme.Light:
+                RequestedThemeVariant = ThemeVariant.Light;
+                break;
+            default:
+                break;
+        }
+
         // Line below is needed to remove Avalonia data validation.
         // Without this line you will get duplicate validations from both Avalonia and CT
         BindingPlugins.DataValidators.RemoveAt(0);

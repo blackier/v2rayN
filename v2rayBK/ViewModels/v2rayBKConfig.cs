@@ -4,11 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Avalonia.Platform;
+using Avalonia.Styling;
 using ServiceLib.Models;
 using v2rayBK.Common;
 using v2rayBK.Handlers;
 
 namespace v2rayBK.ViewModels;
+
+public enum AppTheme
+{
+    Default,
+    Dark,
+    Light
+}
 
 public partial class v2rayBKConfig : ViewModelBase
 {
@@ -120,6 +129,11 @@ public partial class v2rayBKConfig : ViewModelBase
 
     [ObservableProperty]
     private bool _speedTestAfterPullSubscribe = false;
+
+    [ObservableProperty]
+    private AppTheme _appTheme = ViewModels.AppTheme.Default;
+
+    // 服务器列表
 
     [ObservableProperty]
     private int _serverGroupSeletedIndex = -1;

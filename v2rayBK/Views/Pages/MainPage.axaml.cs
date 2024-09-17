@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Styling;
 using FluentAvalonia.UI.Controls;
 using FluentAvalonia.UI.Navigation;
 using v2rayBK.ViewModels;
@@ -57,4 +58,20 @@ public partial class MainPage : UserControl
     private void root_frame_Navigated(object sender, NavigationEventArgs e) { }
 
     private void root_frame_Navigating(object sender, NavigatingCancelEventArgs e) { }
+
+    private void toggle_theme_CommandBarButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var theme = App.Get()!.ActualThemeVariant;
+        if (theme == ThemeVariant.Dark)
+        {
+            theme = ThemeVariant.Light;
+            App.Get()!.v2rayBKConfig.AppTheme = AppTheme.Light;
+        }
+        else if (theme == ThemeVariant.Light)
+        {
+            theme = ThemeVariant.Dark;
+            App.Get()!.v2rayBKConfig.AppTheme = AppTheme.Dark;
+        }
+        App.Get()!.RequestedThemeVariant = theme;
+    }
 }
