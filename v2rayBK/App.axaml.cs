@@ -67,6 +67,7 @@ public partial class App : Application
             DesktopApp.ShutdownMode = ShutdownMode.OnExplicitShutdown;
             DesktopApp.Startup += DesktopApp_Startup;
             DesktopApp.Exit += Desktop_Exit;
+            DesktopApp.ShutdownRequested += DesktopApp_ShutdownRequested;
         }
 
         base.OnFrameworkInitializationCompleted();
@@ -100,11 +101,21 @@ public partial class App : Application
         LoadTrayIcon();
     }
 
-    private async void Desktop_Exit(object? sender, ControlledApplicationLifetimeExitEventArgs e)
+    private async Task Desktop_Stop()
     {
         GetRequiredService<v2rayBKConfig>().Close();
         await _host.StopAsync();
         _host.Dispose();
+    }
+
+    private async void Desktop_Exit(object? sender, ControlledApplicationLifetimeExitEventArgs e)
+    {
+        await Desktop_Stop();
+    }
+
+    private async void DesktopApp_ShutdownRequested(object? sender, ShutdownRequestedEventArgs e)
+    {
+        await Desktop_Stop();
     }
 
     public static App? Get()
@@ -186,16 +197,14 @@ public partial class App : Application
         _mutex = new Mutex(true, Directory.GetCurrentDirectory().ToHashSet().ToString(), out isOwned);
         EventWaitHandle eventWaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset, "MainWindowWake");
 
-        // So, R# would not give a warning that this variable is not used.
-        GC.KeepAlive(_mutex);
         if (isOwned)
         {
-            // Spawn a thread which will be waiting for our event
+            GC.KeepAlive(_mutex);
             var thread = new Thread(() =>
             {
                 while (eventWaitHandle.WaitOne())
                 {
-                    //MainWindow.DispatcherQueue.TryEnqueue(() => MainWindow.Show());
+                    PostTask(() => MainWindow.ShowWindow());
                 }
             });
             // It is important mark it as background otherwise it will prevent app from exiting.
@@ -205,9 +214,6 @@ public partial class App : Application
         }
         // Notify other instance so it could bring itself to foreground.
         eventWaitHandle.Set();
-
-        // Terminate this instance.
-
         return true;
     }
 }

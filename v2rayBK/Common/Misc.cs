@@ -8,7 +8,7 @@ using Microsoft.Win32;
 
 namespace v2rayBK.Common;
 
-internal class Misc
+public class Misc
 {
     private static string autoRunName = "v2rayBKAutoRun";
     private static string autoRunRegPath = @"Software\Microsoft\Windows\CurrentVersion\Run";

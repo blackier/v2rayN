@@ -9,6 +9,7 @@ namespace v2rayBK.Views.Pages;
 public partial class SettingsPage : UserControl
 {
     public SettingsPageViewModel ViewModel { get; }
+
     public SettingsPage()
     {
         ViewModel = App.GetRequiredService<SettingsPageViewModel>();

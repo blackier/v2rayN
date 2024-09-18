@@ -21,9 +21,6 @@ public enum AppTheme
 
 public partial class v2rayBKConfig : ViewModelBase
 {
-    [ObservableProperty]
-    private SystemProxyType _systemProxyType;
-
     // 入站
 
     [ObservableProperty]
@@ -34,6 +31,9 @@ public partial class v2rayBKConfig : ViewModelBase
 
     [ObservableProperty]
     private bool _sniffingEnabled;
+
+    [ObservableProperty]
+    private bool _allowLANConn;
 
     // 日志
 
@@ -59,39 +59,22 @@ public partial class v2rayBKConfig : ViewModelBase
     [ObservableProperty]
     private bool _localDNSEnabled;
 
-    /// <summary>
-    /// 域名解析策略
-    /// </summary>
+    // 路由
+
     [ObservableProperty]
     private string _domainStrategy = "AsIs";
 
-    /// <summary>
-    /// 用户自定义需代理的网址或ip
-    /// </summary>
     [ObservableProperty]
     private List<string> _userProxy;
 
-    /// <summary>
-    /// 用户自定义直连的网址或ip
-    /// </summary>
     [ObservableProperty]
     private List<string> _userDirect;
 
-    /// <summary>
-    /// 用户自定义阻止的网址或ip
-    /// </summary>
     [ObservableProperty]
     private List<string> _userBlock;
 
-    /// <summary>
-    /// 允许来自局域网的连接
-    /// </summary>
-    [ObservableProperty]
-    private bool _allowLANConn;
+    // 测速
 
-    /// <summary>
-    /// 启用实时网速和流量统计
-    /// </summary>
     [ObservableProperty]
     private bool _enableStatistics = true;
 
@@ -111,19 +94,16 @@ public partial class v2rayBKConfig : ViewModelBase
     [ObservableProperty]
     private long _proxySpeedDown;
 
-    /// <summary>
-    /// 服务器下载测速url
-    /// </summary>
     [ObservableProperty]
     private string _speedTestUrl = "http://www.gstatic.com/generate_204";
 
-    /// <summary>
-    /// 服务器真连接延迟测试url
-    /// </summary>
     [ObservableProperty]
     private string _speedPingTestUrl = "http://www.gstatic.com/generate_204";
 
     // 配置
+    [ObservableProperty]
+    private SystemProxyType _systemProxyType;
+
     [ObservableProperty]
     private bool _pullSubscribeWithProxy = false;
 

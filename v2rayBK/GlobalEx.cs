@@ -2,8 +2,19 @@
 
 namespace v2rayBK;
 
+public enum OpenUrlType
+{
+    XRayProject,
+    v2rayBK,
+    Promotion,
+}
+
 class GlobalEx
 {
+    public const string XRayProjectUrl = "https://github.com/XTLS/Xray-core";
+    public const string v2rayBKUrl = "https://github.com/blackier/v2rayN";
+    public const string PromotionUrl = "aHR0cHM6Ly85LjIzNDQ1Ni54eXovYWJjLmh0bWw=";
+
     public static readonly List<string> DomainDNSAddress = ["223.5.5.5", "223.6.6.6", "localhost"];
     public static readonly List<string> DomainOverseaDNSAddress = ["1.1.1.1", "8.8.8.8"];
 

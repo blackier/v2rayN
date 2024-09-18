@@ -13,7 +13,7 @@ namespace v2rayBK.Handlers;
 /// <summary>
 /// v2ray配置文件处理类
 /// </summary>
-internal class XRayConfigHandler
+public class XRayConfigHandler
 {
     public static bool GenerateClientConfig(v2rayBKConfig config, string fileName, bool blExport, out string msg)
     {

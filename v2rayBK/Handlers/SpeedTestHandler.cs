@@ -10,7 +10,7 @@ using v2rayBK.ViewModels;
 
 namespace v2rayBK.Handlers;
 
-internal class SpeedTestHandler
+public class SpeedTestHandler
 {
     public static void RunRealPing(v2rayBKConfig config, List<int> selecteds)
     {

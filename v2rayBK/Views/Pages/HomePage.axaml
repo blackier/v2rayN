@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="using:v2rayBK.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:global="using:v2rayBK"
     xmlns:handler="using:v2rayBK.Handlers"
     xmlns:local="using:v2rayBK.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -61,9 +62,19 @@
                         <MenuItem Header="IP List" />
                     </MenuItem>
                     <MenuItem Header="Project">
-                        <MenuItem Header="v2rayBK" />
-                        <MenuItem Header="XRay-core" />
+                        <MenuItem
+                            Click="openurl_MenuItem_Click"
+                            Header="XRay-core"
+                            Tag="{x:Static global:OpenUrlType.XRayProject}" />
+                        <MenuItem
+                            Click="openurl_MenuItem_Click"
+                            Header="v2rayBK"
+                            Tag="{x:Static global:OpenUrlType.v2rayBK}" />
                     </MenuItem>
+                    <MenuItem
+                        Click="openurl_MenuItem_Click"
+                        Header="Promotion"
+                        Tag="{x:Static global:OpenUrlType.Promotion}" />
                 </MenuItem>
             </Menu>
             <TabControl

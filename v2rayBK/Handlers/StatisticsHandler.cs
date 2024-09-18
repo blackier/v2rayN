@@ -3,7 +3,7 @@ using v2rayBK.ViewModels;
 
 namespace v2rayBK.Handlers;
 
-class StatisticsHandler
+public class StatisticsHandler
 {
     private v2rayBKConfig _config;
     private StatsServiceClient _client;

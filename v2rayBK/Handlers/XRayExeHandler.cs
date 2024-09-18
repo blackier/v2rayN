@@ -6,7 +6,7 @@ namespace v2rayBK.Handlers;
 /// <summary>
 /// v2ray进程处理类
 /// </summary>
-internal class XRayExeHandler
+public class XRayExeHandler
 {
     private List<string> lstV2ray = new() { "xray", "v2ray", "wv2ray", };
     private Process _process;

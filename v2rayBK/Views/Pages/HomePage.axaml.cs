@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -67,6 +68,22 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
     private void system_proxy_NativeMenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         App.Get()?.tray_system_proxy_NativeMenuItem_Click(sender, e);
+    }
+
+    private void openurl_MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        switch ((OpenUrlType)((MenuItem)sender!).Tag!)
+        {
+            case OpenUrlType.XRayProject:
+                Process.Start("explorer.exe", GlobalEx.XRayProjectUrl);
+                break;
+            case OpenUrlType.v2rayBK:
+                Process.Start("explorer.exe", GlobalEx.v2rayBKUrl);
+                break;
+            case OpenUrlType.Promotion:
+                Process.Start("explorer.exe", Utils.Base64Decode(GlobalEx.PromotionUrl));
+                break;
+        }
     }
 
     private ScrollViewer? _log_textbox_ScrollViewer;

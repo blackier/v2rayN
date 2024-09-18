@@ -17,7 +17,7 @@ public enum SystemProxyType
 /// <summary>
 /// 系统代理(http)总处理
 /// </summary>
-class SystemProxyHandler
+public class SystemProxyHandler
 {
     public static bool Update(v2rayBKConfig config)
     {

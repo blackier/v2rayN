@@ -3,7 +3,7 @@ using Grpc.Net.Client;
 
 namespace v2rayBK.V2RayAPI;
 
-class StatsServiceClient
+public class StatsServiceClient
 {
     private Channel channel_;
     private StatsService.StatsServiceClient client_;

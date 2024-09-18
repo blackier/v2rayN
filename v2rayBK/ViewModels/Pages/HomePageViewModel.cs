@@ -28,13 +28,8 @@ public partial class HomePageViewModel : ViewModelBase
         v2RayBKConfig.StartSelectedServer();
     }
 
-    [RelayCommand]
-    public void PullCurrentSubscribe()
+    public Config InitServeLib()
     {
-        var server = v2RayBKConfig.SelectedServerGroup;
-        if (server == null)
-            return;
-
         Config config =
             new()
             {
@@ -44,6 +39,17 @@ public partial class HomePageViewModel : ViewModelBase
                 inbound = new()
             };
         LazyConfig.Instance.SetConfig(config);
+        return config;
+    }
+
+    [RelayCommand]
+    public void PullCurrentSubscribe()
+    {
+        var server = v2RayBKConfig.SelectedServerGroup;
+        if (server == null)
+            return;
+
+        Config config = InitServeLib();
 
         SubItem fakeSubItem = new() { id = "fakeid", url = server.Address };
         SQLiteHelper.Instance.Replace(fakeSubItem);
@@ -70,26 +76,13 @@ public partial class HomePageViewModel : ViewModelBase
 
     public async Task<string> CheckUpdateXRayVersion()
     {
-        Config config =
-            new()
-            {
-                guiItem = new(),
-                uiItem = new(),
-                inbound = new()
-            };
-        LazyConfig.Instance.SetConfig(config);
+        Config config = InitServeLib();
 
-        return await (new UpdateHandler()).CheckUpdateCoreVersion(
+        UpdateHandler updateHandle = new();
+        return await updateHandle.CheckUpdateCoreVersion(
             ServiceLib.Enums.ECoreType.Xray,
             config,
-            (bool success, string msg) =>
-            {
-                //App.PostLog(msg);
-                Dispatcher.UIThread.Post(() =>
-                {
-                    if (success) { }
-                });
-            },
+            (bool success, string msg) => { },
             false
         );
     }

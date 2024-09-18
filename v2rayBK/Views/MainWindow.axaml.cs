@@ -12,6 +12,7 @@ namespace v2rayBK.Views;
 public partial class MainWindow : AppWindow
 {
     public MainWindowViewModel ViewModel { get; }
+
     public MainWindow()
     {
         ViewModel = App.GetRequiredService<MainWindowViewModel>();
@@ -35,9 +36,7 @@ public partial class MainWindow : AppWindow
         base.OnClosing(e);
     }
 
-    public override void Show()
-    {
-    }
+    public override void Show() { }
 
     public void ShowWindow()
     {
