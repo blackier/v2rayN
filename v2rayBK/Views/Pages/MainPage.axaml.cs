@@ -55,9 +55,9 @@ public partial class MainPage : UserControl
             root_frame.Navigate(typeof(SettingsPage));
     }
 
-    private void root_frame_Navigated(object sender, NavigationEventArgs e) { }
+    private void root_frame_Navigated(object? sender, NavigationEventArgs e) { }
 
-    private void root_frame_Navigating(object sender, NavigatingCancelEventArgs e) { }
+    private void root_frame_Navigating(object? sender, NavigatingCancelEventArgs e) { }
 
     private void toggle_theme_CommandBarButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {

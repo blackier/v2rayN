@@ -30,10 +30,10 @@ public partial class ServerGroupInfo : ViewModelBase
     public List<ProfileItem> Profiles { get; set; } = new();
 
     [JsonIgnore]
-    public ServerGroupItem? SelectedServer => Servers.ElementAtOrDefault(ServerSeletedIndex);
+    public ServerGroupItem SelectedServer => Servers.ElementAtOrDefault(ServerSeletedIndex);
 
     [JsonIgnore]
-    public ProfileItem? SelectedProfile => Profiles.ElementAtOrDefault(ServerSeletedIndex);
+    public ProfileItem SelectedProfile => Profiles.ElementAtOrDefault(ServerSeletedIndex);
 
     public ServerGroupInfo() { }
 

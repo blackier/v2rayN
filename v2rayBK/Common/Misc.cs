@@ -13,16 +13,16 @@ public class Misc
     private static string autoRunName = "v2rayBKAutoRun";
     private static string autoRunRegPath = @"Software\Microsoft\Windows\CurrentVersion\Run";
 
-    public static string? RegReadValue(string path, string name, string def)
+    public static string RegReadValue(string path, string name, string def)
     {
         if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             return null;
 
-        RegistryKey? regKey = null;
+        RegistryKey regKey = null;
         try
         {
             regKey = Registry.CurrentUser.OpenSubKey(path, false);
-            string? value = regKey?.GetValue(name) as string;
+            string value = regKey?.GetValue(name) as string;
             if (Utils.IsNullOrEmpty(value))
             {
                 return def;
@@ -48,7 +48,7 @@ public class Misc
         if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             return;
 
-        RegistryKey? regKey = null;
+        RegistryKey regKey = null;
         try
         {
             regKey = Registry.CurrentUser.CreateSubKey(path);
@@ -85,7 +85,7 @@ public class Misc
     {
         try
         {
-            string? value = RegReadValue(autoRunRegPath, autoRunName, "");
+            string value = RegReadValue(autoRunRegPath, autoRunName, "");
             string exePath = Utils.GetExePath();
             if (value?.Equals(exePath) == true)
             {

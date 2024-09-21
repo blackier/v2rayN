@@ -118,7 +118,7 @@ public partial class App : Application
         await Desktop_Stop();
     }
 
-    public static App? Get()
+    public static App Get()
     {
         return App.Current as App;
     }

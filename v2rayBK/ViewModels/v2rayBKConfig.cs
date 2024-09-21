@@ -122,7 +122,7 @@ public partial class v2rayBKConfig : ViewModelBase
     private ObservableCollection<ServerGroupInfo> _serverGroup = new();
 
     [JsonIgnore]
-    public ServerGroupInfo? SelectedServerGroup => ServerGroup.ElementAtOrDefault(ServerGroupSeletedIndex);
+    public ServerGroupInfo SelectedServerGroup => ServerGroup.ElementAtOrDefault(ServerGroupSeletedIndex);
 
     private XRayExeHandler _xrayExeHandler;
     private StatisticsHandler _statisticsHandler;
@@ -156,7 +156,7 @@ public partial class v2rayBKConfig : ViewModelBase
         _statisticsHandler = new(this);
     }
 
-    public static v2rayBKConfig? LoadConfig()
+    public static v2rayBKConfig LoadConfig()
     {
         //载入配置文件
         string? result = Utils.LoadResource(Utils.GetPath(GlobalEx.ConfigFileName));
@@ -183,17 +183,17 @@ public partial class v2rayBKConfig : ViewModelBase
         SaveConfig();
     }
 
-    public ProfileItem? GetSelectedProfile()
+    public ProfileItem GetSelectedProfile()
     {
         return SelectedServerGroup?.SelectedProfile;
     }
 
-    public ProfileItem? GetSelectedProfile(int index)
+    public ProfileItem GetSelectedProfile(int index)
     {
         return SelectedServerGroup?.Profiles?.ElementAtOrDefault(index);
     }
 
-    public ServerGroupItem? GetSelectedServer(int index)
+    public ServerGroupItem GetSelectedServer(int index)
     {
         return SelectedServerGroup?.Servers?.ElementAtOrDefault(index);
     }
