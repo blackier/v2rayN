@@ -286,7 +286,7 @@ public class XRayConfigHandler
 
             v2rayConfig.Outbounds.Add(outbound);
         }
-        else if (node.configType == EConfigType.Socks)
+        else if (node.configType == EConfigType.SOCKS)
         {
             var outbound = V2Ray.OutboundObject.GetSocks(Global.ProxyTag, new DnsEndPoint(node.address, node.port));
             var settings = (V2Ray.Protocols.Socks.OutboundConfigurationObject)outbound.Settings;
