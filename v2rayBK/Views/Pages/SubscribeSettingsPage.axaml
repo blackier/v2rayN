@@ -1,19 +1,18 @@
-<UserControl
-    x:Class="v2rayBK.Views.Pages.SubscribeSettingsPage"
-    xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="using:v2rayBK.Views.Pages"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="using:FluentAvalonia.UI.Controls"
-    xmlns:vm="using:v2rayBK.ViewModels"
-    xmlns:vmp="using:v2rayBK.ViewModels.Pages"
-    Width="500"
-    Height="300"
-    d:DesignHeight="450"
-    d:DesignWidth="600"
-    x:DataType="vmp:SubscribeSettingsPageViewModel"
-    mc:Ignorable="d">
+<UserControl x:Class="v2rayBK.Views.Pages.SubscribeSettingsPage"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:v2rayBK.Views.Pages"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ui="using:FluentAvalonia.UI.Controls"
+             xmlns:vm="using:v2rayBK.ViewModels"
+             xmlns:vmp="using:v2rayBK.ViewModels.Pages"
+             Width="500"
+             Height="300"
+             d:DesignHeight="450"
+             d:DesignWidth="600"
+             x:DataType="vmp:SubscribeSettingsPageViewModel"
+             mc:Ignorable="d">
     <Design.DataContext>
         <vmp:SubscribeSettingsPageViewModel />
     </Design.DataContext>
@@ -37,18 +36,16 @@
                             </Grid>
                             <Grid ColumnDefinitions="Auto,*">
                                 <TextBlock VerticalAlignment="Center" Text="Address" />
-                                <TextBox
-                                    Grid.Column="1"
-                                    Text="{Binding Address}"
-                                    TextWrapping="Wrap" />
+                                <TextBox Grid.Column="1"
+                                         Text="{Binding Address}"
+                                         TextWrapping="Wrap" />
                             </Grid>
                         </StackPanel>
-                        <Button
-                            Name="delete_subscribe_button"
-                            Grid.Column="1"
-                            Margin="4"
-                            Padding="8"
-                            Click="delete_subscribe_button_Click">
+                        <Button Name="delete_subscribe_button"
+                                Grid.Column="1"
+                                Margin="4"
+                                Padding="8"
+                                Click="delete_subscribe_button_Click">
                             <ui:SymbolIcon Symbol="Delete" />
                         </Button>
                     </Grid>

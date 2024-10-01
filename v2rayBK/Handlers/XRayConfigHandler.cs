@@ -183,7 +183,12 @@ public class XRayConfigHandler
         return 0;
     }
 
-    private static int RoutingUserRule(v2rayBKConfig config, V2RayConfig v2rayConfig, List<string> userRule, string tag)
+    private static int RoutingUserRule(
+        v2rayBKConfig config,
+        V2RayConfig v2rayConfig,
+        ObservableCollection<RoutingRuleItem> userRule,
+        string tag
+    )
     {
         if (userRule != null && userRule.Count > 0)
         {
@@ -200,26 +205,31 @@ public class XRayConfigHandler
                 Domain = new List<string>()
             };
 
-            foreach (string u in userRule)
+            foreach (RoutingRuleItem rule in userRule)
             {
-                string url = u.TrimEx();
-                if (Utils.IsNullOrEmpty(url))
-                {
+                if (!rule.Enable)
                     continue;
-                }
-                if (Utils.IsIP(url) || url.StartsWith("geoip:"))
+                foreach (var u in rule.Domain)
                 {
-                    ipRule.Ip.Add(url);
-                }
-                else if (
-                    Utils.IsDomain(url)
-                    || url.StartsWith("geosite:")
-                    || url.StartsWith("regexp:")
-                    || url.StartsWith("domain:")
-                    || url.StartsWith("full:")
-                )
-                {
-                    domainRule.Domain.Add(url);
+                    string url = u.TrimEx();
+                    if (Utils.IsNullOrEmpty(url))
+                    {
+                        continue;
+                    }
+                    if (Utils.IsIP(url) || url.StartsWith("geoip:"))
+                    {
+                        ipRule.Ip.Add(url);
+                    }
+                    else if (
+                        Utils.IsDomain(url)
+                        || url.StartsWith("geosite:")
+                        || url.StartsWith("regexp:")
+                        || url.StartsWith("domain:")
+                        || url.StartsWith("full:")
+                    )
+                    {
+                        domainRule.Domain.Add(url);
+                    }
                 }
             }
             if (ipRule.Ip.Count > 0)

@@ -1,13 +1,12 @@
-<Application
-    x:Class="v2rayBK.App"
-    xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converter="using:v2rayBK.Converters"
-    xmlns:handler="using:v2rayBK.Handlers"
-    xmlns:lang="using:v2rayBK.Lang"
-    xmlns:local="using:v2rayBK"
-    xmlns:sty="using:FluentAvalonia.Styling"
-    x:DataType="local:App">
+<Application x:Class="v2rayBK.App"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converter="using:v2rayBK.Converters"
+             xmlns:handler="using:v2rayBK.Handlers"
+             xmlns:lang="using:v2rayBK.Lang"
+             xmlns:local="using:v2rayBK"
+             xmlns:sty="using:FluentAvalonia.Styling"
+             x:DataType="local:App">
     <!--  "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options.  -->
 
     <Application.Resources>
@@ -33,29 +32,25 @@
 
     <TrayIcon.Icons>
         <TrayIcons>
-            <TrayIcon
-                Clicked="tray_icon_TrayIcon_Clicked"
-                Icon="/Assets/NotifyIcon1.ico"
-                ToolTipText="Avalonia Tray Icon ToolTip">
+            <TrayIcon Clicked="tray_icon_TrayIcon_Clicked"
+                      Icon="/Assets/NotifyIcon1.ico"
+                      ToolTipText="Avalonia Tray Icon ToolTip">
                 <TrayIcon.Menu>
                     <NativeMenu>
                         <NativeMenuItem Header="System Proxy">
                             <NativeMenu>
-                                <NativeMenuItem
-                                    Click="tray_system_proxy_NativeMenuItem_Click"
-                                    Header="Close"
-                                    IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Close}}"
-                                    ToggleType="Radio" />
-                                <NativeMenuItem
-                                    Click="tray_system_proxy_NativeMenuItem_Click"
-                                    Header="Http"
-                                    IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Http}}"
-                                    ToggleType="Radio" />
-                                <NativeMenuItem
-                                    Click="tray_system_proxy_NativeMenuItem_Click"
-                                    Header="Socks"
-                                    IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Socks}}"
-                                    ToggleType="Radio" />
+                                <NativeMenuItem Click="tray_system_proxy_NativeMenuItem_Click"
+                                                Header="Close"
+                                                IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Close}}"
+                                                ToggleType="Radio" />
+                                <NativeMenuItem Click="tray_system_proxy_NativeMenuItem_Click"
+                                                Header="Http"
+                                                IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Http}}"
+                                                ToggleType="Radio" />
+                                <NativeMenuItem Click="tray_system_proxy_NativeMenuItem_Click"
+                                                Header="Socks"
+                                                IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Socks}}"
+                                                ToggleType="Radio" />
                             </NativeMenu>
                         </NativeMenuItem>
                         <NativeMenuItemSeparator />

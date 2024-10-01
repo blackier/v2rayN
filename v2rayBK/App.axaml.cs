@@ -34,11 +34,13 @@ public partial class App : Application
                 services.AddSingleton<MainWindow>();
                 // Page
                 services.AddSingleton<HomePage>();
+                services.AddTransient<RoutingPage>();
                 services.AddTransient<SettingsPage>();
                 // ViewModels
                 services.AddSingleton<v2rayBKConfig>(v2rayBKConfig.LoadConfig() ?? new());
                 services.AddSingleton<MainWindowViewModel>();
                 services.AddSingleton<HomePageViewModel>();
+                services.AddTransient<RoutingPageViewModel>();
                 services.AddTransient<SettingsPageViewModel>();
                 // Models
             }
@@ -52,6 +54,10 @@ public partial class App : Application
         _uiThreadId = Environment.CurrentManagedThreadId;
         DataContext = this;
         AvaloniaXamlLoader.Load(this);
+        if (Design.IsDesignMode)
+        {
+            RequestedThemeVariant = ThemeVariant.Dark;
+        }
     }
 
     public override void OnFrameworkInitializationCompleted()

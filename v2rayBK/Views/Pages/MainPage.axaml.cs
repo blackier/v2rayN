@@ -17,7 +17,9 @@ public partial class MainPage : UserControl
         {
             if (srcType == typeof(HomePage))
                 return App.GetRequiredService<HomePage>();
-            if (srcType == typeof(SettingsPage))
+            else if (srcType == typeof(RoutingPage))
+                return App.GetRequiredService<RoutingPage>();
+            else if (srcType == typeof(SettingsPage))
                 return App.GetRequiredService<SettingsPage>();
             return new TextBlock() { Text = $"Invalid Page Type {srcType}" };
         }
@@ -49,8 +51,11 @@ public partial class MainPage : UserControl
 
     private void root_navigationview_SelectionChanged(object? sender, NavigationViewSelectionChangedEventArgs args)
     {
+        // also need modify NavigationFactory
         if (args.SelectedItem == home_navitem)
             root_frame.Navigate(typeof(HomePage));
+        if (args.SelectedItem == routing_navitem)
+            root_frame.Navigate(typeof(RoutingPage));
         else if (args.SelectedItem == settings_navitem)
             root_frame.Navigate(typeof(SettingsPage));
     }

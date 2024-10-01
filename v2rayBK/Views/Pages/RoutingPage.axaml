@@ -1,0 +1,88 @@
+<UserControl x:Class="v2rayBK.Views.Pages.RoutingPage"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:v2rayBK.Views.Pages"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ui="using:FluentAvalonia.UI.Controls"
+             xmlns:vm="using:v2rayBK.ViewModels"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:DataType="local:RoutingPage"
+             mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="TextBlock.SettingsSectionHeaderTextBlockStyle">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Margin" Value="1,30,0,0" />
+            </Style.Setters>
+        </Style>
+    </UserControl.Styles>
+    <ScrollViewer>
+        <StackPanel MaxWidth="720" Spacing="8">
+            <TextBlock Classes="SettingsSectionHeaderTextBlockStyle" Text="Routing" />
+            <ui:SettingsExpanderItem Content="FakeDNS">
+                <ui:SettingsExpanderItem.Footer>
+                    <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.FakednsEnabled}" />
+                </ui:SettingsExpanderItem.Footer>
+            </ui:SettingsExpanderItem>
+            <ui:SettingsExpanderItem Content="本地DNS服务">
+                <ui:SettingsExpanderItem.Footer>
+                    <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.LocalDNSEnabled}" />
+                </ui:SettingsExpanderItem.Footer>
+            </ui:SettingsExpanderItem>
+            <ui:SettingsExpanderItem Content="域名解析">
+                <ui:SettingsExpanderItem.Footer>
+                    <ComboBox ItemsSource="{Binding ViewModel.DomainStrategy}" SelectedItem="{Binding ViewModel.v2RayBKConfig.DomainStrategy}" />
+                </ui:SettingsExpanderItem.Footer>
+            </ui:SettingsExpanderItem>
+            <!--  Routing  -->
+            <TabControl SelectedIndex="{Binding ViewModel.v2RayBKConfig.RoutingSeletedIndex}">
+                <TabControl.Resources>
+                    <DataTemplate x:Key="RuleItemTemplate" DataType="vm:RoutingRuleItem">
+                        <Grid Margin="0,4" ColumnDefinitions="*,Auto">
+                            <TextBox MinHeight="64"
+                                     AcceptsReturn="True"
+                                     CornerRadius="2"
+                                     Text="{Binding DomainEdit}" />
+                            <StackPanel Grid.Column="1" Margin="8,0">
+                                <ToggleSwitch HorizontalAlignment="Center"
+                                              IsChecked="{Binding Enable}"
+                                              OffContent=""
+                                              OnContent="" />
+                                <Button BorderBrush="Transparent" Click="delete_rule_Button_Click">
+                                    <ui:SymbolIcon FontSize="18" Symbol="Delete" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </TabControl.Resources>
+                <TabItem FontSize="14" Header="代理">
+                    <StackPanel Spacing="4">
+                        <Button BorderBrush="Transparent" Command="{Binding ViewModel.v2RayBKConfig.RoutingAddRuleCommand}">
+                            <ui:SymbolIcon FontSize="18" Symbol="Add" />
+                        </Button>
+                        <ItemsControl ItemTemplate="{StaticResource RuleItemTemplate}" ItemsSource="{Binding ViewModel.v2RayBKConfig.UserProxy}" />
+                    </StackPanel>
+                </TabItem>
+                <TabItem FontSize="14" Header="直连">
+                    <StackPanel Spacing="4">
+                        <Button BorderBrush="Transparent" Command="{Binding ViewModel.v2RayBKConfig.RoutingAddRuleCommand}">
+                            <ui:SymbolIcon FontSize="18" Symbol="Add" />
+                        </Button>
+                        <ItemsControl ItemTemplate="{StaticResource RuleItemTemplate}" ItemsSource="{Binding ViewModel.v2RayBKConfig.UserDirect}" />
+                    </StackPanel>
+                </TabItem>
+                <TabItem FontSize="14" Header="阻止">
+                    <StackPanel Spacing="4">
+                        <Button BorderBrush="Transparent" Command="{Binding ViewModel.v2RayBKConfig.RoutingAddRuleCommand}">
+                            <ui:SymbolIcon FontSize="18" Symbol="Add" />
+                        </Button>
+                        <ItemsControl ItemTemplate="{StaticResource RuleItemTemplate}" ItemsSource="{Binding ViewModel.v2RayBKConfig.UserBlock}" />
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

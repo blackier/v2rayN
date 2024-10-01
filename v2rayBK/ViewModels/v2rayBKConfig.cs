@@ -64,14 +64,18 @@ public partial class v2rayBKConfig : ViewModelBase
     [ObservableProperty]
     private string _domainStrategy = "AsIs";
 
+    [property: JsonIgnore]
     [ObservableProperty]
-    private List<string> _userProxy;
+    private int _routingSeletedIndex = 1;
 
     [ObservableProperty]
-    private List<string> _userDirect;
+    private ObservableCollection<RoutingRuleItem> _userProxy = new();
 
     [ObservableProperty]
-    private List<string> _userBlock;
+    private ObservableCollection<RoutingRuleItem> _userDirect = new() { new() { Domain = new(GlobalEx.geoCnAdress) } };
+
+    [ObservableProperty]
+    private ObservableCollection<RoutingRuleItem> _userBlock = new() { new() { Domain = new(GlobalEx.geoAdAdress) } };
 
     // 测速
 
@@ -224,5 +228,32 @@ public partial class v2rayBKConfig : ViewModelBase
         foreach (var index in seleteds)
             GetSelectedServer(index)!.TestResult = "";
         Task.Run(() => SpeedTestHandler.RunRealPing(this, seleteds));
+    }
+
+    private ObservableCollection<RoutingRuleItem> CurrentEditRoutingRule()
+    {
+        switch (RoutingSeletedIndex)
+        {
+            case 0:
+                return UserProxy;
+            case 1:
+                return UserDirect;
+            case 2:
+                return UserBlock;
+            default:
+                return null;
+        }
+    }
+
+    [property: JsonIgnore]
+    [RelayCommand]
+    public void RoutingAddRule()
+    {
+        CurrentEditRoutingRule().Add(new());
+    }
+
+    public void RoutingDeleteRule(RoutingRuleItem rule)
+    {
+        CurrentEditRoutingRule().Remove(rule);
     }
 }
