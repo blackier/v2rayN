@@ -210,6 +210,11 @@ public partial class v2rayBKConfig : ViewModelBase
         SystemProxyHandler.Update(this);
     }
 
+    public void StopV2RayCore()
+    {
+        _xrayExeHandler?.V2rayStop();
+    }
+
     public void StartSelectedServer()
     {
         SelectedServerGroup?.UpdateSelectedServer();

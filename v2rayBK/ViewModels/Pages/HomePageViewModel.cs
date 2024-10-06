@@ -138,6 +138,7 @@ public partial class HomePageViewModel : ViewModelBase
                 App.PostLog($"UpdateXRay fail, {e.Error}");
                 return;
             }
+            v2RayBKConfig.StopV2RayCore();
             FileManager.ZipExtractToFile(fileName, Utils.StartupPath(), "");
             App.PostTask(() => RestartServer());
         };
