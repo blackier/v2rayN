@@ -216,7 +216,7 @@ public class XRayConfigHandler
                     {
                         continue;
                     }
-                    if (Utils.IsIP(url) || url.StartsWith("geoip:"))
+                    if (Misc.IsIP(url) || url.StartsWith("geoip:"))
                     {
                         ipRule.Ip.Add(url);
                     }

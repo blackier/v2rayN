@@ -8,6 +8,7 @@ using Octokit.Internal;
 using ServiceLib.Common;
 using ServiceLib.Handler;
 using ServiceLib.Models;
+using ServiceLib.Services;
 
 namespace v2rayBK.ViewModels.Pages;
 
@@ -33,15 +34,14 @@ public partial class HomePageViewModel : ViewModelBase
 
     public Config InitServeLib()
     {
-        Config config =
-            new()
-            {
-                coreBasicItem = new(),
-                guiItem = new(),
-                uiItem = new(),
-                inbound = new()
-            };
-        LazyConfig.Instance.SetConfig(config);
+        AppHandler.Instance.InitApp();
+
+        Config config = AppHandler.Instance.Config;
+        config.coreBasicItem = new();
+        config.guiItem = new();
+        config.uiItem = new();
+        config.inbound = new();
+
         return config;
     }
 
@@ -57,8 +57,8 @@ public partial class HomePageViewModel : ViewModelBase
         SubItem fakeSubItem = new() { id = "fakeid", url = server.Address };
         SQLiteHelper.Instance.Replace(fakeSubItem);
 
-        UpdateHandler updateHandle = new();
-        updateHandle.UpdateSubscriptionProcess(
+        UpdateService updateService = new();
+        updateService.UpdateSubscriptionProcess(
             config,
             fakeSubItem.id,
             v2RayBKConfig.PullSubscribeWithProxy,
@@ -68,7 +68,7 @@ public partial class HomePageViewModel : ViewModelBase
                 if (success)
                     App.PostTask(() =>
                     {
-                        var items = LazyConfig.Instance.ProfileItems(fakeSubItem.id);
+                        var items = AppHandler.Instance.ProfileItems(fakeSubItem.id);
                         server.UpdateServers(items);
                         if (v2RayBKConfig.SpeedTestAfterPullSubscribe)
                             v2RayBKConfig.SeepTestServer();

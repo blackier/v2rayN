@@ -27,7 +27,10 @@ public class SystemProxyHandler
             {
                 case SystemProxyType.Http:
                     PACHandler.StopListenner();
-                    WinINet.ProxyGlobal($"{Global.Loopback}:{config.HttpInboundPort}", string.Empty);
+                    WinINet.ProxyGlobal(
+                        $"{Global.Loopback}:{config.HttpInboundPort}",
+                        config.UserDirectSkipEnable ? config.UserDirectSkip : string.Empty
+                    );
                     break;
                 case SystemProxyType.Socks:
                     string pacUrl = "http://127.0.0.1:8008/pac/";

@@ -70,6 +70,19 @@
                         <Button BorderBrush="Transparent" Command="{Binding ViewModel.v2RayBKConfig.RoutingAddRuleCommand}">
                             <ui:SymbolIcon FontSize="18" Symbol="Add" />
                         </Button>
+                        <Grid Margin="0,4" ColumnDefinitions="*,Auto">
+                            <TextBox MinHeight="64"
+                                     AcceptsReturn="True"
+                                     CornerRadius="2"
+                                     Text="{Binding ViewModel.v2RayBKConfig.UserDirectSkip}"
+                                     Watermark="System proxy skip item" />
+                            <StackPanel Grid.Column="1" Margin="8,0">
+                                <ToggleSwitch HorizontalAlignment="Center"
+                                              IsChecked="{Binding ViewModel.v2RayBKConfig.UserDirectSkipEnable}"
+                                              OffContent=""
+                                              OnContent="" />
+                            </StackPanel>
+                        </Grid>
                         <ItemsControl ItemTemplate="{StaticResource RuleItemTemplate}" ItemsSource="{Binding ViewModel.v2RayBKConfig.UserDirect}" />
                     </StackPanel>
                 </TabItem>

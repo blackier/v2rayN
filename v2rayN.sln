@@ -32,6 +32,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtosLib", "ThirdParty\v2r
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLib", "ThirdParty\v2rayN\v2rayN\ServiceLib\ServiceLib.csproj", "{4C44E386-2759-4A2A-B9B2-505F53898701}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PacLib", "ThirdParty\v2rayN\v2rayN\PacLib\PacLib.csproj", "{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -204,6 +206,22 @@ Global
 		{4C44E386-2759-4A2A-B9B2-505F53898701}.Release|x64.Build.0 = Release|Any CPU
 		{4C44E386-2759-4A2A-B9B2-505F53898701}.Release|x86.ActiveCfg = Release|Any CPU
 		{4C44E386-2759-4A2A-B9B2-505F53898701}.Release|x86.Build.0 = Release|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Debug|x64.Build.0 = Debug|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Debug|x86.Build.0 = Debug|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Release|ARM64.Build.0 = Release|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Release|x64.ActiveCfg = Release|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Release|x64.Build.0 = Release|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Release|x86.ActiveCfg = Release|Any CPU
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -218,9 +236,10 @@ Global
 		{0CEEF544-9FBA-4C7B-A8B2-146018B1FF6A} = {1D7E60FB-8CCF-4F0F-A582-7A246B90B348}
 		{82DB2FD8-CE1F-4511-8696-A4EBFB736E40} = {0CEEF544-9FBA-4C7B-A8B2-146018B1FF6A}
 		{4C44E386-2759-4A2A-B9B2-505F53898701} = {0CEEF544-9FBA-4C7B-A8B2-146018B1FF6A}
+		{1642F04C-EF17-4A0B-A2B0-41AB50E38B54} = {0CEEF544-9FBA-4C7B-A8B2-146018B1FF6A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_SortFileContentOnSave = True
 		SolutionGuid = {56B88873-C9CC-4069-A1E5-DABD6C6E865E}
+		RESX_SortFileContentOnSave = True
 	EndGlobalSection
 EndGlobal

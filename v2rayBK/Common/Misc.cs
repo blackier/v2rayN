@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,5 +95,10 @@ public class Misc
         }
         catch { }
         return false;
+    }
+
+    public static bool IsIP(string ip)
+    {
+        return IPAddress.TryParse(ip, out var address);
     }
 }
