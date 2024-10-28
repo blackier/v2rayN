@@ -66,7 +66,7 @@ public partial class v2rayBKConfig : ViewModelBase
 
     [property: JsonIgnore]
     [ObservableProperty]
-    private int _routingSeletedIndex = 1;
+    private int _routingSeletedIndex = 0;
 
     [ObservableProperty]
     private ObservableCollection<RoutingRuleItem> _userProxy = new();

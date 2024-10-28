@@ -34,11 +34,6 @@
                     <NumericUpDown Increment="1" Value="{Binding ViewModel.v2RayBKConfig.SocksInboundPort}" />
                 </ui:SettingsExpanderItem.Footer>
             </ui:SettingsExpanderItem>
-            <ui:SettingsExpanderItem Content="流量探测">
-                <ui:SettingsExpanderItem.Footer>
-                    <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.SniffingEnabled}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
             <ui:SettingsExpanderItem Content="允许来自LAN的连接">
                 <ui:SettingsExpanderItem.Footer>
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.AllowLANConn}" />

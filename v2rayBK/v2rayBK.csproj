@@ -35,7 +35,7 @@
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Downloader" Version="3.2.1" />
 		<PackageReference Include="FluentAvaloniaUI" Version="2.1.0" />
-		<PackageReference Include="Google.Protobuf" Version="3.28.2" />
+		<PackageReference Include="Google.Protobuf" Version="3.28.3" />
 		<PackageReference Include="Grpc.Core" Version="2.46.6" />
 		<PackageReference Include="Grpc.Tools" Version="2.66.0">
 			<PrivateAssets>all</PrivateAssets>

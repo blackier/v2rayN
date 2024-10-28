@@ -45,12 +45,12 @@ public partial class ServerGroupInfo : ViewModelBase
         var newServers = profiles
             .Select(t => new ServerGroupItem
             {
-                ConfigType = t.configType.ToString(),
-                Remarks = t.remarks,
-                Address = t.address,
-                Port = t.port.ToString(),
-                Security = t.security,
-                Network = t.network,
+                ConfigType = t.ConfigType.ToString(),
+                Remarks = t.Remarks,
+                Address = t.Address,
+                Port = t.Port.ToString(),
+                Security = t.Security,
+                Network = t.Network,
             })
             .ToList();
         foreach (var oldserver in Servers)

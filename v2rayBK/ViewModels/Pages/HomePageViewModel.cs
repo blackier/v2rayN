@@ -37,16 +37,16 @@ public partial class HomePageViewModel : ViewModelBase
         AppHandler.Instance.InitApp();
 
         Config config = AppHandler.Instance.Config;
-        config.coreBasicItem = new();
-        config.guiItem = new();
-        config.uiItem = new();
-        config.inbound = new();
+        config.CoreBasicItem = new();
+        config.GuiItem = new();
+        config.UiItem = new();
+        config.Inbound = new();
 
         return config;
     }
 
     [RelayCommand]
-    public void PullCurrentSubscribe()
+    public async Task PullCurrentSubscribe()
     {
         var server = v2RayBKConfig.SelectedServerGroup;
         if (server == null)
@@ -54,21 +54,21 @@ public partial class HomePageViewModel : ViewModelBase
 
         Config config = InitServeLib();
 
-        SubItem fakeSubItem = new() { id = "fakeid", url = server.Address };
-        SQLiteHelper.Instance.Replace(fakeSubItem);
+        SubItem fakeSubItem = new() { Id = "fakeid", Url = server.Address };
+        await SQLiteHelper.Instance.ReplaceAsync(fakeSubItem);
 
         UpdateService updateService = new();
-        updateService.UpdateSubscriptionProcess(
+        _ = updateService.UpdateSubscriptionProcess(
             config,
-            fakeSubItem.id,
+            fakeSubItem.Id,
             v2RayBKConfig.PullSubscribeWithProxy,
             (bool success, string msg) =>
             {
                 App.PostLog(msg);
                 if (success)
-                    App.PostTask(() =>
+                    App.PostTask(async () =>
                     {
-                        var items = AppHandler.Instance.ProfileItems(fakeSubItem.id);
+                        var items = await AppHandler.Instance.ProfileItems(fakeSubItem.Id);
                         server.UpdateServers(items);
                         if (v2RayBKConfig.SpeedTestAfterPullSubscribe)
                             v2RayBKConfig.SeepTestServer();

@@ -21,6 +21,11 @@
     <ScrollViewer>
         <StackPanel MaxWidth="720" Spacing="8">
             <TextBlock Classes="SettingsSectionHeaderTextBlockStyle" Text="Routing" />
+            <ui:SettingsExpanderItem Content="流量探测">
+                <ui:SettingsExpanderItem.Footer>
+                    <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.SniffingEnabled}" />
+                </ui:SettingsExpanderItem.Footer>
+            </ui:SettingsExpanderItem>
             <ui:SettingsExpanderItem Content="FakeDNS">
                 <ui:SettingsExpanderItem.Footer>
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.FakednsEnabled}" />
