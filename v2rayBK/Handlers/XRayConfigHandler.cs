@@ -455,7 +455,7 @@ public class XRayConfigHandler
             //    kcpSettings.Seed = node.Path;
             //}
             case nameof(ETransport.httpupgrade):
-            case nameof(ETransport.splithttp):
+            case nameof(ETransport.xhttp):
             case nameof(ETransport.grpc):
                 throw new Exception($"no support {node.GetNetwork()} stream setting");
             case nameof(ETransport.ws):

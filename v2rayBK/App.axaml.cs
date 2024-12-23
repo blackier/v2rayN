@@ -114,14 +114,14 @@ public partial class App : Application
         _host.Dispose();
     }
 
-    private async void Desktop_Exit(object? sender, ControlledApplicationLifetimeExitEventArgs e)
+    private void Desktop_Exit(object? sender, ControlledApplicationLifetimeExitEventArgs e)
     {
-        await Desktop_Stop();
+        Desktop_Stop().Wait();
     }
 
-    private async void DesktopApp_ShutdownRequested(object? sender, ShutdownRequestedEventArgs e)
+    private void DesktopApp_ShutdownRequested(object? sender, ShutdownRequestedEventArgs e)
     {
-        await Desktop_Stop();
+        DesktopApp.Shutdown();
     }
 
     public static App Get()
