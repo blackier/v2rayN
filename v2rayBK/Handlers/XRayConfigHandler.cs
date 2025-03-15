@@ -212,7 +212,7 @@ public class XRayConfigHandler
                 foreach (var u in rule.Domain)
                 {
                     string url = u.TrimEx();
-                    if (Utils.IsNullOrEmpty(url))
+                    if (url.IsNullOrEmpty())
                     {
                         continue;
                     }

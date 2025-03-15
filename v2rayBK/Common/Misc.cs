@@ -24,7 +24,7 @@ public class Misc
         {
             regKey = Registry.CurrentUser.OpenSubKey(path, false);
             string value = regKey?.GetValue(name) as string;
-            if (Utils.IsNullOrEmpty(value))
+            if (value.IsNullOrEmpty())
             {
                 return def;
             }
@@ -53,7 +53,7 @@ public class Misc
         try
         {
             regKey = Registry.CurrentUser.CreateSubKey(path);
-            if (Utils.IsNullOrEmpty(value.ToString()))
+            if (value.ToString().IsNullOrEmpty())
             {
                 regKey?.DeleteValue(name, false);
             }

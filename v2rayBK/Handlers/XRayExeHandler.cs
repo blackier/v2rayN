@@ -145,7 +145,7 @@ public class XRayExeHandler
                 break;
             }
         }
-        if (Utils.IsNullOrEmpty(fileName))
+        if (fileName.IsNullOrEmpty())
         {
             App.PostLog("NotFoundCore");
         }
