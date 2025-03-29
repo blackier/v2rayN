@@ -20,7 +20,12 @@ public partial class ServerGroupInfo : ViewModelBase
 
     public int ServerSeletedIndexCache
     {
-        get { return ServerSeletedIndex; }
+        get
+        {
+            if (_serverSeletedIndexCache == -1)
+                _serverSeletedIndexCache = ServerSeletedIndex;
+            return _serverSeletedIndexCache;
+        }
         set { _serverSeletedIndexCache = value; }
     }
 
