@@ -93,8 +93,8 @@ public partial class HomePageViewModel : ViewModelBase
                     )
                 )
             );
-            var release = await client.Repository.Release.GetLatest("XTLS", "Xray-core");
-            return release.Assets.Where(t => t.Name.EndsWith("windows-64.zip")).First().BrowserDownloadUrl;
+            var release = await client.Repository.Release.GetAll("XTLS", "Xray-core");
+            return release.First().Assets.Where(t => t.Name.EndsWith("windows-64.zip")).First().BrowserDownloadUrl;
         }
         catch (Exception ex)
         {
