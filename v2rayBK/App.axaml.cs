@@ -121,7 +121,9 @@ public partial class App : Application
 
     private void DesktopApp_ShutdownRequested(object? sender, ShutdownRequestedEventArgs e)
     {
+        GetRequiredService<v2rayBKConfig>().Close();
         DesktopApp.Shutdown();
+        e.Cancel = false;
     }
 
     public static App Get()
