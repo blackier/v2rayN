@@ -246,7 +246,7 @@ public class XRayConfigHandler
                 var directDNSItem = new ServerObject();
                 directDNSItem.Domains = domainRule.Domain.ToList();
                 directDNSItem.Address = Global.DomainDNSAddress.FirstOrDefault();
-
+                directDNSItem.Domains.Add(config.GetSelectedProfile().Address);
                 v2rayConfig.Dns.Servers.Insert(0, directDNSItem);
             }
         }
@@ -256,30 +256,19 @@ public class XRayConfigHandler
     private static int SetOutbound(v2rayBKConfig config, V2RayConfig v2rayConfig, ProfileItem node)
     {
         // 设置代理，放前面作为主出站
+        V2Ray.OutboundObject outbound = new();
         if (node.ConfigType == EConfigType.VMess)
         {
-            var outbound = V2Ray.OutboundObject.GetVMess(Global.ProxyTag, node.Address, node.Port, node.Id);
+            outbound = V2Ray.OutboundObject.GetVMess(Global.ProxyTag, node.Address, node.Port, node.Id);
 
             var settings = (V2Ray.Protocols.VMess.OutboundConfigurationObject)outbound.Settings;
             settings.Vnext[0].Users[0].AlterId = node.AlterId;
             settings.Vnext[0].Users[0].Email = Global.UserEMail;
             settings.Vnext[0].Users[0].Security = node.Security;
-
-            //Mux
-            outbound.Mux = new();
-            outbound.Mux.Enabled = config.MuxEnabled;
-            outbound.Mux.Concurrency = config.MuxEnabled ? 8 : -1;
-
-            //远程服务器底层传输配置
-            var streamSettings = new V2Ray.Transport.StreamSettingsObject();
-            BoundStreamSettings(config, node, streamSettings);
-            outbound.StreamSettings = streamSettings;
-
-            v2rayConfig.Outbounds.Add(outbound);
         }
         else if (node.ConfigType == EConfigType.Shadowsocks)
         {
-            var outbound = V2Ray.OutboundObject.GetShadowsocks(Global.ProxyTag);
+            outbound = V2Ray.OutboundObject.GetShadowsocks(Global.ProxyTag);
             var settings = (V2Ray.Protocols.Shadowsocks.OutboundConfigurationObject)outbound.Settings;
 
             //远程服务器地址和端口
@@ -288,17 +277,11 @@ public class XRayConfigHandler
             settings.Servers[0].Port = node.Port;
             settings.Servers[0].Password = node.Id;
             settings.Servers[0].Method = node.Security;
-
-            //Mux
-            outbound.Mux = new();
-            outbound.Mux.Enabled = config.MuxEnabled;
-            outbound.Mux.Concurrency = config.MuxEnabled ? 8 : -1;
-
-            v2rayConfig.Outbounds.Add(outbound);
+            settings.Servers[0].Level = 1;
         }
         else if (node.ConfigType == EConfigType.SOCKS)
         {
-            var outbound = V2Ray.OutboundObject.GetSocks(Global.ProxyTag, new DnsEndPoint(node.Address, node.Port));
+            outbound = V2Ray.OutboundObject.GetSocks(Global.ProxyTag, new DnsEndPoint(node.Address, node.Port));
             var settings = (V2Ray.Protocols.Socks.OutboundConfigurationObject)outbound.Settings;
 
             if (!node.Security.IsNullOrEmpty() && !node.Id.IsNullOrEmpty())
@@ -314,23 +297,21 @@ public class XRayConfigHandler
                         }
                     );
             }
-
-            //Mux
-            outbound.Mux = new();
-            outbound.Mux.Enabled = config.MuxEnabled;
-            outbound.Mux.Concurrency = config.MuxEnabled ? 8 : -1;
-
-            v2rayConfig.Outbounds.Add(outbound);
         }
         else if (node.ConfigType == EConfigType.VLESS)
         {
-            var outbound = V2Ray.OutboundObject.GetVLESS(Global.ProxyTag, node.Address, node.Port, node.Id);
+            outbound = V2Ray.OutboundObject.GetVLESS(Global.ProxyTag, node.Address, node.Port, node.Id);
 
             var settings = (V2Ray.Protocols.VLESS.OutboundConfigurationObject)outbound.Settings;
 
             //远程服务器用户ID
             settings.Vnext[0].Users[0].Email = Global.UserEMail;
             settings.Vnext[0].Users[0].Encryption = node.Security;
+        }
+        else if (node.ConfigType == EConfigType.Trojan)
+        {
+            outbound = V2Ray.OutboundObject.GetTrojan(Global.ProxyTag, node.Address, node.Port, node.Id);
+        }
 
             //Mux
             outbound.Mux = new();
@@ -341,6 +322,7 @@ public class XRayConfigHandler
             {
                 if (!node.Flow.IsNullOrEmpty())
                 {
+                var settings = (V2Ray.Protocols.VLESS.OutboundConfigurationObject)outbound.Settings;
                     settings.Vnext[0].Users[0].Flow = node.Flow;
                     outbound.Mux.Enabled = false;
                 }
@@ -348,27 +330,11 @@ public class XRayConfigHandler
 
             //远程服务器底层传输配置
             var streamSettings = new V2Ray.Transport.StreamSettingsObject();
+        streamSettings.Sockopt = new() { DomainStrategy = "UseIP" };
             BoundStreamSettings(config, node, streamSettings);
             outbound.StreamSettings = streamSettings;
 
             v2rayConfig.Outbounds.Add(outbound);
-        }
-        else if (node.ConfigType == EConfigType.Trojan)
-        {
-            var outbound = V2Ray.OutboundObject.GetTrojan(Global.ProxyTag, node.Address, node.Port, node.Id);
-
-            //Mux
-            outbound.Mux = new();
-            outbound.Mux.Enabled = config.MuxEnabled;
-            outbound.Mux.Concurrency = config.MuxEnabled ? 8 : -1;
-
-            //远程服务器底层传输配置
-            var streamSettings = new V2Ray.Transport.StreamSettingsObject();
-            BoundStreamSettings(config, node, streamSettings);
-            outbound.StreamSettings = streamSettings;
-
-            v2rayConfig.Outbounds.Add(outbound);
-        }
 
         // 设置直连
         var freedomOutbound = new V2Ray.OutboundObject

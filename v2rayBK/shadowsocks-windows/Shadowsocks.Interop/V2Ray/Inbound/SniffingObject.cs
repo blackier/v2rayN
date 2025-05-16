@@ -43,7 +43,7 @@ namespace Shadowsocks.Interop.V2Ray.Inbound
             {
                 Enabled = true,
                 DestOverride = new() { "http", "tls", "fakedns", },
-                MetadataOnly = true,
+                MetadataOnly = false,
             };
     }
 }
