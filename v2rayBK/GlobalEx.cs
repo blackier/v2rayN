@@ -14,6 +14,8 @@ class GlobalEx
     public const string XRayProjectUrl = "https://github.com/XTLS/Xray-core";
     public const string v2rayBKUrl = "https://github.com/blackier/v2rayN";
     public const string PromotionUrl = "aHR0cHM6Ly85LjIzNDQ1Ni54eXovYWJjLmh0bWw=";
+    public const string GeoSiteLatestUrl = "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat";
+    public const string GeoIPLatestUrl = "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat";
 
     public static readonly List<string> DomainDNSAddress = ["223.5.5.5", "223.6.6.6", "localhost"];
     public static readonly List<string> DomainOverseaDNSAddress = ["1.1.1.1", "8.8.8.8"];

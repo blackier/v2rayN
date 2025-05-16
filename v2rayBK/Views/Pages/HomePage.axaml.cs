@@ -42,7 +42,7 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
         ViewModel.StartSeletedServer();
     }
 
-    private async void check_update_xray_menuitem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private async void check_update_xray_MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         string lastVersionUrl = await ViewModel.CheckUpdateXRayVersion();
         if (!string.IsNullOrEmpty(lastVersionUrl))
@@ -65,7 +65,7 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
         }
     }
 
-    private void system_proxy_NativeMenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void system_proxy_MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         App.Get()?.tray_system_proxy_NativeMenuItem_Click(sender, e);
     }

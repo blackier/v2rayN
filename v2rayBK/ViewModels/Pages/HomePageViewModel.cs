@@ -103,14 +103,52 @@ public partial class HomePageViewModel : ViewModelBase
         return "";
     }
 
-    public async void UpdateXRay(string lastVerisonUrl)
+    public void UpdateXRay(string lastVerisonUrl)
     {
-        string fileName = Utils.GetTempPath(Path.GetFileName(lastVerisonUrl));
+        _ = DownloadFile(
+            lastVerisonUrl,
+            (fileName) =>
+            {
+                v2RayBKConfig.StopV2RayCore();
+                FileManager.ZipExtractToFile(fileName, Utils.StartupPath(), "");
+                App.PostTask(() => RestartServer());
+            }
+        );
+    }
+
+    [RelayCommand]
+    public void UpdateGeoSite()
+    {
+        UpdateGeoFile(GlobalEx.GeoSiteLatestUrl);
+    }
+
+    [RelayCommand]
+    public void UpdateGeoIP()
+    {
+        UpdateGeoFile(GlobalEx.GeoIPLatestUrl);
+    }
+
+    public void UpdateGeoFile(string fileUrl)
+    {
+        _ = DownloadFile(
+            fileUrl,
+            (fileName) =>
+            {
+                v2RayBKConfig.StopV2RayCore();
+                File.Copy(fileName, Path.Combine(Utils.StartupPath(), Path.GetFileName(fileName)), true);
+                App.PostTask(() => RestartServer());
+            }
+        );
+    }
+
+    public async Task DownloadFile(string fileUrl, Action<string> DownloadCompleted)
+    {
+        string fileName = Utils.GetTempPath(Path.GetFileName(fileUrl));
         File.Delete(fileName);
 
         IDownload download = DownloadBuilder
             .New()
-            .WithUrl(lastVerisonUrl)
+            .WithUrl(fileUrl)
             .WithDirectory("")
             .WithFileName(fileName)
             .WithConfiguration(
@@ -128,19 +166,17 @@ public partial class HomePageViewModel : ViewModelBase
             if (progress - preProgress >= 1)
             {
                 preProgress = progress;
-                App.PostLog($"UpdateXRay DownloadProgress: {preProgress}%");
+                App.PostLog($"DownloadProgress: {preProgress}%");
             }
         };
         download.DownloadFileCompleted += (object sender, System.ComponentModel.AsyncCompletedEventArgs e) =>
         {
             if (e.Error != null)
             {
-                App.PostLog($"UpdateXRay fail, {e.Error}");
+                App.PostLog($"DownloadFile fail, {e.Error}");
                 return;
             }
-            v2RayBKConfig.StopV2RayCore();
-            FileManager.ZipExtractToFile(fileName, Utils.StartupPath(), "");
-            App.PostTask(() => RestartServer());
+            DownloadCompleted?.Invoke(fileName);
         };
         await download.StartAsync();
     }

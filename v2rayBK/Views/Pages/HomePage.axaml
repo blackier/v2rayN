@@ -35,24 +35,24 @@
                 <MenuItem Header="Share" />
                 <MenuItem Command="{Binding ViewModel.RestartServerCommand}" Header="Restart Server" />
                 <MenuItem Header="System Proxy">
-                    <MenuItem Click="system_proxy_NativeMenuItem_Click"
+                    <MenuItem Click="system_proxy_MenuItem_Click"
                               Header="Close"
                               IsChecked="{Binding ViewModel.v2RayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Close}}"
                               ToggleType="Radio" />
-                    <MenuItem Click="system_proxy_NativeMenuItem_Click"
+                    <MenuItem Click="system_proxy_MenuItem_Click"
                               Header="Http"
                               IsChecked="{Binding ViewModel.v2RayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Http}}"
                               ToggleType="Radio" />
-                    <MenuItem Click="system_proxy_NativeMenuItem_Click"
+                    <MenuItem Click="system_proxy_MenuItem_Click"
                               Header="Socks"
                               IsChecked="{Binding ViewModel.v2RayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Socks}}"
                               ToggleType="Radio" />
                 </MenuItem>
                 <MenuItem Header="Help">
                     <MenuItem Header="Check for Updates">
-                        <MenuItem Click="check_update_xray_menuitem_Click" Header="XRay-core" />
-                        <MenuItem Header="Domain List" />
-                        <MenuItem Header="IP List" />
+                        <MenuItem Click="check_update_xray_MenuItem_Click" Header="XRay-core" />
+                        <MenuItem Command="{Binding ViewModel.UpdateGeoSiteCommand}" Header="Domain List" />
+                        <MenuItem Command="{Binding ViewModel.UpdateGeoIPCommand}" Header="IP List" />
                     </MenuItem>
                     <MenuItem Header="Project">
                         <MenuItem Click="openurl_MenuItem_Click"
