@@ -78,10 +78,10 @@ public partial class v2rayBKConfig : ViewModelBase
     private ObservableCollection<RoutingRuleItem> _userBlock = new() { new() { Domain = new(GlobalEx.geoAdAdress) } };
 
     [ObservableProperty]
-    private string _userDirectSkip = string.Empty;
+    private string _httpProxyRule = "<local>";
 
     [ObservableProperty]
-    private bool _userDirectSkipEnable = true;
+    private bool _httpProxyRuleEnable = true;
 
     // 测速
 

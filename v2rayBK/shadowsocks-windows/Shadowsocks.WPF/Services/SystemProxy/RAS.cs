@@ -49,7 +49,7 @@ namespace Shadowsocks.WPF.Services.SystemProxy
             // size in bytes of buffer
             ref int lpcb,
             // number of entries written to buffer
-            out int lpcEntries
+            ref int lpcEntries
         );
 
         public static string[] GetAllConnections()
@@ -65,7 +65,7 @@ namespace Shadowsocks.WPF.Services.SystemProxy
             // Windows Vista or later:  To determine the required buffer size, call RasEnumEntries
             // with lprasentryname set to NULL. The variable pointed to by lpcb should be set to zero.
             // The function will return the required buffer size in lpcb and an error code of ERROR_BUFFER_TOO_SMALL.
-            retval = RasEnumEntries("", "", null, ref lpSize, out lpNames);
+            retval = RasEnumEntries(null, null, null, ref lpSize, ref lpNames);
             if (retval == EBufferTooSmall)
             {
                 names = new RasEntryName[lpNames];
@@ -74,7 +74,7 @@ namespace Shadowsocks.WPF.Services.SystemProxy
                     names[i].dwSize = entryNameSize;
                 }
 
-                retval = RasEnumEntries("", "", names, ref lpSize, out lpNames);
+                retval = RasEnumEntries(null, null, names, ref lpSize, ref lpNames);
             }
 
             if (retval == ESuccess)

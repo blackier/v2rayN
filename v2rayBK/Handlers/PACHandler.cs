@@ -19,15 +19,18 @@ public class PACHandler
 
     public static void StopListenner()
     {
-        ShowMsg("pac listenner stop");
+        if (_listener == null)
+            return;
+
         _listener?.Stop();
         _listener?.Close();
         _listener = null;
+        ShowMsg("PAC listenner stop");
     }
 
     public static void StartListener(string[] prefixes)
     {
-        ShowMsg("pac listenner start");
+        ShowMsg("PAC listenner start");
         if (_listener != null)
         {
             if (_listener.IsListening)
@@ -56,11 +59,11 @@ public class PACHandler
 
     private static void ListenerCallback(IAsyncResult result)
     {
-        ShowMsg("pac listenner callback");
+        ShowMsg("PAC listenner callback");
         HttpListener listener = (HttpListener)result.AsyncState;
         if (listener == null || !listener.IsListening)
         {
-            ShowMsg("pac listener is null, need restart listener");
+            ShowMsg("PAC listener is null, need restart listener");
             _listener = null;
             return;
         }

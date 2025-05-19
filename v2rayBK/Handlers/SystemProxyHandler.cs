@@ -29,17 +29,20 @@ public class SystemProxyHandler
                     PACHandler.StopListenner();
                     WinINet.ProxyGlobal(
                         $"{Global.Loopback}:{config.HttpInboundPort}",
-                        config.UserDirectSkipEnable ? config.UserDirectSkip : string.Empty
+                        config.HttpProxyRuleEnable ? config.HttpProxyRule : string.Empty
                     );
+                    App.PostLog("Systeam http proxy start");
                     break;
                 case SystemProxyType.Socks:
                     string pacUrl = "http://127.0.0.1:8008/pac/";
                     PACHandler.StartListener(new[] { pacUrl });
                     WinINet.ProxyPAC(pacUrl + "socks.pac");
+                    App.PostLog("Systeam pac proxy start");
                     break;
                 default:
                     PACHandler.StopListenner();
                     WinINet.Reset();
+                    App.PostLog("Systeam proxy stop");
                     break;
             }
         }
