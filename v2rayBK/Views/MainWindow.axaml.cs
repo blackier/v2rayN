@@ -19,8 +19,8 @@ public partial class MainWindow : AppWindow
         DataContext = this;
         InitializeComponent();
 
-        this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-        this.ShowInTaskbar = false;
+        WindowStartupLocation = WindowStartupLocation.CenterOwner;
+        ShowInTaskbar = false;
 
         TitleBar.Height = app_titlebar_grid.Height;
         TitleBar.ExtendsContentIntoTitleBar = true;
@@ -40,6 +40,7 @@ public partial class MainWindow : AppWindow
 
     public void ShowWindow()
     {
+        WindowState = WindowState.Normal;
         ShowInTaskbar = true;
         base.Show();
         Activate();
