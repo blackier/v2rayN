@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -20,7 +20,7 @@ namespace v2rayBK;
 
 public partial class App : Application
 {
-    private static readonly IHost _host = Host.CreateDefaultBuilder()
+    private static IHost _host = Host.CreateDefaultBuilder()
         .ConfigureAppConfiguration(c =>
         {
             c.SetBasePath(AppContext.BaseDirectory);
@@ -83,7 +83,7 @@ public partial class App : Application
     {
         await _host.StartAsync();
 
-        // ÷˜Ã‚
+        // ‰∏ªÈ¢ò
         switch (v2rayBKConfig.AppTheme)
         {
             case AppTheme.Dark:
@@ -101,29 +101,31 @@ public partial class App : Application
         BindingPlugins.DataValidators.RemoveAt(0);
         DesktopApp.MainWindow = MainWindow;
 
-        // ◊‘∆Ù∂Ø
+        // Ëá™ÂêØÂä®
         GetRequiredService<HomePage>();
         v2rayBKConfig.StartServer();
         LoadTrayIcon();
     }
 
-    private async Task Desktop_Stop()
+    private void Desktop_Stop()
     {
+        if (_host == null)
+            return;
         GetRequiredService<v2rayBKConfig>().Close();
-        await _host.StopAsync();
+        _host.StopAsync().Wait();
         _host.Dispose();
+        _host = null;
     }
 
     private void Desktop_Exit(object? sender, ControlledApplicationLifetimeExitEventArgs e)
     {
-        Desktop_Stop().Wait();
+        Desktop_Stop();
     }
 
     private void DesktopApp_ShutdownRequested(object? sender, ShutdownRequestedEventArgs e)
     {
-        GetRequiredService<v2rayBKConfig>().Close();
+        Desktop_Stop();
         DesktopApp.Shutdown();
-        e.Cancel = false;
     }
 
     public static App Get()
