@@ -55,24 +55,26 @@ public partial class HomePageViewModel : ViewModelBase
         Config config = InitServeLib();
 
         SubItem fakeSubItem = new() { Id = "fakeid", Url = server.Address };
+        await SQLiteHelper.Instance.DeleteAsync(fakeSubItem);
         await SQLiteHelper.Instance.ReplaceAsync(fakeSubItem);
 
         UpdateService updateService = new();
-        _ = updateService.UpdateSubscriptionProcess(
+        await updateService.UpdateSubscriptionProcess(
             config,
             fakeSubItem.Id,
             v2RayBKConfig.PullSubscribeWithProxy,
-            (bool success, string msg) =>
+            async (bool success, string msg) =>
             {
                 App.PostLog(msg);
                 if (success)
-                    App.PostTask(async () =>
-                    {
-                        var items = await AppHandler.Instance.ProfileItems(fakeSubItem.Id);
-                        server.UpdateServers(items);
-                        if (v2RayBKConfig.SpeedTestAfterPullSubscribe)
-                            v2RayBKConfig.SeepTestServer();
-                    });
+                {
+                    var items = await AppHandler.Instance.ProfileItems(fakeSubItem.Id);
+                    if (items == null || !items.Any())
+                        return;
+                    server.UpdateServers(items);
+                    if (v2RayBKConfig.SpeedTestAfterPullSubscribe)
+                        v2RayBKConfig.SeepTestServer();
+                }
             }
         );
     }
