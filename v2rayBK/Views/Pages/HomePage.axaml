@@ -23,15 +23,15 @@
                     <MenuItem Name="subscribe_settings_menuitem"
                               Click="subscribe_settings_menuitem_Click"
                               Header="Settings" />
-                    <MenuItem Command="{Binding ViewModel.PullCurrentSubscribeCommand}" Header="Pull Current" />
                     <MenuItem Header="Pull Current with Proxy"
                               IsChecked="{Binding ViewModel.v2RayBKConfig.PullSubscribeWithProxy, Mode=TwoWay}"
                               ToggleType="CheckBox" />
-                    <MenuItem Command="{Binding ViewModel.v2RayBKConfig.SeepTestServerCommand}" Header="Speed Test" />
                     <MenuItem Header="Speed Test after Pull"
                               IsChecked="{Binding ViewModel.v2RayBKConfig.SpeedTestAfterPullSubscribe, Mode=TwoWay}"
                               ToggleType="CheckBox" />
                 </MenuItem>
+                <MenuItem Command="{Binding ViewModel.PullCurrentSubscribeCommand}" Header="Pull Subscribe" />
+                <MenuItem Command="{Binding ViewModel.v2RayBKConfig.SeepTestServerCommand}" Header="Speed Test" />
                 <MenuItem Header="Share" />
                 <MenuItem Command="{Binding ViewModel.RestartServerCommand}" Header="Restart Server" />
                 <MenuItem Header="System Proxy">
