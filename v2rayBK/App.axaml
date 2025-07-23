@@ -37,22 +37,18 @@
                       ToolTipText="Avalonia Tray Icon ToolTip">
                 <TrayIcon.Menu>
                     <NativeMenu>
-                        <NativeMenuItem Header="System Proxy">
-                            <NativeMenu>
-                                <NativeMenuItem Click="tray_system_proxy_NativeMenuItem_Click"
-                                                Header="Close"
-                                                IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Close}}"
-                                                ToggleType="Radio" />
-                                <NativeMenuItem Click="tray_system_proxy_NativeMenuItem_Click"
-                                                Header="Http"
-                                                IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Http}}"
-                                                ToggleType="Radio" />
-                                <NativeMenuItem Click="tray_system_proxy_NativeMenuItem_Click"
-                                                Header="Socks"
-                                                IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Socks}}"
-                                                ToggleType="Radio" />
-                            </NativeMenu>
-                        </NativeMenuItem>
+                        <NativeMenuItem Click="tray_system_proxy_NativeMenuItem_Click"
+                                        Header="Close"
+                                        IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Close}}"
+                                        ToggleType="Radio" />
+                        <NativeMenuItem Click="tray_system_proxy_NativeMenuItem_Click"
+                                        Header="Http"
+                                        IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Http}}"
+                                        ToggleType="Radio" />
+                        <NativeMenuItem Click="tray_system_proxy_NativeMenuItem_Click"
+                                        Header="Socks"
+                                        IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Socks}}"
+                                        ToggleType="Radio" />
                         <NativeMenuItemSeparator />
                         <NativeMenuItem Click="tray_exit_NativeMenuItem_Click" Header="{x:Static lang:Resource.Tray_Exit_Header}" />
                     </NativeMenu>
