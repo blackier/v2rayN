@@ -204,7 +204,7 @@ public partial class App : Application
     {
         //https://stackoverflow.com/questions/14506406/wpf-single-instance-best-practices
         bool isOwned;
-        _mutex = new Mutex(true, Directory.GetCurrentDirectory().ToHashSet().ToString(), out isOwned);
+        _mutex = new Mutex(true, Directory.GetCurrentDirectory().ToHashSet().ToString()[..5], out isOwned);
         EventWaitHandle eventWaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset, "MainWindowWake");
 
         if (isOwned)
