@@ -24,6 +24,16 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
         WeakReferenceMessenger.Default.Register<MessageType.LogMessage>(this);
     }
 
+
+    void IRecipient<MessageType.LogMessage>.Receive(MessageType.LogMessage message)
+    {
+        if (log_ItemsControl.Items.Count > 999)
+            log_ItemsControl.Items.Clear();
+
+        log_ItemsControl.Items.Add(new SelectableTextBlock() {Text = message.log, TextWrapping = Avalonia.Media.TextWrapping.Wrap });
+        log_ScrollViewer.ScrollToEnd();
+    }
+
     private async void subscribe_settings_menuitem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         var dialog = new ContentDialog() { Title = "Subscribe Settings", PrimaryButtonText = "OK" };
@@ -34,12 +44,6 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
             DataContext = new SubscribeSettingsPageViewModel() { ServerGroup = ViewModel.v2RayBKConfig.ServerGroup }
         };
         await dialog.ShowAsync();
-    }
-
-    private void server_list_datagrid_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
-    {
-        log_textbox.Text = "";
-        ViewModel.StartSeletedServer();
     }
 
     private async void check_update_xray_MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -86,14 +90,18 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
         }
     }
 
-    private ScrollViewer? _log_textbox_ScrollViewer;
-
-    void IRecipient<MessageType.LogMessage>.Receive(MessageType.LogMessage message)
+    private void server_list_DataGrid_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
     {
-        log_textbox.Text += Environment.NewLine + message.log;
-        if (_log_textbox_ScrollViewer == null)
-            _log_textbox_ScrollViewer = log_textbox.GetVisualDescendants().OfType<ScrollViewer>().FirstOrDefault();
+        log_ItemsControl.Items.Clear();
+        ViewModel.StartSeletedServer();
+    }
 
-        _log_textbox_ScrollViewer?.ScrollToEnd();
+
+    private async void DataGrid_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
+    {
+        var dataGrid = (DataGrid)sender;
+        if (!this.IsLoaded)
+            await Task.Delay(100);
+        dataGrid.ScrollIntoView(dataGrid.SelectedItem, null);
     }
 }

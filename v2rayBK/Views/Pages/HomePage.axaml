@@ -67,7 +67,8 @@
                               Tag="{x:Static global:OpenUrlType.Promotion}" />
                 </MenuItem>
             </Menu>
-            <TabControl Grid.Row="1"
+            <TabControl Name="server_list_TabControl"
+                        Grid.Row="1"
                         Padding="0"
                         ItemsSource="{Binding ViewModel.v2RayBKConfig.ServerGroup, Mode=OneWay}"
                         SelectedIndex="{Binding ViewModel.v2RayBKConfig.ServerGroupSeletedIndex}">
@@ -78,17 +79,18 @@
                 </TabControl.ItemTemplate>
                 <TabControl.ContentTemplate>
                     <DataTemplate DataType="vm:ServerGroupInfo">
-                        <DataGrid Name="server_list_datagrid"
+                        <DataGrid Name="server_list_DataGrid"
                                   BorderBrush="Gray"
                                   BorderThickness="1"
                                   CanUserReorderColumns="False"
                                   CanUserResizeColumns="True"
                                   CanUserSortColumns="True"
-                                  DoubleTapped="server_list_datagrid_DoubleTapped"
+                                  DoubleTapped="server_list_DataGrid_DoubleTapped"
                                   GridLinesVisibility="All"
                                   IsReadOnly="True"
                                   ItemsSource="{Binding Servers}"
-                                  SelectedIndex="{Binding ServerSeletedIndexCache}">
+                                  SelectedIndex="{Binding ServerSeletedIndexCache}"
+                                  SelectionChanged="DataGrid_SelectionChanged">
                             <DataGrid.Columns>
                                 <DataGridCheckBoxColumn Binding="{Binding IsSeletedServer, Mode=OneWay}" />
                                 <DataGridTextColumn Binding="{Binding ConfigType, Mode=OneWay}" Header="Type" />
@@ -113,14 +115,11 @@
         <GridSplitter Grid.Row="1" ShowsPreview="True" />
         <ThemeVariantScope Grid.Row="2" RequestedThemeVariant="Dark">
             <Grid Background="{DynamicResource SolidBackgroundFillColorBaseBrush}" TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}">
-                <TextBox Name="log_textbox"
-                         AcceptsReturn="True"
-                         CornerRadius="0"
-                         FontSize="12"
-                         IsReadOnly="True"
-                         MaxLines="999"
-                         TextWrapping="Wrap" />
-
+                <ScrollViewer Name="log_ScrollViewer" Background="{DynamicResource TextControlBackground}">
+                    <ItemsControl Name="log_ItemsControl"
+                                  Padding="{DynamicResource TextControlThemePadding}"
+                                  FontSize="12" />
+                </ScrollViewer>
             </Grid>
         </ThemeVariantScope>
         <DockPanel Grid.Row="3" Height="25">
