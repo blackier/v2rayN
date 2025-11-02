@@ -1,14 +1,14 @@
-﻿using System;
-using System.Net;
-using System.Threading;
-using Avalonia.Threading;
-using Downloader;
+﻿using Downloader;
 using Octokit;
 using Octokit.Internal;
-using ServiceLib.Common;
 using ServiceLib.Handler;
+using ServiceLib.Helper;
+using ServiceLib.Manager;
 using ServiceLib.Models;
 using ServiceLib.Services;
+using System;
+using System.Net;
+using System.Threading;
 
 namespace v2rayBK.ViewModels.Pages;
 
@@ -34,9 +34,9 @@ public partial class HomePageViewModel : ViewModelBase
 
     public Config InitServeLib()
     {
-        AppHandler.Instance.InitApp();
+        AppManager.Instance.InitApp();
 
-        Config config = AppHandler.Instance.Config;
+        Config config = AppManager.Instance.Config;
         config.CoreBasicItem = new();
         config.GuiItem = new();
         config.UiItem = new();
@@ -58,8 +58,7 @@ public partial class HomePageViewModel : ViewModelBase
         await SQLiteHelper.Instance.DeleteAsync(fakeSubItem);
         await SQLiteHelper.Instance.ReplaceAsync(fakeSubItem);
 
-        UpdateService updateService = new();
-        await updateService.UpdateSubscriptionProcess(
+        await SubscriptionHandler.UpdateProcess(
             config,
             fakeSubItem.Id,
             v2RayBKConfig.PullSubscribeWithProxy,
@@ -68,7 +67,7 @@ public partial class HomePageViewModel : ViewModelBase
                 App.PostLog(msg);
                 if (success)
                 {
-                    var items = await AppHandler.Instance.ProfileItems(fakeSubItem.Id);
+                    var items = await AppManager.Instance.ProfileItems(fakeSubItem.Id);
                     if (items == null || !items.Any())
                         return;
                     server.UpdateServers(items);
