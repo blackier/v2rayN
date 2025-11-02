@@ -10,5 +10,8 @@ namespace Shadowsocks.Interop.V2Ray
         public HttpObject HttpSettings { get; set; }
         public QuicObject QuicSettings { get; set; }
         public DomainSocketObject DsSettings { get; set; }
+        public HttpUpgradeObject HttpUpgradeSettings { get; set; }
+        public XhttpObject XhttpSettings { get; set; }
+        public GRPCObject GrpcSettings { get; set; }
     }
 }

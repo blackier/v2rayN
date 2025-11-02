@@ -18,6 +18,7 @@ namespace Shadowsocks.Interop.V2Ray.Transport
 
         public TlsObject TlsSettings { get; set; }
         public SockoptObject Sockopt { get; set; }
+        public RealityObject RealitySettings { get; set; }
 
         public static StreamSettingsObject DefaultWsTls =>
             new()

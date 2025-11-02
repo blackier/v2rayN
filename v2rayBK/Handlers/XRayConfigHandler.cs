@@ -245,7 +245,7 @@ public class XRayConfigHandler
             {
                 var directDNSItem = new ServerObject();
                 directDNSItem.Domains = domainRule.Domain.ToList();
-                directDNSItem.Address = Global.DomainDNSAddress.FirstOrDefault();
+                directDNSItem.Address = GlobalEx.DomainDNSAddress.FirstOrDefault();
                 directDNSItem.Domains.Add(config.GetSelectedProfile().Address);
                 v2rayConfig.Dns.Servers.Insert(0, directDNSItem);
             }
@@ -312,29 +312,34 @@ public class XRayConfigHandler
         {
             outbound = V2Ray.OutboundObject.GetTrojan(Global.ProxyTag, node.Address, node.Port, node.Id);
         }
+        else
+        {
+            // TODO
+            throw new Exception($"no support {node.ConfigType} proxy");
+        }
 
-            //Mux
-            outbound.Mux = new();
-            outbound.Mux.Enabled = config.MuxEnabled;
-            outbound.Mux.Concurrency = config.MuxEnabled ? 8 : -1;
+        //Mux
+        outbound.Mux = new();
+        outbound.Mux.Enabled = config.MuxEnabled;
+        outbound.Mux.Concurrency = config.MuxEnabled ? 8 : -1;
 
-            if (node.StreamSecurity == Global.StreamSecurityReality || node.StreamSecurity == Global.StreamSecurity)
+        if (node.StreamSecurity == Global.StreamSecurityReality || node.StreamSecurity == Global.StreamSecurity)
+        {
+            if (!node.Flow.IsNullOrEmpty())
             {
-                if (!node.Flow.IsNullOrEmpty())
-                {
                 var settings = (V2Ray.Protocols.VLESS.OutboundConfigurationObject)outbound.Settings;
-                    settings.Vnext[0].Users[0].Flow = node.Flow;
-                    outbound.Mux.Enabled = false;
-                }
+                settings.Vnext[0].Users[0].Flow = node.Flow;
+                outbound.Mux.Enabled = false;
             }
+        }
 
-            //远程服务器底层传输配置
-            var streamSettings = new V2Ray.Transport.StreamSettingsObject();
+        //远程服务器底层传输配置
+        var streamSettings = new V2Ray.Transport.StreamSettingsObject();
         streamSettings.Sockopt = new() { DomainStrategy = "UseIP" };
-            BoundStreamSettings(config, node, streamSettings);
-            outbound.StreamSettings = streamSettings;
+        BoundStreamSettings(config, node, streamSettings);
+        outbound.StreamSettings = streamSettings;
 
-            v2rayConfig.Outbounds.Add(outbound);
+        v2rayConfig.Outbounds.Add(outbound);
 
         // 设置直连
         var freedomOutbound = new V2Ray.OutboundObject
@@ -377,12 +382,14 @@ public class XRayConfigHandler
         if (node.StreamSecurity == Global.StreamSecurity)
         {
             streamSettings.Security = node.StreamSecurity;
-            streamSettings.TlsSettings = new();
-            streamSettings.TlsSettings.AllowInsecure = node.AllowInsecure.IsNullOrEmpty()
-                ? config.DefAllowInsecure
-                : Utils.ToBool(node.AllowInsecure);
-            streamSettings.TlsSettings.Alpn = node.GetAlpn();
-            streamSettings.TlsSettings.Fingerprint = node.Fingerprint;
+            streamSettings.TlsSettings = new()
+            {
+                AllowInsecure = node.AllowInsecure.IsNullOrEmpty()
+                    ? config.DefAllowInsecure
+                    : Utils.ToBool(node.AllowInsecure),
+                Alpn = node.GetAlpn(),
+                Fingerprint = node.Fingerprint.IsNullOrEmpty() ? "random" : node.Fingerprint
+            };
 
             if (!sni.IsNullOrEmpty())
             {
@@ -396,8 +403,16 @@ public class XRayConfigHandler
         //if Reality
         if (node.StreamSecurity == Global.StreamSecurityReality)
         {
-            // TODO
-            throw new Exception("no support reality stream setting");
+            streamSettings.Security = node.StreamSecurity;
+            streamSettings.RealitySettings = new()
+            {
+                Fingerprint = node.Fingerprint.IsNullOrEmpty() ? "random" : node.Fingerprint,
+                ServerName = node.Sni,
+                Password = node.PublicKey,
+                ShortId = node.ShortId,
+                SpiderX = node.SpiderX,
+                Mldsa65Verify = node.Mldsa65Verify,
+            };
         }
 
         //streamSettings
@@ -405,40 +420,64 @@ public class XRayConfigHandler
         {
             //kcp基本配置暂时是默认值，用户能自己设置伪装类型
             case nameof(ETransport.kcp):
-            // TODO
-            //streamSettings.KcpSettings = new() { Mtu = config.kcpItem.mtu, Tti = config.kcpItem.tti };
-            //var kcpSettings = streamSettings.KcpSettings;
-            //// 不区客户端和服务
-            //kcpSettings.UplinkCapacity = config.kcpItem.uplinkCapacity;
-            //kcpSettings.DownlinkCapacity = config.kcpItem.downlinkCapacity;
-
-            //kcpSettings.Congestion = config.kcpItem.congestion;
-            //kcpSettings.ReadBufferSize = config.kcpItem.readBufferSize;
-            //kcpSettings.WriteBufferSize = config.kcpItem.writeBufferSize;
-            //kcpSettings.Header.Type = node.HeaderType;
-            //if (!node.Path.IsNullOrEmpty())
-            //{
-            //    kcpSettings.Seed = node.Path;
-            //}
-            case nameof(ETransport.httpupgrade):
-            case nameof(ETransport.xhttp):
-            case nameof(ETransport.grpc):
-                throw new Exception($"no support {node.GetNetwork()} stream setting");
+                // 没啥好设置的，就按默认
+                streamSettings.KcpSettings = new();
+                var kcpSettings = streamSettings.KcpSettings;
+                kcpSettings.Header = new() { Type = node.HeaderType, Domain = host.IsNullOrEmpty() ? null : host };
+                if (!string.IsNullOrWhiteSpace(node.Path))
+                {
+                    kcpSettings.Seed = node.Path;
+                }
+                break;
             case nameof(ETransport.ws):
                 streamSettings.WsSettings = new();
                 var wsSettings = streamSettings.WsSettings;
-
-                string path = node.Path;
                 if (!string.IsNullOrWhiteSpace(host))
                 {
+                    wsSettings.Host = host;
                     wsSettings.Headers.Add("Host", host);
                 }
-                if (!string.IsNullOrWhiteSpace(path))
+                if (!string.IsNullOrWhiteSpace(node.Path))
                 {
-                    wsSettings.Path = path;
+                    wsSettings.Path = node.Path;
                 }
-                wsSettings.Headers.Add("User-Agent", useragent);
-
+                if (!string.IsNullOrWhiteSpace(useragent))
+                {
+                    wsSettings.Headers.Add("User-Agent", useragent);
+                }
+                break;
+            case nameof(ETransport.httpupgrade):
+                streamSettings.HttpUpgradeSettings = new();
+                var httpupgradeSettings = streamSettings.HttpUpgradeSettings;
+                if (!string.IsNullOrWhiteSpace(host))
+                {
+                    httpupgradeSettings.Host = host;
+                }
+                if (!string.IsNullOrWhiteSpace(node.Path))
+                {
+                    httpupgradeSettings.Path = node.Path;
+                }
+                break;
+            case nameof(ETransport.xhttp):
+                streamSettings.Network = ETransport.xhttp.ToString();
+                streamSettings.XhttpSettings = new();
+                var xhttpSettings = streamSettings.XhttpSettings;
+                if (!string.IsNullOrWhiteSpace(host))
+                {
+                    xhttpSettings.Host = host;
+                }
+                if (!string.IsNullOrWhiteSpace(node.Path))
+                {
+                    xhttpSettings.Path = node.Path;
+                }
+                if (node.HeaderType.IsNotEmpty() && Global.XhttpMode.Contains(node.HeaderType))
+                {
+                    xhttpSettings.Mode = node.HeaderType;
+                }
+                if (node.Extra.IsNotEmpty())
+                {
+                    xhttpSettings.Extra = JsonUtils.ParseJson(node.Extra);
+                }
                 break;
             case nameof(ETransport.h2):
                 streamSettings.HttpSettings = new();
@@ -465,6 +504,13 @@ public class XRayConfigHandler
                     else
                         streamSettings.TlsSettings.ServerName = node.Address;
                 }
+                break;
+            case nameof(ETransport.grpc):
+                streamSettings.GrpcSettings = new();
+                var grpcSettings = streamSettings.GrpcSettings;
+                grpcSettings.Authority = host.IsNullOrEmpty() ? null : host;
+                grpcSettings.ServiceName = node.Path;
+                grpcSettings.MultiMode = node.HeaderType == Global.GrpcMultiMode;
                 break;
             default:
                 //tcp带http伪装
@@ -570,6 +616,21 @@ public class XRayConfigHandler
                 int port = freePort + index;
                 config.GetSelectedServer(index)!.SpeedTestPort = port;
                 var inboundTag = "http" + port.ToString();
+
+                var outboundTag = Global.ProxyTag + port.ToString();
+
+                V2RayConfig v2rayConfigCopy = V2RayConfig.SpeedTest;
+                try
+                {
+                    SetOutbound(config, v2rayConfigCopy, node);
+                }
+                catch (Exception e)
+                {
+                    App.PostLog($"Gen test config failed, InboundTag={inboundTag}, {e.Message}");
+                    continue;
+                }
+                v2rayConfigCopy.Outbounds[0].Tag = outboundTag;
+
                 v2rayConfig.Inbounds.Add(
                     new()
                     {
@@ -579,13 +640,6 @@ public class XRayConfigHandler
                         Tag = inboundTag
                     }
                 );
-
-                var outboundTag = Global.ProxyTag + port.ToString();
-
-                V2RayConfig v2rayConfigCopy = V2RayConfig.SpeedTest;
-                SetOutbound(config, v2rayConfigCopy, node);
-                v2rayConfigCopy.Outbounds[0].Tag = outboundTag;
-
                 v2rayConfig.Outbounds.Add(v2rayConfigCopy.Outbounds[0]);
                 v2rayConfig.Routing.Rules.Add(
                     new()

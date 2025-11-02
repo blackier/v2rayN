@@ -15,6 +15,8 @@ namespace Shadowsocks.Interop.V2Ray.Transport
         /// </summary>
         public string Path { get; set; }
 
+        public string Host { get; set; }
+
         /// <summary>
         /// Gets or sets HTTP header key-value pairs.
         /// Defaults to empty.

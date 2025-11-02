@@ -14,6 +14,7 @@ namespace Shadowsocks.Interop.V2Ray.Transport.Header
         /// wireguard
         /// </summary>
         public string Type { get; set; }
+        public string Domain { get; set; }
 
         public HeaderObject()
         {
