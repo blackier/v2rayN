@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -64,11 +65,17 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            if (ExistLaunchedApp())
+            var thread = new Thread(() =>
             {
-                desktop.Shutdown();
-                return;
-            }
+                while (Program._eventWaitHandle.WaitOne())
+                {
+                    PostTask(() => MainWindow.ShowWindow());
+                }
+            });
+            // It is important mark it as background otherwise it will prevent app from exiting.
+            thread.IsBackground = true;
+            thread.Start();
+
             DesktopApp = desktop;
             DesktopApp.ShutdownMode = ShutdownMode.OnExplicitShutdown;
             DesktopApp.Startup += DesktopApp_Startup;
@@ -196,34 +203,5 @@ public partial class App : Application
     private void tray_exit_NativeMenuItem_Click(object? sender, System.EventArgs e)
     {
         DesktopApp.Shutdown();
-    }
-
-    private Mutex _mutex;
-
-    private bool ExistLaunchedApp()
-    {
-        //https://stackoverflow.com/questions/14506406/wpf-single-instance-best-practices
-        bool isOwned;
-        _mutex = new Mutex(true, Directory.GetCurrentDirectory().ToHashSet().ToString()[..5], out isOwned);
-        EventWaitHandle eventWaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset, "MainWindowWake");
-
-        if (isOwned)
-        {
-            GC.KeepAlive(_mutex);
-            var thread = new Thread(() =>
-            {
-                while (eventWaitHandle.WaitOne())
-                {
-                    PostTask(() => MainWindow.ShowWindow());
-                }
-            });
-            // It is important mark it as background otherwise it will prevent app from exiting.
-            thread.IsBackground = true;
-            thread.Start();
-            return false;
-        }
-        // Notify other instance so it could bring itself to foreground.
-        eventWaitHandle.Set();
-        return true;
     }
 }
