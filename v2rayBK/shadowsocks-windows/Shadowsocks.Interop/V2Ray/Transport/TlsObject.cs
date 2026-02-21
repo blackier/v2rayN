@@ -10,5 +10,8 @@ namespace Shadowsocks.Interop.V2Ray.Transport
         public List<CertificateObject> Certificates { get; set; }
         public bool DisableSystemRoot { get; set; }
         public string Fingerprint { get; set; }
+        public string PinnedPeerCertSha256 { get; set; }
+        public string EchConfigList { get; set; }
+        public string EchForceQuery { get; set; }
     }
 }

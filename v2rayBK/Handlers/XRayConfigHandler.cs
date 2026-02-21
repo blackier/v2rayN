@@ -1,8 +1,10 @@
 ﻿using System.Net;
 using ServiceLib.Enums;
+using ServiceLib.Manager;
 using ServiceLib.Models;
 using Shadowsocks.Interop.V2Ray.Dns;
 using Shadowsocks.Interop.V2Ray.Inbound;
+using Shadowsocks.Interop.V2Ray.Transport;
 using v2rayBK.Common;
 using v2rayBK.ViewModels;
 using V2Ray = Shadowsocks.Interop.V2Ray;
@@ -388,7 +390,9 @@ public class XRayConfigHandler
                     ? config.DefAllowInsecure
                     : Utils.ToBool(node.AllowInsecure),
                 Alpn = node.GetAlpn(),
-                Fingerprint = node.Fingerprint.IsNullOrEmpty() ? "random" : node.Fingerprint
+                Fingerprint = node.Fingerprint.IsNullOrEmpty() ? "random" : node.Fingerprint,
+                EchConfigList = node.EchConfigList.NullIfEmpty(),
+                EchForceQuery = node.EchForceQuery.NullIfEmpty()
             };
 
             if (!sni.IsNullOrEmpty())
@@ -398,6 +402,24 @@ public class XRayConfigHandler
             if (!string.IsNullOrWhiteSpace(host))
             {
                 streamSettings.TlsSettings.ServerName = Utils.String2List(host)[0];
+            }
+
+            var certs = CertPemManager.ParsePemChain(node.Cert);
+            if (certs.Count > 0)
+            {
+                var certsettings = new List<CertificateObject>();
+                foreach (var cert in certs)
+                {
+                    var certPerLine = cert.Split("\n").ToList();
+                    certsettings.Add(new CertificateObject { Certificate = certPerLine, Usage = "verify", });
+                }
+                streamSettings.TlsSettings.Certificates = certsettings;
+                streamSettings.TlsSettings.DisableSystemRoot = true;
+                streamSettings.TlsSettings.AllowInsecure = false;
+            }
+            else if (!node.CertSha.IsNullOrEmpty())
+            {
+                streamSettings.TlsSettings.PinnedPeerCertSha256 = node.CertSha;
             }
         }
         //if Reality
@@ -435,7 +457,6 @@ public class XRayConfigHandler
                 if (!string.IsNullOrWhiteSpace(host))
                 {
                     wsSettings.Host = host;
-                    wsSettings.Headers.Add("Host", host);
                 }
                 if (!string.IsNullOrWhiteSpace(node.Path))
                 {

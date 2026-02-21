@@ -111,7 +111,7 @@ public partial class HomePageViewModel : ViewModelBase
             (fileName) =>
             {
                 v2RayBKConfig.StopV2RayCore();
-                FileManager.ZipExtractToFile(fileName, Utils.StartupPath(), "");
+                FileUtils.ZipExtractToFile(fileName, Utils.StartupPath(), "");
                 App.PostTask(() => RestartServer());
             }
         );
