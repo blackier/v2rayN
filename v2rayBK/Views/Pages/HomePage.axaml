@@ -47,6 +47,10 @@
                               Header="Socks"
                               IsChecked="{Binding ViewModel.v2RayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Socks}}"
                               ToggleType="Radio" />
+                    <MenuItem Click="system_proxy_MenuItem_Click"
+                              Header="Tun"
+                              IsChecked="{Binding ViewModel.v2RayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Tun}}"
+                              ToggleType="Radio" />
                 </MenuItem>
                 <MenuItem Header="Help">
                     <MenuItem Header="Check for Updates">

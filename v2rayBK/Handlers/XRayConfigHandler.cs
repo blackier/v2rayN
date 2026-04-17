@@ -121,25 +121,22 @@ public class XRayConfigHandler
         httpInbound.Sniffing.Enabled = config.SniffingEnabled;
         httpInbound.Sniffing.RouteOnly = config.SniffingEnabled;
 
+        // tun
+        if (config.SystemProxyType == SystemProxyType.Tun)
+        {
+            var tunInbound = V2Ray.InboundObject.DefaultTun;
+            tunInbound.Tag = "tunProxy";
+            if (config.FakednsEnabled)
+                tunInbound.Sniffing = SniffingObject.DefaultFakeDns;
+            tunInbound.Sniffing.Enabled = config.SniffingEnabled;
+            tunInbound.Sniffing.RouteOnly = config.SniffingEnabled;
+
+            v2rayConfig.Inbounds.Add(tunInbound);
+        }
+
         v2rayConfig.Inbounds.Add(socksInbound);
         v2rayConfig.Inbounds.Add(httpInbound);
 
-        // dns入口
-        if (config.LocalDNSEnabled)
-        {
-            var dnsInbound = new V2Ray.InboundObject
-            {
-                Tag = GlobalEx.dnsInTag,
-                Listen = Global.Loopback,
-                Port = GlobalEx.dnsPort,
-                Protocol = Global.InboundAPIProtocol,
-                Settings = new V2Ray.Protocols.Dokodemo_door.InboundConfigurationObject(
-                    GlobalEx.DomainOverseaDNSAddress.First(),
-                    "tcp,udp"
-                )
-            };
-            v2rayConfig.Inbounds.Add(dnsInbound);
-        }
         return 0;
     }
 
@@ -147,17 +144,7 @@ public class XRayConfigHandler
     {
         v2rayConfig.Routing.DomainStrategy = config.DomainStrategy;
 
-        // DNS设置
-        // DNS本地服务入口
-        var dnsHostRule = new V2Ray.Routing.RuleObject
-        {
-            Type = "field",
-            InboundTag = new() { GlobalEx.dnsInTag },
-            OutboundTag = GlobalEx.dnsOutTag,
-        };
-        v2rayConfig.Routing.Rules.Add(dnsHostRule);
-
-        // DNS代理固定的几个
+        // 海外DNS服务走代理
         var dnsServerProxyRule = new V2Ray.Routing.RuleObject
         {
             Type = "field",
@@ -166,12 +153,12 @@ public class XRayConfigHandler
         };
         v2rayConfig.Routing.Rules.Add(dnsServerProxyRule);
 
-        // DNS其他直接直连
+        // 其他DNS直连
         var dnsServerDirectRule = new V2Ray.Routing.RuleObject
         {
-            Type = "field",
-            InboundTag = new() { GlobalEx.dnsServerTag },
-            OutboundTag = Global.DirectTag,
+           Type = "field",
+           InboundTag = new() { GlobalEx.dnsServerTag },
+           OutboundTag = Global.DirectTag,
         };
         v2rayConfig.Routing.Rules.Add(dnsServerDirectRule);
 
@@ -206,6 +193,12 @@ public class XRayConfigHandler
                 OutboundTag = tag,
                 Domain = new List<string>()
             };
+            var processRule = new V2Ray.Routing.RuleObject
+            {
+                Type = "field",
+                OutboundTag = tag,
+                Process = new List<string>()
+            };
 
             foreach (RoutingRuleItem rule in userRule)
             {
@@ -218,7 +211,11 @@ public class XRayConfigHandler
                     {
                         continue;
                     }
-                    if (Misc.IsIP(url) || url.StartsWith("geoip:"))
+                    if (url.Contains('/') || url.EndsWith(".exe"))
+                    {
+                        processRule.Process.Add(url);
+                    }
+                    else if (Misc.IsIP(url) || url.StartsWith("geoip:"))
                     {
                         ipRule.Ip.Add(url);
                     }
@@ -241,6 +238,10 @@ public class XRayConfigHandler
             if (domainRule.Domain.Count > 0)
             {
                 v2rayConfig.Routing.Rules.Add(domainRule);
+            }
+            if (processRule.Process.Count > 0)
+            {
+                v2rayConfig.Routing.Rules.Add(processRule);
             }
             // dns server direct
             if (tag == Global.DirectTag)
@@ -281,9 +282,7 @@ public class XRayConfigHandler
             settings.Servers[0].Address = node.Address;
             settings.Servers[0].Port = node.Port;
             settings.Servers[0].Password = node.Password;
-            settings.Servers[0].Method = AppManager
-                .Instance.GetShadowsocksSecurities(node)
-                .Contains(protocolExtra.SsMethod)
+            settings.Servers[0].Method = Global.SsSecuritiesInXray.Contains(protocolExtra.SsMethod)
                 ? protocolExtra.SsMethod
                 : "none";
             settings.Servers[0].Uto = protocolExtra.Uot == true ? true : null;
@@ -355,10 +354,6 @@ public class XRayConfigHandler
             Settings = new V2Ray.Protocols.Freedom.OutboundConfigurationObject()
         };
         v2rayConfig.Outbounds.Add(freedomOutbound);
-
-        // dns解析
-        var dnsOutbound = new V2Ray.OutboundObject { Protocol = "dns", Tag = GlobalEx.dnsOutTag };
-        v2rayConfig.Outbounds.Add(dnsOutbound);
 
         // 设置黑名单
         var blackholeOutbound = new V2Ray.OutboundObject

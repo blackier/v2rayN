@@ -49,6 +49,10 @@
                                         Header="Socks"
                                         IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Socks}}"
                                         ToggleType="Radio" />
+                        <NativeMenuItem Click="tray_system_proxy_NativeMenuItem_Click"
+                                        Header="Tun"
+                                        IsChecked="{Binding v2rayBKConfig.SystemProxyType, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static handler:SystemProxyType.Tun}}"
+                                        ToggleType="Radio" />
                         <NativeMenuItemSeparator />
                         <NativeMenuItem Click="tray_exit_NativeMenuItem_Click" Header="{x:Static lang:Resource.Tray_Exit_Header}" />
                     </NativeMenu>

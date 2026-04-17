@@ -18,6 +18,7 @@ namespace Shadowsocks.Interop.V2Ray.Routing
         public List<string> InboundTag { get; set; }
         public List<string> Protocol { get; set; }
         public string Attrs { get; set; }
+        public List<string> Process { get; set; }
         public string OutboundTag { get; set; }
         public string BalancerTag { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Security.Cryptography;
 using v2rayBK.ViewModels;
 
 namespace v2rayBK.Handlers;
@@ -16,13 +17,13 @@ public class XRayExeHandler
     /// <summary>
     /// 载入V2ray
     /// </summary>
-    public void LoadV2ray(v2rayBKConfig config)
+    public void LoadV2ray(v2rayBKConfig config, bool stopTun = false)
     {
         string fileName = Utils.GetPath("config.json");
         var ret = XRayConfigHandler.GenerateClientConfig(config, fileName, false, out string msg);
         App.PostLog(msg);
         if (ret)
-            V2rayRestart();
+            V2rayRestart(stopTun);
     }
 
     /// <summary>
@@ -39,9 +40,9 @@ public class XRayExeHandler
         return pid;
     }
 
-    public void V2rayRestart()
+    public void V2rayRestart(bool stopTun = false)
     {
-        V2rayStop();
+        V2rayStop(stopTun);
         V2rayStart();
     }
 
@@ -86,7 +87,7 @@ public class XRayExeHandler
         }
     }
 
-    public void V2rayStop()
+    public void V2rayStop(bool stopTun = false)
     {
         try
         {
@@ -110,6 +111,16 @@ public class XRayExeHandler
                         }
                     }
                 }
+            }
+            if (stopTun)
+            {
+                var sum = MD5.HashData(Encoding.UTF8.GetBytes("xray_tun"));
+                var guid = new Guid(sum);
+                var pnpUtilPath = @"C:\Windows\System32\pnputil.exe";
+                var arg = $$""" /remove-device  "SWD\Wintun\{{{guid}}}" """;
+
+                // Try to remove the device
+                _ = Utils.GetCliWrapOutput(pnpUtilPath, arg);
             }
         }
         catch (Exception ex)

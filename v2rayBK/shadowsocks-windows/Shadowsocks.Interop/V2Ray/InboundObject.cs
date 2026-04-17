@@ -40,5 +40,14 @@ namespace Shadowsocks.Interop.V2Ray
                 Protocol = "http",
                 Sniffing = SniffingObject.Default,
             };
+
+        public static InboundObject DefaultTun =>
+            new()
+            {
+                Tag = "tun-in",
+                Protocol = "tun",
+                Settings = Protocols.TUN.InboundConfigurationObject.Default,
+                Sniffing = SniffingObject.Default,
+            };
     }
 }

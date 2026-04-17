@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
@@ -107,8 +108,10 @@ public partial class App : Application
 
         // 自启动
         GetRequiredService<HomePage>();
-        v2rayBKConfig.StartServer();
         LoadTrayIcon();
+        v2rayBKConfig.StartServer();
+        if (Program._rebootAs)
+            MainWindow.ShowWindow();
     }
 
     private void Desktop_Stop()
@@ -180,6 +183,9 @@ public partial class App : Application
             case SystemProxyType.Socks:
                 trayIcon!.Icon = new(new Bitmap(AssetLoader.Open(new Uri("avares://v2rayBK/Assets/NotifyIcon3.ico"))));
                 break;
+            case SystemProxyType.Tun:
+                trayIcon!.Icon = new(new Bitmap(AssetLoader.Open(new Uri("avares://v2rayBK/Assets/NotifyIcon4.ico"))));
+                break;
             default:
                 trayIcon!.Icon = new(new Bitmap(AssetLoader.Open(new Uri("avares://v2rayBK/Assets/NotifyIcon1.ico"))));
                 break;
@@ -194,7 +200,30 @@ public partial class App : Application
     public void tray_system_proxy_NativeMenuItem_Click(object? sender, System.EventArgs e)
     {
         LoadTrayIcon();
-        SystemProxyHandler.Update(v2rayBKConfig);
+        if (v2rayBKConfig.NeedStopTun)
+        {
+            if (v2rayBKConfig.SystemProxyType == SystemProxyType.Tun && Utils.IsAdministrator() == false)
+            {
+                DesktopApp.Shutdown();
+                // tun模式需要管理员启动xray
+                ProcessStartInfo startInfo =
+                    new()
+                    {
+                        UseShellExecute = true,
+                        Arguments = Global.RebootAs,
+                        WorkingDirectory = Utils.StartupPath(),
+                        FileName = Utils.GetExePath().AppendQuotes(),
+                        Verb = "runas"
+                    };
+                Process.Start(startInfo);
+                return;
+            }
+            v2rayBKConfig.StartServer();
+        }
+        else
+        {
+            SystemProxyHandler.Update(v2rayBKConfig);
+        }
     }
 
     private void tray_exit_NativeMenuItem_Click(object? sender, System.EventArgs e)

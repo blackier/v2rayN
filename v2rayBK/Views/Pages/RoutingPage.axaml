@@ -26,14 +26,9 @@
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.SniffingEnabled}" />
                 </ui:FASettingsExpanderItem.Footer>
             </ui:FASettingsExpanderItem>
-            <ui:FASettingsExpanderItem Content="FakeDNS">
+            <ui:FASettingsExpanderItem Content="FakeDNS" Description="TUN模式需关闭">
                 <ui:FASettingsExpanderItem.Footer>
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.FakednsEnabled}" />
-                </ui:FASettingsExpanderItem.Footer>
-            </ui:FASettingsExpanderItem>
-            <ui:FASettingsExpanderItem Content="本地DNS服务">
-                <ui:FASettingsExpanderItem.Footer>
-                    <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.LocalDNSEnabled}" />
                 </ui:FASettingsExpanderItem.Footer>
             </ui:FASettingsExpanderItem>
             <ui:FASettingsExpanderItem Content="域名解析策略">

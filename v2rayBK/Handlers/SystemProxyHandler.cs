@@ -11,7 +11,8 @@ public enum SystemProxyType
 {
     Close = 0,
     Http,
-    Socks
+    Socks,
+    Tun
 }
 
 /// <summary>

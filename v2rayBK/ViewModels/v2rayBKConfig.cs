@@ -56,9 +56,6 @@ public partial class v2rayBKConfig : ViewModelBase
     [ObservableProperty]
     private bool _fakednsEnabled;
 
-    [ObservableProperty]
-    private bool _localDNSEnabled;
-
     // 路由
 
     [ObservableProperty]
@@ -114,6 +111,11 @@ public partial class v2rayBKConfig : ViewModelBase
     [ObservableProperty]
     private SystemProxyType _systemProxyType;
 
+    partial void OnSystemProxyTypeChanged(SystemProxyType oldValue, SystemProxyType newValue)
+    {
+        NeedStopTun = oldValue == SystemProxyType.Tun || newValue == SystemProxyType.Tun;
+    }
+
     [ObservableProperty]
     private bool _pullSubscribeWithProxy = false;
 
@@ -133,6 +135,9 @@ public partial class v2rayBKConfig : ViewModelBase
 
     [JsonIgnore]
     public ServerGroupInfo SelectedServerGroup => ServerGroup.ElementAtOrDefault(ServerGroupSeletedIndex);
+
+    [JsonIgnore]
+    public bool NeedStopTun { get; set; } = false;
 
     private XRayExeHandler _xrayExeHandler;
     private StatisticsHandler _statisticsHandler;
@@ -216,9 +221,9 @@ public partial class v2rayBKConfig : ViewModelBase
     public void StartServer()
     {
         App.PostLog($"Start server: {SelectedServerGroup?.SelectedServer?.Remarks}");
-        _xrayExeHandler.LoadV2ray(this);
-        _statisticsHandler.Start();
         SystemProxyHandler.Update(this);
+        _xrayExeHandler.LoadV2ray(this, NeedStopTun);
+        _statisticsHandler.Start();
     }
 
     public void StopV2RayCore()

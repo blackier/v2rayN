@@ -11,10 +11,14 @@ internal sealed class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        if (ExistLaunchedApp())
+        // 管理员权限重启，非单例
+        _rebootAs = args.Contains(Global.RebootAs);
+        if (ExistLaunchedApp(!_rebootAs))
             return;
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
     }
+
+    internal static bool _rebootAs = false;
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp() =>
@@ -27,7 +31,7 @@ internal sealed class Program
     internal static Mutex _mutex;
     internal static EventWaitHandle _eventWaitHandle;
 
-    private static bool ExistLaunchedApp()
+    private static bool ExistLaunchedApp(bool isSingle = true)
     {
         //https://stackoverflow.com/questions/14506406/wpf-single-instance-best-practices
         bool isOwned;
@@ -40,7 +44,8 @@ internal sealed class Program
             return false;
         }
         // Notify other instance so it could bring itself to foreground.
-        _eventWaitHandle.Set();
-        return true;
+        if (isSingle)
+            _eventWaitHandle.Set();
+        return isSingle;
     }
 }
