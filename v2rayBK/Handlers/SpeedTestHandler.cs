@@ -71,8 +71,8 @@ public class SpeedTestHandler
             Socket clientSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
             IAsyncResult result = clientSocket.BeginConnect(endPoint, null, null);
-            if (!result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(5)))
-                throw new TimeoutException("connect timeout (5s): " + url);
+            if (!result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(2)))
+                throw new TimeoutException("connect timeout (2s): " + url);
             clientSocket.EndConnect(result);
 
             timer.Stop();
@@ -94,7 +94,7 @@ public class SpeedTestHandler
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Proxy = webProxy;
-            request.Timeout = (int)TimeSpan.FromSeconds(5).TotalMilliseconds;
+            request.Timeout = (int)TimeSpan.FromSeconds(2).TotalMilliseconds;
 
             Stopwatch timer = new Stopwatch();
             timer.Start();
