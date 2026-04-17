@@ -14,6 +14,8 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.Shadowsocks
 
         public string Password { get; set; }
 
+        public bool? Uto { get; set; }
+
         public int? Level { get; set; }
 
         public ServerObject()
