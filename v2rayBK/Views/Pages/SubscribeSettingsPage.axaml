@@ -46,7 +46,7 @@
                                 Margin="4"
                                 Padding="8"
                                 Click="delete_subscribe_button_Click">
-                            <ui:SymbolIcon Symbol="Delete" />
+                            <ui:FASymbolIcon Symbol="Delete" />
                         </Button>
                     </Grid>
                 </DataTemplate>

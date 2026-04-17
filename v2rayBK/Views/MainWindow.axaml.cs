@@ -9,7 +9,7 @@ using v2rayBK.Views.Pages;
 
 namespace v2rayBK.Views;
 
-public partial class MainWindow : AppWindow
+public partial class MainWindow : FAAppWindow
 {
     public MainWindowViewModel ViewModel { get; }
 
@@ -24,7 +24,7 @@ public partial class MainWindow : AppWindow
 
         TitleBar.Height = app_titlebar_grid.Height;
         TitleBar.ExtendsContentIntoTitleBar = true;
-        TitleBar.TitleBarHitTestType = TitleBarHitTestType.Complex;
+        TitleBar.TitleBarHitTestType = FATitleBarHitTestType.Complex;
 
         main_root_frame.Navigate(typeof(MainPage));
     }
@@ -56,7 +56,7 @@ public partial class MainWindow : AppWindow
         loading_contentcontrol.IsVisible = false;
     }
 
-    private void main_root_frame_Navigated(object sender, NavigationEventArgs e) { }
+    private void main_root_frame_Navigated(object sender, FANavigationEventArgs e) { }
 
-    private void main_root_frame_Navigating(object sender, NavigatingCancelEventArgs e) { }
+    private void main_root_frame_Navigating(object sender, FANavigatingCancelEventArgs e) { }
 }

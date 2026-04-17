@@ -11,7 +11,7 @@ namespace v2rayBK.Views.Pages;
 
 public partial class MainPage : UserControl
 {
-    class NavigationFactory : INavigationPageFactory
+    class NavigationFactory : IFANavigationPageFactory
     {
         public Control GetPage(Type srcType)
         {
@@ -35,21 +35,21 @@ public partial class MainPage : UserControl
         InitializeComponent();
 
         // NOTE: Make sure the routing strategy is Direct
-        AddHandler(Frame.NavigatingFromEvent, OnNavigatingFrom, RoutingStrategies.Direct);
-        AddHandler(Frame.NavigatedFromEvent, OnNavigatedFrom, RoutingStrategies.Direct);
-        AddHandler(Frame.NavigatedToEvent, OnNavigatedTo, RoutingStrategies.Direct);
+        AddHandler(FAFrame.NavigatingFromEvent, OnNavigatingFrom, RoutingStrategies.Direct);
+        AddHandler(FAFrame.NavigatedFromEvent, OnNavigatedFrom, RoutingStrategies.Direct);
+        AddHandler(FAFrame.NavigatedToEvent, OnNavigatedTo, RoutingStrategies.Direct);
 
         root_frame.NavigationPageFactory = new NavigationFactory();
         root_navigationview.SelectedItem = home_navitem;
     }
 
-    private void OnNavigatingFrom(object sender, NavigatingCancelEventArgs args) { }
+    private void OnNavigatingFrom(object sender, FANavigatingCancelEventArgs args) { }
 
-    private void OnNavigatedFrom(object sender, NavigationEventArgs args) { }
+    private void OnNavigatedFrom(object sender, FANavigationEventArgs args) { }
 
-    private void OnNavigatedTo(object sender, NavigationEventArgs args) { }
+    private void OnNavigatedTo(object sender, FANavigationEventArgs args) { }
 
-    private void root_navigationview_SelectionChanged(object? sender, NavigationViewSelectionChangedEventArgs args)
+    private void root_navigationview_SelectionChanged(object? sender, FANavigationViewSelectionChangedEventArgs args)
     {
         // also need modify NavigationFactory
         if (args.SelectedItem == home_navitem)
@@ -60,9 +60,9 @@ public partial class MainPage : UserControl
             root_frame.Navigate(typeof(SettingsPage));
     }
 
-    private void root_frame_Navigated(object? sender, NavigationEventArgs e) { }
+    private void root_frame_Navigated(object? sender, FANavigationEventArgs e) { }
 
-    private void root_frame_Navigating(object? sender, NavigatingCancelEventArgs e) { }
+    private void root_frame_Navigating(object? sender, FANavigatingCancelEventArgs e) { }
 
     private void toggle_theme_CommandBarButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {

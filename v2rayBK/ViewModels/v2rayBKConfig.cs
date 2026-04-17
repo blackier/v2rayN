@@ -169,9 +169,14 @@ public partial class v2rayBKConfig : ViewModelBase
     public static v2rayBKConfig LoadConfig()
     {
         //载入配置文件
-        string? result = File.ReadAllText(Utils.GetPath(GlobalEx.ConfigFileName));
+        string configPath = Utils.GetPath(GlobalEx.ConfigFileName);
+        if (!File.Exists(configPath))
+            return null;
+
+        string? result = File.ReadAllText(configPath);
         if (result.IsNullOrEmpty())
             return null;
+
         var config = Json.FromJson<v2rayBKConfig>(result);
         if (config != null)
         {

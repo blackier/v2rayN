@@ -30,7 +30,7 @@
             </StackPanel>
         </Grid>
         <Panel Grid.Row="1">
-            <ui:Frame x:Name="main_root_frame"
+            <ui:FAFrame x:Name="main_root_frame"
                       CacheSize="100"
                       Navigated="main_root_frame_Navigated"
                       Navigating="main_root_frame_Navigating" />

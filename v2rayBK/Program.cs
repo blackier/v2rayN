@@ -18,7 +18,11 @@ internal sealed class Program
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp() =>
-        AppBuilder.Configure<App>().UsePlatformDetect().WithInterFont().LogToTrace();
+        AppBuilder.Configure<App>().UsePlatformDetect()
+#if DEBUG
+        .WithDeveloperTools()
+#endif
+        .WithInterFont().LogToTrace();
 
     internal static Mutex _mutex;
     internal static EventWaitHandle _eventWaitHandle;

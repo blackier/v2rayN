@@ -24,57 +24,57 @@
         <StackPanel MaxWidth="720" Spacing="8">
             <!--  Inbound  -->
             <TextBlock Classes="SettingsSectionHeaderTextBlockStyle" Text="Inbound" />
-            <ui:SettingsExpanderItem Content="Http Port">
-                <ui:SettingsExpanderItem.Footer>
+            <ui:FASettingsExpanderItem Content="Http Port">
+                <ui:FASettingsExpanderItem.Footer>
                     <NumericUpDown Increment="1" Value="{Binding ViewModel.v2RayBKConfig.HttpInboundPort}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
-            <ui:SettingsExpanderItem Content="Socks Port">
-                <ui:SettingsExpanderItem.Footer>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
+            <ui:FASettingsExpanderItem Content="Socks Port">
+                <ui:FASettingsExpanderItem.Footer>
                     <NumericUpDown Increment="1" Value="{Binding ViewModel.v2RayBKConfig.SocksInboundPort}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
-            <ui:SettingsExpanderItem Content="允许来自LAN的连接">
-                <ui:SettingsExpanderItem.Footer>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
+            <ui:FASettingsExpanderItem Content="允许来自LAN的连接">
+                <ui:FASettingsExpanderItem.Footer>
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.AllowLANConn}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
             <!--  Outbound  -->
             <TextBlock Classes="SettingsSectionHeaderTextBlockStyle" Text="Outbound" />
-            <ui:SettingsExpanderItem Content="多路复用">
-                <ui:SettingsExpanderItem.Footer>
+            <ui:FASettingsExpanderItem Content="多路复用">
+                <ui:FASettingsExpanderItem.Footer>
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.MuxEnabled}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
-            <ui:SettingsExpanderItem Content="跳过证书校验">
-                <ui:SettingsExpanderItem.Footer>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
+            <ui:FASettingsExpanderItem Content="跳过证书校验">
+                <ui:FASettingsExpanderItem.Footer>
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.DefAllowInsecure}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
             <!--  Log  -->
             <TextBlock Classes="SettingsSectionHeaderTextBlockStyle" Text="Log" />
-            <ui:SettingsExpanderItem Content="本地日志">
-                <ui:SettingsExpanderItem.Footer>
+            <ui:FASettingsExpanderItem Content="本地日志">
+                <ui:FASettingsExpanderItem.Footer>
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.LogEnabled}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
-            <ui:SettingsExpanderItem Content="日志等级">
-                <ui:SettingsExpanderItem.Footer>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
+            <ui:FASettingsExpanderItem Content="日志等级">
+                <ui:FASettingsExpanderItem.Footer>
                     <ComboBox ItemsSource="{Binding ViewModel.LogLevel}" SelectedItem="{Binding ViewModel.v2RayBKConfig.LogLevel}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
             <!--  Generic  -->
             <TextBlock Classes="SettingsSectionHeaderTextBlockStyle" Text="Generic" />
-            <ui:SettingsExpanderItem Content="Auto Start">
-                <ui:SettingsExpanderItem.Footer>
+            <ui:FASettingsExpanderItem Content="Auto Start">
+                <ui:FASettingsExpanderItem.Footer>
                     <ToggleSwitch Name="autostart_ToggleSwitch" IsChecked="{Binding ViewModel.IsAutoStart}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
-            <ui:SettingsExpanderItem Content="Statistics">
-                <ui:SettingsExpanderItem.Footer>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
+            <ui:FASettingsExpanderItem Content="Statistics">
+                <ui:FASettingsExpanderItem.Footer>
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.EnableStatistics}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

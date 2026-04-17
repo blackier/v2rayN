@@ -36,7 +36,7 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
 
     private async void subscribe_settings_menuitem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        var dialog = new ContentDialog() { Title = "Subscribe Settings", PrimaryButtonText = "OK" };
+        var dialog = new FAContentDialog() { Title = "Subscribe Settings", PrimaryButtonText = "OK" };
 
         // In our case the Content is a UserControl, but can be anything.
         dialog.Content = new SubscribeSettingsPage()
@@ -51,7 +51,7 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
         string lastVersionUrl = await ViewModel.CheckUpdateXRayVersion();
         if (!string.IsNullOrEmpty(lastVersionUrl))
         {
-            var dialog = new ContentDialog()
+            var dialog = new FAContentDialog()
             {
                 Title = "XRay-core Update",
                 SecondaryButtonText = "Cancel",
@@ -62,7 +62,7 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
             dialog.Content = $"Download from {lastVersionUrl}";
 
             var result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
+            if (result == FAContentDialogResult.Primary)
             {
                 ViewModel.UpdateXRay(lastVersionUrl);
             }

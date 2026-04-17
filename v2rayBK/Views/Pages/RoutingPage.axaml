@@ -21,45 +21,45 @@
     <ScrollViewer>
         <StackPanel MaxWidth="720" Spacing="8">
             <TextBlock Classes="SettingsSectionHeaderTextBlockStyle" Text="Routing" />
-            <ui:SettingsExpanderItem Content="流量探测">
-                <ui:SettingsExpanderItem.Footer>
+            <ui:FASettingsExpanderItem Content="流量探测">
+                <ui:FASettingsExpanderItem.Footer>
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.SniffingEnabled}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
-            <ui:SettingsExpanderItem Content="FakeDNS">
-                <ui:SettingsExpanderItem.Footer>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
+            <ui:FASettingsExpanderItem Content="FakeDNS">
+                <ui:FASettingsExpanderItem.Footer>
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.FakednsEnabled}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
-            <ui:SettingsExpanderItem Content="本地DNS服务">
-                <ui:SettingsExpanderItem.Footer>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
+            <ui:FASettingsExpanderItem Content="本地DNS服务">
+                <ui:FASettingsExpanderItem.Footer>
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.LocalDNSEnabled}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
-            <ui:SettingsExpanderItem Content="域名解析策略">
-                <ui:SettingsExpanderItem.Footer>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
+            <ui:FASettingsExpanderItem Content="域名解析策略">
+                <ui:FASettingsExpanderItem.Footer>
                     <ComboBox ItemsSource="{Binding ViewModel.DomainStrategy}" SelectedItem="{Binding ViewModel.v2RayBKConfig.DomainStrategy}" />
-                </ui:SettingsExpanderItem.Footer>
-            </ui:SettingsExpanderItem>
-            <ui:SettingsExpander Description="若有多个条目，请使用英文分号（;）来分隔。" Header="请勿对以下列条目开头的地址使用系统Http代理服务器。">
-                <ui:SettingsExpander.Resources>
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
+            <ui:FASettingsExpander Description="若有多个条目，请使用英文分号（;）来分隔。" Header="请勿对以下列条目开头的地址使用系统Http代理服务器。">
+                <ui:FASettingsExpander.Resources>
                     <StaticResource x:Key="ExpanderHeaderBorderBrush" ResourceKey="ControlFillColorTransparentBrush" />
                     <StaticResource x:Key="ExpanderContentBorderBrush" ResourceKey="ControlFillColorTransparentBrush" />
                     <Thickness x:Key="SettingsExpanderPadding">16,10</Thickness>
                     <x:Double x:Key="SettingsExpanderMinHeight">48</x:Double>
-                </ui:SettingsExpander.Resources>
-                <ui:SettingsExpander.Footer>
+                </ui:FASettingsExpander.Resources>
+                <ui:FASettingsExpander.Footer>
                     <ToggleSwitch HorizontalAlignment="Center"
                                   IsChecked="{Binding ViewModel.v2RayBKConfig.HttpProxyRuleEnable}"
                                   OffContent=""
                                   OnContent="" />
-                </ui:SettingsExpander.Footer>
+                </ui:FASettingsExpander.Footer>
                 <TextBox MinHeight="64"
                          AcceptsReturn="True"
                          CornerRadius="2"
                          Text="{Binding ViewModel.v2RayBKConfig.HttpProxyRule}"
                          Watermark="" />
-            </ui:SettingsExpander>
+            </ui:FASettingsExpander>
             <!--  Routing  -->
             <TabControl SelectedIndex="{Binding ViewModel.v2RayBKConfig.RoutingSeletedIndex}">
                 <TabControl.Resources>
@@ -75,7 +75,7 @@
                                               OffContent=""
                                               OnContent="" />
                                 <Button BorderBrush="Transparent" Click="delete_rule_Button_Click">
-                                    <ui:SymbolIcon FontSize="18" Symbol="Delete" />
+                                    <ui:FASymbolIcon FontSize="18" Symbol="Delete" />
                                 </Button>
                             </StackPanel>
                         </Grid>
@@ -84,7 +84,7 @@
                 <TabItem FontSize="14" Header="代理">
                     <StackPanel Spacing="4">
                         <Button BorderBrush="Transparent" Command="{Binding ViewModel.v2RayBKConfig.RoutingAddRuleCommand}">
-                            <ui:SymbolIcon FontSize="18" Symbol="Add" />
+                            <ui:FASymbolIcon FontSize="18" Symbol="Add" />
                         </Button>
                         <ItemsControl ItemTemplate="{StaticResource RuleItemTemplate}" ItemsSource="{Binding ViewModel.v2RayBKConfig.UserProxy}" />
                     </StackPanel>
@@ -92,7 +92,7 @@
                 <TabItem FontSize="14" Header="直连">
                     <StackPanel Spacing="4">
                         <Button BorderBrush="Transparent" Command="{Binding ViewModel.v2RayBKConfig.RoutingAddRuleCommand}">
-                            <ui:SymbolIcon FontSize="18" Symbol="Add" />
+                            <ui:FASymbolIcon FontSize="18" Symbol="Add" />
                         </Button>
                         <ItemsControl ItemTemplate="{StaticResource RuleItemTemplate}" ItemsSource="{Binding ViewModel.v2RayBKConfig.UserDirect}" />
                     </StackPanel>
@@ -100,7 +100,7 @@
                 <TabItem FontSize="14" Header="阻止">
                     <StackPanel Spacing="4">
                         <Button BorderBrush="Transparent" Command="{Binding ViewModel.v2RayBKConfig.RoutingAddRuleCommand}">
-                            <ui:SymbolIcon FontSize="18" Symbol="Add" />
+                            <ui:FASymbolIcon FontSize="18" Symbol="Add" />
                         </Button>
                         <ItemsControl ItemTemplate="{StaticResource RuleItemTemplate}" ItemsSource="{Binding ViewModel.v2RayBKConfig.UserBlock}" />
                     </StackPanel>
