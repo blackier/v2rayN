@@ -20,8 +20,8 @@
         <Grid RowDefinitions="Auto, *">
             <Menu>
                 <MenuItem Header="Subscribe">
-                    <MenuItem Name="subscribe_settings_menuitem"
-                              Click="subscribe_settings_menuitem_Click"
+                    <MenuItem Name="subscribe_settings_MenuItem"
+                              Click="subscribe_settings_MenuItem_Click"
                               Header="Settings" />
                     <MenuItem Header="Pull Current with Proxy"
                               IsChecked="{Binding ViewModel.v2RayBKConfig.PullSubscribeWithProxy, Mode=TwoWay}"
@@ -31,8 +31,8 @@
                               ToggleType="CheckBox" />
                 </MenuItem>
                 <MenuItem Command="{Binding ViewModel.PullCurrentSubscribeCommand}" Header="Pull Subscribe" />
-                <MenuItem Command="{Binding ViewModel.v2RayBKConfig.SeepTestServerCommand}" Header="Speed Test" />
-                <MenuItem Header="Share" />
+                <MenuItem Command="{Binding ViewModel.v2RayBKConfig.SpeedTestServerCommand}" Header="Speed Test" />
+                <MenuItem Click="test_selected_MenuItem_Click" Header="Test Selected" />
                 <MenuItem Command="{Binding ViewModel.RestartServerCommand}" Header="Restart Server" />
                 <MenuItem Header="System Proxy">
                     <MenuItem Click="system_proxy_MenuItem_Click"
@@ -94,7 +94,7 @@
                                   IsReadOnly="True"
                                   ItemsSource="{Binding Servers}"
                                   SelectedIndex="{Binding ServerSeletedIndexCache}"
-                                  SelectionChanged="DataGrid_SelectionChanged">
+                                  SelectionChanged="server_list_DataGrid_SelectionChanged">
                             <DataGrid.Columns>
                                 <DataGridCheckBoxColumn Binding="{Binding IsSeletedServer, Mode=OneWay}" />
                                 <DataGridTextColumn Binding="{Binding ConfigType, Mode=OneWay}" Header="Type" />
@@ -103,7 +103,7 @@
                                 <DataGridTextColumn Binding="{Binding Port, Mode=OneWay}" Header="Port" />
                                 <DataGridTextColumn Binding="{Binding Security, Mode=OneWay}" Header="Security" />
                                 <DataGridTextColumn Binding="{Binding Network}" Header="Network" />
-                                <DataGridTextColumn Width="125"
+                                <DataGridTextColumn Width="128"
                                                     Binding="{Binding TestResult}"
                                                     Header="TestResult" />
                                 <DataGridTextColumn Binding="{Binding TodayDown, Mode=OneWay, Converter={StaticResource FileSizeToFriendlyStringConverter}}" Header="TodayDown" />

@@ -16,7 +16,7 @@ public enum AppTheme
 {
     Default,
     Dark,
-    Light
+    Light,
 }
 
 public partial class v2rayBKConfig : ViewModelBase
@@ -150,8 +150,8 @@ public partial class v2rayBKConfig : ViewModelBase
                 Servers = new()
                 {
                     new() { ConfigType = "type1", Remarks = "remaks1" },
-                    new() { ConfigType = "type2", Remarks = "remaks2" }
-                }
+                    new() { ConfigType = "type2", Remarks = "remaks2" },
+                },
             },
             new ServerGroupInfo()
             {
@@ -159,9 +159,9 @@ public partial class v2rayBKConfig : ViewModelBase
                 Address = "sfe2",
                 Servers = new()
                 {
-                    new() { ConfigType = "type1", Remarks = "remaks1" }
-                }
-            }
+                    new() { ConfigType = "type1", Remarks = "remaks1" },
+                },
+            },
         };
 
         _xrayExeHandler = new();
@@ -236,16 +236,26 @@ public partial class v2rayBKConfig : ViewModelBase
 
     [property: JsonIgnore]
     [RelayCommand]
-    public void SeepTestServer()
+    public async Task SpeedTestServer()
     {
-        SeepTestServer(Enumerable.Range(0, SelectedServerGroup!.Servers.Count()).ToList());
+        await SpeedTestServer(Enumerable.Range(0, SelectedServerGroup!.Servers.Count()).ToList());
     }
 
-    public void SeepTestServer(List<int> seleteds)
+    public async Task SpeedTestServer(List<int> seleteds)
     {
         foreach (var index in seleteds)
             GetSelectedServer(index)!.TestResult = "";
-        Task.Run(() => SpeedTestHandler.RunRealPing(this, seleteds));
+
+        int groupSize = 15;
+        int groupCount = seleteds.Count / groupSize;
+        for (int i = 0; i < groupCount; i++)
+        {
+            await Task.Run(() => SpeedTestHandler.RunRealPing(this, seleteds.GetRange(i * groupSize, groupSize)));
+        }
+
+        var p = seleteds.Count - groupSize * groupCount;
+        if (p > 0)
+            await Task.Run(() => SpeedTestHandler.RunRealPing(this, seleteds.GetRange(groupSize * groupCount, p)));
     }
 
     private ObservableCollection<RoutingRuleItem> CurrentEditRoutingRule()

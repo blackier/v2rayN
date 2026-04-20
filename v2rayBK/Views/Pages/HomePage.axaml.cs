@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -24,26 +25,40 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
         WeakReferenceMessenger.Default.Register<MessageType.LogMessage>(this);
     }
 
-
     void IRecipient<MessageType.LogMessage>.Receive(MessageType.LogMessage message)
     {
         if (log_ItemsControl.Items.Count > 999)
             log_ItemsControl.Items.Clear();
 
-        log_ItemsControl.Items.Add(new SelectableTextBlock() {Text = message.log, TextWrapping = Avalonia.Media.TextWrapping.Wrap });
+        log_ItemsControl.Items.Add(
+            new SelectableTextBlock() { Text = message.log, TextWrapping = Avalonia.Media.TextWrapping.Wrap }
+        );
         log_ScrollViewer.ScrollToEnd();
     }
 
-    private async void subscribe_settings_menuitem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private async void subscribe_settings_MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         var dialog = new FAContentDialog() { Title = "Subscribe Settings", PrimaryButtonText = "OK" };
 
         // In our case the Content is a UserControl, but can be anything.
         dialog.Content = new SubscribeSettingsPage()
         {
-            DataContext = new SubscribeSettingsPageViewModel() { ServerGroup = ViewModel.v2RayBKConfig.ServerGroup }
+            DataContext = new SubscribeSettingsPageViewModel() { ServerGroup = ViewModel.v2RayBKConfig.ServerGroup },
         };
         await dialog.ShowAsync();
+    }
+
+    private void test_selected_MenuItem_Click(object? sender, RoutedEventArgs e)
+    {
+        if (server_list_TabControl.FindDescendantOfType<DataGrid>() is DataGrid server_list_DataGrid)
+        {
+            _ = ViewModel.v2RayBKConfig.SpeedTestServer(
+                server_list_DataGrid
+                    .SelectedItems.OfType<ServerGroupItem>()
+                    .Select(t => ViewModel.v2RayBKConfig.SelectedServerGroup.Servers.IndexOf(t))
+                    .ToList()
+            );
+        }
     }
 
     private async void check_update_xray_MenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -55,7 +70,7 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
             {
                 Title = "XRay-core Update",
                 SecondaryButtonText = "Cancel",
-                PrimaryButtonText = "OK"
+                PrimaryButtonText = "OK",
             };
 
             // In our case the Content is a UserControl, but can be anything.
@@ -96,8 +111,10 @@ public partial class HomePage : UserControl, IRecipient<MessageType.LogMessage>
         ViewModel.StartSeletedServer();
     }
 
-
-    private async void DataGrid_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
+    private async void server_list_DataGrid_SelectionChanged(
+        object? sender,
+        Avalonia.Controls.SelectionChangedEventArgs e
+    )
     {
         var dataGrid = (DataGrid)sender;
         if (!this.IsLoaded)

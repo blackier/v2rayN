@@ -72,7 +72,7 @@ public partial class HomePageViewModel : ViewModelBase
                         return;
                     server.UpdateServers(items);
                     if (v2RayBKConfig.SpeedTestAfterPullSubscribe)
-                        v2RayBKConfig.SeepTestServer();
+                        v2RayBKConfig.SpeedTestServer();
                 }
             }
         );
