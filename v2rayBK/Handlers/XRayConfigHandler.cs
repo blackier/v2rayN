@@ -385,9 +385,6 @@ public class XRayConfigHandler
             streamSettings.Security = node.StreamSecurity;
             streamSettings.TlsSettings = new()
             {
-                AllowInsecure = node.AllowInsecure.IsNullOrEmpty()
-                    ? config.DefAllowInsecure
-                    : Utils.ToBool(node.AllowInsecure),
                 Alpn = node.GetAlpn(),
                 Fingerprint = node.Fingerprint.IsNullOrEmpty() ? "random" : node.Fingerprint,
                 EchConfigList = node.EchConfigList.NullIfEmpty(),
@@ -414,12 +411,10 @@ public class XRayConfigHandler
                 }
                 streamSettings.TlsSettings.Certificates = certsettings;
                 streamSettings.TlsSettings.DisableSystemRoot = true;
-                streamSettings.TlsSettings.AllowInsecure = false;
             }
             else if (!node.CertSha.IsNullOrEmpty())
             {
                 streamSettings.TlsSettings.PinnedPeerCertSha256 = node.CertSha;
-                streamSettings.TlsSettings.AllowInsecure = false;
             }
         }
         //if Reality

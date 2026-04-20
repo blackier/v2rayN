@@ -48,9 +48,6 @@ public partial class v2rayBKConfig : ViewModelBase
     [ObservableProperty]
     private bool _muxEnabled;
 
-    [ObservableProperty]
-    private bool _defAllowInsecure;
-
     // DNS
 
     [ObservableProperty]

@@ -46,11 +46,6 @@
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.MuxEnabled}" />
                 </ui:FASettingsExpanderItem.Footer>
             </ui:FASettingsExpanderItem>
-            <ui:FASettingsExpanderItem Content="跳过证书校验">
-                <ui:FASettingsExpanderItem.Footer>
-                    <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.DefAllowInsecure}" />
-                </ui:FASettingsExpanderItem.Footer>
-            </ui:FASettingsExpanderItem>
             <!--  Log  -->
             <TextBlock Classes="SettingsSectionHeaderTextBlockStyle" Text="Log" />
             <ui:FASettingsExpanderItem Content="本地日志">
