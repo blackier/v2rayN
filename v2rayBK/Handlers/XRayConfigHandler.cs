@@ -7,6 +7,7 @@ using ServiceLib.Models;
 using ServiceLib.Models.Entities;
 using Shadowsocks.Interop.V2Ray.Dns;
 using Shadowsocks.Interop.V2Ray.Inbound;
+using Shadowsocks.Interop.V2Ray.Protocols.TUN;
 using Shadowsocks.Interop.V2Ray.Transport;
 using v2rayBK.Common;
 using v2rayBK.ViewModels;
@@ -133,6 +134,10 @@ public class XRayConfigHandler
                 tunInbound.Sniffing = SniffingObject.DefaultFakeDns;
             tunInbound.Sniffing.Enabled = config.SniffingEnabled;
             tunInbound.Sniffing.RouteOnly = config.SniffingEnabled;
+
+            if (config.AutoOutboundsInterface.IsNotEmpty())
+                (tunInbound.Settings as InboundConfigurationObject).AutoOutboundsInterface =
+                    config.AutoOutboundsInterface;
 
             v2rayConfig.Inbounds.Add(tunInbound);
         }

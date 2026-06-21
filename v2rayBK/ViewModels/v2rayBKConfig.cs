@@ -33,6 +33,9 @@ public partial class v2rayBKConfig : ViewModelBase
     [ObservableProperty]
     private bool _allowLANConn;
 
+    [ObservableProperty]
+    private string _autoOutboundsInterface;
+
     // 日志
 
     [ObservableProperty]

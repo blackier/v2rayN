@@ -29,7 +29,7 @@ namespace Shadowsocks.Interop.V2Ray.Protocols.TUN
                 ],
                 UserLevel = 0,
                 AutoSystemRoutingTable = ["0.0.0.0/0", "::/0"],
-                AutoOutboundsInterface = "WLAN"
+                AutoOutboundsInterface = "auto"
             };
     }
 }

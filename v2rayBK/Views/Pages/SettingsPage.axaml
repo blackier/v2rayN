@@ -39,6 +39,11 @@
                     <ToggleSwitch IsChecked="{Binding ViewModel.v2RayBKConfig.AllowLANConn}" />
                 </ui:FASettingsExpanderItem.Footer>
             </ui:FASettingsExpanderItem>
+            <ui:FASettingsExpanderItem Content="TUN模式网卡接口">
+                <ui:FASettingsExpanderItem.Footer>
+                    <TextBox MinWidth="130" Text="{Binding ViewModel.v2RayBKConfig.AutoOutboundsInterface}" />
+                </ui:FASettingsExpanderItem.Footer>
+            </ui:FASettingsExpanderItem>
             <!--  Outbound  -->
             <TextBlock Classes="SettingsSectionHeaderTextBlockStyle" Text="Outbound" />
             <ui:FASettingsExpanderItem Content="多路复用">
