@@ -19,9 +19,6 @@ public partial class MainWindow : FAAppWindow
         DataContext = this;
         InitializeComponent();
 
-        WindowStartupLocation = WindowStartupLocation.CenterOwner;
-        ShowInTaskbar = false;
-
         TitleBar.Height = app_titlebar_grid.Height;
         TitleBar.ExtendsContentIntoTitleBar = true;
         TitleBar.TitleBarHitTestType = FATitleBarHitTestType.Complex;

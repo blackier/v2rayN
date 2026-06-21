@@ -1,4 +1,6 @@
 ﻿using System.Net;
+using System.Net.NetworkInformation;
+using DynamicData;
 using ServiceLib.Enums;
 using ServiceLib.Manager;
 using ServiceLib.Models;
@@ -156,9 +158,9 @@ public class XRayConfigHandler
         // 其他DNS直连
         var dnsServerDirectRule = new V2Ray.Routing.RuleObject
         {
-           Type = "field",
-           InboundTag = new() { GlobalEx.dnsServerTag },
-           OutboundTag = Global.DirectTag,
+            Type = "field",
+            InboundTag = new() { GlobalEx.dnsServerTag },
+            OutboundTag = Global.DirectTag,
         };
         v2rayConfig.Routing.Rules.Add(dnsServerDirectRule);
 
@@ -185,19 +187,19 @@ public class XRayConfigHandler
             {
                 Type = "field",
                 OutboundTag = tag,
-                Ip = new List<string>()
+                Ip = new List<string>(),
             };
             var domainRule = new V2Ray.Routing.RuleObject
             {
                 Type = "field",
                 OutboundTag = tag,
-                Domain = new List<string>()
+                Domain = new List<string>(),
             };
             var processRule = new V2Ray.Routing.RuleObject
             {
                 Type = "field",
                 OutboundTag = tag,
-                Process = new List<string>()
+                Process = new List<string>(),
             };
 
             foreach (RoutingRuleItem rule in userRule)
@@ -302,7 +304,7 @@ public class XRayConfigHandler
                         {
                             User = node.Username,
                             Pass = node.Password,
-                            Level = 1
+                            Level = 1,
                         }
                     );
             }
@@ -351,7 +353,7 @@ public class XRayConfigHandler
         {
             Protocol = "freedom",
             Tag = Global.DirectTag,
-            Settings = new V2Ray.Protocols.Freedom.OutboundConfigurationObject()
+            Settings = new V2Ray.Protocols.Freedom.OutboundConfigurationObject(),
         };
         v2rayConfig.Outbounds.Add(freedomOutbound);
 
@@ -360,7 +362,7 @@ public class XRayConfigHandler
         {
             Protocol = "blackhole",
             Tag = Global.BlockTag,
-            Settings = new V2Ray.Protocols.Blackhole.OutboundConfigurationObject()
+            Settings = new V2Ray.Protocols.Blackhole.OutboundConfigurationObject(),
         };
         v2rayConfig.Outbounds.Add(blackholeOutbound);
 
@@ -388,7 +390,7 @@ public class XRayConfigHandler
                 Alpn = node.GetAlpn(),
                 Fingerprint = node.Fingerprint.IsNullOrEmpty() ? "random" : node.Fingerprint,
                 EchConfigList = node.EchConfigList.NullIfEmpty(),
-                EchForceQuery = node.EchForceQuery.NullIfEmpty()
+                EchForceQuery = node.EchForceQuery.NullIfEmpty(),
             };
 
             if (!sni.IsNullOrEmpty())
@@ -407,7 +409,7 @@ public class XRayConfigHandler
                 foreach (var cert in certs)
                 {
                     var certPerLine = cert.Split("\n").ToList();
-                    certsettings.Add(new CertificateObject { Certificate = certPerLine, Usage = "verify", });
+                    certsettings.Add(new CertificateObject { Certificate = certPerLine, Usage = "verify" });
                 }
                 streamSettings.TlsSettings.Certificates = certsettings;
                 streamSettings.TlsSettings.DisableSystemRoot = true;
@@ -515,7 +517,7 @@ public class XRayConfigHandler
                 {
                     Security = host,
                     Key = node.Path,
-                    Header = new() { Type = node.HeaderType }
+                    Header = new() { Type = node.HeaderType },
                 };
                 if (node.StreamSecurity == Global.StreamSecurity)
                 {
@@ -578,11 +580,11 @@ public class XRayConfigHandler
             v2rayConfig.Api = new()
             {
                 Tag = "api",
-                Services = new() { "StatsService", },
+                Services = new() { "StatsService" },
             };
             v2rayConfig.Policy = new()
             {
-                System = new() { StatsOutboundUplink = true, StatsOutboundDownlink = true }
+                System = new() { StatsOutboundUplink = true, StatsOutboundDownlink = true },
             };
 
             var apiInbound = new V2Ray.InboundObject
@@ -591,7 +593,7 @@ public class XRayConfigHandler
                 Listen = Global.Loopback,
                 Port = GlobalEx.v2rayApiPort,
                 Protocol = Global.InboundAPIProtocol,
-                Settings = new V2Ray.Protocols.Dokodemo_door.InboundConfigurationObject(Global.Loopback, "tcp,udp")
+                Settings = new V2Ray.Protocols.Dokodemo_door.InboundConfigurationObject(Global.Loopback, "tcp,udp"),
             };
             v2rayConfig.Inbounds.Add(apiInbound);
 
@@ -599,7 +601,7 @@ public class XRayConfigHandler
             {
                 Type = "field",
                 InboundTag = new() { apiTagName },
-                OutboundTag = apiTagName
+                OutboundTag = apiTagName,
             };
             // 需要放到最前面
             v2rayConfig.Routing.Rules.Insert(0, apiRule);
@@ -624,7 +626,13 @@ public class XRayConfigHandler
                 App.PostLog("FailedGenDefaultConfiguration");
                 return "";
             }
+
             var freePort = Utils.GetFreePort();
+            var ipGlobalProperties = IPGlobalProperties.GetIPGlobalProperties();
+            var usePorts = ipGlobalProperties.GetActiveTcpListeners().Select(t => t.Port).ToList();
+            usePorts.Add(ipGlobalProperties.GetActiveUdpListeners().Select(t => t.Port));
+            usePorts.Add(ipGlobalProperties.GetActiveTcpConnections().Select(t => t.LocalEndPoint.Port));
+
             foreach (int index in selecteds)
             {
                 var node = config.GetSelectedProfile(index);
@@ -634,7 +642,13 @@ public class XRayConfigHandler
                     continue;
                 }
 
-                int port = freePort + index;
+                freePort++;
+                while (usePorts.Contains(freePort))
+                {
+                    freePort++;
+                }
+                int port = freePort;
+
                 config.GetSelectedServer(index)!.SpeedTestPort = port;
                 var inboundTag = "http" + port.ToString();
 
@@ -658,7 +672,7 @@ public class XRayConfigHandler
                         Listen = Global.Loopback,
                         Port = port,
                         Protocol = "http",
-                        Tag = inboundTag
+                        Tag = inboundTag,
                     }
                 );
                 v2rayConfig.Outbounds.Add(v2rayConfigCopy.Outbounds[0]);
