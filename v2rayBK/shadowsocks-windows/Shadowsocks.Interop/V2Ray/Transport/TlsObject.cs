@@ -16,5 +16,6 @@ namespace Shadowsocks.Interop.V2Ray.Transport
         public string PinnedPeerCertSha256 { get; set; }
         public string EchConfigList { get; set; }
         public string EchForceQuery { get; set; }
+        public string VerifyPeerCertByName { get; set; }
     }
 }

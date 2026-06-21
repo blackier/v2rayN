@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using DynamicData;
 using FluentAvalonia.Core;
-using ServiceLib.Models;
+using ServiceLib.Models.Entities;
 
 namespace v2rayBK.ViewModels;
 

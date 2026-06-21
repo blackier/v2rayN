@@ -4,6 +4,7 @@ using DynamicData;
 using ServiceLib.Enums;
 using ServiceLib.Manager;
 using ServiceLib.Models;
+using ServiceLib.Models.Entities;
 using Shadowsocks.Interop.V2Ray.Dns;
 using Shadowsocks.Interop.V2Ray.Inbound;
 using Shadowsocks.Interop.V2Ray.Transport;
@@ -377,29 +378,81 @@ public class XRayConfigHandler
     {
         // 底层传输配置
         streamSettings.Network = node.GetNetwork();
-        string host = node.RequestHost.TrimEx();
         string sni = node.Sni;
         string useragent =
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 YaBrowser/24.4.0.0 Safari/537.36";
+
+        var transport = node.GetTransportExtra();
+        var host = string.Empty;
+        var path = string.Empty;
+        var kcpSeed = string.Empty;
+        var kcpMtu = 0;
+        var headerType = string.Empty;
+        var xhttpExtra = string.Empty;
+        switch (node.GetNetwork())
+        {
+            case nameof(ETransport.raw):
+                host = transport.Host?.TrimEx() ?? string.Empty;
+                path = transport.Path?.TrimEx() ?? string.Empty;
+                headerType = transport.RawHeaderType?.TrimEx() ?? string.Empty;
+                break;
+
+            case nameof(ETransport.kcp):
+                kcpSeed = transport.KcpSeed?.TrimEx() ?? string.Empty;
+                headerType = transport.KcpHeaderType?.TrimEx() ?? string.Empty;
+                kcpMtu = transport.KcpMtu > 0 ? transport.KcpMtu!.Value : 8;
+                break;
+
+            case nameof(ETransport.ws):
+                host = transport.Host?.TrimEx() ?? string.Empty;
+                path = transport.Path?.TrimEx() ?? string.Empty;
+                break;
+
+            case nameof(ETransport.httpupgrade):
+                host = transport.Host?.TrimEx() ?? string.Empty;
+                path = transport.Path?.TrimEx() ?? string.Empty;
+                break;
+
+            case nameof(ETransport.xhttp):
+                host = transport.Host?.TrimEx() ?? string.Empty;
+                path = transport.Path?.TrimEx() ?? string.Empty;
+                headerType = transport.XhttpMode?.TrimEx() ?? string.Empty;
+                xhttpExtra = transport.XhttpExtra?.TrimEx() ?? string.Empty;
+                break;
+
+            case nameof(ETransport.grpc):
+                host = transport.GrpcAuthority?.TrimEx() ?? string.Empty;
+                path = transport.GrpcServiceName?.TrimEx() ?? string.Empty;
+                headerType = transport.GrpcMode?.TrimEx() ?? string.Empty;
+                break;
+        }
+
         //if tls
         if (node.StreamSecurity == Global.StreamSecurity)
         {
             streamSettings.Security = node.StreamSecurity;
             streamSettings.TlsSettings = new()
             {
+                AllowInsecure = node.GetAllowInsecure(),
                 Alpn = node.GetAlpn(),
                 Fingerprint = node.Fingerprint.IsNullOrEmpty() ? "random" : node.Fingerprint,
                 EchConfigList = node.EchConfigList.NullIfEmpty(),
-                EchForceQuery = node.EchForceQuery.NullIfEmpty(),
+                VerifyPeerCertByName = node.VerifyPeerCertByName.NullIfEmpty(),
             };
 
             if (!sni.IsNullOrEmpty())
             {
                 streamSettings.TlsSettings.ServerName = sni;
             }
-            if (!string.IsNullOrWhiteSpace(host))
+            else if (!host.IsNullOrEmpty())
             {
                 streamSettings.TlsSettings.ServerName = Utils.String2List(host)[0];
+            }
+
+            if (!streamSettings.TlsSettings.EchConfigList.IsNullOrEmpty())
+            {
+                // For legacy xray compatibility, remove this in the future
+                streamSettings.TlsSettings.EchForceQuery = "full";
             }
 
             var certs = CertPemManager.ParsePemChain(node.Cert);
@@ -442,10 +495,10 @@ public class XRayConfigHandler
                 // 没啥好设置的，就按默认
                 streamSettings.KcpSettings = new();
                 var kcpSettings = streamSettings.KcpSettings;
-                kcpSettings.Header = new() { Type = node.HeaderType, Domain = host.IsNullOrEmpty() ? null : host };
-                if (!string.IsNullOrWhiteSpace(node.Path))
+                kcpSettings.Header = new() { Type = headerType, Domain = host.IsNullOrEmpty() ? null : host };
+                if (!string.IsNullOrWhiteSpace(kcpSeed))
                 {
-                    kcpSettings.Seed = node.Path;
+                    kcpSettings.Seed = kcpSeed;
                 }
                 break;
             case nameof(ETransport.ws):
@@ -455,9 +508,9 @@ public class XRayConfigHandler
                 {
                     wsSettings.Host = host;
                 }
-                if (!string.IsNullOrWhiteSpace(node.Path))
+                if (!string.IsNullOrWhiteSpace(path))
                 {
-                    wsSettings.Path = node.Path;
+                    wsSettings.Path = path;
                 }
                 if (!string.IsNullOrWhiteSpace(useragent))
                 {
@@ -471,9 +524,9 @@ public class XRayConfigHandler
                 {
                     httpupgradeSettings.Host = host;
                 }
-                if (!string.IsNullOrWhiteSpace(node.Path))
+                if (!string.IsNullOrWhiteSpace(path))
                 {
-                    httpupgradeSettings.Path = node.Path;
+                    httpupgradeSettings.Path = path;
                 }
                 if (!string.IsNullOrWhiteSpace(useragent))
                 {
@@ -488,56 +541,30 @@ public class XRayConfigHandler
                 {
                     xhttpSettings.Host = host;
                 }
-                if (!string.IsNullOrWhiteSpace(node.Path))
+                if (!string.IsNullOrWhiteSpace(path))
                 {
-                    xhttpSettings.Path = node.Path;
+                    xhttpSettings.Path = path;
                 }
-                if (node.HeaderType.IsNotEmpty() && Global.XhttpMode.Contains(node.HeaderType))
+                if (headerType.IsNotEmpty() && Global.XhttpMode.Contains(headerType))
                 {
-                    xhttpSettings.Mode = node.HeaderType;
+                    xhttpSettings.Mode = headerType;
                 }
-                if (node.Extra.IsNotEmpty())
+                if (xhttpExtra.IsNotEmpty())
                 {
-                    xhttpSettings.Extra = JsonUtils.ParseJson(node.Extra);
-                }
-                break;
-            case nameof(ETransport.h2):
-                streamSettings.HttpSettings = new();
-                var httpSettings = streamSettings.HttpSettings;
-
-                if (!string.IsNullOrWhiteSpace(host))
-                {
-                    httpSettings.Host = Utils.String2List(host);
-                }
-                httpSettings.Path = node.Path;
-
-                break;
-            case nameof(ETransport.quic):
-                streamSettings.QuicSettings = new()
-                {
-                    Security = host,
-                    Key = node.Path,
-                    Header = new() { Type = node.HeaderType },
-                };
-                if (node.StreamSecurity == Global.StreamSecurity)
-                {
-                    if (!sni.IsNullOrEmpty())
-                        streamSettings.TlsSettings.ServerName = sni;
-                    else
-                        streamSettings.TlsSettings.ServerName = node.Address;
+                    xhttpSettings.Extra = JsonUtils.ParseJson(xhttpExtra);
                 }
                 break;
             case nameof(ETransport.grpc):
                 streamSettings.GrpcSettings = new();
                 var grpcSettings = streamSettings.GrpcSettings;
                 grpcSettings.Authority = host.IsNullOrEmpty() ? null : host;
-                grpcSettings.ServiceName = node.Path;
-                grpcSettings.MultiMode = node.HeaderType == Global.GrpcMultiMode;
+                grpcSettings.ServiceName = path;
+                grpcSettings.MultiMode = headerType == Global.GrpcMultiMode;
                 grpcSettings.user_agent = useragent.IsNullOrEmpty() ? null : useragent;
                 break;
             default:
                 //tcp带http伪装
-                if (node.HeaderType.Equals(Global.TcpHeaderHttp))
+                if (headerType.Equals(Global.RawHeaderHttp))
                 {
                     // 这块订阅基本没法用
                     var header = new V2Ray.Transport.Header.HttpHeaderObject();
@@ -550,9 +577,9 @@ public class XRayConfigHandler
                     }
 
                     //填入自定义Path
-                    if (!node.Path.IsNullOrEmpty())
+                    if (!path.IsNullOrEmpty())
                     {
-                        header.request.Path = node.Path.Split(',').ToList();
+                        header.request.Path = path.Split(',').ToList();
                     }
                 }
                 break;
