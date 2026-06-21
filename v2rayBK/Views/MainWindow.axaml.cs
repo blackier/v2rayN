@@ -21,7 +21,6 @@ public partial class MainWindow : FAAppWindow
 
         TitleBar.Height = app_titlebar_grid.Height;
         TitleBar.ExtendsContentIntoTitleBar = true;
-        TitleBar.TitleBarHitTestType = FATitleBarHitTestType.Complex;
 
         main_root_frame.Navigate(typeof(MainPage));
     }
