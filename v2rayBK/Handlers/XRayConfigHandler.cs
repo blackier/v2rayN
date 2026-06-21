@@ -433,7 +433,7 @@ public class XRayConfigHandler
             streamSettings.Security = node.StreamSecurity;
             streamSettings.TlsSettings = new()
             {
-                AllowInsecure = node.GetAllowInsecure(),
+                //AllowInsecure = node.GetAllowInsecure(),
                 Alpn = node.GetAlpn(),
                 Fingerprint = node.Fingerprint.IsNullOrEmpty() ? "random" : node.Fingerprint,
                 EchConfigList = node.EchConfigList.NullIfEmpty(),
