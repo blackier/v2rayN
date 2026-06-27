@@ -19,7 +19,6 @@ public partial class MainWindow : FAAppWindow
         DataContext = this;
         InitializeComponent();
 
-        TitleBar.Height = app_titlebar_grid.Height;
         TitleBar.ExtendsContentIntoTitleBar = true;
 
         main_root_frame.Navigate(typeof(MainPage));
